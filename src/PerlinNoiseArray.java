@@ -1,8 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import java.beans.beancontext.BeanContext;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -10,18 +8,47 @@ import java.util.Arrays;
 
 public class PerlinNoiseArray {
     private float[][] noiseMap;
+
+    private float left;
+    private float top;
     private int height;
     private int width;
+
+    private float noiseMax;
+    private float noiseMin;
+    private float noiseRange;
 
     FastNoise fn;
     BufferedImage bi;
 
     public PerlinNoiseArray(FastNoise fn, int width, int height){
+        this(fn, 0, 0, width, height);
+    }
+
+    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height){
         this.fn = fn;
+        this.left = left;
+        this.top = top;
         this.width = width;
         this.height = height;
         noiseMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    }
+
+    public void setLeft(float left) {
+        this.left = left;
+    }
+
+    public void setTop(float top) {
+        this.top = top;
+    }
+
+    public float getLeft() {
+        return left;
+    }
+
+    public float getTop() {
+        return top;
     }
 
     public int getHeight() {
@@ -50,25 +77,23 @@ public class PerlinNoiseArray {
 
     public void updateNoiseMap()
     {
-        float max = 0;
-        float min = 0;
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = fn.GetNoise(i, j);
-                if(noiseMap[i][j] > max)
-                    max = noiseMap[i][j];
-                if(noiseMap[i][j] < min)
-                    min  = noiseMap[i][j];
+                noiseMap[i][j] = fn.GetNoise(i + left, j + top);
+                if(noiseMap[i][j] > noiseMax)
+                    noiseMax = noiseMap[i][j];
+                if(noiseMap[i][j] < noiseMin)
+                    noiseMin  = noiseMap[i][j];
             }
         }
 
 
-        System.out.println("Max" + max);
-        System.out.println("Min" + min);
+        System.out.println("Max" + noiseMax);
+        System.out.println("Min" + noiseMin);
 
-        float range = max - min;
+        noiseRange = noiseMax - noiseMin;
 
         for(int i = 0; i < width; i++)
         {
@@ -76,9 +101,9 @@ public class PerlinNoiseArray {
             {
 
                 bi.setRGB(i, j, getIntFromColor(
-                        (noiseMap[i][j] - min) / range,
-                        (noiseMap[i][j] - min) / range,
-                        (noiseMap[i][j] - min) / range));
+                        (noiseMap[i][j] - noiseMin) / noiseRange,
+                        (noiseMap[i][j] - noiseMin) / noiseRange,
+                        (noiseMap[i][j] - noiseMin) / noiseRange));
             }
         }
     }
@@ -116,13 +141,5 @@ public class PerlinNoiseArray {
     public BufferedImage getImage()
     {
         return bi;
-    }
-
-    public static void main(String[] args)
-    {
-        Color color = new Color(254, 254, 128);
-        byte[] bytes = ByteBuffer.allocate(4).putInt(color.getRGB()).array();
-
-        System.out.println(Arrays.toString(bytes));
     }
 }
