@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class MainFrame {
     public static void main(String[] argv)
@@ -15,6 +17,22 @@ public class MainFrame {
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);
 
+        PerlinNoiseArray pna = new PerlinNoiseArray(fn, 500, 500);
+
+
+        JPanel panel = new JPanel(){
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                pna.updateNoiseMap();
+                BufferedImage bi = pna.getImage();
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.drawImage(bi, 0 ,0, null);
+            }
+        };
+
+        frame.add(panel);
+        frame.repaint();
     }
 
 }
