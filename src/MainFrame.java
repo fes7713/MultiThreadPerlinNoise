@@ -26,7 +26,7 @@ public class MainFrame {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
-                ncm.updateChunk();
+
                 ncm.drawImage(g2d);
             }
         };
@@ -40,7 +40,13 @@ public class MainFrame {
                 System.out.println(width);
                 System.out.println(height);
                 ncm.setDimension(width, height);
-                panel.repaint();
+                PaintInterface pi = panel::repaint;
+                ncm.updateChunk(
+                        pi,
+                        (max, min)-> {
+                            ncm.setNoiseRange(max, min, pi);
+                        }
+                );
             }
 
             @Override
@@ -59,7 +65,13 @@ public class MainFrame {
             }
         });
 
-
+        PaintInterface pi = panel::repaint;
+        ncm.updateChunk(
+                pi,
+                (max, min)-> {
+                    ncm.setNoiseRange(max, min, pi);
+                }
+        );
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);

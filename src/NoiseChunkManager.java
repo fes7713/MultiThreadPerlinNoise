@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.lang.Math;
 
 public class NoiseChunkManager implements NoiseChunkInterface{
@@ -14,6 +13,9 @@ public class NoiseChunkManager implements NoiseChunkInterface{
 
     private float left;
     private float top;
+
+    private float noiseMax;
+    private float noiseMin;
 
     public NoiseChunkManager(int tableWidth, int tableHeight) {
         this.tableWidth = tableWidth;
@@ -128,10 +130,10 @@ public class NoiseChunkManager implements NoiseChunkInterface{
     }
 
     @Override
-    public void updateChunk() {
+    public void updateChunk(PaintInterface pi, NoiseRangeInterface nri) {
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].updateChunk();
+                chunkTable[i][j].updateChunk(pi, nri);
             }
         }
     }
@@ -141,6 +143,30 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].drawImage(g2d);
+            }
+        }
+    }
+
+    @Override
+    public float getNoiseMax() {
+        return noiseMax;
+    }
+
+    @Override
+    public float getNoiseMin() {
+        return noiseMin;
+    }
+
+    @Override
+    public synchronized void setNoiseRange(float max, float min, PaintInterface pi) {
+        if(noiseMax < max)
+            noiseMax = max;
+        if(noiseMin > min)
+            noiseMin = min;
+
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableWidth; j++) {
+                chunkTable[i][j].setNoiseRange(noiseMax, noiseMin, pi);
             }
         }
     }

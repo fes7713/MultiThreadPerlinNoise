@@ -66,14 +66,23 @@ public class PerlinNoiseArray {
         dimensionChanged();
     }
 
+    public float getNoiseMax() {
+        return noiseMax;
+    }
+
+    public float getNoiseMin() {
+        return noiseMin;
+    }
+
     private void dimensionChanged()
     {
         noiseMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
-    public void updateNoiseMap()
+    public void updateNoiseMap(PaintInterface pi)
     {
+        noiseMax = noiseMin = 0;
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
@@ -88,6 +97,11 @@ public class PerlinNoiseArray {
 
         noiseRange = noiseMax - noiseMin;
 
+        updateImage(pi);
+    }
+
+    public void updateImage(PaintInterface pi)
+    {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
@@ -99,6 +113,17 @@ public class PerlinNoiseArray {
                         (noiseMap[i][j] - noiseMin) / noiseRange));
             }
         }
+
+        if(pi != null)
+            pi.paint();
+    }
+
+    public void setNoiseRange(float max, float min, PaintInterface pi)
+    {
+        noiseMax = max;
+        noiseMin = min;
+        noiseRange = noiseMax - noiseMin;
+        updateImage(pi);
     }
 
     public int getIntFromColor(int Red, int Green, int Blue){

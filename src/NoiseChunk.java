@@ -11,6 +11,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     FastNoise fn;
     PerlinNoiseArray array;
+    Thread thread;
 
     public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height) {
         this.fn = fn;
@@ -68,13 +69,37 @@ public class NoiseChunk implements NoiseChunkInterface{
         setHeight(height);
     }
 
-    public void updateChunk()
+    public void updateChunk(PaintInterface pi, NoiseRangeInterface nri)
     {
-        array.updateNoiseMap();
+        thread = new Thread()
+        {
+            @Override
+            public void run() {
+                super.run();
+                array.updateNoiseMap(pi);
+                nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+            }
+        };
+        thread.start();
     }
 
     public void drawImage(Graphics2D g2d)
     {
         g2d.drawImage(array.getImage(), chunkX * width, chunkY * height, null);
+    }
+
+    @Override
+    public float getNoiseMax() {
+        return array.getNoiseMax();
+    }
+
+    @Override
+    public float getNoiseMin() {
+        return array.getNoiseMin();
+    }
+
+    @Override
+    public void setNoiseRange(float max, float min, PaintInterface pi) {
+        array.setNoiseRange(max, min, pi);
     }
 }
