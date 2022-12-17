@@ -1,6 +1,7 @@
+import java.awt.*;
 import java.lang.Math;
 
-public class NoiseChunkManager {
+public class NoiseChunkManager implements NoiseChunkInterface{
     private NoiseChunk[][] chunkTable;
     private final FastNoise fn;
 
@@ -114,8 +115,18 @@ public class NoiseChunkManager {
         this.top = top;
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setLeft(left);
+                chunkTable[i][j].setTop(top);
             }
         }
+    }
+
+    @Override
+    public void updateChunk() {
+
+    }
+
+    @Override
+    public void drawImage(Graphics2D g2d) {
+
     }
 }

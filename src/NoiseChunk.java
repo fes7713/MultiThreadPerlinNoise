@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class NoiseChunk {
+public class NoiseChunk implements NoiseChunkInterface{
     private final int chunkX;
     private final int chunkY;
 
