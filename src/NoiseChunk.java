@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
     private final int chunkX;
@@ -13,6 +14,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     PerlinNoiseArray array;
     Thread thread;
 
+    ReentrantLock lock;
+
     public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height) {
         this.fn = fn;
         this.chunkX = chunkX;
@@ -22,6 +25,8 @@ public class NoiseChunk implements NoiseChunkInterface{
         this.width = width;
         this.height = height;
         array = new PerlinNoiseArray(fn, chunkX * width + left, chunkY * height + top, width, height);
+        thread = new Thread();
+        lock = new ReentrantLock();
     }
 
     public float getLeft() {
@@ -71,13 +76,23 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void updateChunk(PaintInterface pi, NoiseRangeInterface nri)
     {
+        if(thread.isAlive())
+        {
+            System.out.println("Active thread");
+            thread.interrupt();
+        }
+
         thread = new Thread()
         {
             @Override
             public void run() {
                 super.run();
-                array.updateNoiseMap(pi);
-                nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                array.updateNoiseMap();
+                if(!Thread.interrupted())
+                {
+                    array.updateImage(pi);
+                    nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                }
             }
         };
         thread.start();

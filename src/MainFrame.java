@@ -37,8 +37,6 @@ public class MainFrame {
                 int width = e.getComponent().getWidth();
                 int height = e.getComponent().getHeight();
 
-                System.out.println(width);
-                System.out.println(height);
                 ncm.setDimension(width, height);
                 PaintInterface pi = panel::repaint;
                 ncm.updateChunk(
