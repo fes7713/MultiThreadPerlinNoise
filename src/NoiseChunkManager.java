@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.lang.Math;
 
 public class NoiseChunkManager implements NoiseChunkInterface{

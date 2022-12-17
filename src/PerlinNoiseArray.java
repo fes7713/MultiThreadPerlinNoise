@@ -1,10 +1,7 @@
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 public class PerlinNoiseArray {
     private float[][] noiseMap;
@@ -88,10 +85,6 @@ public class PerlinNoiseArray {
                     noiseMin  = noiseMap[i][j];
             }
         }
-
-
-        System.out.println("Max" + noiseMax);
-        System.out.println("Min" + noiseMin);
 
         noiseRange = noiseMax - noiseMin;
 

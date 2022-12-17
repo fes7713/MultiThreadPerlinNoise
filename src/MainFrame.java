@@ -16,15 +16,11 @@ public class MainFrame {
 
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(0, 0, 500, 500);
-        frame.setVisible(true);
+
 
 //        PerlinNoiseArray pna = new PerlinNoiseArray(fn, 50, 50, 500, 500);
-        NoiseChunkManager ncm = new NoiseChunkManager(2, 2);
-        NoiseChunk nc1 = new NoiseChunk(fn, 0, 0, 0, 0, 200, 200);
-        NoiseChunk nc2 = new NoiseChunk(fn, 1, 0, 0, 0, 200, 200);
-        NoiseChunk nc3 = new NoiseChunk(fn, 0, 1, 0, 0, 200, 200);
-        NoiseChunk nc4 = new NoiseChunk(fn, 1, 1, 0, 0, 200, 200);
+        NoiseChunkManager ncm = new NoiseChunkManager(5, 5);
+
         JPanel panel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
@@ -63,7 +59,10 @@ public class MainFrame {
             }
         });
 
+
         frame.add(panel);
+        frame.setBounds(0, 0, 500, 500);
+        frame.setVisible(true);
         frame.repaint();
     }
 

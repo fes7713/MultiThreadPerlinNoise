@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class NoiseChunk implements NoiseChunkInterface{
     private final int chunkX;
@@ -76,6 +75,6 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void drawImage(Graphics2D g2d)
     {
-        g2d.drawImage(array.getImage(), chunkX * width , chunkY * height, null);
+        g2d.drawImage(array.getImage(), chunkX * width, chunkY * height, null);
     }
 }
