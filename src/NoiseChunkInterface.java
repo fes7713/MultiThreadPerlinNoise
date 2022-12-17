@@ -10,5 +10,5 @@ interface NoiseChunkInterface {
     void drawImage(Graphics2D g2d);
     float getNoiseMax();
     float getNoiseMin();
-    void setNoiseRange(float max, float min, PaintInterface pi);
+    void setNoiseRange(float max, float min);
 }

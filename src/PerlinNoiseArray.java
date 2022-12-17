@@ -80,7 +80,7 @@ public class PerlinNoiseArray {
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
-    public void updateNoiseMap()
+    public void initNoiseMap()
     {
         noiseMax = noiseMin = 0;
         for(int i = 0; i < width; i++)
@@ -98,13 +98,30 @@ public class PerlinNoiseArray {
         noiseRange = noiseMax - noiseMin;
     }
 
+    public void increaseResolution(int resolution)
+    {
+        noiseMax = noiseMin = 0;
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                noiseMap[i][j] += fn.GetNoise((i  + left) * resolution, (j + top) * resolution ) / resolution;
+                if(noiseMap[i][j] > noiseMax)
+                    noiseMax = noiseMap[i][j];
+                if(noiseMap[i][j] < noiseMin)
+                    noiseMin  = noiseMap[i][j];
+            }
+        }
+
+        noiseRange = noiseMax - noiseMin;
+    }
+
     public void updateImage(PaintInterface pi)
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-
                 bi.setRGB(i, j, getIntFromColor(
                         (noiseMap[i][j] - noiseMin) / noiseRange,
                         (noiseMap[i][j] - noiseMin) / noiseRange,
@@ -116,19 +133,17 @@ public class PerlinNoiseArray {
             pi.paint();
     }
 
-    public void setNoiseRange(float max, float min, PaintInterface pi)
+    public void setNoiseRange(float max, float min)
     {
         if(noiseMax < max)
         {
             noiseMax = max;
             noiseRange = noiseMax - noiseMin;
-            updateImage(pi);
         }
         else if(noiseMin > min)
         {
             noiseMin = min;
             noiseRange = noiseMax - noiseMin;
-            updateImage(pi);
         }
     }
 

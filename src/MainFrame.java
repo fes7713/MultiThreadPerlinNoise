@@ -42,7 +42,7 @@ public class MainFrame {
                 ncm.updateChunk(
                         pi,
                         (max, min)-> {
-                            ncm.setNoiseRange(max, min, pi);
+                            ncm.setNoiseRange(max, min);
                         }
                 );
             }
@@ -66,9 +66,7 @@ public class MainFrame {
         PaintInterface pi = panel::repaint;
         ncm.updateChunk(
                 pi,
-                (max, min)-> {
-                    ncm.setNoiseRange(max, min, pi);
-                }
+                ncm::setNoiseRange
         );
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);

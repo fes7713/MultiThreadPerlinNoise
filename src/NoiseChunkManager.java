@@ -158,7 +158,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
     }
 
     @Override
-    public synchronized void setNoiseRange(float max, float min, PaintInterface pi) {
+    public synchronized void setNoiseRange(float max, float min) {
         if(noiseMax < max)
             noiseMax = max;
         if(noiseMin > min)
@@ -166,7 +166,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
 
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableWidth; j++) {
-                chunkTable[i][j].setNoiseRange(noiseMax, noiseMin, pi);
+                chunkTable[i][j].setNoiseRange(noiseMax, noiseMin);
             }
         }
     }

@@ -78,7 +78,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     {
         if(thread.isAlive())
         {
-            System.out.println("Active thread");
+//            System.out.println("Active thread");
             thread.interrupt();
         }
 
@@ -87,11 +87,14 @@ public class NoiseChunk implements NoiseChunkInterface{
             @Override
             public void run() {
                 super.run();
-                array.updateNoiseMap();
-                if(!Thread.interrupted())
-                {
-                    array.updateImage(pi);
+                array.initNoiseMap();
+                nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                array.updateImage(pi);
+
+                for (int i = 1; i < 8; i++) {
+                    array.increaseResolution((int)Math.pow(2, i));
                     nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                    array.updateImage(pi);
                 }
             }
         };
@@ -114,7 +117,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     @Override
-    public void setNoiseRange(float max, float min, PaintInterface pi) {
-        array.setNoiseRange(max, min, pi);
+    public void setNoiseRange(float max, float min) {
+        array.setNoiseRange(max, min);
     }
 }
