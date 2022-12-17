@@ -25,7 +25,13 @@ public class NoiseChunkManager implements NoiseChunkInterface{
 
         left = 0;
         top = 0;
+        canvasWidth = 1000;
+        canvasHeight = 1000;
+
         initTable();
+
+        widthChanged();
+        heightChanged();
     }
 
     private void initTable()
@@ -38,7 +44,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
             for (int j = 0; j < tableHeight; j++)
             {
                 chunkTable[i][j] = new NoiseChunk(fn, i, j, left, top, width, height);
-             }
+            }
         }
     }
 
@@ -86,7 +92,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         heightChanged();
     }
 
-    public void setCanvasDimension(int canvasWidth, int canvasHeight)
+    public void setDimension(int canvasWidth, int canvasHeight)
     {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
@@ -122,11 +128,19 @@ public class NoiseChunkManager implements NoiseChunkInterface{
 
     @Override
     public void updateChunk() {
-
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].updateChunk();
+            }
+        }
     }
 
     @Override
     public void drawImage(Graphics2D g2d) {
-
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].drawImage(g2d);
+            }
+        }
     }
 }

@@ -47,9 +47,10 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     public void setWidth(int width) {
+        this.width = width;
         array.setWidth(width);
         array.setLeft(chunkX * width + left);
-        this.width = width;
+
     }
 
     public int getHeight() {
@@ -57,9 +58,15 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     public void setHeight(int height) {
-        array.setWidth(height);
-        array.setLeft(chunkY * height + top);
         this.height = height;
+        array.setHeight(height);
+        array.setTop(chunkY * height + top);
+    }
+
+    @Override
+    public void setDimension(int width, int height) {
+        setWidth(width);
+        setHeight(height);
     }
 
     public void updateChunk()

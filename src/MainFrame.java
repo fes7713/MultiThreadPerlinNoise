@@ -20,35 +20,31 @@ public class MainFrame {
         frame.setVisible(true);
 
 //        PerlinNoiseArray pna = new PerlinNoiseArray(fn, 50, 50, 500, 500);
-        NoiseChunk nc1 = new NoiseChunk(fn, 0, 0, 0, 0, 500, 500);
-        NoiseChunk nc2 = new NoiseChunk(fn, 1, 0, 0, 0, 500, 500);
-        NoiseChunk nc3 = new NoiseChunk(fn, 0, 1, 0, 0, 500, 500);
-        NoiseChunk nc4 = new NoiseChunk(fn, 1, 1, 0, 0, 500, 500);
-
+        NoiseChunkManager ncm = new NoiseChunkManager(2, 2);
+        NoiseChunk nc1 = new NoiseChunk(fn, 0, 0, 0, 0, 200, 200);
+        NoiseChunk nc2 = new NoiseChunk(fn, 1, 0, 0, 0, 200, 200);
+        NoiseChunk nc3 = new NoiseChunk(fn, 0, 1, 0, 0, 200, 200);
+        NoiseChunk nc4 = new NoiseChunk(fn, 1, 1, 0, 0, 200, 200);
         JPanel panel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
-                nc1.updateChunk();
-                nc1.drawImage(g2d);
-
-                nc2.updateChunk();
-                nc2.drawImage(g2d);
-
-                nc3.updateChunk();
-                nc3.drawImage(g2d);
-
-                nc4.updateChunk();
-                nc4.drawImage(g2d);
+                ncm.updateChunk();
+                ncm.drawImage(g2d);
             }
         };
 
         panel.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                System.out.println(e.getComponent().getWidth());
-                System.out.println(e.getComponent().getHeight());
+                int width = e.getComponent().getWidth();
+                int height = e.getComponent().getHeight();
+
+                System.out.println(width);
+                System.out.println(height);
+                ncm.setDimension(width, height);
+                panel.repaint();
             }
 
             @Override

@@ -5,6 +5,7 @@ interface NoiseChunkInterface {
     void setTop(float top);
     float getLeft();
     float getTop();
+    void setDimension(int width, int height);
     void updateChunk();
     void drawImage(Graphics2D g2d);
 }
