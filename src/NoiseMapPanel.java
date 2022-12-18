@@ -1,18 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener {
+public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
     private final NoiseChunkInterface nci;
+
+    private int startX;
+    private int startY;
+    private float startLeft;
+    private float startTop;
 
     public NoiseMapPanel(NoiseChunkInterface nci)
     {
         this.nci = nci;
         addComponentListener(this);
         addMouseMotionListener(this);
+        addMouseListener(this);
     }
 
     @Override
@@ -53,11 +56,50 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        System.out.println(e.getX());
+        System.out.println(e.getY());
+        int diffX = e.getX() - startX;
+        int diffY = e.getY() - startY;
 
+        nci.setLeft(startLeft - diffX);
+        nci.setTop(startTop - diffY);
+        nci.updateChunk(
+                null,
+                nci::setNoiseRange
+        );
+        nci.updateImage(this::repaint);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        startX = e.getX();
+        startY = e.getY();
+        startLeft = nci.getLeft();
+        startTop = nci.getTop();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

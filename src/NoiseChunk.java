@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,6 +16,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     Thread thread;
     ReentrantLock lock;
     Semaphore semaphore;
+
+
 
     public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height, Semaphore semaphore) {
         this.fn = fn;
@@ -39,8 +39,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     public void setLeft(float left) {
-        array.setLeft(chunkX * width + left);
         this.left = left;
+        array.setLeft(chunkX * width + left);
     }
 
     public float getTop() {
@@ -48,8 +48,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     public void setTop(float top) {
-        array.setTop(chunkY * height + top);
         this.top = top;
+        array.setTop(chunkY * height + top);
     }
 
     public int getWidth() {
