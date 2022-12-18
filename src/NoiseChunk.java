@@ -104,11 +104,16 @@ public class NoiseChunk implements NoiseChunkInterface{
                 array.updateImage(pi);
 
                 for (int i = 1; i < 8; i++) {
+                    if(Thread.interrupted())
+                    {
+                        semaphore.release();
+                        return;
+                    }
                     array.increaseResolution((int)Math.pow(2, i));
                     nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
                     array.updateImage(pi);
                 }
-                System.out.println("Noise updated");
+//                System.out.println("Noise updated");
                 semaphore.release();
 //                lock.unlock();
             }

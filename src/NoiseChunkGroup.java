@@ -1,11 +1,9 @@
 import java.awt.*;
 import java.lang.Math;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class NoiseChunkManager implements NoiseChunkInterface{
+public class NoiseChunkGroup implements NoiseChunkInterface{
     private NoiseChunk[][] chunkTable;
     private final FastNoise fn;
 
@@ -24,7 +22,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
     private final Semaphore semaphore;
     ThreadPoolExecutor executor;
 
-    public NoiseChunkManager(int tableWidth, int tableHeight) {
+    public NoiseChunkGroup(int tableWidth, int tableHeight) {
         this.tableWidth = tableWidth;
         this.tableHeight = tableHeight;
 

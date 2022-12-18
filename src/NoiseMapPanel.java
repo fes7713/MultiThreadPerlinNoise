@@ -37,6 +37,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 this::repaint,
                 nci::setNoiseRange
         );
+
+
     }
 
     @Override

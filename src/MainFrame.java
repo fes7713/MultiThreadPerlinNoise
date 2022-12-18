@@ -19,13 +19,13 @@ public class MainFrame {
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        NoiseChunkManager ncm = new NoiseChunkManager(5, 5);
+        NoiseChunkGroup ncg = new NoiseChunkGroup(5, 5);
 
-        JPanel panel = new NoiseMapPanel(ncm) ;
+        JPanel panel = new NoiseMapPanel(ncg) ;
 
-        ncm.updateChunk(
+        ncg.updateChunk(
                 panel::repaint,
-                ncm::setNoiseRange
+                ncg::setNoiseRange
         );
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
