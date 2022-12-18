@@ -7,6 +7,9 @@ public class NoiseChunkGroup implements NoiseChunkInterface{
     private NoiseChunk[][] chunkTable;
     private final FastNoise fn;
 
+    private int chunkX;
+    private int chunkY;
+
     private int tableWidth;
     private int tableHeight;
 
@@ -196,6 +199,24 @@ public class NoiseChunkGroup implements NoiseChunkInterface{
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableWidth; j++) {
                 chunkTable[i][j].setNoiseRange(noiseMax, noiseMin);
+            }
+        }
+    }
+
+    @Override
+    public void setChunkX(int chunkX) {
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].setChunkX(chunkX + i);
+            }
+        }
+    }
+
+    @Override
+    public void setChunkY(int chunkY) {
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].setChunkY(chunkY + j);
             }
         }
     }

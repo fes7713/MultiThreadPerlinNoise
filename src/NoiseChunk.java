@@ -3,8 +3,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
-    private final int chunkX;
-    private final int chunkY;
+    private int chunkX;
+    private int chunkY;
 
     private int left;
     private int top;
@@ -144,5 +144,15 @@ public class NoiseChunk implements NoiseChunkInterface{
     @Override
     public void setNoiseRange(float max, float min) {
         array.setNoiseRange(max, min);
+    }
+
+    @Override
+    public void setChunkX(int chunkX) {
+        this.chunkX = chunkX;
+    }
+
+    @Override
+    public void setChunkY(int chunkY) {
+        this.chunkY = chunkY;
     }
 }

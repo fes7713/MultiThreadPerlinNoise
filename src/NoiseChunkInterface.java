@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
 
 interface NoiseChunkInterface {
     void setLeft(int left);
@@ -14,5 +12,6 @@ interface NoiseChunkInterface {
     float getNoiseMax();
     float getNoiseMin();
     void setNoiseRange(float max, float min);
-
+    void setChunkX(int chunkX);
+    void setChunkY(int chunkY);
 }
