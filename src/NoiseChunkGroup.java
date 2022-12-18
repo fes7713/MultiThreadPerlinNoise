@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class NoiseChunkGroup implements NoiseChunkInterface{
-    private NoiseChunk[][] chunkTable;
+    private NoiseChunkInterface[][] chunkTable;
     private final FastNoise fn;
 
     private int chunkX;
@@ -106,12 +106,22 @@ public class NoiseChunkGroup implements NoiseChunkInterface{
         heightChanged();
     }
 
-    public void setDimension(int canvasWidth, int canvasHeight)
+    public void setWidth(int canvasWidth)
     {
         this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
         widthChanged();
+    }
+
+    public void setHeight(int canvasHeight)
+    {
+        this.canvasHeight = canvasHeight;
         heightChanged();
+    }
+
+    public void setDimension(int canvasWidth, int canvasHeight)
+    {
+        setWidth(canvasWidth);
+        setHeight(canvasHeight);
     }
 
     public int getLeft() {

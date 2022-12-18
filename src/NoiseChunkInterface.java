@@ -14,4 +14,6 @@ interface NoiseChunkInterface {
     void setNoiseRange(float max, float min);
     void setChunkX(int chunkX);
     void setChunkY(int chunkY);
+    void setWidth(int width);
+    void setHeight(int height);
 }

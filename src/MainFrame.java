@@ -20,7 +20,7 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseChunkGroup ncg = new NoiseChunkGroup(5, 5);
-        ncg.setChunkY(-1);
+
         JPanel panel = new NoiseMapPanel(ncg) ;
 
         ncg.updateChunk(
