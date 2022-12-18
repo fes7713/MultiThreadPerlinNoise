@@ -6,8 +6,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final int chunkX;
     private final int chunkY;
 
-    private float left;
-    private float top;
+    private int left;
+    private int top;
     private int width;
     private int height;
 
@@ -19,37 +19,37 @@ public class NoiseChunk implements NoiseChunkInterface{
 
 
 
-    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height, Semaphore semaphore) {
+    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
         this.fn = fn;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
-        this.left = left;
-        this.top = top;
+
         this.width = width;
         this.height = height;
         thread = new Thread();
         lock = new ReentrantLock();
         this.semaphore = semaphore;
 
-        array = new PerlinNoiseArray(fn, chunkX * width + left, chunkY * height + top, width, height);
+        left = 0;
+        top = 0;
+
+        array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height);
     }
 
-    public float getLeft() {
+    public int getLeft() {
         return left;
     }
 
-    public void setLeft(float left) {
+    public void setLeft(int left) {
         this.left = left;
-        array.setLeft(chunkX * width + left);
     }
 
-    public float getTop() {
+    public int getTop() {
         return top;
     }
 
-    public void setTop(float top) {
+    public void setTop(int top) {
         this.top = top;
-        array.setTop(chunkY * height + top);
     }
 
     public int getWidth() {
@@ -59,7 +59,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void setWidth(int width) {
         this.width = width;
         array.setWidth(width);
-        array.setLeft(chunkX * width + left);
+        array.setLeft(chunkX * width);
 
     }
 
@@ -70,7 +70,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void setHeight(int height) {
         this.height = height;
         array.setHeight(height);
-        array.setTop(chunkY * height + top);
+        array.setTop(chunkY * height);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void drawImage(Graphics2D g2d)
     {
-        g2d.drawImage(array.getImage(), chunkX * width, chunkY * height, null);
+        g2d.drawImage(array.getImage(), chunkX * width + left, chunkY * height + top, null);
     }
 
     @Override

@@ -7,8 +7,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private int startX;
     private int startY;
-    private float startLeft;
-    private float startTop;
+    private int startLeft;
+    private int startTop;
 
     public NoiseMapPanel(NoiseChunkInterface nci)
     {
@@ -61,13 +61,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int diffX = e.getX() - startX;
         int diffY = e.getY() - startY;
 
-        nci.setLeft(startLeft - diffX);
-        nci.setTop(startTop - diffY);
-        nci.updateChunk(
-                null,
-                nci::setNoiseRange
-        );
-        nci.updateImage(this::repaint);
+        nci.setLeft(startLeft + diffX);
+        nci.setTop(startTop + diffY);
+
+        repaint();
     }
 
     @Override

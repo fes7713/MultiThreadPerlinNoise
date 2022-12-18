@@ -3,10 +3,10 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 
 interface NoiseChunkInterface {
-    void setLeft(float left);
-    void setTop(float top);
-    float getLeft();
-    float getTop();
+    void setLeft(int left);
+    void setTop(int top);
+    int getLeft();
+    int getTop();
     void setDimension(int width, int height);
     void updateChunk(PaintInterface pi, NoiseRangeInterface nri);
     void updateImage(PaintInterface pi);

@@ -15,8 +15,8 @@ public class NoiseChunkManager implements NoiseChunkInterface{
     private int canvasWidth;
     private int canvasHeight;
 
-    private float left;
-    private float top;
+    private int left;
+    private int top;
 
     private float noiseMax;
     private float noiseMin;
@@ -56,7 +56,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         {
             for (int j = 0; j < tableHeight; j++)
             {
-                chunkTable[i][j] = new NoiseChunk(fn, i, j, left, top, width, height, semaphore);
+                chunkTable[i][j] = new NoiseChunk(fn, i, j, width, height, semaphore);
             }
         }
     }
@@ -113,11 +113,11 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         heightChanged();
     }
 
-    public float getLeft() {
+    public int getLeft() {
         return left;
     }
 
-    public void setLeft(float left) {
+    public void setLeft(int left) {
         this.left = left;
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
@@ -126,11 +126,11 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         }
     }
 
-    public float getTop() {
+    public int getTop() {
         return top;
     }
 
-    public void setTop(float top) {
+    public void setTop(int top) {
         this.top = top;
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
