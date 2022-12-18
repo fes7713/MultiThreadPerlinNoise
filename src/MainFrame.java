@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class MainFrame {
     public static void main(String[] argv)
@@ -38,12 +40,11 @@ public class MainFrame {
                 int height = e.getComponent().getHeight();
 
                 ncm.setDimension(width, height);
+
                 PaintInterface pi = panel::repaint;
                 ncm.updateChunk(
                         pi,
-                        (max, min)-> {
-                            ncm.setNoiseRange(max, min);
-                        }
+                        ncm::setNoiseRange
                 );
             }
 

@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.lang.Math;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class NoiseChunkManager implements NoiseChunkInterface{
     private NoiseChunk[][] chunkTable;
@@ -17,6 +21,9 @@ public class NoiseChunkManager implements NoiseChunkInterface{
     private float noiseMax;
     private float noiseMin;
 
+    private final Semaphore semaphore;
+    ThreadPoolExecutor executor;
+
     public NoiseChunkManager(int tableWidth, int tableHeight) {
         this.tableWidth = tableWidth;
         this.tableHeight = tableHeight;
@@ -31,10 +38,13 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         canvasWidth = 1000;
         canvasHeight = 1000;
 
+        semaphore = new Semaphore(tableWidth * tableHeight);
+
         initTable();
 
         widthChanged();
         heightChanged();
+
     }
 
     private void initTable()
@@ -46,7 +56,7 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         {
             for (int j = 0; j < tableHeight; j++)
             {
-                chunkTable[i][j] = new NoiseChunk(fn, i, j, left, top, width, height);
+                chunkTable[i][j] = new NoiseChunk(fn, i, j, left, top, width, height, semaphore);
             }
         }
     }
@@ -134,6 +144,28 @@ public class NoiseChunkManager implements NoiseChunkInterface{
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].updateChunk(pi, nri);
+            }
+        }
+        Runnable afterTasks = () -> {
+            try {
+                semaphore.acquire(tableHeight * tableWidth);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Noise should be completed by here");
+            setNoiseRange(noiseMax, noiseMin);
+            updateImage(pi);
+            semaphore.release(tableHeight * tableWidth);
+        };
+        new Thread(afterTasks).start();
+    }
+
+    public void updateImage(PaintInterface pi)
+    {
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].updateImage(pi);
             }
         }
     }

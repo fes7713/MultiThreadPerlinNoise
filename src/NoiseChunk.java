@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
@@ -13,10 +16,10 @@ public class NoiseChunk implements NoiseChunkInterface{
     FastNoise fn;
     PerlinNoiseArray array;
     Thread thread;
-
     ReentrantLock lock;
+    Semaphore semaphore;
 
-    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height) {
+    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, float left, float top, int width, int height, Semaphore semaphore) {
         this.fn = fn;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
@@ -24,9 +27,11 @@ public class NoiseChunk implements NoiseChunkInterface{
         this.top = top;
         this.width = width;
         this.height = height;
-        array = new PerlinNoiseArray(fn, chunkX * width + left, chunkY * height + top, width, height);
         thread = new Thread();
         lock = new ReentrantLock();
+        this.semaphore = semaphore;
+
+        array = new PerlinNoiseArray(fn, chunkX * width + left, chunkY * height + top, width, height);
     }
 
     public float getLeft() {
@@ -81,12 +86,19 @@ public class NoiseChunk implements NoiseChunkInterface{
 //            System.out.println("Active thread");
             thread.interrupt();
         }
-
+//        lock.lock();
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         thread = new Thread()
         {
             @Override
             public void run() {
                 super.run();
+//                lock.lock();
+
                 array.initNoiseMap();
                 nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
                 array.updateImage(pi);
@@ -96,9 +108,17 @@ public class NoiseChunk implements NoiseChunkInterface{
                     nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
                     array.updateImage(pi);
                 }
+                System.out.println("Noise updated");
+                semaphore.release();
+//                lock.unlock();
             }
         };
         thread.start();
+    }
+
+    public void updateImage(PaintInterface pi)
+    {
+        array.updateImage(pi);
     }
 
     public void drawImage(Graphics2D g2d)
