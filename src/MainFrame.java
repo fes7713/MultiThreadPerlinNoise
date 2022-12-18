@@ -19,54 +19,12 @@ public class MainFrame {
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-//        PerlinNoiseArray pna = new PerlinNoiseArray(fn, 50, 50, 500, 500);
         NoiseChunkManager ncm = new NoiseChunkManager(5, 5);
 
-        JPanel panel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+        JPanel panel = new NoiseMapPanel(ncm) ;
 
-                ncm.drawImage(g2d);
-            }
-        };
-
-        panel.addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int width = e.getComponent().getWidth();
-                int height = e.getComponent().getHeight();
-
-                ncm.setDimension(width, height);
-
-                PaintInterface pi = panel::repaint;
-                ncm.updateChunk(
-                        pi,
-                        ncm::setNoiseRange
-                );
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {
-
-            }
-        });
-
-        PaintInterface pi = panel::repaint;
         ncm.updateChunk(
-                pi,
+                panel::repaint,
                 ncm::setNoiseRange
         );
         frame.add(panel);

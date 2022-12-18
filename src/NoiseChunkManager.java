@@ -153,7 +153,6 @@ public class NoiseChunkManager implements NoiseChunkInterface{
                 e.printStackTrace();
             }
 
-            System.out.println("Noise should be completed by here");
             setNoiseRange(noiseMax, noiseMin);
             updateImage(pi);
             semaphore.release(tableHeight * tableWidth);
