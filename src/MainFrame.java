@@ -9,7 +9,6 @@ import java.util.concurrent.Semaphore;
 public class MainFrame {
     public static void main(String[] argv)
     {
-        System.out.println("Print");
         FastNoise fn = new FastNoise();
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
@@ -35,7 +34,7 @@ public class MainFrame {
 
         System.out.println(ncg);
 
-        ncg.pushTop(newNcg, 2);
+        ncg.pushBottom(newNcg, 6);
         System.out.println("pushed");
 
         System.out.println(ncg);

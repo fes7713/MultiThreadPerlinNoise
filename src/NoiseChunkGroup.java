@@ -2,6 +2,8 @@ import java.awt.*;
 import java.lang.Math;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface{
     private final String name;
@@ -21,6 +23,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     private int top;
 
     private final Semaphore semaphore;
+    private final Lock lock;
     ThreadPoolExecutor executor;
 
     public NoiseChunkGroup(String name, FastNoise fn, int tableWidth, int tableHeight) {
@@ -37,7 +40,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         canvasHeight = 1000;
 
         semaphore = new Semaphore(tableWidth * tableHeight);
-
+        lock = new ReentrantLock();
         initTable();
 
         widthChanged();
@@ -238,12 +241,18 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
     private void syncChunkCoordinate()
     {
+        try {
+            semaphore.acquire(tableWidth * tableWidth);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         for(int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].setChunkX(i + chunkX);
                 chunkTable[i][j].setChunkY(j + chunkY);
             }
         }
+        semaphore.release(tableWidth * tableWidth);
     }
 
 
@@ -332,7 +341,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
       V
     ******
     ******
-
      */
     @Override
     public NoiseChunkInterface[][] pushTop(NoiseChunkGroup ncg, int length) {
@@ -371,7 +379,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
         }
         // Replace all
-        else if(tableWidth == pushedChunks.length)
+        else if(tableHeight == pushedChunks[0].length)
         {
             retuningChunkTable = chunkTable;
             chunkTable = pushedChunks;
@@ -465,14 +473,77 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         return retuningChunkTable;
     }
 
+    /*/
+    ******
+    ******
+      U
+      |
+    ******
+    ******
+    ******
+    ******
+      U
+      |
+    ******
+    ******
+     */
+
     @Override
     public NoiseChunkInterface[][] pushBottom(NoiseChunkGroup ncg, int length) {
-        return new NoiseChunkInterface[0][];
+        NoiseChunkInterface[][] inputChunkTable = new NoiseChunkInterface[tableWidth][length];
+        arrayCopy(ncg.chunkTable, 0, 0, tableWidth, length, inputChunkTable, 0, 0);
+        return pushBottom(inputChunkTable);
     }
 
     @Override
     public NoiseChunkInterface[][] pushBottom(NoiseChunkInterface[][] pushedChunks) {
-        return new NoiseChunkInterface[0][];
+        if(pushedChunks.length == 0 || pushedChunks[0].length == 0)
+            throw new IllegalArgumentException("Chunk dimension cannot be zero");
+        if(tableWidth != pushedChunks.length)
+            throw new IllegalArgumentException("Chunk dimension does not match");
+
+        NoiseChunkInterface[][] retuningChunkTable;
+        if(tableHeight > pushedChunks[0].length)
+        {
+            retuningChunkTable = new NoiseChunkInterface[tableWidth][pushedChunks[0].length];
+            // Create retuning array
+            arrayCopy(chunkTable, 0, 0, tableWidth, pushedChunks[0].length, retuningChunkTable, 0, 0);
+            // Shift chunkTable by pushedChunks.length
+            arrayCopy(
+                    chunkTable, 0, pushedChunks[0].length, tableWidth, tableHeight - pushedChunks[0].length,
+                    chunkTable, 0, 0
+            );
+            // Copy pushedChunk to the right side of chunkTable
+            arrayCopy(
+                    pushedChunks, 0, 0, tableWidth, pushedChunks[0].length,
+                    chunkTable, 0, tableHeight - pushedChunks[0].length
+            );
+
+        }
+        // Replace all
+        else if(tableHeight == pushedChunks[0].length)
+        {
+            retuningChunkTable = chunkTable;
+            chunkTable = pushedChunks;
+
+        }
+        // Pushed chunk table is bigger than existing table
+        else{
+            retuningChunkTable = new NoiseChunkInterface[tableWidth][pushedChunks[0].length];
+
+            arrayCopy(chunkTable, 0, 0, tableWidth, tableHeight, retuningChunkTable, 0, 0);
+            arrayCopy(
+                    pushedChunks, 0, pushedChunks[0].length - tableHeight, tableWidth, tableHeight,
+                    chunkTable, 0, 0
+            );
+            arrayCopy(
+                    pushedChunks, 0 ,0, tableWidth, pushedChunks[0].length - tableHeight,
+                    retuningChunkTable, 0, tableHeight
+            );
+        }
+        syncChunkCoordinate();
+
+        return retuningChunkTable;
     }
 
     public String toString()

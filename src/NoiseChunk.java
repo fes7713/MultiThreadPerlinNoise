@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
@@ -16,7 +17,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     FastNoise fn;
     PerlinNoiseArray array;
     Thread thread;
-    ReentrantLock lock;
+    Lock lock;
     Semaphore semaphore;
 
 
@@ -125,6 +126,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 //                System.out.println("Noise updated");
                 semaphore.release();
                 lock.unlock();
+
             }
         };
         thread.start();
@@ -144,18 +146,14 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     @Override
     public void setChunkX(int chunkX) {
-        lock.lock();
         this.chunkX = chunkX;
         array.setLeft(chunkX * width);
-        lock.unlock();
     }
 
     @Override
     public void setChunkY(int chunkY) {
-        lock.lock();
         this.chunkY = chunkY;
         array.setTop(chunkY * height);
-        lock.unlock();
     }
 
     @Override
