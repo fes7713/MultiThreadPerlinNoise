@@ -11,10 +11,6 @@ public class PerlinNoiseArray {
     private int height;
     private int width;
 
-    private float noiseMax;
-    private float noiseMin;
-    private float noiseRange;
-
     FastNoise fn;
     BufferedImage bi;
 
@@ -66,14 +62,6 @@ public class PerlinNoiseArray {
         dimensionChanged();
     }
 
-    public float getNoiseMax() {
-        return noiseMax;
-    }
-
-    public float getNoiseMin() {
-        return noiseMin;
-    }
-
     private void dimensionChanged()
     {
         noiseMap = new float[width][height];
@@ -82,38 +70,24 @@ public class PerlinNoiseArray {
 
     public void initNoiseMap()
     {
-        noiseMax = noiseMin = 0;
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
                 noiseMap[i][j] = fn.GetNoise(i + left, j + top);
-                if(noiseMap[i][j] > noiseMax)
-                    noiseMax = noiseMap[i][j];
-                if(noiseMap[i][j] < noiseMin)
-                    noiseMin  = noiseMap[i][j];
             }
         }
-
-        noiseRange = noiseMax - noiseMin;
     }
 
     public void increaseResolution(int resolution)
     {
-        noiseMax = noiseMin = 0;
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
                 noiseMap[i][j] += fn.GetNoise((i  + left) * resolution, (j + top) * resolution ) / resolution;
-                if(noiseMap[i][j] > noiseMax)
-                    noiseMax = noiseMap[i][j];
-                if(noiseMap[i][j] < noiseMin)
-                    noiseMin  = noiseMap[i][j];
             }
         }
-
-        noiseRange = noiseMax - noiseMin;
     }
 
     public float convertNoise(float noise)
@@ -128,10 +102,6 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-//                bi.setRGB(i, j, getIntFromColor(
-//                        (noiseMap[i][j] - noiseMin) / noiseRange,
-//                        (noiseMap[i][j] - noiseMin) / noiseRange,
-//                        (noiseMap[i][j] - noiseMin) / noiseRange));
                 bi.setRGB(i, j, getIntFromColor(
                             convertNoise(noiseMap[i][j]),
                             convertNoise(noiseMap[i][j]),
@@ -143,20 +113,6 @@ public class PerlinNoiseArray {
 
         if(pi != null)
             pi.paint();
-    }
-
-    public void setNoiseRange(float max, float min)
-    {
-        if(noiseMax < max)
-        {
-            noiseMax = max;
-            noiseRange = noiseMax - noiseMin;
-        }
-        else if(noiseMin > min)
-        {
-            noiseMin = min;
-            noiseRange = noiseMax - noiseMin;
-        }
     }
 
     public int getIntFromColor(int Red, int Green, int Blue){

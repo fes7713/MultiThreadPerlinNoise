@@ -90,7 +90,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         setHeight(height);
     }
 
-    public void updateChunk(PaintInterface pi, NoiseRangeInterface nri)
+    public void updateChunk(PaintInterface pi)
     {
         if(thread.isAlive())
         {
@@ -111,7 +111,6 @@ public class NoiseChunk implements NoiseChunkInterface{
                 lock.lock();
 
                 array.initNoiseMap();
-                nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
                 array.updateImage(pi);
 
                 for (int i = 1; i < 8; i++) {
@@ -121,7 +120,6 @@ public class NoiseChunk implements NoiseChunkInterface{
                         return;
                     }
                     array.increaseResolution((int)Math.pow(2, i));
-                    nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
                     array.updateImage(pi);
                 }
 //                System.out.println("Noise updated");
@@ -142,21 +140,6 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void drawImage(Graphics2D g2d)
     {
         g2d.drawImage(array.getImage(), chunkX * width + left, chunkY * height + top, null);
-    }
-
-    @Override
-    public float getNoiseMax() {
-        return array.getNoiseMax();
-    }
-
-    @Override
-    public float getNoiseMin() {
-        return array.getNoiseMin();
-    }
-
-    @Override
-    public void setNoiseRange(float max, float min) {
-        array.setNoiseRange(max, min);
     }
 
     @Override

@@ -27,12 +27,10 @@ public class MainFrame {
 
         JPanel panel = new NoiseMapPanel(ncg) ;
         newNcg.updateChunk(
-                null,
-                newNcg::setNoiseRange
+                null
         );
         ncg.updateChunk(
-                null,
-                ncg::setNoiseRange
+                null
         );
 
         try {

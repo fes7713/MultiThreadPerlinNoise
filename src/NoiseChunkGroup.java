@@ -20,9 +20,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     private int left;
     private int top;
 
-    private float noiseMax;
-    private float noiseMin;
-
     private final Semaphore semaphore;
     ThreadPoolExecutor executor;
 
@@ -165,24 +162,12 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     }
 
     @Override
-    public void updateChunk(PaintInterface pi, NoiseRangeInterface nri) {
+    public void updateChunk(PaintInterface pi) {
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].updateChunk(pi, nri);
+                chunkTable[i][j].updateChunk(pi);
             }
         }
-        Runnable afterTasks = () -> {
-            try {
-                semaphore.acquire(tableHeight * tableWidth);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            setNoiseRange(noiseMax, noiseMin);
-            updateImage(pi);
-            semaphore.release(tableHeight * tableWidth);
-        };
-        new Thread(afterTasks).start();
     }
 
     public void updateImage(PaintInterface pi)
@@ -199,30 +184,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].drawImage(g2d);
-            }
-        }
-    }
-
-    @Override
-    public float getNoiseMax() {
-        return noiseMax;
-    }
-
-    @Override
-    public float getNoiseMin() {
-        return noiseMin;
-    }
-
-    @Override
-    public synchronized void setNoiseRange(float max, float min) {
-        if(noiseMax < max)
-            noiseMax = max;
-        if(noiseMin > min)
-            noiseMin = min;
-
-        for (int i = 0; i < tableWidth; i++) {
-            for (int j = 0; j < tableWidth; j++) {
-                chunkTable[i][j].setNoiseRange(noiseMax, noiseMin);
             }
         }
     }
