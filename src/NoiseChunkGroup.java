@@ -25,14 +25,12 @@ public class NoiseChunkGroup implements NoiseChunkInterface{
     private final Semaphore semaphore;
     ThreadPoolExecutor executor;
 
-    public NoiseChunkGroup(int tableWidth, int tableHeight) {
+    public NoiseChunkGroup(FastNoise fn, int tableWidth, int tableHeight) {
         this.tableWidth = tableWidth;
         this.tableHeight = tableHeight;
 
         chunkTable = new NoiseChunk[tableWidth][tableHeight];
-        fn = new FastNoise();
-        fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
-        fn.SetInterp(FastNoise.Interp.Quintic);
+        this.fn = fn;
 
         left = 0;
         top = 0;
@@ -46,6 +44,11 @@ public class NoiseChunkGroup implements NoiseChunkInterface{
         widthChanged();
         heightChanged();
 
+    }
+    public NoiseChunkGroup(int tableWidth, int tableHeight) {
+        this(new FastNoise(), tableWidth, tableHeight);
+        fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
+        fn.SetInterp(FastNoise.Interp.Quintic);
     }
 
     private void initTable()
