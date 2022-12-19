@@ -3,6 +3,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
+    private final String name;
+
     private int chunkX;
     private int chunkY;
 
@@ -18,8 +20,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     Semaphore semaphore;
 
 
-
-    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
+    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
+        this.name = name;
         this.fn = fn;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
@@ -34,6 +36,15 @@ public class NoiseChunk implements NoiseChunkInterface{
         top = 0;
 
         array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height);
+    }
+
+    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
+        this("Default", fn, chunkX, chunkY, width, height,semaphore);
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     public int getLeft() {
@@ -56,7 +67,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         return width;
     }
 
-    public void setWidth(int width) {
+    public synchronized void setWidth(int width) {
         this.width = width;
         array.setWidth(width);
         array.setLeft(chunkX * width);
@@ -67,14 +78,14 @@ public class NoiseChunk implements NoiseChunkInterface{
         return height;
     }
 
-    public void setHeight(int height) {
+    public synchronized void setHeight(int height) {
         this.height = height;
         array.setHeight(height);
         array.setTop(chunkY * height);
     }
 
     @Override
-    public void setDimension(int width, int height) {
+    public synchronized void setDimension(int width, int height) {
         setWidth(width);
         setHeight(height);
     }
@@ -100,7 +111,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 //                lock.lock();
 
                 array.initNoiseMap();
-                nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                nri.setNoiseRange(getNoiseMax(), getNoiseMin());
                 array.updateImage(pi);
 
                 for (int i = 1; i < 8; i++) {
@@ -110,7 +121,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                         return;
                     }
                     array.increaseResolution((int)Math.pow(2, i));
-                    nri.noiseRangeUpdate(getNoiseMax(), getNoiseMin());
+                    nri.setNoiseRange(getNoiseMax(), getNoiseMin());
                     array.updateImage(pi);
                 }
 //                System.out.println("Noise updated");
@@ -154,5 +165,11 @@ public class NoiseChunk implements NoiseChunkInterface{
     @Override
     public void setChunkY(int chunkY) {
         this.chunkY = chunkY;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }

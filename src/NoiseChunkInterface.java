@@ -16,4 +16,5 @@ interface NoiseChunkInterface {
     void setChunkY(int chunkY);
     void setWidth(int width);
     void setHeight(int height);
+    String getName();
 }

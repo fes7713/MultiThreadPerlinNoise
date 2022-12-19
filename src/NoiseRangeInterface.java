@@ -1,3 +1,3 @@
 public interface NoiseRangeInterface {
-    void noiseRangeUpdate(float max, float min);
+    void setNoiseRange(float max, float min);
 }
