@@ -132,9 +132,9 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void updateImage(PaintInterface pi)
     {
-        lock.lock();
+//        lock.lock();
         array.updateImage(pi);
-        lock.unlock();
+//        lock.unlock();
     }
 
     public void drawImage(Graphics2D g2d)
@@ -144,14 +144,18 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     @Override
     public void setChunkX(int chunkX) {
+        lock.lock();
         this.chunkX = chunkX;
         array.setLeft(chunkX * width);
+        lock.unlock();
     }
 
     @Override
     public void setChunkY(int chunkY) {
+        lock.lock();
         this.chunkY = chunkY;
         array.setTop(chunkY * height);
+        lock.unlock();
     }
 
     @Override

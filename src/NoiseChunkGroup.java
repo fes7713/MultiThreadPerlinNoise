@@ -168,6 +168,18 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                 chunkTable[i][j].updateChunk(pi);
             }
         }
+
+        Runnable afterTasks = () -> {
+            try {
+                semaphore.acquire(tableHeight * tableWidth);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            updateImage(pi);
+            semaphore.release(tableHeight * tableWidth);
+        };
+        new Thread(afterTasks).start();
     }
 
     public void updateImage(PaintInterface pi)
@@ -215,6 +227,15 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
+    private <E> void arrayReverseCopy(E[][] src, int srcX, int srcY, int width, int height, E[][] dest, int destX, int destY)
+    {
+        for(int i = width - 1; i >= 0; i--) {
+            for (int j = height - 1; j >= 0; j--) {
+                dest[destX + i][destY + j] = src[srcX + i][srcY + j];
+            }
+        }
+    }
+
     private void syncChunkCoordinate()
     {
         for(int i = 0; i < tableWidth; i++) {
@@ -225,10 +246,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
-    @Override
-    public NoiseChunkInterface[][] pushLeft(NoiseChunkGroup ncg, int length) {
-        return new NoiseChunkInterface[0][];
-    }
 
     /*/
      **     ******         **
@@ -237,10 +254,85 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
      **     ******         **
      */
     @Override
-    public NoiseChunkInterface[][] pushLeft(NoiseChunkInterface[][] pushedChunks) {
-        return new NoiseChunkInterface[0][];
+    public NoiseChunkInterface[][] pushLeft(NoiseChunkGroup ncg, int length) {
+        NoiseChunkInterface[][] inputChunkTable = new NoiseChunkInterface[length][tableHeight];
+        arrayCopy(ncg.chunkTable, ncg.tableWidth - length, 0, length, tableHeight, inputChunkTable, 0, 0);
+        return pushLeft(inputChunkTable);
     }
 
+    @Override
+    public NoiseChunkInterface[][] pushLeft(NoiseChunkInterface[][] pushedChunks) {
+        if(pushedChunks.length == 0 || pushedChunks[0].length == 0)
+            throw new IllegalArgumentException("Chunk dimension cannot be zero");
+        if(tableHeight != pushedChunks[0].length)
+            throw new IllegalArgumentException("Chunk dimension does not match");
+
+        NoiseChunkInterface[][] retuningChunkTable;
+        if(tableWidth > pushedChunks.length)
+        {
+            retuningChunkTable = new NoiseChunkInterface[pushedChunks.length][tableHeight];
+            // Create retuning array
+            arrayCopy(
+                    chunkTable, tableWidth - pushedChunks.length, 0, pushedChunks.length, tableHeight,
+                    retuningChunkTable, 0, 0
+            );
+            // Shift chunkTable by pushedChunks.length
+            arrayReverseCopy(
+                    chunkTable, 0, 0, tableWidth - pushedChunks.length, tableHeight,
+                    chunkTable, pushedChunks.length, 0
+            );
+            // Copy pushedChunk to the right side of chunkTable
+            arrayCopy(
+                    pushedChunks, 0, 0, pushedChunks.length, tableHeight,
+                    chunkTable, 0, 0
+            );
+
+        }
+        // Replace all
+        else if(tableWidth == pushedChunks.length)
+        {
+            retuningChunkTable = chunkTable;
+            chunkTable = pushedChunks;
+
+        }
+        // Pushed chunk table is bigger than existing table
+        else{
+            retuningChunkTable = new NoiseChunkInterface[pushedChunks.length][tableHeight];
+
+            // Copy chunk table to returning chunk table
+            arrayCopy(
+                    chunkTable, 0, 0, tableWidth, tableHeight,
+                    retuningChunkTable, pushedChunks.length - tableWidth, 0
+            );
+            // Copy the pushed chunk table to the chunk table
+            arrayCopy(
+                    pushedChunks, 0, 0, tableWidth, tableHeight,
+                    chunkTable, 0, 0
+            );
+            arrayCopy(
+                    pushedChunks, tableWidth ,0, pushedChunks.length - tableWidth, tableHeight,
+                    retuningChunkTable, 0, 0
+            );
+        }
+        syncChunkCoordinate();
+
+        return retuningChunkTable;
+    }
+
+    /*/
+    ******
+    ******
+      |
+      V
+    ******
+    ******
+    ******
+      |
+      V
+    ******
+    ******
+
+     */
     @Override
     public NoiseChunkInterface[][] pushTop(NoiseChunkGroup ncg, int length) {
         return new NoiseChunkInterface[0][];

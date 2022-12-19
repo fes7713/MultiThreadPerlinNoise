@@ -32,15 +32,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int height = e.getComponent().getHeight();
 
 //        nci.setDimension(width, height);
-
-//        nci.updateChunk(
-//                this::repaint,
-//                nci::setNoiseRange
-//        );
-//
-//        NoiseChunkGroup newNcg = new NoiseChunkGroup("New", new FastNoise(), 2, 5);
-//        newNcg.updateChunk(null);
-//        ((NoiseChunkGroup)nci).pushRight(newNcg, 2);
+//        nci.updateChunk(this::repaint);
     }
 
     @Override

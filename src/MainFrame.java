@@ -20,9 +20,9 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseChunkGroup ncg = new NoiseChunkGroup("Chunk", fn, 5, 5);
-        NoiseChunkGroup newNcg = new NoiseChunkGroup("New", fn, 2, 5);
+        NoiseChunkGroup newNcg = new NoiseChunkGroup("New", fn, 6, 5);
         ncg.setDimension(500, 500);
-        newNcg.setDimension(200, 500);
+        newNcg.setDimension(600, 500);
 //        newNcg.setChunkX(2);
 
         JPanel panel = new NoiseMapPanel(ncg) ;
@@ -33,14 +33,9 @@ public class MainFrame {
                 null
         );
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         System.out.println(ncg);
-        ncg.pushRight(newNcg, 2);
+
+        ncg.pushRight(newNcg, 6);
         System.out.println("pushed");
 
         System.out.println(ncg);
@@ -52,12 +47,6 @@ public class MainFrame {
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);
         frame.repaint();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        panel.repaint();
     }
 
 }
