@@ -327,6 +327,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     ******
     ******
     ******
+    ******
       |
       V
     ******
@@ -335,12 +336,69 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
      */
     @Override
     public NoiseChunkInterface[][] pushTop(NoiseChunkGroup ncg, int length) {
-        return new NoiseChunkInterface[0][];
+        NoiseChunkInterface[][] inputChunkTable = new NoiseChunkInterface[tableWidth][length];
+        arrayCopy(ncg.chunkTable, 0, ncg.tableHeight - length, tableWidth, length, inputChunkTable, 0, 0);
+        return pushTop(inputChunkTable);
     }
 
     @Override
     public NoiseChunkInterface[][] pushTop(NoiseChunkInterface[][] pushedChunks) {
-        return new NoiseChunkInterface[0][];
+
+        if(pushedChunks.length == 0 || pushedChunks[0].length == 0)
+            throw new IllegalArgumentException("Chunk dimension cannot be zero");
+        if(tableWidth != pushedChunks.length)
+            throw new IllegalArgumentException("Chunk dimension does not match");
+
+        NoiseChunkInterface[][] retuningChunkTable;
+        if(tableHeight > pushedChunks[0].length)
+        {
+            retuningChunkTable = new NoiseChunkInterface[tableWidth][pushedChunks[0].length];
+            // Create retuning array
+            arrayCopy(
+                    chunkTable, 0, tableHeight - pushedChunks[0].length, tableWidth, pushedChunks[0].length,
+                    retuningChunkTable, 0, 0
+            );
+            // Shift chunkTable by pushedChunks.length
+            arrayReverseCopy(
+                    chunkTable, 0, 0, tableWidth, tableHeight - pushedChunks[0].length,
+                    chunkTable, 0, pushedChunks[0].length
+            );
+            // Copy pushedChunk to the right side of chunkTable
+            arrayCopy(
+                    pushedChunks, 0, 0, tableWidth, pushedChunks[0].length,
+                    chunkTable, 0, 0
+            );
+
+        }
+        // Replace all
+        else if(tableWidth == pushedChunks.length)
+        {
+            retuningChunkTable = chunkTable;
+            chunkTable = pushedChunks;
+
+        }
+        // Pushed chunk table is bigger than existing table
+        else{
+            retuningChunkTable = new NoiseChunkInterface[tableWidth][pushedChunks[0].length];
+
+            // Copy chunk table to returning chunk table
+            arrayCopy(
+                    chunkTable, 0, 0, tableWidth, tableHeight,
+                    retuningChunkTable, 0, pushedChunks[0].length - tableHeight
+            );
+            // Copy the pushed chunk table to the chunk table
+            arrayCopy(
+                    pushedChunks, 0, 0, tableWidth, tableHeight,
+                    chunkTable, 0, 0
+            );
+            arrayCopy(
+                    pushedChunks, 0 ,tableHeight, tableWidth, pushedChunks[0].length - tableHeight,
+                    retuningChunkTable, 0, 0
+            );
+        }
+        syncChunkCoordinate();
+
+        return retuningChunkTable;
     }
 
     /*/

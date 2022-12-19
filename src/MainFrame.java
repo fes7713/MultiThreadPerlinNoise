@@ -20,9 +20,9 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseChunkGroup ncg = new NoiseChunkGroup("Chunk", fn, 5, 5);
-        NoiseChunkGroup newNcg = new NoiseChunkGroup("New", fn, 6, 5);
+        NoiseChunkGroup newNcg = new NoiseChunkGroup("New", fn, 5, 6);
         ncg.setDimension(500, 500);
-        newNcg.setDimension(600, 500);
+        newNcg.setDimension(500, 600);
 //        newNcg.setChunkX(2);
 
         JPanel panel = new NoiseMapPanel(ncg) ;
@@ -35,7 +35,7 @@ public class MainFrame {
 
         System.out.println(ncg);
 
-        ncg.pushRight(newNcg, 6);
+        ncg.pushTop(newNcg, 2);
         System.out.println("pushed");
 
         System.out.println(ncg);
