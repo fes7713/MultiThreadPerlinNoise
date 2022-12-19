@@ -21,11 +21,19 @@ public class MainFrame {
 
         NoiseChunkGroup ncg = new NoiseChunkGroup("Chunk", fn, 5, 5);
         NoiseChunkGroup newNcg = new NoiseChunkGroup("New", fn, 2, 5);
+        ncg.setDimension(500, 500);
+        newNcg.setDimension(200, 500);
 //        newNcg.setChunkX(2);
 
         JPanel panel = new NoiseMapPanel(ncg) ;
-        newNcg.updateChunk(panel::repaint);
-        ncg.updateChunk(panel::repaint);
+        newNcg.updateChunk(
+                null,
+                newNcg::setNoiseRange
+        );
+        ncg.updateChunk(
+                null,
+                ncg::setNoiseRange
+        );
 
         try {
             Thread.sleep(3000);
@@ -51,8 +59,7 @@ public class MainFrame {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ncg.updateImage(panel::repaint);
-//        panel.repaint();
+        panel.repaint();
     }
 
 }

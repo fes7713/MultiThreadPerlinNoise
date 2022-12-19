@@ -3,7 +3,7 @@ import java.lang.Math;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface, NoiseRangeInterface{
+public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface{
     private final String name;
     private NoiseChunkInterface[][] chunkTable;
     private final FastNoise fn;
@@ -185,10 +185,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         new Thread(afterTasks).start();
     }
 
-    public void updateChunk(PaintInterface pi){
-        updateChunk(pi, this);
-    }
-
     public void updateImage(PaintInterface pi)
     {
         for (int i = 0; i < tableWidth; i++) {
@@ -354,6 +350,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
             );
         }
         syncChunkCoordinate();
+
         return retuningChunkTable;
     }
 
