@@ -116,16 +116,28 @@ public class PerlinNoiseArray {
         noiseRange = noiseMax - noiseMin;
     }
 
+    public float convertNoise(float noise)
+    {
+//        return 1 - 0.5F / (noise + 1.25F);
+        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
+    }
+
     public void updateImage(PaintInterface pi)
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
+//                bi.setRGB(i, j, getIntFromColor(
+//                        (noiseMap[i][j] - noiseMin) / noiseRange,
+//                        (noiseMap[i][j] - noiseMin) / noiseRange,
+//                        (noiseMap[i][j] - noiseMin) / noiseRange));
                 bi.setRGB(i, j, getIntFromColor(
-                        (noiseMap[i][j] - noiseMin) / noiseRange,
-                        (noiseMap[i][j] - noiseMin) / noiseRange,
-                        (noiseMap[i][j] - noiseMin) / noiseRange));
+                            convertNoise(noiseMap[i][j]),
+                            convertNoise(noiseMap[i][j]),
+                            convertNoise(noiseMap[i][j])
+                        )
+                );
             }
         }
 
