@@ -1,3 +1,5 @@
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -18,6 +20,7 @@ public class ChunkProvider {
         fn = new FastNoise();
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
+        chunkWidth = chunkHeight = 200;
     }
 
     public static ChunkProvider getInstance(){
@@ -31,8 +34,8 @@ public class ChunkProvider {
             return loadedNoiseMap.get(col).get(row);
         }
         else{
-            NoiseChunkInterface noiseChunk = new NoiseChunk(fn, col, row, chunkWidth, chunkHeight, semaphore);
-            noiseChunk.updateChunk(null);
+            NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, semaphore);
+
             if(loadedNoiseMap.containsKey(col)) {
                 loadedNoiseMap.get(col).put(row, noiseChunk);
             }else{
@@ -44,5 +47,12 @@ public class ChunkProvider {
             }
             return noiseChunk;
         }
+    }
+
+    public void dimensionChanged(int chunkWidth, int chunkHeight)
+    {
+        loadedNoiseMap.clear();
+        this.chunkWidth = chunkWidth;
+        this.chunkHeight = chunkHeight;
     }
 }

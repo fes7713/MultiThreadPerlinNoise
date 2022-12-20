@@ -9,5 +9,4 @@ public interface NoiseChunkGroupInterface {
     NoiseChunkInterface[][] pushBottom(NoiseChunkInterface[][] pushedChunks);
     int getChunkWidth();
     int getChunkHeight();
-
 }

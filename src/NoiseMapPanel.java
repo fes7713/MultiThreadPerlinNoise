@@ -3,19 +3,35 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
-    private final NoiseChunkInterface nci;
+    private final ChunkProvider provider;
+    private NoiseChunkGroup nci;
 
     private int startX;
     private int startY;
     private int startLeft;
     private int startTop;
 
-    public NoiseMapPanel(NoiseChunkInterface nci)
+    private int tableWidth;
+    private int tableHeight;
+
+    public NoiseMapPanel(NoiseChunkGroup nci)
     {
         this.nci = nci;
+
+        provider = ChunkProvider.getInstance();
+        tableWidth = tableHeight = 5;
         addComponentListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
+    }
+
+    public NoiseMapPanel()
+    {
+        this(new NoiseChunkGroup("Chunk",  100, 200,5, 5));
+        nci.updateChunk(
+            null
+        );
+        System.out.println("Print");
     }
 
     @Override
@@ -31,8 +47,13 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int width = e.getComponent().getWidth();
         int height = e.getComponent().getHeight();
 
-//        nci.setDimension(width, height);
-//        nci.updateChunk(this::repaint);
+        provider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
+        nci = new NoiseChunkGroup("Chunk",  width, height,tableWidth, tableHeight);
+        System.out.println(nci.getChunkWidth());
+        System.out.println(nci.getChunkHeight());
+
+        nci.updateChunk(this::repaint);
+        System.out.println("Resize");
     }
 
     @Override
@@ -52,8 +73,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println(e.getX());
-        System.out.println(e.getY());
         int diffX = e.getX() - startX;
         int diffY = e.getY() - startY;
 
@@ -77,8 +96,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void mousePressed(MouseEvent e) {
         startX = e.getX();
         startY = e.getY();
-//        startLeft = nci.getLeft();
-//        startTop = nci.getTop();
+        startLeft = nci.getPixelShiftX();
+        startTop = nci.getPixelShiftY();
     }
 
     @Override

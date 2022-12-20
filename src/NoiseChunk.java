@@ -109,7 +109,7 @@ public class NoiseChunk implements NoiseChunkInterface{
             @Override
             public void run() {
                 super.run();
-                lock.lock();
+//                lock.lock();
 
                 array.initNoiseMap();
                 array.updateImage(pi);
@@ -125,7 +125,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                 }
 //                System.out.println("Noise updated");
                 semaphore.release();
-                lock.unlock();
+//                lock.unlock();
             }
         };
         thread.start();
@@ -143,6 +143,12 @@ public class NoiseChunk implements NoiseChunkInterface{
         g2d.drawImage(array.getImage(),
                 (chunkX + chunkShiftX) * width + pixelShiftX,
                 (chunkY + chunkShiftY) * height + pixelShiftY, null
+        );
+        g2d.drawRect(
+                (chunkX + chunkShiftX) * width + pixelShiftX,
+                (chunkY + chunkShiftY) * height + pixelShiftY,
+                width,
+                height
         );
     }
 
