@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
-    private final ChunkProvider provider;
+    private final ChunkProvider provider = ChunkProvider.getInstance();
     private NoiseChunkGroup nci;
 
     private int startX;
@@ -21,7 +21,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     {
         this.nci = nci;
 
-        provider = ChunkProvider.getInstance();
+
         tableWidth = tableHeight = 5;
         addComponentListener(this);
         addMouseMotionListener(this);
@@ -32,9 +32,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     {
         this(new NoiseChunkGroup("Chunk",  100, 200,5, 5));
         nci.updateChunk(
-            null
+            this::repaint
         );
-        System.out.println("Print");
     }
 
     @Override

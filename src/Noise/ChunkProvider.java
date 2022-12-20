@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 public class ChunkProvider {
-    private static ChunkProvider provider = new ChunkProvider();
+    private static final ChunkProvider provider = new ChunkProvider();
 
     FastNoise fn;
-    private  Map<Integer, Map<Integer, NoiseChunkInterface>> loadedNoiseMap;
+    private final Map<Integer, Map<Integer, NoiseChunkInterface>> loadedNoiseMap;
 
     private int chunkWidth;
     private int chunkHeight;
 
-
+    PaintInterface pi;
     private ChunkProvider()
     {
         loadedNoiseMap = new HashMap<>();
@@ -26,8 +26,18 @@ public class ChunkProvider {
     public static ChunkProvider getInstance(){
         return provider;
     }
+    public static ChunkProvider getInstance(PaintInterface pi){
+        provider.setPaintInterface(pi);
+        return provider;
+    }
 
-    public NoiseChunkInterface requestNoiseChunk(int col, int row, Semaphore semaphore)
+
+    public void setPaintInterface(PaintInterface pi)
+    {
+        this.pi = pi;
+    }
+
+    public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate, Semaphore semaphore)
     {
         if(loadedNoiseMap.containsKey(col) && loadedNoiseMap.get(col).containsKey(row))
         {
@@ -35,7 +45,15 @@ public class ChunkProvider {
         }
         else{
             NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, semaphore);
+            if(paintUpdate)
+            {
+                if(pi == null)
+                    throw new RuntimeException("Need paint interface to be set before this method call");
+                noiseChunk.updateChunk(pi);
+            }
 
+            else
+                noiseChunk.updateChunk(null);
             if(loadedNoiseMap.containsKey(col)) {
                 loadedNoiseMap.get(col).put(row, noiseChunk);
             }else{

@@ -1,6 +1,8 @@
 package Noise;
 
 public interface NoiseChunkGroupInterface {
+    void loadChunks(int chunkX, int chunkY);
+
     NoiseChunkInterface[][] pushLeft(NoiseChunkGroup ncg, int length);
     NoiseChunkInterface[][] pushLeft(NoiseChunkInterface[][] pushedChunks);
     NoiseChunkInterface[][] pushTop(NoiseChunkGroup ncg, int length);
