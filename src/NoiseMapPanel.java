@@ -1,3 +1,6 @@
+import Noise.ChunkProvider;
+import Noise.NoiseChunkGroup;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

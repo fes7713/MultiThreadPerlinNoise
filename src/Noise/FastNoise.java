@@ -1,6 +1,6 @@
+package Noise;
 
-
-// FastNoise.java
+// Noise.FastNoise.java
 //
 // MIT License
 //
@@ -131,7 +131,7 @@ public class FastNoise {
     }
 
     // Sets return type from cellular noise calculations
-    // Note: NoiseLookup requires another FastNoise object be set with SetCellularNoiseLookup() to function
+    // Note: NoiseLookup requires another Noise.FastNoise object be set with SetCellularNoiseLookup() to function
     // Default: CellValue
     public void SetCellularDistanceFunction(CellularDistanceFunction cellularDistanceFunction) {
         m_cellularDistanceFunction = cellularDistanceFunction;

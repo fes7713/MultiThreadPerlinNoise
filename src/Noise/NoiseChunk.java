@@ -1,3 +1,5 @@
+package Noise;
+
 import java.awt.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;

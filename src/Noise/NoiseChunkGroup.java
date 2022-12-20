@@ -1,7 +1,8 @@
+package Noise;
+
 import java.awt.*;
 import java.lang.Math;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -73,7 +74,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
             for (int j = 0; j < tableHeight; j++)
             {
                 chunkTable[i][j] = provider.requestNoiseChunk(i, j, semaphore);
-//                        new NoiseChunk(name + i + "-" + j, fn, i, j, chunkWidth, chunkHeight, semaphore);
+//                        new Noise.NoiseChunk(name + i + "-" + j, fn, i, j, chunkWidth, chunkHeight, semaphore);
             }
         }
     }

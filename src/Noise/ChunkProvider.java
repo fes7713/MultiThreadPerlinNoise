@@ -1,5 +1,5 @@
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+package Noise;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;

@@ -1,10 +1,6 @@
+import Noise.FastNoise;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
 
 public class MainFrame {
     public static void main(String[] argv)

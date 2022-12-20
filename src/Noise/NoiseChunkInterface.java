@@ -1,3 +1,5 @@
+package Noise;
+
 import java.awt.*;
 
 interface NoiseChunkInterface {

@@ -1,7 +1,7 @@
+import Noise.NoiseChunkGroup;
+
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 public class NoiseChunkManager implements ComponentListener {
@@ -23,7 +23,7 @@ public class NoiseChunkManager implements ComponentListener {
         top = 0;
         size = borderThickness * 2 + 1;
         semaphore = new Semaphore(MAIN_CHUNK_TABLE_SIZE * MAIN_CHUNK_TABLE_SIZE);
-//        mainGroup = new NoiseChunkGroup(fn, 500, 500, MAIN_CHUNK_TABLE_SIZE, MAIN_CHUNK_TABLE_SIZE, semaphore);
+//        mainGroup = new Noise.NoiseChunkGroup(fn, 500, 500, MAIN_CHUNK_TABLE_SIZE, MAIN_CHUNK_TABLE_SIZE, semaphore);
 
     }
 
