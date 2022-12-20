@@ -149,17 +149,17 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
             }
         }
 
-        Runnable afterTasks = () -> {
-            try {
-                semaphore.acquire(tableHeight * tableWidth);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            updateImage(pi);
-            semaphore.release(tableHeight * tableWidth);
-        };
-        new Thread(afterTasks).start();
+//        Runnable afterTasks = () -> {
+//            try {
+//                semaphore.acquire(tableHeight * tableWidth);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            updateImage(pi);
+//            semaphore.release(tableHeight * tableWidth);
+//        };
+//        new Thread(afterTasks).start();
     }
 
     public void updateImage(PaintInterface pi)
