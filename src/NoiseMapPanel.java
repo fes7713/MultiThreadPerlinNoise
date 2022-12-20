@@ -57,8 +57,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int diffX = e.getX() - startX;
         int diffY = e.getY() - startY;
 
-        nci.setLeft(startLeft + diffX);
-        nci.setTop(startTop + diffY);
+        nci.setPixelShiftX(startLeft + diffX);
+        nci.setPixelShiftY(startTop + diffY);
 
         repaint();
     }
@@ -77,8 +77,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void mousePressed(MouseEvent e) {
         startX = e.getX();
         startY = e.getY();
-        startLeft = nci.getLeft();
-        startTop = nci.getTop();
+//        startLeft = nci.getLeft();
+//        startTop = nci.getTop();
     }
 
     @Override

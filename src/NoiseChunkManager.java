@@ -1,8 +1,11 @@
-public class NoiseChunkManager {
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Semaphore;
+
+public class NoiseChunkManager implements ComponentListener {
     private int borderThickness;
-
-    private NoiseChunkInterface[][] chunkLoadTable;
-
     private final int MAIN_CHUNK_TABLE_SIZE = 5;
 
     private int left;
@@ -10,37 +13,42 @@ public class NoiseChunkManager {
 
     private int size;
 
+    NoiseChunkGroup mainGroup;
+    Semaphore semaphore;
+
+
     public NoiseChunkManager(int borderThickness)
     {
-        chunkLoadTable = new NoiseChunkInterface[borderThickness * 2 + 1][borderThickness * 2 + 1];
         left = 0;
         top = 0;
         size = borderThickness * 2 + 1;
+        semaphore = new Semaphore(MAIN_CHUNK_TABLE_SIZE * MAIN_CHUNK_TABLE_SIZE);
+//        mainGroup = new NoiseChunkGroup(fn, 500, 500, MAIN_CHUNK_TABLE_SIZE, MAIN_CHUNK_TABLE_SIZE, semaphore);
+
     }
 
-    public void initTable()
-    {
-        FastNoise fn =  new FastNoise();
-        fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
-        fn.SetInterp(FastNoise.Interp.Quintic);
-
-        chunkLoadTable[borderThickness][borderThickness] =
-                    new NoiseChunkGroup(fn, MAIN_CHUNK_TABLE_SIZE, MAIN_CHUNK_TABLE_SIZE);
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if(i == borderThickness && j == borderThickness)
-                    continue;
-                if(i == borderThickness)
-                    chunkLoadTable[i][j] = new NoiseChunkGroup(fn, MAIN_CHUNK_TABLE_SIZE, 1);
-                else if(j == borderThickness)
-                    chunkLoadTable[i][j] = new NoiseChunkGroup(fn, 1, MAIN_CHUNK_TABLE_SIZE);
-                else
-                    chunkLoadTable[i][j] = new NoiseChunkGroup(fn, 1, 1);
 
 
-            }
-        }
+    @Override
+    public void componentResized(ComponentEvent e) {
+        int width = e.getComponent().getWidth();
+        int height = e.getComponent().getHeight();
 
+
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
 
     }
 }

@@ -6,13 +6,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class NoiseChunk implements NoiseChunkInterface{
     private final String name;
 
-    private int chunkX;
-    private int chunkY;
+    private final int chunkX;
+    private final int chunkY;
+    private final int width;
+    private final int height;
 
-    private int left;
-    private int top;
-    private int width;
-    private int height;
+    private int chunkShiftX;
+    private int chunkShiftY;
+    private int pixelShiftX;
+    private int pixelShiftY;
+
 
     FastNoise fn;
     PerlinNoiseArray array;
@@ -33,8 +36,8 @@ public class NoiseChunk implements NoiseChunkInterface{
         lock = new ReentrantLock();
         this.semaphore = semaphore;
 
-        left = 0;
-        top = 0;
+        chunkShiftX = chunkShiftY = 0;
+        pixelShiftX = pixelShiftY = 0;
 
         array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height);
     }
@@ -48,47 +51,44 @@ public class NoiseChunk implements NoiseChunkInterface{
         return name;
     }
 
-    public int getLeft() {
-        return left;
-    }
-
-    public void setLeft(int left) {
-        this.left = left;
-    }
-
-    public int getTop() {
-        return top;
-    }
-
-    public void setTop(int top) {
-        this.top = top;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public synchronized void setWidth(int width) {
-        this.width = width;
-        array.setWidth(width);
-        array.setLeft(chunkX * width);
-
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public synchronized void setHeight(int height) {
-        this.height = height;
-        array.setHeight(height);
-        array.setTop(chunkY * height);
+    @Override
+    public int getChunkX() {
+        return chunkX;
     }
 
     @Override
-    public synchronized void setDimension(int width, int height) {
-        setWidth(width);
-        setHeight(height);
+    public int getChunkY() {
+        return chunkY;
+    }
+
+    @Override
+    public void setChunkShiftX(int chunkShiftX) {
+        this.chunkShiftX = chunkShiftX;
+    }
+
+    @Override
+    public void setChunkShiftY(int chunkShiftY) {
+        this.chunkShiftY = chunkShiftY;
+    }
+
+    @Override
+    public int getPixelShiftX() {
+        return pixelShiftX;
+    }
+
+    @Override
+    public void setPixelShiftX(int pixelShiftX) {
+        this.pixelShiftX = pixelShiftX;
+    }
+
+    @Override
+    public int getPixelShiftY() {
+        return pixelShiftY;
+    }
+
+    @Override
+    public void setPixelShiftY(int pixelShiftY) {
+        this.pixelShiftY = pixelShiftY;
     }
 
     public void updateChunk(PaintInterface pi)
@@ -126,7 +126,6 @@ public class NoiseChunk implements NoiseChunkInterface{
 //                System.out.println("Noise updated");
                 semaphore.release();
                 lock.unlock();
-
             }
         };
         thread.start();
@@ -141,19 +140,10 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void drawImage(Graphics2D g2d)
     {
-        g2d.drawImage(array.getImage(), chunkX * width + left, chunkY * height + top, null);
-    }
-
-    @Override
-    public void setChunkX(int chunkX) {
-        this.chunkX = chunkX;
-        array.setLeft(chunkX * width);
-    }
-
-    @Override
-    public void setChunkY(int chunkY) {
-        this.chunkY = chunkY;
-        array.setTop(chunkY * height);
+        g2d.drawImage(array.getImage(),
+                (chunkX + chunkShiftX) * width + pixelShiftX,
+                (chunkY + chunkShiftY) * height + pixelShiftY, null
+        );
     }
 
     @Override

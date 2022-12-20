@@ -10,23 +10,28 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     private NoiseChunkInterface[][] chunkTable;
     private final FastNoise fn;
 
-    private int chunkX;
-    private int chunkY;
+    private final int chunkX;
+    private final int chunkY;
+    private final int chunkWidth;
+    private final int chunkHeight;
 
-    private int tableWidth;
-    private int tableHeight;
+//    private int chunkShiftX;
+//    private int chunkShiftY;
+    private int pixelShiftX;
+    private int pixelShiftY;
+
+    private final int tableWidth;
+    private final int tableHeight;
 
     private int canvasWidth;
     private int canvasHeight;
 
-    private int left;
-    private int top;
-
     private final Semaphore semaphore;
     private final Lock lock;
-    ThreadPoolExecutor executor;
 
-    public NoiseChunkGroup(String name, FastNoise fn, int tableWidth, int tableHeight) {
+    private final ChunkProvider provider;
+
+    public NoiseChunkGroup(String name, FastNoise fn, int canvasWidth, int canvasHeight, int tableWidth, int tableHeight, Semaphore semaphore) {
         this.name = name;
         this.tableWidth = tableWidth;
         this.tableHeight = tableHeight;
@@ -34,39 +39,49 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         chunkTable = new NoiseChunk[tableWidth][tableHeight];
         this.fn = fn;
 
-        left = 0;
-        top = 0;
-        canvasWidth = 1000;
-        canvasHeight = 1000;
+        chunkX = chunkY = 0;
+//        chunkShiftX = chunkShiftY = 0;
+//        pixelShiftX = pixelShiftY = 0;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
 
-        semaphore = new Semaphore(tableWidth * tableHeight);
+        chunkWidth = getChunkWidth();
+        chunkHeight = getChunkHeight();
+
+
+
+        this.semaphore = semaphore;
         lock = new ReentrantLock();
+        provider = ChunkProvider.getInstance();
         initTable();
-
-        widthChanged();
-        heightChanged();
     }
 
-    public NoiseChunkGroup(FastNoise fn, int tableWidth, int tableHeight) {
-        this("Default", fn, tableWidth, tableHeight);
+    public NoiseChunkGroup(String name, FastNoise fn,  int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
+        this(name, fn, canvasWidth, canvasHeight, tableWidth, tableHeight, new Semaphore(tableWidth * tableHeight));
     }
 
-    public NoiseChunkGroup(int tableWidth, int tableHeight) {
-        this(new FastNoise(), tableWidth, tableHeight);
+    public NoiseChunkGroup(FastNoise fn, int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
+        this("Default", fn, canvasWidth, canvasHeight, tableWidth, tableHeight);
+    }
+
+    public NoiseChunkGroup(FastNoise fn, int canvasWidth, int canvasHeight, int tableWidth, int tableHeight, Semaphore semaphore) {
+        this("Default", fn ,canvasWidth, canvasHeight, tableWidth, tableHeight, semaphore);
+    }
+
+    public NoiseChunkGroup(int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
+        this(new FastNoise(), canvasWidth, canvasHeight, tableWidth, tableHeight);
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
     }
 
     private void initTable()
     {
-        int width = (int)Math.ceil(canvasWidth / (double)tableWidth);
-        int height = (int)Math.ceil(canvasHeight / (double)tableHeight);
-
         for (int i = 0; i < tableWidth; i++)
         {
             for (int j = 0; j < tableHeight; j++)
             {
-                chunkTable[i][j] = new NoiseChunk(name + i + "-" + j, fn, i, j, width, height, semaphore);
+                chunkTable[i][j] = provider.requestNoiseChunk(i, j, semaphore);
+                        new NoiseChunk(name + i + "-" + j, fn, i, j, chunkWidth, chunkHeight, semaphore);
             }
         }
     }
@@ -76,90 +91,60 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         return name;
     }
 
-    private void widthChanged()
-    {
-        int width = (int)Math.ceil(canvasWidth / (double)tableWidth);
-        for (int i = 0; i < tableWidth; i++)
-        {
-            for (int j = 0; j < tableHeight; j++)
-            {
-                chunkTable[i][j].setWidth(width);
-            }
-        }
+    @Override
+    public int getChunkX() {
+        return chunkX;
     }
 
-    private void heightChanged()
-    {
-        int height = (int)Math.ceil(canvasHeight / (double)tableHeight);
-        for (int i = 0; i < tableWidth; i++)
-        {
-            for (int j = 0; j < tableHeight; j++)
-            {
-                chunkTable[i][j].setHeight(height);
-            }
-        }
+    @Override
+    public int getChunkY() {
+        return chunkY;
     }
 
-    public int getTableWidth() {
-        return tableWidth;
-    }
-
-    public void setTableWidth(int tableWidth) {
-        this.tableWidth = tableWidth;
-        chunkTable = new NoiseChunk[tableWidth][tableHeight];
-        widthChanged();
-    }
-
-    public int getTableHeight() {
-        return tableHeight;
-    }
-
-    public void setTableHeight(int tableHeight) {
-        this.tableHeight = tableHeight;
-        chunkTable = new NoiseChunk[tableWidth][tableHeight];
-        heightChanged();
-    }
-
-    public void setWidth(int canvasWidth)
-    {
-        this.canvasWidth = canvasWidth;
-        widthChanged();
-    }
-
-    public void setHeight(int canvasHeight)
-    {
-        this.canvasHeight = canvasHeight;
-        heightChanged();
-    }
-
-    public void setDimension(int canvasWidth, int canvasHeight)
-    {
-        setWidth(canvasWidth);
-        setHeight(canvasHeight);
-    }
-
-    public int getLeft() {
-        return left;
-    }
-
-    public void setLeft(int left) {
-        this.left = left;
+    @Override
+    public void setChunkShiftX(int chunkShiftX) {
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setLeft(left);
+                chunkTable[i][j].setChunkShiftX(chunkShiftX);
             }
         }
     }
 
-    public int getTop() {
-        return top;
-    }
-
-    public void setTop(int top) {
-        this.top = top;
+    @Override
+    public void setChunkShiftY(int chunkShiftY) {
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setTop(top);
+                chunkTable[i][j].setChunkShiftY(chunkShiftY);
+            }
+        }
+    }
+
+    @Override
+    public int getPixelShiftX() {
+        return pixelShiftX;
+    }
+
+    @Override
+    public void setPixelShiftX(int pixelShiftX) {
+        this.pixelShiftX = pixelShiftX;
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].setPixelShiftX(pixelShiftX);
+            }
+        }
+    }
+
+    @Override
+    public int getPixelShiftY() {
+        return pixelShiftY;
+    }
+
+    @Override
+    public void setPixelShiftY(int pixelShiftY) {
+        this.pixelShiftY = pixelShiftY;
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].setPixelShiftY(pixelShiftY);
             }
         }
     }
@@ -203,24 +188,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
-    @Override
-    public void setChunkX(int chunkX) {
-        for (int i = 0; i < tableWidth; i++) {
-            for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setChunkX(chunkX + i);
-            }
-        }
-    }
-
-    @Override
-    public void setChunkY(int chunkY) {
-        for (int i = 0; i < tableWidth; i++) {
-            for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setChunkY(chunkY + j);
-            }
-        }
-    }
-
     private <E> void arrayCopy(E[][] src, int srcX, int srcY, int width, int height, E[][] dest, int destX, int destY)
     {
         for(int i = 0; i < width; i++) {
@@ -237,22 +204,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                 dest[destX + i][destY + j] = src[srcX + i][srcY + j];
             }
         }
-    }
-
-    private void syncChunkCoordinate()
-    {
-        try {
-            semaphore.acquire(tableWidth * tableWidth);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for(int i = 0; i < tableWidth; i++) {
-            for (int j = 0; j < tableHeight; j++) {
-                chunkTable[i][j].setChunkX(i + chunkX);
-                chunkTable[i][j].setChunkY(j + chunkY);
-            }
-        }
-        semaphore.release(tableWidth * tableWidth);
     }
 
 
@@ -305,7 +256,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
         }
         // Pushed chunk table is bigger than existing table
-        else{
+        else {
             retuningChunkTable = new NoiseChunkInterface[pushedChunks.length][tableHeight];
 
             // Copy chunk table to returning chunk table
@@ -319,11 +270,10 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                     chunkTable, 0, 0
             );
             arrayCopy(
-                    pushedChunks, tableWidth ,0, pushedChunks.length - tableWidth, tableHeight,
+                    pushedChunks, tableWidth, 0, pushedChunks.length - tableWidth, tableHeight,
                     retuningChunkTable, 0, 0
             );
         }
-        syncChunkCoordinate();
 
         return retuningChunkTable;
     }
@@ -404,7 +354,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                     retuningChunkTable, 0, 0
             );
         }
-        syncChunkCoordinate();
 
         return retuningChunkTable;
     }
@@ -468,7 +417,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                     retuningChunkTable, tableWidth, 0
             );
         }
-        syncChunkCoordinate();
 
         return retuningChunkTable;
     }
@@ -541,9 +489,18 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                     retuningChunkTable, 0, tableHeight
             );
         }
-        syncChunkCoordinate();
 
         return retuningChunkTable;
+    }
+
+    @Override
+    public int getChunkWidth() {
+        return (int)Math.ceil(canvasHeight / (double)tableHeight);
+    }
+
+    @Override
+    public int getChunkHeight() {
+        return (int)Math.ceil(canvasWidth / (double)tableWidth);
     }
 
     public String toString()

@@ -1,17 +1,20 @@
 import java.awt.*;
 
 interface NoiseChunkInterface {
-    void setLeft(int left);
-    void setTop(int top);
-    int getLeft();
-    int getTop();
-    void setDimension(int width, int height);
+    int getChunkX();
+    int getChunkY();
+
+    void setChunkShiftX(int chunkShiftX);
+    void setChunkShiftY(int chunkShiftY);
+
+    int getPixelShiftX();
+    void setPixelShiftX(int pixelShiftX);
+    int getPixelShiftY();
+    void setPixelShiftY(int pixelShiftY);
+
     void updateChunk(PaintInterface pi);
     void updateImage(PaintInterface pi);
     void drawImage(Graphics2D g2d);
-    void setChunkX(int chunkX);
-    void setChunkY(int chunkY);
-    void setWidth(int width);
-    void setHeight(int height);
+
     String getName();
 }
