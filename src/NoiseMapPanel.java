@@ -10,6 +10,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private NoiseChunkGroup mainGroup;
     private NoiseChunkGroup verticalEdgeGroup;
     private NoiseChunkGroup horizontalEdgeGroup;
+    private NoiseChunkGroup cornerGroup;
 
     private int startX;
     private int startY;
@@ -19,14 +20,20 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int tableWidth;
     private int tableHeight;
 
+    private static final int CHUNK_SIZE = 5;
+
     public NoiseMapPanel(NoiseChunkGroup ncg)
     {
         this.mainGroup = ncg;
 
-        tableWidth = tableHeight = 5;
-        verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,5, 1);
-        horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, 5);
+        tableWidth = tableHeight = CHUNK_SIZE;
+        verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
+        horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
+        cornerGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 100,1, 1);
 
+        verticalEdgeGroup.loadChunks(0, 0, true);
+        horizontalEdgeGroup.loadChunks(0, 0, true);
+        cornerGroup.loadChunks(0, 0, true);
         addComponentListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -34,7 +41,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public NoiseMapPanel()
     {
-        this(new NoiseChunkGroup("Chunk",  100, 200,5, 5));
+        this(new NoiseChunkGroup("Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE));
         mainGroup.loadChunks(0, 0, true);
 //        mainGroup.updateChunk(
 //            this::repaint
@@ -45,7 +52,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
+        verticalEdgeGroup.drawImage(g2d);
+        horizontalEdgeGroup.drawImage(g2d);
+        cornerGroup.drawImage(g2d);
         mainGroup.drawImage(g2d);
     }
 
@@ -61,9 +70,14 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 new NoiseChunkGroup("Vertical",  width, mainGroup.getChunkHeight(),tableWidth, 1);
         horizontalEdgeGroup =
                 new NoiseChunkGroup("Horizontal",  mainGroup.getChunkWidth(), height,1, tableHeight);
+        cornerGroup =
+                new NoiseChunkGroup("Corner",  mainGroup.getChunkWidth(), mainGroup.getChunkHeight(),1, 1);
 
 //        mainGroup.updateChunk(this::repaint);
         mainGroup.loadChunks(0, 0, true);
+        verticalEdgeGroup.loadChunks(0, 0, true);
+        horizontalEdgeGroup.loadChunks(0, 0, true);
+        cornerGroup.loadChunks(0, 0, true);
         System.out.println("Resize");
     }
 
@@ -90,14 +104,58 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         startY = e.getY();
         startLeft += diffX;
         startTop += diffY;
-//        mainGroup.setPixelShiftX(startLeft);
-//        mainGroup.setPixelShiftY(startTop);
 
         mainGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
         mainGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
         mainGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
         mainGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
         mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
+
+        horizontalEdgeGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
+        horizontalEdgeGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
+        horizontalEdgeGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
+        horizontalEdgeGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+
+        verticalEdgeGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
+        verticalEdgeGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
+        verticalEdgeGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
+        verticalEdgeGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+
+        cornerGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
+        cornerGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
+        cornerGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
+        cornerGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+
+        if(startLeft < 0)
+        {
+            System.out.println("Right");
+            horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight(), true);
+            if(startTop < 0)
+                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+            else
+                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() - 1, true);
+        }
+        else{
+            System.out.println("Left");
+            horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1, - startTop / mainGroup.getChunkHeight(), true);
+            if(startTop < 0)
+                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1 , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+            else
+                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1 , - startTop / mainGroup.getChunkHeight() - 1, true);
+        }
+
+        if(startTop < 0)
+        {
+            System.out.println("Bottom");
+            verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+
+        }
+        else{
+            System.out.println("Top");
+            verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() -1, true);
+
+        }
+
 
 
 //        System.out.println("Chunk X " + startLeft/mainGroup.getChunkWidth());
