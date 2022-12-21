@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface{
     private final String name;
-    private NoiseChunkInterface[][] chunkTable;
+    private final NoiseChunkInterface[][] chunkTable;
 
     private int chunkX;
     private int chunkY;
@@ -39,8 +39,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         chunkTable = new NoiseChunk[tableWidth][tableHeight];
 
         chunkX = chunkY = 0;
-//        chunkShiftX = chunkShiftY = 0;
-//        pixelShiftX = pixelShiftY = 0;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
@@ -50,7 +48,9 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         this.semaphore = semaphore;
         lock = new ReentrantLock();
         provider = ChunkProvider.getInstance();
-        loadChunks(chunkX, chunkY, false);
+//        loadChunks(chunkX, chunkY, false);
+
+        System.err.printf("%-20s Chunks are not loaded\n", "[" + name + "]");
     }
 
     public NoiseChunkGroup(String name,  int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
@@ -153,18 +153,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
                 chunkTable[i][j].updateChunk(pi);
             }
         }
-
-//        Runnable afterTasks = () -> {
-//            try {
-//                semaphore.acquire(tableHeight * tableWidth);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//            updateImage(pi);
-//            semaphore.release(tableHeight * tableWidth);
-//        };
-//        new Thread(afterTasks).start();
     }
 
     public void updateImage(PaintInterface pi)

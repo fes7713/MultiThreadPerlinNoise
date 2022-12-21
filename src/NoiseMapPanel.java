@@ -7,7 +7,9 @@ import java.awt.event.*;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
     private final ChunkProvider provider = ChunkProvider.getInstance(this::repaint);
-    private NoiseChunkGroup ncg;
+    private NoiseChunkGroup mainGroup;
+    private NoiseChunkGroup verticalEdgeGroup;
+    private NoiseChunkGroup horizontalEdgeGroup;
 
     private int startX;
     private int startY;
@@ -19,10 +21,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public NoiseMapPanel(NoiseChunkGroup ncg)
     {
-        this.ncg = ncg;
-
+        this.mainGroup = ncg;
 
         tableWidth = tableHeight = 5;
+        verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,5, 1);
+        horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, 5);
+
         addComponentListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -31,9 +35,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public NoiseMapPanel()
     {
         this(new NoiseChunkGroup("Chunk",  100, 200,5, 5));
-        ncg.updateChunk(
-            this::repaint
-        );
+        mainGroup.loadChunks(0, 0, true);
+//        mainGroup.updateChunk(
+//            this::repaint
+//        );
     }
 
     @Override
@@ -41,7 +46,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        ncg.drawImage(g2d);
+        mainGroup.drawImage(g2d);
     }
 
     @Override
@@ -50,11 +55,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int height = e.getComponent().getHeight();
 
         provider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
-        ncg = new NoiseChunkGroup("Chunk",  width, height,tableWidth, tableHeight);
-        System.out.println(ncg.getChunkWidth());
-        System.out.println(ncg.getChunkHeight());
+        mainGroup =
+                new NoiseChunkGroup("Main",  width, height,tableWidth, tableHeight);
+        verticalEdgeGroup =
+                new NoiseChunkGroup("Vertical",  width, mainGroup.getChunkHeight(),tableWidth, 1);
+        horizontalEdgeGroup =
+                new NoiseChunkGroup("Horizontal",  mainGroup.getChunkWidth(), height,1, tableHeight);
 
-        ncg.updateChunk(this::repaint);
+//        mainGroup.updateChunk(this::repaint);
+        mainGroup.loadChunks(0, 0, true);
         System.out.println("Resize");
     }
 
@@ -81,20 +90,20 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         startY = e.getY();
         startLeft += diffX;
         startTop += diffY;
-//        ncg.setPixelShiftX(startLeft);
-//        ncg.setPixelShiftY(startTop);
+//        mainGroup.setPixelShiftX(startLeft);
+//        mainGroup.setPixelShiftY(startTop);
 
-        ncg.setChunkShiftX(startLeft / ncg.getChunkWidth());
-        ncg.setChunkShiftY(startTop / ncg.getChunkHeight());
-        ncg.setPixelShiftX(startLeft % ncg.getChunkWidth());
-        ncg.setPixelShiftY(startTop % ncg.getChunkHeight());
-        ncg.loadChunks(- startLeft / ncg.getChunkWidth(), - startTop / ncg.getChunkHeight(), true);
+        mainGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
+        mainGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
+        mainGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
+        mainGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+        mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
 
 
-//        System.out.println("Chunk X " + startLeft/ncg.getChunkWidth());
-//        System.out.println("Chunk Y " + startTop/ncg.getChunkHeight());
-//        System.out.println("Pixel X " + startLeft%ncg.getChunkWidth());
-//        System.out.println("Pixel Y " + startTop%ncg.getChunkHeight());
+//        System.out.println("Chunk X " + startLeft/mainGroup.getChunkWidth());
+//        System.out.println("Chunk Y " + startTop/mainGroup.getChunkHeight());
+//        System.out.println("Pixel X " + startLeft%mainGroup.getChunkWidth());
+//        System.out.println("Pixel Y " + startTop%mainGroup.getChunkHeight());
         repaint();
     }
 
