@@ -1,63 +1,92 @@
 package Noise.Color;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class GradientColorPanel extends JPanel implements ComponentListener {
-    List<GradientNode> nodes;
-    JButton addButton;
-    JButton removeButton;
-    JPanel buttonPanel;
-
-    JPanel colorPanel;
-
+public class GradientColorPanel extends JPanel {
+    final List<GradientNode> nodes;
     BufferedImage bi;
-    public GradientColorPanel()
+
+    public GradientColorPanel(List<GradientNode> nodes)
     {
-        nodes = new ArrayList<>();
-
-        addButton = new JButton("Add");
-        removeButton = new JButton("Remove");
-        buttonPanel = new JPanel(new BorderLayout());
-//        add(removeButton);
-        addComponentListener(this);
-        setLayout(new BorderLayout());
+        this.nodes = nodes;
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-        colorPanel = new JPanel(){
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                int width = this.getWidth();
-                int height = this.getHeight();
-                bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    }
 
-                if(width > height)
-                {
-                    for (int i = 0; i < width; i++) {
-                        for (int j = 0; j < height; j++) {
-                            bi.setRGB(i, j, getIntFromColor(i / (float)width, i / (float)width, i / (float)width));
-                        }
-                    }
-                }
-                else{
-                    for (int i = 0; i < width; i++) {
-                        for (int j = 0; j < height; j++) {
-                            bi.setRGB(i, j, getIntFromColor(i / (float)width, i / (float)width, i / (float)width));
-                        }
-                    }
-                }
-                Graphics2D g2d = (Graphics2D)g;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int width = this.getWidth();
+        int height = this.getHeight();
+        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-                g2d.drawImage(bi, 0, 0, width, height, null);
+        Collections.sort(nodes);
+
+        if(width > height)
+        {
+            float min = nodes.get(nodes.size() - 1).getPosition();
+            float max = nodes.get(0).getPosition();
+            float length = max - min;
+
+            Color[] colors= new Color[width];
+            int cnt = 0;
+            for(int i = 1; i < nodes.size(); i++)
+            {
+                Color preColor = nodes.get(i - 1).getColor();
+                float[] prehsbvals = new float[3];
+                Color.RGBtoHSB(preColor.getRed(), preColor.getGreen(), preColor.getBlue(), prehsbvals);
+
+                Color color = nodes.get(i).getColor();
+                float[] hsbvals = new float[3];
+                Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsbvals);
+                for (int j = 0; cnt / (float)width < nodes.get(i).getPosition() && cnt < width; j++) {
+                    float interval = nodes.get(i).getPosition() - nodes.get(i - 1).getPosition();
+                    float ratio = (cnt / (float)width - nodes.get(i - 1).getPosition()) / interval;
+
+                    if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
+                    {
+                        if(prehsbvals[0] > hsbvals[0])
+                            hsbvals[0] += 1;
+                        else
+                            prehsbvals[0] += 1;
+                    }
+                    float[] newhsvvals = new float[3];
+                    for (int k = 0; k < 3; k++) {
+                        newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
+                    }
+
+                    if(newhsvvals[0] > 1)
+                        newhsvvals[0] -= 1;
+
+                    colors[cnt] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+
+                    cnt++;
+                }
             }
-        };
-        add(colorPanel, BorderLayout.CENTER);
+
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+
+
+                    bi.setRGB(i, j, colors[i].getRGB());
+
+                }
+            }
+        }
+        else{
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    bi.setRGB(i, j, getIntFromColor(i / (float)width, i / (float)width, i / (float)width));
+                }
+            }
+        }
+        Graphics2D g2d = (Graphics2D)g;
+
+        g2d.drawImage(bi, 0, 0, width, height, null);
     }
 
     public int getIntFromColor(int Red, int Green, int Blue){
@@ -78,119 +107,5 @@ public class GradientColorPanel extends JPanel implements ComponentListener {
         B = B & 0x000000FF;
 
         return 0xFF000000 | R | G | B;
-    }
-
-    public void showFrame()
-    {
-        JFrame frame = new JFrame("Window");
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(200, 600);
-        frame.setLocationRelativeTo(null);
-
-        frame.setMinimumSize(new Dimension(100, 250));
-
-        frame.add(this);
-        frame.setVisible(true);
-
-
-
-    }
-
-    @Override
-    public void componentResized(ComponentEvent e) {
-        buttonPanel.removeAll();
-        buttonPanel.revalidate();
-
-        removeAll();
-        revalidate();
-        repaint();
-
-        int width = e.getComponent().getWidth();
-        int height = e.getComponent().getHeight();
-
-        if(width > height)
-        {
-            buttonPanel.add(addButton, BorderLayout.NORTH);
-            buttonPanel.add(removeButton, BorderLayout.SOUTH);
-            add(buttonPanel, BorderLayout.EAST);
-        }
-        else
-        {
-            buttonPanel.add(addButton, BorderLayout.WEST);
-            buttonPanel.add(removeButton, BorderLayout.EAST);
-            add(buttonPanel, BorderLayout.NORTH);
-        }
-        add(colorPanel, BorderLayout.CENTER);
-    }
-
-    @Override
-    public void componentMoved(ComponentEvent e) {
-
-    }
-
-    @Override
-    public void componentShown(ComponentEvent e) {
-
-    }
-
-    @Override
-    public void componentHidden(ComponentEvent e) {
-
-    }
-
-    private class GradientNode implements Comparable<GradientNode> {
-        Color color;
-        /*/
-        Position of color node valued between 0 and 1;
-         */
-        float position;
-
-        public GradientNode(Color color, float position) {
-            this.color = color;
-            this.position = position;
-        }
-
-        public Color getColor() {
-            return color;
-        }
-
-        public void setColor(Color color) {
-            this.color = color;
-        }
-
-        public float getPosition() {
-            return position;
-        }
-
-        public void setPosition(float position) {
-            this.position = position;
-        }
-
-        @Override
-        public int compareTo(GradientNode o) {
-            if(position > o.position)
-                return 1;
-            else if(position == o.position)
-                return 0;
-            else
-                return -1;
-        }
-
-//        @Override
-//        public int compare(GradientNode o1, GradientNode o2) {
-//            if(o1.position > o2.position)
-//                return 1;
-//            else if(o1.position == o2.position)
-//                return 0;
-//            else
-//                return -1;
-//        }
-
-    }
-    public static void main(String[] argv)
-    {
-        GradientColorPanel panel = new GradientColorPanel();
-        panel.showFrame();
     }
 }
