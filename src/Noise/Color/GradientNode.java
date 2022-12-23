@@ -66,15 +66,23 @@ public class GradientNode implements Comparable<GradientNode> {
 
         if(width > height)
         {
-            g2d.fillRect((int)(width * position), height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
-            g2d.setColor(Color.WHITE);
-            g2d.drawRect((int)(width * position), height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+            g2d.fillRect((int)(width * position) - BOX_SIZE / 2, height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+            if(hsb[2] * (1.25 - hsb[1]) > 1)
+                g2d.setColor(color.darker().darker());
+            else
+                g2d.setColor(Color.WHITE);
+            g2d.drawLine((int)(width * position), 0, (int)(width * position), height - BOX_SIZE);
+            g2d.drawRect((int)(width * position) - BOX_SIZE / 2, height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
         }
 
         else {
-            g2d.fillRect(width - BOX_SIZE, (int) (height * position), BOX_SIZE, BOX_SIZE);
-            g2d.setColor(Color.WHITE);
-            g2d.drawRect(width - BOX_SIZE, (int) (height * position), BOX_SIZE, BOX_SIZE);
+            g2d.fillRect(width - BOX_SIZE, (int) (height * position) - BOX_SIZE / 2, BOX_SIZE, BOX_SIZE);
+            if(hsb[2] * (1.25 - hsb[1]) > 1)
+                g2d.setColor(color.darker().darker());
+            else
+                g2d.setColor(Color.WHITE);
+            g2d.drawLine(0, (int) (height * position), width - BOX_SIZE, (int) (height * position));
+            g2d.drawRect(width - BOX_SIZE, (int) (height * position) - BOX_SIZE / 2, BOX_SIZE, BOX_SIZE);
         }
     }
 }

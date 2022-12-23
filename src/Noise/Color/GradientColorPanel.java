@@ -20,7 +20,7 @@ public class GradientColorPanel extends JPanel {
         nodes.add(new GradientNode(Color.RED, 0.1F));
         nodes.add(new GradientNode(Color.MAGENTA, 0.25F));
         nodes.add(new GradientNode(Color.ORANGE, 0.5F));
-        nodes.add(new GradientNode(Color.BLACK, 0.9F));
+        nodes.add(new GradientNode(Color.WHITE, 0.9F));
     }
 
     @Override
