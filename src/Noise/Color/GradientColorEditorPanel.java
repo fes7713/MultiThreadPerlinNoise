@@ -2,12 +2,9 @@ package Noise.Color;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GradientColorEditorPanel extends JPanel implements ComponentListener {
     JButton addButton;
@@ -17,8 +14,8 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
     JPanel colorPanel;
     public GradientColorEditorPanel()
     {
-        addButton = new JButton("Add");
-        removeButton = new JButton("Remove");
+        addButton = new JButton(ColorEditorAction.ADD.name());
+        removeButton = new JButton(ColorEditorAction.REMOVE.name());
         buttonPanel = new JPanel(new BorderLayout());
 
         addComponentListener(this);
@@ -26,6 +23,10 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
         colorPanel = new GradientColorPanel();
         add(colorPanel, BorderLayout.CENTER);
+        addButton.addActionListener((ActionListener) colorPanel);
+        addButton.setActionCommand(ColorEditorAction.ADD.name());
+        removeButton.addActionListener((ActionListener) colorPanel);
+        removeButton.setActionCommand(ColorEditorAction.REMOVE.name());
     }
 
     public void showFrame()

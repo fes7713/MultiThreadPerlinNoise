@@ -1,6 +1,11 @@
 package Noise.Color;
 
+import javax.swing.*;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.image.ImageObserver;
 
 public class GradientNode implements Comparable<GradientNode> {
     Color color;
@@ -12,15 +17,21 @@ public class GradientNode implements Comparable<GradientNode> {
     private static int BOX_SIZE = 20; // in pixel
 
     float[] hsb;
+    ColorUpdateInterface cui;
 
-    public GradientNode(Color color, float position) {
+    public GradientNode(Color color, float position, ColorUpdateInterface cui) {
         this.color = color;
         if(position < 0 || position > 1)
             throw new IllegalArgumentException("position should be value between 0 and 1");
         this.position = position;
+        this.cui = cui;
 
         hsb = new float[3];
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+    }
+
+    public GradientNode(GradientNode node){
+        this(new Color(node.color.getRGB()), node.position, node.cui);
     }
 
     public float[] getHsb() {
@@ -60,29 +71,124 @@ public class GradientNode implements Comparable<GradientNode> {
         return "[R:" + color.getRed()+ ",G:" + color.getGreen() + ",B:" + color.getBlue() + "]" + "pos:" + position;
     }
 
+    public boolean contains(MouseEvent event, int width, int height, boolean selected)
+    {
+        int multiplier = 1;
+        if(selected)
+            multiplier = 2;
+        int x = event.getX();
+        int y = event.getY();
+
+        if(width > height) {
+            // x coord check
+            if ((int) (width * position) - BOX_SIZE * multiplier / 2 < x && x < (int) (width * position) + BOX_SIZE * multiplier / 2) {
+                // y coord check
+                if(y > height - BOX_SIZE * multiplier)
+                {
+                    return true;
+                }
+            }
+        }
+        else{
+            if((int) (height * position) - BOX_SIZE * multiplier / 2 < y && y < (int) (height * position) + BOX_SIZE * multiplier / 2)
+            {
+                if(width - BOX_SIZE * multiplier < x)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean mouseEvent(MouseEvent event, int width, int height, boolean selected)
+    {
+       if(contains(event, width, height, selected))
+       {
+           showColorPalette(event.getXOnScreen() + 20, event.getYOnScreen() - 20);
+           return true;
+       }
+       return false;
+    }
+
+    public void showColorPalette(int x, int y)
+    {
+        final JColorChooser colorChooser = new JColorChooser(color);
+        Color original = color;
+        JDialog dialog = JColorChooser.createDialog(null, "Title", false, colorChooser,
+                e -> {
+                    System.out.println("Okay ");
+                    Color newForegroundColor = colorChooser.getColor();
+                    setColor(newForegroundColor);
+                    cui.update();
+                },
+                e -> {
+                    System.out.println("Cancel");
+                    setColor(original);
+                    cui.update();
+                }
+        );
+
+        ColorSelectionModel model = colorChooser.getSelectionModel();
+        ChangeListener changeListener = changeEvent -> {
+            Color newForegroundColor = colorChooser.getColor();
+            setColor(newForegroundColor);
+            cui.update();
+        };
+        model.addChangeListener(changeListener);
+//        model.setSelectedColor(color);
+        dialog.setBounds(x, y, 300, 300);
+        dialog.setVisible(true);
+    }
+
     public void paint(Graphics2D g2d, int width, int height)
+    {
+        paint(g2d, width, height, false);
+    }
+
+    public void paint(Graphics2D g2d, int width, int height, boolean selected)
     {
         g2d.setColor(color);
 
+        int multiplier = 1;
+        if(selected)
+            multiplier = 2;
+
         if(width > height)
         {
-            g2d.fillRect((int)(width * position) - BOX_SIZE / 2, height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+            g2d.fillRect(
+                    (int)(width * position) - BOX_SIZE * multiplier / 2,
+                    height - BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier);
             if(hsb[2] * (1.25 - hsb[1]) > 1)
                 g2d.setColor(color.darker().darker());
             else
                 g2d.setColor(Color.WHITE);
-            g2d.drawLine((int)(width * position), 0, (int)(width * position), height - BOX_SIZE);
-            g2d.drawRect((int)(width * position) - BOX_SIZE / 2, height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+            g2d.drawLine((int)(width * position), 0, (int)(width * position), height - BOX_SIZE * multiplier);
+            g2d.drawRect(
+                    (int)(width * position) - BOX_SIZE * multiplier / 2,
+                    height - BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier);
         }
 
         else {
-            g2d.fillRect(width - BOX_SIZE, (int) (height * position) - BOX_SIZE / 2, BOX_SIZE, BOX_SIZE);
+            g2d.fillRect(
+                    width - BOX_SIZE * multiplier,
+                    (int) (height * position) - BOX_SIZE * multiplier / 2,
+                    BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier);
             if(hsb[2] * (1.25 - hsb[1]) > 1)
                 g2d.setColor(color.darker().darker());
             else
                 g2d.setColor(Color.WHITE);
-            g2d.drawLine(0, (int) (height * position), width - BOX_SIZE, (int) (height * position));
-            g2d.drawRect(width - BOX_SIZE, (int) (height * position) - BOX_SIZE / 2, BOX_SIZE, BOX_SIZE);
+            g2d.drawLine(0, (int) (height * position), width - BOX_SIZE * multiplier, (int) (height * position));
+            g2d.drawRect(
+                    width - BOX_SIZE * multiplier,
+                    (int) (height * position) - BOX_SIZE * multiplier / 2,
+                    BOX_SIZE * multiplier,
+                    BOX_SIZE * multiplier);
         }
     }
 }

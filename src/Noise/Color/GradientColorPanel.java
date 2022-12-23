@@ -2,25 +2,31 @@ package Noise.Color;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GradientColorPanel extends JPanel {
+public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     final List<GradientNode> nodes;
     BufferedImage bi;
     Color[] colors;
+    GradientNode selectedNode;
+    boolean hold;
 
     public GradientColorPanel()
     {
+        hold = false;
         nodes = new ArrayList<>();
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-
-        nodes.add(new GradientNode(Color.RED, 0.1F));
-        nodes.add(new GradientNode(Color.MAGENTA, 0.25F));
-        nodes.add(new GradientNode(Color.ORANGE, 0.5F));
-        nodes.add(new GradientNode(Color.WHITE, 0.9F));
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        nodes.add(new GradientNode(Color.RED, 0.1F, this::repaint));
+        nodes.add(new GradientNode(Color.MAGENTA, 0.25F, this::repaint));
+        nodes.add(new GradientNode(Color.ORANGE, 0.5F, this::repaint));
+        nodes.add(new GradientNode(Color.WHITE, 0.9F, this::repaint));
+        selectedNode = nodes.get(0);
     }
 
     @Override
@@ -29,8 +35,6 @@ public class GradientColorPanel extends JPanel {
         int width = this.getWidth();
         int height = this.getHeight();
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-
 
         if(width > height)
         {
@@ -54,8 +58,11 @@ public class GradientColorPanel extends JPanel {
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.drawImage(bi, 0, 0, width, height, null);
+        selectedNode.paint(g2d, width, height, true);
         for(GradientNode node: nodes)
-            node.paint(g2d, width, height);
+            if(node != selectedNode)
+                node.paint(g2d, width, height);
+
     }
 
     public void addColorAtPosition(Color color, float position)
@@ -63,7 +70,7 @@ public class GradientColorPanel extends JPanel {
         if(position < 0 || position > 1)
             throw new IllegalArgumentException("position should be value between 0 and 1");
 
-        nodes.add(new GradientNode(color, position));
+        nodes.add(new GradientNode(color, position, this::repaint));
         if(nodes.size() < 2)
             System.err.println("Node list size is still less than 2");
     }
@@ -73,12 +80,15 @@ public class GradientColorPanel extends JPanel {
         if(nodes.size() < 2)
             throw new RuntimeException("Node list cannot be less than 2");
         Collections.sort(nodes);
-        List<GradientNode> gradationNodes = new ArrayList<>(nodes);
+        List<GradientNode> gradationNodes = new ArrayList<>();
+        for(GradientNode node: nodes)
+            gradationNodes.add(node);
+
         if(gradationNodes.get(0).getPosition() != 0)
-            gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0));
+            gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0, this::repaint));
 
         if(gradationNodes.get(gradationNodes.size() - 1).getPosition() != 1)
-            gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1));
+            gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1, this::repaint));
 
         colors= new Color[size];
         int cnt = 0;
@@ -132,5 +142,114 @@ public class GradientColorPanel extends JPanel {
         B = B & 0x000000FF;
 
         return 0xFF000000 | R | G | B;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        for(GradientNode node: nodes)
+        {
+            if(node.mouseEvent(e, this.getWidth(), this.getHeight(), node == selectedNode))
+            {
+                selectedNode = node;
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+        for(GradientNode node: nodes)
+        {
+            if(node == selectedNode)
+                continue;
+            if(node.contains(e, this.getWidth(), this.getHeight(), false))
+            {
+                selectedNode = node;
+                hold = true;
+                return;
+            }
+        }
+        if(selectedNode.contains(e, this.getWidth(), this.getHeight(), true))
+        {
+            hold = true;
+            return;
+        }
+        hold = false;
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if(hold)
+        {
+            int x = e.getX();
+            int y = e.getY();
+
+            int width = getWidth();
+            int height = getHeight();
+
+            if(width > height) {
+                selectedNode.setPosition(x / (float)width);
+            }
+            else{
+                selectedNode.setPosition(y / (float)height);
+            }
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
+
+        switch (ColorEditorAction.valueOf(e.getActionCommand()))
+        {
+            case ADD -> {
+                GradientNode newNode;
+                if(selectedNode.getPosition() < 0.9F)
+                {
+                    newNode = new GradientNode(selectedNode.getColor(), selectedNode.getPosition() + 0.05F, selectedNode.cui);
+
+                }
+                else{
+                    newNode =new GradientNode(selectedNode.getColor(), selectedNode.getPosition() - 0.05F, selectedNode.cui);
+                }
+                nodes.add(newNode);
+                selectedNode = newNode;
+            }
+            case REMOVE -> {
+                if(nodes.size() <= 2)
+                    return;
+                int index = nodes.indexOf(selectedNode);
+                nodes.remove(selectedNode);
+                if(index != 0)
+                    selectedNode = nodes.get(index - 1);
+                else
+                    selectedNode = nodes.get(0);
+            }
+            default -> {
+                throw new RuntimeException("Error occurred in color gradient editor");
+            }
+        }
+        repaint();
     }
 }

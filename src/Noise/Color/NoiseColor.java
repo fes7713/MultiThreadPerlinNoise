@@ -23,23 +23,6 @@ public class NoiseColor {
     public NoiseColor() {
     }
 
-    private Color interpolateColor(Color startC, Color endC, int ratio)
-    {
-        try{
-            float iRatio = nColorLevel - ratio;
-            return new Color(
-                    (int)(startC.getRed() * iRatio + endC.getRed() * ratio),
-                    (int)(startC.getGreen()* iRatio + endC.getGreen() * ratio),
-                    (int)(startC.getBlue()* iRatio + endC.getBlue() * ratio)
-            );
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error : interpolateColor()" + ratio);
-            return Color.WHITE;
-        }
-    }
-
     public void showColorPalette()
     {
         final JColorChooser colorChooser = new JColorChooser(Color.BLUE);
