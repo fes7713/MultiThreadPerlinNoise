@@ -9,9 +9,22 @@ public class GradientNode implements Comparable<GradientNode> {
      */
     float position;
 
+    private static int BOX_SIZE = 20; // in pixel
+
+    float[] hsb;
+
     public GradientNode(Color color, float position) {
         this.color = color;
+        if(position < 0 || position > 1)
+            throw new IllegalArgumentException("position should be value between 0 and 1");
         this.position = position;
+
+        hsb = new float[3];
+        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+    }
+
+    public float[] getHsb() {
+        return hsb;
     }
 
     public Color getColor() {
@@ -19,6 +32,7 @@ public class GradientNode implements Comparable<GradientNode> {
     }
 
     public void setColor(Color color) {
+        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
         this.color = color;
     }
 
@@ -44,5 +58,23 @@ public class GradientNode implements Comparable<GradientNode> {
     public String toString()
     {
         return "[R:" + color.getRed()+ ",G:" + color.getGreen() + ",B:" + color.getBlue() + "]" + "pos:" + position;
+    }
+
+    public void paint(Graphics2D g2d, int width, int height)
+    {
+        g2d.setColor(color);
+
+        if(width > height)
+        {
+            g2d.fillRect((int)(width * position), height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+            g2d.setColor(Color.WHITE);
+            g2d.drawRect((int)(width * position), height - BOX_SIZE, BOX_SIZE, BOX_SIZE);
+        }
+
+        else {
+            g2d.fillRect(width - BOX_SIZE, (int) (height * position), BOX_SIZE, BOX_SIZE);
+            g2d.setColor(Color.WHITE);
+            g2d.drawRect(width - BOX_SIZE, (int) (height * position), BOX_SIZE, BOX_SIZE);
+        }
     }
 }

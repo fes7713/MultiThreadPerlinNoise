@@ -3,17 +3,24 @@ package Noise.Color;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class GradientColorPanel extends JPanel {
     final List<GradientNode> nodes;
     BufferedImage bi;
+    Color[] colors;
 
-    public GradientColorPanel(List<GradientNode> nodes)
+    public GradientColorPanel()
     {
-        this.nodes = nodes;
+        nodes = new ArrayList<>();
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+
+        nodes.add(new GradientNode(Color.RED, 0.1F));
+        nodes.add(new GradientNode(Color.MAGENTA, 0.25F));
+        nodes.add(new GradientNode(Color.ORANGE, 0.5F));
+        nodes.add(new GradientNode(Color.BLACK, 0.9F));
     }
 
     @Override
@@ -23,70 +30,88 @@ public class GradientColorPanel extends JPanel {
         int height = this.getHeight();
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        Collections.sort(nodes);
+
 
         if(width > height)
         {
-            float min = nodes.get(nodes.size() - 1).getPosition();
-            float max = nodes.get(0).getPosition();
-            float length = max - min;
-
-            Color[] colors= new Color[width];
-            int cnt = 0;
-            for(int i = 1; i < nodes.size(); i++)
-            {
-                Color preColor = nodes.get(i - 1).getColor();
-                float[] prehsbvals = new float[3];
-                Color.RGBtoHSB(preColor.getRed(), preColor.getGreen(), preColor.getBlue(), prehsbvals);
-
-                Color color = nodes.get(i).getColor();
-                float[] hsbvals = new float[3];
-                Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsbvals);
-                for (int j = 0; cnt / (float)width < nodes.get(i).getPosition() && cnt < width; j++) {
-                    float interval = nodes.get(i).getPosition() - nodes.get(i - 1).getPosition();
-                    float ratio = (cnt / (float)width - nodes.get(i - 1).getPosition()) / interval;
-
-                    if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
-                    {
-                        if(prehsbvals[0] > hsbvals[0])
-                            hsbvals[0] += 1;
-                        else
-                            prehsbvals[0] += 1;
-                    }
-                    float[] newhsvvals = new float[3];
-                    for (int k = 0; k < 3; k++) {
-                        newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
-                    }
-
-                    if(newhsvvals[0] > 1)
-                        newhsvvals[0] -= 1;
-
-                    colors[cnt] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
-
-                    cnt++;
-                }
-            }
-
+            updateColorArray(width);
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-
-
                     bi.setRGB(i, j, colors[i].getRGB());
-
                 }
             }
         }
         else{
+            updateColorArray(height);
+
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    bi.setRGB(i, j, getIntFromColor(i / (float)width, i / (float)width, i / (float)width));
+                    bi.setRGB(i, j, colors[j].getRGB());
                 }
             }
         }
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.drawImage(bi, 0, 0, width, height, null);
+        for(GradientNode node: nodes)
+            node.paint(g2d, width, height);
+    }
+
+    public void addColorAtPosition(Color color, float position)
+    {
+        if(position < 0 || position > 1)
+            throw new IllegalArgumentException("position should be value between 0 and 1");
+
+        nodes.add(new GradientNode(color, position));
+        if(nodes.size() < 2)
+            System.err.println("Node list size is still less than 2");
+    }
+
+    private void updateColorArray(int size)
+    {
+        if(nodes.size() < 2)
+            throw new RuntimeException("Node list cannot be less than 2");
+        Collections.sort(nodes);
+        List<GradientNode> gradationNodes = new ArrayList<>(nodes);
+        if(gradationNodes.get(0).getPosition() != 0)
+            gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0));
+
+        if(gradationNodes.get(gradationNodes.size() - 1).getPosition() != 1)
+            gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1));
+
+        colors= new Color[size];
+        int cnt = 0;
+
+        for(int i = 1; i < gradationNodes.size(); i++)
+        {
+            float[] prehsbvals = gradationNodes.get(i - 1).getHsb();
+
+            float[] hsbvals = gradationNodes.get(i).getHsb();
+
+            for (int j = 0; cnt / (float)size < gradationNodes.get(i).getPosition() && cnt < size; j++) {
+                float interval = gradationNodes.get(i).getPosition() - gradationNodes.get(i - 1).getPosition();
+                float ratio = (cnt / (float)size - gradationNodes.get(i - 1).getPosition()) / interval;
+
+                if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
+                {
+                    if(prehsbvals[0] > hsbvals[0])
+                        hsbvals[0] += 1;
+                    else
+                        prehsbvals[0] += 1;
+                }
+
+                float[] newhsvvals = new float[3];
+                for (int k = 0; k < 3; k++) {
+                    newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
+                }
+
+                if(newhsvvals[0] > 1)
+                    newhsvvals[0] -= 1;
+
+                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+            }
+        }
     }
 
     public int getIntFromColor(int Red, int Green, int Blue){
