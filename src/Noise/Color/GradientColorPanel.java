@@ -2,13 +2,19 @@ package Noise.Color;
 
 import Noise.PaintInterface;
 
+import javax.imageio.IIOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     final List<GradientNode> nodes;
@@ -237,6 +243,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 repaint();
             }
             case REMOVE -> {
+                // TODO file name input form
                 if(nodes.size() <= 2)
                     return;
                 int index = nodes.indexOf(selectedNode);
@@ -248,9 +255,79 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 repaint();
             }
             case LOAD -> {
+                try{
+                    // TODO replace nodes list
+                    // TODO file name chang
+                    File folder = new File("presets");
+                    File[] listOfFiles = folder.listFiles();
 
+                    for (File file : listOfFiles) {
+                        if (file.isFile()) {
+                            System.out.println(file.getName());
+                        }
+                    }
+
+                    String selectvalues[] = new String[listOfFiles.length];
+                    IntStream.range(0, listOfFiles.length).forEach(i -> {
+                        selectvalues[i] = listOfFiles[i].getName();
+                    });
+
+                    Object value = JOptionPane.showInputDialog(this, "Message",
+                            "タイトル", JOptionPane.ERROR_MESSAGE,
+                            new ImageIcon("icons/preset1.png"), selectvalues, selectvalues[0]);
+
+                    System.out.println(value);
+                    if(value == null)
+                        return;
+
+                    List<GradientNode> inputNodes = new ArrayList<>();
+                    BufferedReader inputReader = new BufferedReader(new FileReader("presets/" + value));
+
+                    inputReader.lines().forEach(line -> {
+                        GradientNode node = GradientNode.fromString(line, this::repaint);
+                        inputNodes.add(node);
+                    });
+
+                    inputReader.close();
+
+                    if(inputNodes.size() < 2)
+                        return;
+
+                    nodes.clear();
+                    nodes.addAll(inputNodes);
+                    selectedNode = inputNodes.get(0);
+                    repaint();
+
+                }catch(IOException ie)
+                {
+                    ie.printStackTrace();
+                }
             }
             case SAVE -> {
+                String filename = (String)JOptionPane.showInputDialog(
+                        this,
+                        "Enter preset file name",
+                        "Preset save form",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+                if(filename == null)
+                    return;
+                try{
+                    BufferedWriter outputWriter = new BufferedWriter(new FileWriter("presets/" + filename + ".txt"));
+                    for(GradientNode node: nodes)
+                    {
+                        outputWriter.write(node.toString());
+                        outputWriter.newLine();
+                    }
+
+                    outputWriter.flush();
+                    outputWriter.close();
+                }catch(IOException ie)
+                {
+                    ie.printStackTrace();
+                }
 
             }
             default -> {
