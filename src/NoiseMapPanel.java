@@ -1,6 +1,7 @@
 import Noise.ChunkProvider;
 import Noise.ColorProvider;
 import Noise.NoiseChunkGroup;
+import Noise.PaintInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,15 +42,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addComponentListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        System.out.println(colorProvider.getColors());
-//        colorProvider.setPaintInterface(updatedColors -> {
-//            System.out.println(Arrays.toString(updatedColors));
-//            mainGroup.updateImage(this::repaint);
-//            verticalEdgeGroup.updateImage(this::repaint);
-//            horizontalEdgeGroup.updateImage(this::repaint);
-//            cornerGroup.updateImage(this::repaint);
-//        });
-//        colorProvider.showColorEditor();
+        colorProvider.setPaintInterface(this::updateImage);
+
+        colorProvider.showColorEditor();
     }
 
     public NoiseMapPanel()
@@ -59,6 +54,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 //        mainGroup.updateChunk(
 //            this::repaint
 //        );
+    }
+
+    public void updateImage()
+    {
+        mainGroup.updateImage(this::repaint);
+        verticalEdgeGroup.updateImage(this::repaint);
+        horizontalEdgeGroup.updateImage(this::repaint);
+        cornerGroup.updateImage(this::repaint);
+        repaint();
     }
 
     @Override

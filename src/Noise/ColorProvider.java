@@ -38,7 +38,10 @@ public class ColorProvider {
     public void setPaintInterface(PaintInterface pi)
     {
         this.pi = pi;
-//        editor.se(pi);
+        editor.setPaintInterface(() -> {
+            COLORS = editor.getColors();
+            pi.paint();
+        });
     }
 
     public Color[] getColors()

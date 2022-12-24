@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.Arrays;
 
 public class GradientColorEditorPanel extends JPanel implements ComponentListener {
     JButton addButton;
@@ -33,13 +32,18 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         removeButton.setActionCommand(ColorEditorAction.REMOVE.name());
     }
 
+    public void setPaintInterface(PaintInterface pi)
+    {
+        colorPanel.setPaintInterface(pi);
+    }
+
     public void showFrame()
     {
         JFrame frame = new JFrame("Window");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(200, 600);
         frame.setLocationRelativeTo(null);
-        frame.setMinimumSize(new Dimension(100, 250));
+        frame.setMinimumSize(new Dimension(150, 200));
         frame.add(this);
         frame.setVisible(true);
     }

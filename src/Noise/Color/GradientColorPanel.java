@@ -27,15 +27,23 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         addMouseListener(this);
         addMouseMotionListener(this);
-        nodes.add(new GradientNode(Color.RED, 0.1F, this::repaint));
-        nodes.add(new GradientNode(Color.MAGENTA, 0.25F, this::repaint));
-        nodes.add(new GradientNode(Color.ORANGE, 0.5F, this::repaint));
-        nodes.add(new GradientNode(Color.WHITE, 0.9F, this::repaint));
+//        nodes.add(new GradientNode(Color.RED, 0.1F, this::repaint));
+//        nodes.add(new GradientNode(Color.MAGENTA, 0.25F, this::repaint));
+//        nodes.add(new GradientNode(Color.ORANGE, 0.5F, this::repaint));
+//        nodes.add(new GradientNode(Color.WHITE, 0.9F, this::repaint));
+        nodes.add(new GradientNode(Color.WHITE, 0F, this::repaint));
+        nodes.add(new GradientNode(Color.BLACK, 1F, this::repaint));
         selectedNode = nodes.get(0);
         updateColorArray(255);
     }
 
-//    public void set
+    public void setPaintInterface(PaintInterface pi)
+    {
+        System.err.println("Color panel paint interface has been updated");
+        this.pi = pi;
+    }
+
+    //    public void set
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

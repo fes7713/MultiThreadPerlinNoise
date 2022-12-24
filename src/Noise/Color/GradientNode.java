@@ -138,7 +138,7 @@ public class GradientNode implements Comparable<GradientNode> {
         };
         model.addChangeListener(changeListener);
 //        model.setSelectedColor(color);
-        dialog.setBounds(x, y, 300, 300);
+        dialog.setBounds(x, y, 600, 400);
         dialog.setVisible(true);
     }
 
