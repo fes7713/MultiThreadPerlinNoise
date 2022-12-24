@@ -69,7 +69,20 @@ public class GradientNode implements Comparable<GradientNode> {
     @Override
     public String toString()
     {
-        return "[R:" + color.getRed()+ ",G:" + color.getGreen() + ",B:" + color.getBlue() + "]" + "pos:" + position;
+        return "R=" + color.getRed()+ ",G=" + color.getGreen() + ",B=" + color.getBlue() + ",P=" + position;
+    }
+
+    public static GradientNode fromString(String str, PaintInterface pi)
+    {
+        String[] parts = str
+                .replace("R=", "")
+                .replace("G=", "")
+                .replace("B=", "")
+                .replace("P=", "")
+                .split(",");
+
+        Color color = new Color(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+        return new GradientNode(color, Float.parseFloat(parts[3]), pi);
     }
 
     public boolean contains(MouseEvent event, int width, int height, boolean selected)
