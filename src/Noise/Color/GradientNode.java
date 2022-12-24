@@ -7,6 +7,7 @@ import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class GradientNode implements Comparable<GradientNode> {
     Color color;
