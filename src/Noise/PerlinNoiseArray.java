@@ -115,8 +115,8 @@ public class PerlinNoiseArray {
     public void saveMapImage()
     {
         try {
-            File outputfile = new File("saved.png");
-            ImageIO.write(bi, "png", outputfile);
+            File outfile = new File("saved.png");
+            ImageIO.write(bi, "png", outfile);
         } catch (IOException e) {
             // handle exception
         }
@@ -125,5 +125,10 @@ public class PerlinNoiseArray {
     public BufferedImage getImage()
     {
         return bi;
+    }
+
+    public static void main(String[] args)
+    {
+//        Math.
     }
 }
