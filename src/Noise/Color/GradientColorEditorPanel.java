@@ -40,7 +40,6 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
         colorPanel = new GradientColorPanel(pi);
         add(colorPanel, BorderLayout.CENTER);
-        addButton.addActionListener((ActionListener) colorPanel);
         addButton.setActionCommand(ColorEditorAction.ADD.name());
         removeButton.setActionCommand(ColorEditorAction.REMOVE.name());
         loadButton.setActionCommand(ColorEditorAction.LOAD.name());

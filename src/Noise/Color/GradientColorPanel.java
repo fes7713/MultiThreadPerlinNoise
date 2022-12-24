@@ -143,14 +143,18 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for(GradientNode node: nodes)
+        if(e.getClickCount() == 2)
         {
-            if(node.mouseEvent(e, this.getWidth(), this.getHeight(), node == selectedNode))
+            for(GradientNode node: nodes)
             {
-                selectedNode = node;
-                return;
+                if(node.mouseEvent(e, this.getWidth(), this.getHeight(), node == selectedNode))
+                {
+                    selectedNode = node;
+                    return;
+                }
             }
         }
+
     }
 
     @Override
@@ -164,7 +168,9 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             {
                 selectedNode = node;
                 hold = true;
+                repaint();
                 return;
+
             }
         }
         if(selectedNode.contains(e, this.getWidth(), this.getHeight(), true))
@@ -228,6 +234,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
                 nodes.add(newNode);
                 selectedNode = newNode;
+                repaint();
             }
             case REMOVE -> {
                 if(nodes.size() <= 2)
@@ -238,17 +245,18 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                     selectedNode = nodes.get(index - 1);
                 else
                     selectedNode = nodes.get(0);
+                repaint();
             }
             case LOAD -> {
-                System.out.println("LOAD");
+
             }
             case SAVE -> {
-                System.out.println("SAVE");
+
             }
             default -> {
                 throw new RuntimeException("Error occurred in color gradient editor");
             }
         }
-        repaint();
+
     }
 }
