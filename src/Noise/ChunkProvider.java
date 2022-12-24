@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 public class ChunkProvider {
     private static final ChunkProvider provider = new ChunkProvider();
 
-    FastNoise fn;
+    private final FastNoise fn;
     private final Map<Integer, Map<Integer, NoiseChunkInterface>> loadedNoiseMap;
 
     private int chunkWidth;
@@ -58,9 +58,9 @@ public class ChunkProvider {
                 loadedNoiseMap.get(col).put(row, noiseChunk);
             }else{
                 loadedNoiseMap.put(col,
-                        new HashMap<>(){{
-                            put(row, noiseChunk);
-                        }
+                            new HashMap<>(){{
+                                put(row, noiseChunk);
+                            }
                         });
             }
             return noiseChunk;

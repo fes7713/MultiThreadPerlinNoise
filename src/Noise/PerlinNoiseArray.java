@@ -1,7 +1,5 @@
 package Noise;
 
-import Noise.FastNoise;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,8 +13,8 @@ public class PerlinNoiseArray {
     private int height;
     private int width;
 
-    FastNoise fn;
-    BufferedImage bi;
+    private final FastNoise fn;
+    private BufferedImage bi;
 
     public PerlinNoiseArray(FastNoise fn, int width, int height){
         this(fn, 0, 0, width, height);
@@ -102,45 +100,16 @@ public class PerlinNoiseArray {
 
     public void updateImage(PaintInterface pi)
     {
-        System.out.println(ColorProvider.COLORS);
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-//                System.out.println((int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length));
                 bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)].getRGB());
-
-//                bi.setRGB(i, j, getIntFromColor(
-//                            convertNoise(noiseMap[i][j]),
-//                            convertNoise(noiseMap[i][j]),
-//                            convertNoise(noiseMap[i][j])
-//                        )
-//                );
             }
         }
 
         if(pi != null)
             pi.paint();
-    }
-
-    public int getIntFromColor(int Red, int Green, int Blue){
-        Red = (Red << 16) & 0x00FF0000; //Shift red 16-bits and mask out other stuff
-        Green = (Green << 8) & 0x0000FF00; //Shift Green 8-bits and mask out other stuff
-        Blue = Blue & 0x000000FF; //Mask out anything not blue.
-
-        return 0xFF000000 | Red | Green | Blue; //0xFF000000 for 100% Alpha. Bitwise OR everything together.
-    }
-
-    public int getIntFromColor(float Red, float Green, float Blue){
-        int R = Math.round(255 * Red);
-        int G = Math.round(255 * Green);
-        int B = Math.round(255 * Blue);
-
-        R = (R << 16) & 0x00FF0000;
-        G = (G << 8) & 0x0000FF00;
-        B = B & 0x000000FF;
-
-        return 0xFF000000 | R | G | B;
     }
 
     public void saveMapImage()

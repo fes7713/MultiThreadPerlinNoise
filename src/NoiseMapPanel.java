@@ -1,12 +1,11 @@
 import Noise.ChunkProvider;
 import Noise.ColorProvider;
 import Noise.NoiseChunkGroup;
-import Noise.PaintInterface;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
     private final ChunkProvider chunkProvider = ChunkProvider.getInstance(this::repaint);
@@ -21,8 +20,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int startLeft;
     private int startTop;
 
-    private int tableWidth;
-    private int tableHeight;
+    private final int tableWidth;
+    private final int tableHeight;
 
     private static final int CHUNK_SIZE = 5;
 
@@ -51,9 +50,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     {
         this(new NoiseChunkGroup("Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE));
         mainGroup.loadChunks(0, 0, true);
-//        mainGroup.updateChunk(
-//            this::repaint
-//        );
     }
 
     public void updateImage()
@@ -122,26 +118,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         startLeft += diffX;
         startTop += diffY;
 
-        mainGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
-        mainGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
-        mainGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
-        mainGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+        Stream.of(mainGroup, horizontalEdgeGroup, verticalEdgeGroup, cornerGroup)
+                .forEach(group -> {
+                    group.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
+                    group.setChunkShiftY(startTop / mainGroup.getChunkHeight());
+                    group.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
+                    group.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+                });
+
         mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
-
-        horizontalEdgeGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
-        horizontalEdgeGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
-        horizontalEdgeGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
-        horizontalEdgeGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
-
-        verticalEdgeGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
-        verticalEdgeGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
-        verticalEdgeGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
-        verticalEdgeGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
-
-        cornerGroup.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
-        cornerGroup.setChunkShiftY(startTop / mainGroup.getChunkHeight());
-        cornerGroup.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
-        cornerGroup.setPixelShiftY(startTop % mainGroup.getChunkHeight());
 
         if(startLeft < 0)
         {

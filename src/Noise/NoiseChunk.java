@@ -2,8 +2,6 @@ package Noise;
 
 import java.awt.*;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunk implements NoiseChunkInterface{
     private final String name;
@@ -18,24 +16,19 @@ public class NoiseChunk implements NoiseChunkInterface{
     private int pixelShiftX;
     private int pixelShiftY;
 
-
-    FastNoise fn;
-    PerlinNoiseArray array;
-    Thread thread;
-    Lock lock;
-    Semaphore semaphore;
+    private final PerlinNoiseArray array;
+    private Thread thread;
+    private final Semaphore semaphore;
 
 
     public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
         this.name = name;
-        this.fn = fn;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
 
         this.width = width;
         this.height = height;
         thread = new Thread();
-        lock = new ReentrantLock();
         this.semaphore = semaphore;
 
         chunkShiftX = chunkShiftY = 0;
@@ -54,16 +47,6 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     @Override
-    public int getChunkX() {
-        return chunkX;
-    }
-
-    @Override
-    public int getChunkY() {
-        return chunkY;
-    }
-
-    @Override
     public void setChunkShiftX(int chunkShiftX) {
         this.chunkShiftX = chunkShiftX;
     }
@@ -74,18 +57,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     @Override
-    public int getPixelShiftX() {
-        return pixelShiftX;
-    }
-
-    @Override
     public void setPixelShiftX(int pixelShiftX) {
         this.pixelShiftX = pixelShiftX;
-    }
-
-    @Override
-    public int getPixelShiftY() {
-        return pixelShiftY;
     }
 
     @Override
@@ -97,10 +70,8 @@ public class NoiseChunk implements NoiseChunkInterface{
     {
         if(thread.isAlive())
         {
-//            System.out.println("Active thread");
             thread.interrupt();
         }
-//        lock.lock();
         try {
             semaphore.acquire();
         } catch (InterruptedException e) {
@@ -111,7 +82,6 @@ public class NoiseChunk implements NoiseChunkInterface{
             @Override
             public void run() {
                 super.run();
-//                lock.lock();
 
                 array.initNoiseMap();
                 array.updateImage(pi);
@@ -125,9 +95,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                     array.increaseResolution((int)Math.pow(2, i));
                     array.updateImage(pi);
                 }
-//                System.out.println("Noise updated");
                 semaphore.release();
-//                lock.unlock();
             }
         };
         thread.start();
@@ -135,9 +103,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     public void updateImage(PaintInterface pi)
     {
-//        lock.lock();
         array.updateImage(pi);
-//        lock.unlock();
     }
 
     public void drawImage(Graphics2D g2d)

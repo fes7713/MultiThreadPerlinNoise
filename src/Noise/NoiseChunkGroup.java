@@ -3,22 +3,10 @@ package Noise;
 import java.awt.*;
 import java.lang.Math;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface{
     private final String name;
     private final NoiseChunkInterface[][] chunkTable;
-
-    private int chunkX;
-    private int chunkY;
-    private final int chunkWidth;
-    private final int chunkHeight;
-
-//    private int chunkShiftX;
-//    private int chunkShiftY;
-    private int pixelShiftX;
-    private int pixelShiftY;
 
     private final int tableWidth;
     private final int tableHeight;
@@ -27,7 +15,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     private final int canvasHeight;
 
     private final Semaphore semaphore;
-    private final Lock lock;
 
     private final ChunkProvider provider;
 
@@ -38,17 +25,11 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
         chunkTable = new NoiseChunk[tableWidth][tableHeight];
 
-        chunkX = chunkY = 0;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
-        chunkWidth = getChunkWidth();
-        chunkHeight = getChunkHeight();
-
         this.semaphore = semaphore;
-        lock = new ReentrantLock();
         provider = ChunkProvider.getInstance();
-//        loadChunks(chunkX, chunkY, false);
 
         System.err.printf("%-20s Chunks are not loaded\n", "[" + name + "]");
     }
@@ -57,18 +38,8 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         this(name, canvasWidth, canvasHeight, tableWidth, tableHeight, new Semaphore(tableWidth * tableHeight));
     }
 
-    public NoiseChunkGroup(int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
-        this("Default", canvasWidth, canvasHeight, tableWidth, tableHeight);
-    }
-
-    public NoiseChunkGroup(int canvasWidth, int canvasHeight, int tableWidth, int tableHeight, Semaphore semaphore) {
-        this("Default" ,canvasWidth, canvasHeight, tableWidth, tableHeight, semaphore);
-    }
-
     public void loadChunks(int chunkX, int chunkY, boolean paintUpdate)
     {
-        this.chunkX = chunkX;
-        this.chunkY = chunkY;
         for (int i = 0; i < tableWidth; i++)
         {
             for (int j = 0; j < tableHeight; j++)
@@ -78,24 +49,9 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
-    public void loadChunks(int chunkX, int chunkY)
-    {
-        loadChunks(chunkX, chunkY, true);
-    }
-
     public String getName()
     {
         return name;
-    }
-
-    @Override
-    public int getChunkX() {
-        return chunkX;
-    }
-
-    @Override
-    public int getChunkY() {
-        return chunkY;
     }
 
     @Override
@@ -117,13 +73,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     }
 
     @Override
-    public int getPixelShiftX() {
-        return pixelShiftX;
-    }
-
-    @Override
     public void setPixelShiftX(int pixelShiftX) {
-        this.pixelShiftX = pixelShiftX;
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].setPixelShiftX(pixelShiftX);
@@ -132,13 +82,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     }
 
     @Override
-    public int getPixelShiftY() {
-        return pixelShiftY;
-    }
-
-    @Override
     public void setPixelShiftY(int pixelShiftY) {
-        this.pixelShiftY = pixelShiftY;
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].setPixelShiftY(pixelShiftY);

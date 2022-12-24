@@ -7,19 +7,18 @@ import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 public class GradientNode implements Comparable<GradientNode> {
-    Color color;
+    private Color color;
     /*/
     Position of color node valued between 0 and 1;
      */
-    float position;
+    private float position;
 
-    private static int BOX_SIZE = 20; // in pixel
+    private static final int BOX_SIZE = 20; // in pixel
 
-    float[] hsb;
-    PaintInterface pi;
+    private final float[] hsb;
+    private final PaintInterface pi;
 
     public GradientNode(GradientNode node, float position) {
         this(node.color, position, node.pi);
@@ -76,9 +75,9 @@ public class GradientNode implements Comparable<GradientNode> {
         int y = event.getY();
 
         if(width > height) {
-            // x coord check
+            // x cord check
             if ((int) (width * position) - BOX_SIZE * multiplier / 2 < x && x < (int) (width * position) + BOX_SIZE * multiplier / 2) {
-                // y coord check
+                // y cord check
                 if(y > height - BOX_SIZE * multiplier)
                 {
                     return true;
@@ -132,7 +131,6 @@ public class GradientNode implements Comparable<GradientNode> {
             pi.paint();
         };
         model.addChangeListener(changeListener);
-//        model.setSelectedColor(color);
         dialog.setBounds(x, y, 600, 400);
         dialog.setVisible(true);
     }

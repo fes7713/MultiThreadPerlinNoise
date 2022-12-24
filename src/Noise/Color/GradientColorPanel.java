@@ -2,28 +2,23 @@ package Noise.Color;
 
 import Noise.PaintInterface;
 
-import javax.imageio.IIOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
-    final List<GradientNode> nodes;
-    BufferedImage bi;
-    Color[] colors;
-    GradientNode selectedNode;
-    PaintInterface pi;
-    boolean hold;
-
+    private final List<GradientNode> nodes;
+    private BufferedImage bi;
+    private Color[] colors;
+    private GradientNode selectedNode;
+    private PaintInterface pi;
+    private boolean hold;
 
     public GradientColorPanel(PaintInterface pi)
     {
@@ -33,10 +28,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         addMouseListener(this);
         addMouseMotionListener(this);
-//        nodes.add(new GradientNode(Color.RED, 0.1F, this::repaint));
-//        nodes.add(new GradientNode(Color.MAGENTA, 0.25F, this::repaint));
-//        nodes.add(new GradientNode(Color.ORANGE, 0.5F, this::repaint));
-//        nodes.add(new GradientNode(Color.WHITE, 0.9F, this::repaint));
+
         nodes.add(new GradientNode(Color.WHITE, 0F, this::repaint));
         nodes.add(new GradientNode(Color.BLACK, 1F, this::repaint));
         selectedNode = nodes.get(0);
@@ -100,9 +92,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         if(nodes.size() < 2)
             throw new RuntimeException("Node list cannot be less than 2");
         Collections.sort(nodes);
-        List<GradientNode> gradationNodes = new ArrayList<>();
-        for(GradientNode node: nodes)
-            gradationNodes.add(node);
+        List<GradientNode> gradationNodes = new ArrayList<>(nodes);
 
         if(gradationNodes.get(0).getPosition() != 0)
             gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0, this::repaint));
@@ -243,7 +233,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 repaint();
             }
             case REMOVE -> {
-                // TODO file name input form
                 if(nodes.size() <= 2)
                     return;
                 int index = nodes.indexOf(selectedNode);

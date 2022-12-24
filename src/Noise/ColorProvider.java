@@ -1,16 +1,14 @@
 package Noise;
 
-import Noise.Color.ColorUpdateInterface;
 import Noise.Color.GradientColorEditorPanel;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class ColorProvider {
     private static final ColorProvider provider = new ColorProvider();
 
     public static Color[] COLORS;
-    static GradientColorEditorPanel editor;
+    private static GradientColorEditorPanel editor;
 
     PaintInterface pi;
 
@@ -31,10 +29,6 @@ public class ColorProvider {
         return provider;
     }
 
-    public static void setColors(Color[] colors)
-    {
-        COLORS = colors;
-    }
     public void setPaintInterface(PaintInterface pi)
     {
         this.pi = pi;
@@ -42,11 +36,6 @@ public class ColorProvider {
             COLORS = editor.getColors();
             pi.paint();
         });
-    }
-
-    public Color[] getColors()
-    {
-        return COLORS;
     }
 
     public void showColorEditor()
