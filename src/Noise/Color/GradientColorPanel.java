@@ -239,6 +239,12 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 else
                     selectedNode = nodes.get(0);
             }
+            case LOAD -> {
+                System.out.println("LOAD");
+            }
+            case SAVE -> {
+                System.out.println("SAVE");
+            }
             default -> {
                 throw new RuntimeException("Error occurred in color gradient editor");
             }

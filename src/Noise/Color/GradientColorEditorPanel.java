@@ -7,20 +7,34 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class GradientColorEditorPanel extends JPanel implements ComponentListener {
     JButton addButton;
     JButton removeButton;
+    JButton loadButton;
+    JButton saveButton;
+
     JPanel buttonPanel;
 
+
     GradientColorPanel colorPanel;
+    List<JButton> buttons;
 
     public GradientColorEditorPanel(PaintInterface pi)
     {
         addButton = new JButton(ColorEditorAction.ADD.name());
         removeButton = new JButton(ColorEditorAction.REMOVE.name());
-        buttonPanel = new JPanel(new BorderLayout());
+        loadButton = new JButton(ColorEditorAction.LOAD.name());
+        saveButton = new JButton(ColorEditorAction.SAVE.name());
 
+        buttons = Stream.of(addButton, removeButton, loadButton, saveButton).toList();
+
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(2, 2));
+        buttons.forEach(buttonPanel::add);
         addComponentListener(this);
         setLayout(new BorderLayout());
 
@@ -28,8 +42,14 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         add(colorPanel, BorderLayout.CENTER);
         addButton.addActionListener((ActionListener) colorPanel);
         addButton.setActionCommand(ColorEditorAction.ADD.name());
-        removeButton.addActionListener(colorPanel);
         removeButton.setActionCommand(ColorEditorAction.REMOVE.name());
+        loadButton.setActionCommand(ColorEditorAction.LOAD.name());
+        saveButton.setActionCommand(ColorEditorAction.SAVE.name());
+        addButton.addActionListener(colorPanel);
+        removeButton.addActionListener(colorPanel);
+        loadButton.addActionListener(colorPanel);
+        saveButton.addActionListener(colorPanel);
+
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -67,16 +87,16 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
         if(width > height)
         {
-            buttonPanel.add(addButton, BorderLayout.NORTH);
-            buttonPanel.add(removeButton, BorderLayout.SOUTH);
+            buttonPanel.setLayout(new GridLayout(4, 1));
             add(buttonPanel, BorderLayout.EAST);
         }
         else
         {
-            buttonPanel.add(addButton, BorderLayout.WEST);
-            buttonPanel.add(removeButton, BorderLayout.EAST);
+            buttonPanel.setLayout(new GridLayout(2, 2));
             add(buttonPanel, BorderLayout.NORTH);
         }
+
+        buttons.forEach(buttonPanel::add);
         add(colorPanel, BorderLayout.CENTER);
     }
 
