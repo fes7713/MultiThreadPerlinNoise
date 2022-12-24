@@ -256,27 +256,17 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             }
             case LOAD -> {
                 try{
-                    // TODO replace nodes list
-                    // TODO file name chang
-                    File folder = new File("presets");
-                    File[] listOfFiles = folder.listFiles();
+                    File[] files= new File("presets").listFiles();
 
-                    for (File file : listOfFiles) {
-                        if (file.isFile()) {
-                            System.out.println(file.getName());
-                        }
-                    }
-
-                    String selectvalues[] = new String[listOfFiles.length];
-                    IntStream.range(0, listOfFiles.length).forEach(i -> {
-                        selectvalues[i] = listOfFiles[i].getName();
+                    String[] values = new String[files.length];
+                    IntStream.range(0, values.length).forEach(i -> {
+                        values[i] = files[i].getName();
                     });
 
                     Object value = JOptionPane.showInputDialog(this, "Message",
-                            "タイトル", JOptionPane.ERROR_MESSAGE,
-                            new ImageIcon("icons/preset1.png"), selectvalues, selectvalues[0]);
+                            "Load presets", JOptionPane.ERROR_MESSAGE,
+                            new ImageIcon("icons/preset1.png"), values, values[0]);
 
-                    System.out.println(value);
                     if(value == null)
                         return;
 
