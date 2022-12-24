@@ -1,18 +1,22 @@
 package Noise.Color;
 
+import Noise.PaintInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.Arrays;
 
 public class GradientColorEditorPanel extends JPanel implements ComponentListener {
     JButton addButton;
     JButton removeButton;
     JPanel buttonPanel;
 
-    JPanel colorPanel;
-    public GradientColorEditorPanel()
+    GradientColorPanel colorPanel;
+
+    public GradientColorEditorPanel(PaintInterface pi)
     {
         addButton = new JButton(ColorEditorAction.ADD.name());
         removeButton = new JButton(ColorEditorAction.REMOVE.name());
@@ -21,11 +25,11 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         addComponentListener(this);
         setLayout(new BorderLayout());
 
-        colorPanel = new GradientColorPanel();
+        colorPanel = new GradientColorPanel(pi);
         add(colorPanel, BorderLayout.CENTER);
         addButton.addActionListener((ActionListener) colorPanel);
         addButton.setActionCommand(ColorEditorAction.ADD.name());
-        removeButton.addActionListener((ActionListener) colorPanel);
+        removeButton.addActionListener(colorPanel);
         removeButton.setActionCommand(ColorEditorAction.REMOVE.name());
     }
 
@@ -38,6 +42,11 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         frame.setMinimumSize(new Dimension(100, 250));
         frame.add(this);
         frame.setVisible(true);
+    }
+
+    public Color[] getColors()
+    {
+        return colorPanel.getColorArray();
     }
 
     @Override
@@ -82,9 +91,14 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
     }
 
+    public Color[] getUpdatedColorArray(int size)
+    {
+        return colorPanel.getUpdatedColorArray(size);
+    }
+
     public static void main(String[] argv)
     {
-        GradientColorEditorPanel panel = new GradientColorEditorPanel();
+        GradientColorEditorPanel panel = new GradientColorEditorPanel(null);
         panel.showFrame();
     }
 }

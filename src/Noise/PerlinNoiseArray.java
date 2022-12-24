@@ -102,16 +102,20 @@ public class PerlinNoiseArray {
 
     public void updateImage(PaintInterface pi)
     {
+        System.out.println(ColorProvider.COLORS);
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                bi.setRGB(i, j, getIntFromColor(
-                            convertNoise(noiseMap[i][j]),
-                            convertNoise(noiseMap[i][j]),
-                            convertNoise(noiseMap[i][j])
-                        )
-                );
+//                System.out.println((int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length));
+                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)].getRGB());
+
+//                bi.setRGB(i, j, getIntFromColor(
+//                            convertNoise(noiseMap[i][j]),
+//                            convertNoise(noiseMap[i][j]),
+//                            convertNoise(noiseMap[i][j])
+//                        )
+//                );
             }
         }
 

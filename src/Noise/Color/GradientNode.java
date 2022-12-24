@@ -1,11 +1,12 @@
 package Noise.Color;
 
+import Noise.PaintInterface;
+
 import javax.swing.*;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.image.ImageObserver;
 
 public class GradientNode implements Comparable<GradientNode> {
     Color color;
@@ -17,21 +18,21 @@ public class GradientNode implements Comparable<GradientNode> {
     private static int BOX_SIZE = 20; // in pixel
 
     float[] hsb;
-    ColorUpdateInterface cui;
+    PaintInterface pi;
 
-    public GradientNode(Color color, float position, ColorUpdateInterface cui) {
+    public GradientNode(GradientNode node, float position) {
+        this(node.color, position, node.pi);
+    }
+
+    public GradientNode(Color color, float position, PaintInterface pi) {
         this.color = color;
         if(position < 0 || position > 1)
             throw new IllegalArgumentException("position should be value between 0 and 1");
         this.position = position;
-        this.cui = cui;
+        this.pi = pi;
 
         hsb = new float[3];
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-    }
-
-    public GradientNode(GradientNode node){
-        this(new Color(node.color.getRGB()), node.position, node.cui);
     }
 
     public float[] getHsb() {
@@ -111,7 +112,7 @@ public class GradientNode implements Comparable<GradientNode> {
        return false;
     }
 
-    public void showColorPalette(int x, int y)
+    private void showColorPalette(int x, int y)
     {
         final JColorChooser colorChooser = new JColorChooser(color);
         Color original = color;
@@ -120,12 +121,12 @@ public class GradientNode implements Comparable<GradientNode> {
                     System.out.println("Okay ");
                     Color newForegroundColor = colorChooser.getColor();
                     setColor(newForegroundColor);
-                    cui.update();
+                    pi.paint();
                 },
                 e -> {
                     System.out.println("Cancel");
                     setColor(original);
-                    cui.update();
+                    pi.paint();
                 }
         );
 
@@ -133,7 +134,7 @@ public class GradientNode implements Comparable<GradientNode> {
         ChangeListener changeListener = changeEvent -> {
             Color newForegroundColor = colorChooser.getColor();
             setColor(newForegroundColor);
-            cui.update();
+            pi.paint();
         };
         model.addChangeListener(changeListener);
 //        model.setSelectedColor(color);

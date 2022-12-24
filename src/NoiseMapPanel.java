@@ -1,12 +1,15 @@
 import Noise.ChunkProvider;
+import Noise.ColorProvider;
 import Noise.NoiseChunkGroup;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener {
-    private final ChunkProvider provider = ChunkProvider.getInstance(this::repaint);
+    private final ChunkProvider chunkProvider = ChunkProvider.getInstance(this::repaint);
+    private final ColorProvider colorProvider = ColorProvider.getInstance();
     private NoiseChunkGroup mainGroup;
     private NoiseChunkGroup verticalEdgeGroup;
     private NoiseChunkGroup horizontalEdgeGroup;
@@ -27,6 +30,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         this.mainGroup = ncg;
 
         tableWidth = tableHeight = CHUNK_SIZE;
+
         verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
         horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
         cornerGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 100,1, 1);
@@ -37,6 +41,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addComponentListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
+        System.out.println(colorProvider.getColors());
+//        colorProvider.setPaintInterface(updatedColors -> {
+//            System.out.println(Arrays.toString(updatedColors));
+//            mainGroup.updateImage(this::repaint);
+//            verticalEdgeGroup.updateImage(this::repaint);
+//            horizontalEdgeGroup.updateImage(this::repaint);
+//            cornerGroup.updateImage(this::repaint);
+//        });
+//        colorProvider.showColorEditor();
     }
 
     public NoiseMapPanel()
@@ -63,7 +76,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int width = e.getComponent().getWidth();
         int height = e.getComponent().getHeight();
 
-        provider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
+        chunkProvider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
         mainGroup =
                 new NoiseChunkGroup("Main",  width, height,tableWidth, tableHeight);
         verticalEdgeGroup =
@@ -155,13 +168,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() -1, true);
 
         }
-
-
-
-//        System.out.println("Chunk X " + startLeft/mainGroup.getChunkWidth());
-//        System.out.println("Chunk Y " + startTop/mainGroup.getChunkHeight());
-//        System.out.println("Pixel X " + startLeft%mainGroup.getChunkWidth());
-//        System.out.println("Pixel Y " + startTop%mainGroup.getChunkHeight());
         repaint();
     }
 

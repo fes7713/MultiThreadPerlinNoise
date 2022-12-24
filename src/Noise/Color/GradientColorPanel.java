@@ -1,5 +1,7 @@
 package Noise.Color;
 
+import Noise.PaintInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,10 +15,13 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
     BufferedImage bi;
     Color[] colors;
     GradientNode selectedNode;
+    PaintInterface pi;
     boolean hold;
 
-    public GradientColorPanel()
+
+    public GradientColorPanel(PaintInterface pi)
     {
+        this.pi = pi;
         hold = false;
         nodes = new ArrayList<>();
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
@@ -27,8 +32,10 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         nodes.add(new GradientNode(Color.ORANGE, 0.5F, this::repaint));
         nodes.add(new GradientNode(Color.WHITE, 0.9F, this::repaint));
         selectedNode = nodes.get(0);
+        updateColorArray(255);
     }
 
+//    public void set
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -62,17 +69,16 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         for(GradientNode node: nodes)
             if(node != selectedNode)
                 node.paint(g2d, width, height);
-
     }
 
-    public void addColorAtPosition(Color color, float position)
+    public Color[] getUpdatedColorArray(int size)
     {
-        if(position < 0 || position > 1)
-            throw new IllegalArgumentException("position should be value between 0 and 1");
+        updateColorArray(size);
+        return colors;
+    }
 
-        nodes.add(new GradientNode(color, position, this::repaint));
-        if(nodes.size() < 2)
-            System.err.println("Node list size is still less than 2");
+    public Color[] getColorArray(){
+        return colors;
     }
 
     private void updateColorArray(int size)
@@ -122,26 +128,9 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
             }
         }
-    }
 
-    public int getIntFromColor(int Red, int Green, int Blue){
-        Red = (Red << 16) & 0x00FF0000; //Shift red 16-bits and mask out other stuff
-        Green = (Green << 8) & 0x0000FF00; //Shift Green 8-bits and mask out other stuff
-        Blue = Blue & 0x000000FF; //Mask out anything not blue.
-
-        return 0xFF000000 | Red | Green | Blue; //0xFF000000 for 100% Alpha. Bitwise OR everything together.
-    }
-
-    public int getIntFromColor(float Red, float Green, float Blue){
-        int R = Math.round(255 * Red);
-        int G = Math.round(255 * Green);
-        int B = Math.round(255 * Blue);
-
-        R = (R << 16) & 0x00FF0000;
-        G = (G << 8) & 0x0000FF00;
-        B = B & 0x000000FF;
-
-        return 0xFF000000 | R | G | B;
+        if(pi != null)
+            pi.paint();
     }
 
     @Override
@@ -214,7 +203,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
 
     @Override
@@ -226,13 +214,10 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             case ADD -> {
                 GradientNode newNode;
                 if(selectedNode.getPosition() < 0.9F)
-                {
-                    newNode = new GradientNode(selectedNode.getColor(), selectedNode.getPosition() + 0.05F, selectedNode.cui);
+                    newNode = new GradientNode(selectedNode, selectedNode.getPosition() + 0.05F);
+                else
+                    newNode =new GradientNode(selectedNode, selectedNode.getPosition() - 0.05F);
 
-                }
-                else{
-                    newNode =new GradientNode(selectedNode.getColor(), selectedNode.getPosition() - 0.05F, selectedNode.cui);
-                }
                 nodes.add(newNode);
                 selectedNode = newNode;
             }
