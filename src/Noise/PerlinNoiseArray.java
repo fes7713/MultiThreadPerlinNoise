@@ -63,6 +63,13 @@ public class PerlinNoiseArray {
         dimensionChanged();
     }
 
+    public void reuse(float left, float top, float zoom)
+    {
+        this.zoom = zoom;
+        this.left = left * zoom;
+        this.top = top * zoom;
+    }
+
     private void dimensionChanged()
     {
         noiseMap = new float[width][height];

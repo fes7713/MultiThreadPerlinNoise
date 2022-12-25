@@ -6,8 +6,9 @@ import java.util.concurrent.Semaphore;
 public class NoiseChunk implements NoiseChunkInterface{
     private final String name;
 
-    private final int chunkX;
-    private final int chunkY;
+    private int chunkX;
+    private int chunkY;
+
     private final int width;
     private final int height;
 
@@ -41,6 +42,11 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     @Override
+    public long getChunkKey() {
+        return NoiseChunkInterface.getChunkKey(chunkX, chunkY);
+    }
+
+    @Override
     public void setChunkShiftX(int chunkShiftX) {
         this.chunkShiftX = chunkShiftX;
     }
@@ -63,6 +69,13 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void stopChunk()
     {
         thread.interrupt();
+    }
+
+    @Override
+    public void reuseChunk(int chunkX, int chunkY, float zoom) {
+        this.chunkX = chunkX;
+        this.chunkY = chunkY;
+        array.reuse(chunkX * width, chunkY * height, zoom);
     }
 
     public void updateChunk(PaintInterface pi)
@@ -89,6 +102,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                     array.updateImage(pi);
                     Thread.yield();
                 }
+                array.updateImage(pi);
             }
         };
         thread.start();

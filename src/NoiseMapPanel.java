@@ -186,7 +186,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println();
         mouseX = e.getX();
         mouseY = e.getY();
         repaint();
@@ -241,7 +240,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         System.out.println("new " + startX);
 
         chunkProvider.zoomChanged(zoom);
-
 
         updateChunkGroups();
     }

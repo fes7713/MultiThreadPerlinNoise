@@ -2,9 +2,9 @@ package Noise;
 
 import java.awt.*;
 import java.lang.Math;
-import java.util.concurrent.Semaphore;
 
 public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInterface{
+    private long key;
     private final String name;
     private final NoiseChunkInterface[][] chunkTable;
 
@@ -33,6 +33,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
     public void loadChunks(int chunkX, int chunkY, boolean paintUpdate)
     {
+        key = NoiseChunkInterface.getChunkKey(chunkX, chunkY);
         for (int i = 0; i < tableWidth; i++)
         {
             for (int j = 0; j < tableHeight; j++)
@@ -45,6 +46,11 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public long getChunkKey() {
+        return key;
     }
 
     @Override
@@ -97,6 +103,17 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
                 chunkTable[i][j].stopChunk();
+            }
+        }
+    }
+
+    @Override
+    public void reuseChunk(int chunkX, int chunkY, float zoom){
+        key = NoiseChunkInterface.getChunkKey(chunkX, chunkY);
+        System.err.println("Dont come here");
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].reuseChunk(chunkX, chunkY, zoom);
             }
         }
     }
