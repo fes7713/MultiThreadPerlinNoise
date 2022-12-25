@@ -8,7 +8,7 @@ public class ChunkProvider {
     private static final ChunkProvider provider = new ChunkProvider();
 
     private final FastNoise fn;
-    private final Map<Integer, NoiseChunkInterface> loadedNoiseMap;
+    private final Map<Long, NoiseChunkInterface> loadedNoiseMap;
 
     private int chunkWidth;
     private int chunkHeight;
@@ -46,7 +46,8 @@ public class ChunkProvider {
 
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
-        int key = col * 10 + row;
+        long key = (((long)col) << 32) | (row & 0xffffffffL);
+
         if(loadedNoiseMap.containsKey(key))
         {
             return loadedNoiseMap.get(key);
