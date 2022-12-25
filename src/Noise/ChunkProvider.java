@@ -8,7 +8,7 @@ public class ChunkProvider {
     private static final ChunkProvider provider = new ChunkProvider();
 
     private final FastNoise fn;
-    private final Map<Integer, Map<Integer, NoiseChunkInterface>> loadedNoiseMap;
+    private final Map<Integer, NoiseChunkInterface> loadedNoiseMap;
 
     private int chunkWidth;
     private int chunkHeight;
@@ -41,9 +41,10 @@ public class ChunkProvider {
 
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate, Semaphore semaphore)
     {
-        if(loadedNoiseMap.containsKey(col) && loadedNoiseMap.get(col).containsKey(row))
+        int key = col * 10 + row;
+        if(loadedNoiseMap.containsKey(key))
         {
-            return loadedNoiseMap.get(col).get(row);
+            return loadedNoiseMap.get(key);
         }
         else{
             NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, semaphore);
@@ -56,15 +57,7 @@ public class ChunkProvider {
 
             else
                 noiseChunk.updateChunk(null);
-            if(loadedNoiseMap.containsKey(col)) {
-                loadedNoiseMap.get(col).put(row, noiseChunk);
-            }else{
-                loadedNoiseMap.put(col,
-                            new HashMap<>(){{
-                                put(row, noiseChunk);
-                            }
-                        });
-            }
+            loadedNoiseMap.put(key, noiseChunk);
             return noiseChunk;
         }
     }
