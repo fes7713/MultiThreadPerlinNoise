@@ -92,6 +92,15 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
+    @Override
+    public void stopChunk() {
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].stopChunk();
+            }
+        }
+    }
+
     public void updateImage(PaintInterface pi)
     {
         for (int i = 0; i < tableWidth; i++) {

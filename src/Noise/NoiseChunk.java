@@ -60,6 +60,11 @@ public class NoiseChunk implements NoiseChunkInterface{
         this.pixelShiftY = pixelShiftY;
     }
 
+    public void stopChunk()
+    {
+        thread.interrupt();
+    }
+
     public void updateChunk(PaintInterface pi)
     {
         if(thread.isAlive())
@@ -74,7 +79,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 array.initNoiseMap();
                 array.updateImage(pi);
-
+                Thread.yield();
                 for (int i = 1; i < 8; i++) {
                     if(Thread.interrupted())
                     {
@@ -82,6 +87,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                     }
                     array.increaseResolution((int)Math.pow(2, i));
                     array.updateImage(pi);
+                    Thread.yield();
                 }
             }
         };

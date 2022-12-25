@@ -10,6 +10,7 @@ interface NoiseChunkInterface {
     void setPixelShiftY(int pixelShiftY);
 
     void updateChunk(PaintInterface pi);
+    void stopChunk();
     void updateImage(PaintInterface pi);
     void drawImage(Graphics2D g2d);
 

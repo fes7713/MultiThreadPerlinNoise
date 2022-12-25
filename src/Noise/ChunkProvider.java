@@ -68,16 +68,25 @@ public class ChunkProvider {
         }
     }
 
+    public void clearMap()
+    {
+        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+        {
+            chunk.stopChunk();
+        }
+        loadedNoiseMap.clear();
+    }
+
     public void dimensionChanged(int chunkWidth, int chunkHeight)
     {
-        loadedNoiseMap.clear();
+        clearMap();
         this.chunkWidth = chunkWidth;
         this.chunkHeight = chunkHeight;
     }
 
     public void zoomChanged(float zoom)
     {
-        loadedNoiseMap.clear();
+        clearMap();
         this.zoom = zoom;
     }
 }
