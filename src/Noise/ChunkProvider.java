@@ -12,10 +12,12 @@ public class ChunkProvider {
 
     private int chunkWidth;
     private int chunkHeight;
+    private float zoom;
 
     PaintInterface pi;
     private ChunkProvider()
     {
+        zoom = 1;
         loadedNoiseMap = new HashMap<>();
         fn = new FastNoise();
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
@@ -44,7 +46,7 @@ public class ChunkProvider {
             return loadedNoiseMap.get(col).get(row);
         }
         else{
-            NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, semaphore);
+            NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, semaphore);
             if(paintUpdate)
             {
                 if(pi == null)
@@ -72,5 +74,11 @@ public class ChunkProvider {
         loadedNoiseMap.clear();
         this.chunkWidth = chunkWidth;
         this.chunkHeight = chunkHeight;
+    }
+
+    public void zoomChanged(float zoom)
+    {
+        loadedNoiseMap.clear();
+        this.zoom = zoom;
     }
 }

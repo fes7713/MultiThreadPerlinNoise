@@ -15,17 +15,16 @@ public class PerlinNoiseArray {
 
     private final FastNoise fn;
     private BufferedImage bi;
+    private float zoom;
 
-    public PerlinNoiseArray(FastNoise fn, int width, int height){
-        this(fn, 0, 0, width, height);
-    }
-
-    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height){
+    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom){
+        this.zoom = zoom;
         this.fn = fn;
-        this.left = left;
-        this.top = top;
+        this.left = left * zoom;
+        this.top = top * zoom;
         this.width = width;
         this.height = height;
+
         noiseMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
@@ -76,7 +75,7 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = fn.GetNoise(i + left, j + top);
+                noiseMap[i][j] = fn.GetNoise(i  * zoom + left, j  * zoom + top);
             }
         }
     }
@@ -87,7 +86,7 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] += fn.GetNoise((i  + left) * resolution, (j + top) * resolution ) / resolution;
+                noiseMap[i][j] += fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
             }
         }
     }

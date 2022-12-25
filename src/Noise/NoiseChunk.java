@@ -21,7 +21,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final Semaphore semaphore;
 
 
-    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
+    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, Semaphore semaphore) {
         this.name = name;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
@@ -34,11 +34,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         chunkShiftX = chunkShiftY = 0;
         pixelShiftX = pixelShiftY = 0;
 
-        array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height);
-    }
-
-    public NoiseChunk(FastNoise fn, int chunkX, int chunkY, int width, int height, Semaphore semaphore) {
-        this("Default", fn, chunkX, chunkY, width, height,semaphore);
+        array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height, zoom);
     }
 
     public String getName()
