@@ -18,10 +18,9 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     private final PerlinNoiseArray array;
     private Thread thread;
-    private final Semaphore semaphore;
 
 
-    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, Semaphore semaphore) {
+    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom) {
         this.name = name;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
@@ -29,7 +28,6 @@ public class NoiseChunk implements NoiseChunkInterface{
         this.width = width;
         this.height = height;
         thread = new Thread();
-        this.semaphore = semaphore;
 
         chunkShiftX = chunkShiftY = 0;
         pixelShiftX = pixelShiftY = 0;
@@ -68,11 +66,6 @@ public class NoiseChunk implements NoiseChunkInterface{
         {
             thread.interrupt();
         }
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         thread = new Thread()
         {
             @Override
@@ -85,13 +78,11 @@ public class NoiseChunk implements NoiseChunkInterface{
                 for (int i = 1; i < 8; i++) {
                     if(Thread.interrupted())
                     {
-                        semaphore.release();
                         return;
                     }
                     array.increaseResolution((int)Math.pow(2, i));
                     array.updateImage(pi);
                 }
-                semaphore.release();
             }
         };
         thread.start();

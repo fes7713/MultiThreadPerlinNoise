@@ -39,7 +39,12 @@ public class ChunkProvider {
         this.pi = pi;
     }
 
-    public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate, Semaphore semaphore)
+    public void preload(int left, int top, int width, int height)
+    {
+
+    }
+
+    public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
         int key = col * 10 + row;
         if(loadedNoiseMap.containsKey(key))
@@ -47,7 +52,7 @@ public class ChunkProvider {
             return loadedNoiseMap.get(key);
         }
         else{
-            NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, semaphore);
+            NoiseChunkInterface noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom);
             if(paintUpdate)
             {
                 if(pi == null)

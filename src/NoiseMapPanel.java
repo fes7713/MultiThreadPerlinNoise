@@ -118,6 +118,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         }
 
+        mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
+
+
         Stream.of(mainGroup, horizontalEdgeGroup, verticalEdgeGroup, cornerGroup)
                 .forEach(group -> {
                     group.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
