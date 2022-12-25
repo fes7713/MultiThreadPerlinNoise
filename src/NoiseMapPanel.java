@@ -30,6 +30,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int mouseX;
     private int mouseY;
 
+    private static final float ZOOM_RATIO = 2;
+
     public NoiseMapPanel(NoiseChunkGroup ncg)
     {
         this.mainGroup = ncg;
@@ -80,7 +82,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(mouseX, 0, mouseX, this.getHeight());
         g2d.drawLine(0, mouseY, this.getWidth(), mouseY);
 
-        float zoom = (float)Math.pow(1.1, wheelCount);
+        float zoom = (float)Math.pow(ZOOM_RATIO, wheelCount);
         g2d.drawString("(" + (int)((mouseX - startLeft) * zoom)   + ", " + (int)((mouseY - startTop) * zoom) + ")", mouseX + 20, mouseY + 20);
     }
 
@@ -219,23 +221,14 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-
-        int preWheelCount = wheelCount;
         wheelCount -= e.getWheelRotation();
         System.out.println(wheelCount);
 
-        float zoom = (float)Math.pow(1.1, wheelCount);
-        float preZoom = (float)Math.pow(1.1, preWheelCount);
-
-        double x = (int)((mouseX - startLeft) * zoom);
-        double y = (int)((mouseY - startTop) * zoom);
-
-        double preX = (int)((mouseX - startLeft) * preZoom);
-        double preY = (int)((mouseY - startTop) * preZoom);
+        float zoom = (float)Math.pow(ZOOM_RATIO, wheelCount);
 
         System.out.println("old " + startX);
-        startLeft = (int)(mouseX - (mouseX - startLeft) * Math.pow(1.1, e.getWheelRotation()));
-        startTop = (int)(mouseY - (mouseY - startTop) * Math.pow(1.1, e.getWheelRotation()));
+        startLeft = (int)(mouseX - (mouseX - startLeft) * Math.pow(ZOOM_RATIO, e.getWheelRotation()));
+        startTop = (int)(mouseY - (mouseY - startTop) * Math.pow(ZOOM_RATIO, e.getWheelRotation()));
 
         System.out.println("new " + startX);
 

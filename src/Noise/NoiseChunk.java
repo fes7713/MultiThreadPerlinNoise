@@ -20,7 +20,6 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final PerlinNoiseArray array;
     private Thread thread;
 
-
     public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom) {
         this.name = name;
         this.chunkX = chunkX;
@@ -91,15 +90,14 @@ public class NoiseChunk implements NoiseChunkInterface{
                 super.run();
 
                 array.initNoiseMap();
-                array.updateImage(pi);
                 Thread.yield();
                 for (int i = 1; i < 8; i++) {
                     if(Thread.interrupted())
                     {
                         return;
                     }
-                    array.increaseResolution((int)Math.pow(2, i));
                     array.updateImage(pi);
+                    array.increaseResolution((int)Math.pow(2, i));
                     Thread.yield();
                 }
                 array.updateImage(pi);
