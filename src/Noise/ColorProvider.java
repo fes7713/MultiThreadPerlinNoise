@@ -7,7 +7,7 @@ import java.awt.*;
 public class ColorProvider {
     private static final ColorProvider provider = new ColorProvider();
 
-    public static Color[] COLORS;
+    public static int[] COLORS;
     private static GradientColorEditorPanel editor;
 
     PaintInterface pi;

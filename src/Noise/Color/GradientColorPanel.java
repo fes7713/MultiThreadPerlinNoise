@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     private final List<GradientNode> nodes;
     private BufferedImage bi;
-    private Color[] colors;
+    private int[] colors;
     private GradientNode selectedNode;
     private PaintInterface pi;
     private boolean hold;
@@ -55,7 +55,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    bi.setRGB(i, j, colors[i].getRGB());
+                    bi.setRGB(i, j, colors[i]);
                 }
             }
         }
@@ -64,7 +64,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    bi.setRGB(i, j, colors[j].getRGB());
+                    bi.setRGB(i, j, colors[j]);
                 }
             }
         }
@@ -77,13 +77,13 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 node.paint(g2d, width, height);
     }
 
-    public Color[] getUpdatedColorArray(int size)
+    public int[] getUpdatedColorArray(int size)
     {
         updateColorArray(size);
         return colors;
     }
 
-    public Color[] getColorArray(){
+    public int[] getColorArray(){
         return colors;
     }
 
@@ -100,7 +100,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         if(gradationNodes.get(gradationNodes.size() - 1).getPosition() != 1)
             gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1, this::repaint));
 
-        colors= new Color[size];
+        colors= new int[size];
         int cnt = 0;
 
         for(int i = 1; i < gradationNodes.size(); i++)
@@ -129,7 +129,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 if(newhsvvals[0] > 1)
                     newhsvvals[0] -= 1;
 
-                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]).getRGB();
             }
         }
 

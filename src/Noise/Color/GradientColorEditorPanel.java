@@ -52,7 +52,7 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         frame.setVisible(true);
     }
 
-    public Color[] getColors()
+    public int[] getColors()
     {
         return colorPanel.getColorArray();
     }
@@ -99,7 +99,7 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
     }
 
-    public Color[] getUpdatedColorArray(int size)
+    public int[] getUpdatedColorArray(int size)
     {
         return colorPanel.getUpdatedColorArray(size);
     }

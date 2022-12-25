@@ -93,7 +93,6 @@ public class PerlinNoiseArray {
 
     public float convertNoise(float noise)
     {
-//        return 1 - 0.5F / (noise + 1.25F);
         return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
     }
 
@@ -103,7 +102,7 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)].getRGB());
+                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
             }
         }
 
