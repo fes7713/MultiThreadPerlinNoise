@@ -23,7 +23,7 @@ public class GradientNodeLine {
 
     PaintInterface pi;
 
-    private static int LINE_THICKNESS = 15;
+    private static int LINE_THICKNESS = 10;
 
     public GradientNodeLine(List<GradientNode> nodes, float linePosition, PaintInterface pi) {
         this.nodes = nodes;
@@ -54,11 +54,7 @@ public class GradientNodeLine {
 
     public void setLinePosition(float linePosition)
     {
-        if(linePosition < 0 || 1 < linePosition)
-        {
-            throw new IllegalArgumentException("Line position should be between 0 and 1");
-        }
-        this.linePosition = linePosition;
+        this.linePosition = Math.max(0, Math.min(1, linePosition));
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -85,10 +81,10 @@ public class GradientNodeLine {
         Collections.sort(nodes);
         List<GradientNode> gradationNodes = new ArrayList<>(nodes);
 
-        if(gradationNodes.get(0).getPosition() != 0)
+        if(gradationNodes.get(0).getNodePosition() != 0)
             gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0, pi));
 
-        if(gradationNodes.get(gradationNodes.size() - 1).getPosition() != 1)
+        if(gradationNodes.get(gradationNodes.size() - 1).getNodePosition() != 1)
             gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1, pi));
 
         colors= new int[size];
@@ -100,9 +96,9 @@ public class GradientNodeLine {
 
             float[] hsbvals = gradationNodes.get(i).getHsb();
 
-            for (int j = 0; cnt / (float)size < gradationNodes.get(i).getPosition() && cnt < size; j++) {
-                float interval = gradationNodes.get(i).getPosition() - gradationNodes.get(i - 1).getPosition();
-                float ratio = (cnt / (float)size - gradationNodes.get(i - 1).getPosition()) / interval;
+            for (int j = 0; cnt / (float)size < gradationNodes.get(i).getNodePosition() && cnt < size; j++) {
+                float interval = gradationNodes.get(i).getNodePosition() - gradationNodes.get(i - 1).getNodePosition();
+                float ratio = (cnt / (float)size - gradationNodes.get(i - 1).getNodePosition()) / interval;
 
                 if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
                 {
@@ -128,23 +124,47 @@ public class GradientNodeLine {
             pi.paint();
     }
 
-    public void paint(Graphics2D g2d, int width, int height)
+    public void paint(Graphics2D g2d, int width, int height, boolean selected)
     {
-        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        int multiplier = 1;
+        if(selected)
+            multiplier = 2;
+
+        int length = LINE_THICKNESS * multiplier;
+
+        BufferedImage bi = new BufferedImage(length, height, BufferedImage.TYPE_INT_RGB);
         updateColorArray(height);
 
-        for (int i = 0; i < LINE_THICKNESS; i++) {
+        for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                bi.setRGB(i + (int)(linePosition * width) - LINE_THICKNESS / 2, j, colors[j]);
+                bi.setRGB(i, j, colors[j]);
             }
         }
-        selectedNode.paint((Graphics2D) bi.getGraphics(), (int)(linePosition * width), width, height, true);
+        g2d.drawImage(bi, (int)(linePosition * width) - length / 2, 0, length, height, null);
+        selectedNode.paint(g2d, (int)(linePosition * width), height, true);
         for(GradientNode node: nodes)
             if(node != selectedNode)
-                node.paint((Graphics2D) bi.getGraphics(), (int)(linePosition * width), width, height);
-        g2d.drawImage(bi, 0, 0, width, height, null);
+                node.paint(g2d, (int)(linePosition * width), height);
 
+    }
 
+    public boolean contains(MouseEvent event, int width, boolean selected)
+    {
+        int multiplier = 1;
+        if(selected)
+            multiplier = 2;
+
+        int x = event.getX();
+
+        float length = LINE_THICKNESS * multiplier;
+        float position = linePosition * width;
+
+        if(position - length / 2 < x && x < position +  length / 2)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void mouseClicked(MouseEvent e, int width, int height)
@@ -185,16 +205,18 @@ public class GradientNodeLine {
         hold = false;
     }
 
-    public void mouseDragged(MouseEvent e, int width, int height)
+    public boolean mouseDragged(MouseEvent e, int width, int height)
     {
         if(hold)
         {
             int x = e.getX();
             int y = e.getY();
 
-            selectedNode.setPosition(y / (float)height);
+            selectedNode.setNodePosition(y / (float)height);
             pi.paint();
+            return true;
         }
+        return false;
     }
 
     public void action(ActionEvent e, JPanel parent)
@@ -205,10 +227,10 @@ public class GradientNodeLine {
         {
             case ADD_CELL -> {
                 GradientNode newNode;
-                if(selectedNode.getPosition() < 0.9F)
-                    newNode = new GradientNode(selectedNode, selectedNode.getPosition() + 0.05F);
+                if(selectedNode.getNodePosition() < 0.9F)
+                    newNode = new GradientNode(selectedNode, selectedNode.getNodePosition() + 0.05F);
                 else
-                    newNode =new GradientNode(selectedNode, selectedNode.getPosition() - 0.05F);
+                    newNode =new GradientNode(selectedNode, selectedNode.getNodePosition() - 0.05F);
 
                 nodes.add(newNode);
                 selectedNode = newNode;

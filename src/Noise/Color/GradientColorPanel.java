@@ -6,16 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     private BufferedImage bi;
     private PaintInterface pi;
     private boolean hold;
     private final List<GradientNodeLine> gradientLines;
+    private GradientNodeLine selectedLine;
 
     public GradientColorPanel(PaintInterface pi)
     {
@@ -28,6 +27,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
         gradientLines = new ArrayList<>();
         gradientLines.add(new GradientNodeLine(0.2F, this::repaint));
+        selectedLine = gradientLines.get(0);
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -46,7 +46,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
         Graphics2D g2d = (Graphics2D)bi.getGraphics();
         for(GradientNodeLine line: gradientLines)
-            line.paint(g2d, width, height);
+            line.paint(g2d, width, height, line==selectedLine);
         g.drawImage(bi, 0, 0, width, height, null);
     }
 
@@ -65,14 +65,37 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for(GradientNodeLine line: gradientLines)
-            line.mouseClicked(e, this.getWidth(), this.getHeight());
+        int width = this.getWidth();
+        int height = this.getHeight();
+
+        selectedLine.mouseClicked(e, width, height);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int width = this.getWidth();
+        int height = this.getHeight();
+
+        selectedLine.mousePressed(e, width, height);
+
         for(GradientNodeLine line: gradientLines)
-            line.mousePressed(e, this.getWidth(), this.getHeight());
+        {
+            if(line == selectedLine)
+                continue;
+            if(line.contains(e, width, false))
+            {
+                selectedLine = line;
+                hold = true;
+                repaint();
+                return;
+            }
+        }
+        if(selectedLine.contains(e, width, true))
+        {
+            hold = true;
+            return;
+        }
+        hold = false;
     }
 
     @Override
@@ -91,8 +114,18 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        for(GradientNodeLine line: gradientLines)
-            line.mouseDragged(e, this.getWidth(), this.getHeight());
+        int width = this.getWidth();
+        int height = this.getHeight();
+
+        if(!selectedLine.mouseDragged(e, width, height)) {
+            if (hold) {
+                int x = e.getX();
+                int y = e.getY();
+
+                selectedLine.setLinePosition(x / (float) getWidth());
+                repaint();
+            }
+        }
     }
 
     @Override
