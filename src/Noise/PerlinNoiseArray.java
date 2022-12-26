@@ -113,7 +113,7 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
+                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)].getRGB());
             }
         }
 
@@ -201,5 +201,7 @@ public class PerlinNoiseArray {
         Color c = new Color(5, 98, 33);
         Color c1  = valueOf(c.getRGB());
         System.out.println(c1);
+
+        System.out.println(Color.WHITE.getRGB());
     }
 }

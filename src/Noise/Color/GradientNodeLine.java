@@ -13,11 +13,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class GradientNodeLine {
+public class GradientNodeLine  implements Comparable<GradientNodeLine>{
     private float linePosition;
     private final List<GradientNode> nodes;
     private GradientNode selectedNode;
-    private int[] colors;
+    private Color[] colors;
 
     boolean hold;
 
@@ -38,7 +38,7 @@ public class GradientNodeLine {
         selectedNode = nodes.get(0);
 
         // TODO This could cause paint issue
-        updateColorArray(255);
+        updateColorArray(255, true);
         this.pi = pi;
         hold = false;
     }
@@ -46,7 +46,6 @@ public class GradientNodeLine {
     public GradientNodeLine(float linePosition, PaintInterface pi) {
         this(new ArrayList<>(), linePosition, pi);
     }
-
     public float getLinePosition()
     {
         return linePosition;
@@ -63,42 +62,41 @@ public class GradientNodeLine {
         this.pi = pi;
     }
 
-    public int[] getUpdatedColorArray(int size)
+    public Color[] getUpdatedColorArray(int size)
     {
-        updateColorArray(size);
+        updateColorArray(size, true);
         return colors;
     }
 
-    public int[] getColorArray(){
+    public Color[] getColorArray(){
         return colors;
     }
 
-    // TODO private later
-    public  void updateColorArray(int size)
+    public void updateColorArray(int size, boolean update)
     {
-        if(nodes.size() < 2)
-            throw new RuntimeException("Node list cannot be less than 2");
+        if(nodes.size() < 1)
+            throw new RuntimeException("Node list cannot be less than 1");
         Collections.sort(nodes);
-        List<GradientNode> gradationNodes = new ArrayList<>(nodes);
 
-        if(gradationNodes.get(0).getNodePosition() != 0)
-            gradationNodes.add(0, new GradientNode(gradationNodes.get(0).getColor(), 0, pi));
+        colors= new Color[size];
+        for (int i = 0; i < size * nodes.get(0).getNodePosition(); i++) {
+            colors[i] = nodes.get(0).getColor();
+        }
 
-        if(gradationNodes.get(gradationNodes.size() - 1).getNodePosition() != 1)
-            gradationNodes.add(new GradientNode(gradationNodes.get(gradationNodes.size() - 1).getColor(), 1, pi));
+        for (int i = (int)(size * nodes.get(nodes.size() - 1).getNodePosition()); i < size; i++) {
+            colors[i] = nodes.get(nodes.size() - 1).getColor();
+        }
 
-        colors= new int[size];
-        int cnt = 0;
+        int cnt = (int)(size * nodes.get(0).getNodePosition());
 
-        for(int i = 1; i < gradationNodes.size(); i++)
+        for(int i = 1; i < nodes.size(); i++)
         {
-            float[] prehsbvals = gradationNodes.get(i - 1).getHsb();
+            float[] prehsbvals = nodes.get(i - 1).getHsb();
+            float[] hsbvals = nodes.get(i).getHsb();
 
-            float[] hsbvals = gradationNodes.get(i).getHsb();
-
-            for (int j = 0; cnt / (float)size < gradationNodes.get(i).getNodePosition() && cnt < size; j++) {
-                float interval = gradationNodes.get(i).getNodePosition() - gradationNodes.get(i - 1).getNodePosition();
-                float ratio = (cnt / (float)size - gradationNodes.get(i - 1).getNodePosition()) / interval;
+            for (int j = 0; cnt / (float)size < nodes.get(i).getNodePosition() && cnt < size; j++) {
+                float interval = nodes.get(i).getNodePosition() - nodes.get(i - 1).getNodePosition();
+                float ratio = (cnt / (float)size - nodes.get(i - 1).getNodePosition()) / interval;
 
                 if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
                 {
@@ -116,11 +114,11 @@ public class GradientNodeLine {
                 if(newhsvvals[0] > 1)
                     newhsvvals[0] -= 1;
 
-                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]).getRGB();
+                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
             }
         }
 
-        if(pi != null)
+        if(pi != null && update)
             pi.paint();
     }
 
@@ -133,11 +131,10 @@ public class GradientNodeLine {
         int length = LINE_THICKNESS * multiplier;
 
         BufferedImage bi = new BufferedImage(length, height, BufferedImage.TYPE_INT_RGB);
-        updateColorArray(height);
 
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                bi.setRGB(i, j, colors[j]);
+                bi.setRGB(i, j, colors[j].getRGB());
             }
         }
         g2d.drawImage(bi, (int)(linePosition * width) - length / 2, 0, length, height, null);
@@ -145,10 +142,9 @@ public class GradientNodeLine {
         for(GradientNode node: nodes)
             if(node != selectedNode)
                 node.paint(g2d, (int)(linePosition * width), height);
-
     }
 
-    public boolean contains(MouseEvent event, int width, boolean selected)
+    public boolean contains(MouseEvent event, int width, int height, boolean selected)
     {
         int multiplier = 1;
         if(selected)
@@ -162,6 +158,15 @@ public class GradientNodeLine {
         if(position - length / 2 < x && x < position +  length / 2)
         {
             return true;
+        }
+
+        for(GradientNode node: nodes)
+        {
+            if(node.contains(event, linePosition * width, height, node == selectedNode))
+            {
+                selectedNode = node;
+                return true;
+            }
         }
 
         return false;
@@ -317,5 +322,15 @@ public class GradientNodeLine {
                 throw new RuntimeException("Error occurred in color gradient editor");
             }
         }
+    }
+
+    @Override
+    public int compareTo(GradientNodeLine o) {
+        if (linePosition > o.linePosition)
+            return 1;
+        else if (linePosition == o.linePosition)
+            return 0;
+        else
+            return -1;
     }
 }

@@ -54,16 +54,6 @@ public class GradientNode implements Comparable<GradientNode> {
         this.nodePosition = Math.max(0, Math.min(1, nodePosition));
     }
 
-    @Override
-    public int compareTo(GradientNode o) {
-        if (nodePosition > o.nodePosition)
-            return 1;
-        else if (nodePosition == o.nodePosition)
-            return 0;
-        else
-            return -1;
-    }
-
     public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;
@@ -74,7 +64,6 @@ public class GradientNode implements Comparable<GradientNode> {
         int y = event.getY();
 
         float length = BOX_SIZE * multiplier;
-
 
         if((height * nodePosition) - length / 2 < y && y < (height * nodePosition) + length / 2)
         {
@@ -154,6 +143,16 @@ public class GradientNode implements Comparable<GradientNode> {
                 (int) (height * nodePosition) - length / 2,
                 length,
                 length);
+    }
+
+    @Override
+    public int compareTo(GradientNode o) {
+        if (nodePosition > o.nodePosition)
+            return 1;
+        else if (nodePosition == o.nodePosition)
+            return 0;
+        else
+            return -1;
     }
 
     @Override
