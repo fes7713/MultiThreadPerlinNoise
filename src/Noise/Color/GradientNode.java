@@ -66,7 +66,7 @@ public class GradientNode implements Comparable<GradientNode> {
             return -1;
     }
 
-    public boolean contains(MouseEvent event, float centerX, float width, float height, boolean selected)
+    public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;
         if(selected)
@@ -79,7 +79,7 @@ public class GradientNode implements Comparable<GradientNode> {
 
         if((height * position) - length / 2 < y && y < (height * position) + length / 2)
         {
-            if(centerX + width / 2 - length / 2 < x && x < centerX + width / 2 + length / 2)
+            if(centerX - length / 2 < x && x < centerX + length / 2)
             {
                 return true;
             }
@@ -87,9 +87,9 @@ public class GradientNode implements Comparable<GradientNode> {
         return false;
     }
 
-    public boolean mouseEvent(MouseEvent event, float centerX, int width, int height, boolean selected)
+    public boolean mouseEvent(MouseEvent event, float centerX, int height, boolean selected)
     {
-       if(contains(event, centerX, width, height, selected))
+       if(contains(event, centerX, height, selected))
        {
            showColorPalette(event.getXOnScreen() + 20, event.getYOnScreen() - 20);
            return true;

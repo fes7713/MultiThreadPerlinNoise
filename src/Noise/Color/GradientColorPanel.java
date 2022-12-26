@@ -27,7 +27,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         addMouseMotionListener(this);
 
         gradientLines = new ArrayList<>();
-        gradientLines.add(new GradientNodeLine(0, this::repaint));
+        gradientLines.add(new GradientNodeLine(0.5F, this::repaint));
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -46,7 +46,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
         Graphics2D g2d = (Graphics2D)bi.getGraphics();
         for(GradientNodeLine line: gradientLines)
-            line.paint(g2d, width / 2, 0, width / 2, height);
+            line.paint(g2d, width, height);
         g.drawImage(bi, 0, 0, width, height, null);
     }
 

@@ -27,6 +27,11 @@ public class GradientNodeLine {
 
     public GradientNodeLine(List<GradientNode> nodes, float linePosition, PaintInterface pi) {
         this.nodes = nodes;
+
+        /*/
+        This is position of gradient line. Ratio to the available width;
+        This field should be between 0 and 1;
+         */
         this.linePosition = linePosition;
         nodes.add(new GradientNode(Color.WHITE, 0F, pi));
         nodes.add(new GradientNode(Color.BLACK, 1F, pi));
@@ -40,6 +45,20 @@ public class GradientNodeLine {
 
     public GradientNodeLine(float linePosition, PaintInterface pi) {
         this(new ArrayList<>(), linePosition, pi);
+    }
+
+    public float getLinePosition()
+    {
+        return linePosition;
+    }
+
+    public void setLinePosition(float linePosition)
+    {
+        if(linePosition < 0 || 1 < linePosition)
+        {
+            throw new IllegalArgumentException("Line position should be between 0 and 1");
+        }
+        this.linePosition = linePosition;
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -109,7 +128,7 @@ public class GradientNodeLine {
             pi.paint();
     }
 
-    public void paint(Graphics2D g2d, int left, int top,  int width, int height)
+    public void paint(Graphics2D g2d, int width, int height)
     {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         updateColorArray(height);
@@ -123,7 +142,7 @@ public class GradientNodeLine {
         for(GradientNode node: nodes)
             if(node != selectedNode)
                 node.paint((Graphics2D) bi.getGraphics(), 0, width, height);
-        g2d.drawImage(bi, left, top, width, height, null);
+        g2d.drawImage(bi, 0, 0, width, height, null);
 
 
     }
@@ -134,7 +153,7 @@ public class GradientNodeLine {
         {
             for(GradientNode node: nodes)
             {
-                if(node.mouseEvent(e, width / 2, width/2, height, node == selectedNode))
+                if(node.mouseEvent(e, linePosition * width, height, node == selectedNode))
                 {
                     selectedNode = node;
                     return;
@@ -149,7 +168,7 @@ public class GradientNodeLine {
         {
             if(node == selectedNode)
                 continue;
-            if(node.contains(e, width / 2, width / 2, height, false))
+            if(node.contains(e, linePosition * width, height, false))
             {
                 selectedNode = node;
                 hold = true;
@@ -158,7 +177,7 @@ public class GradientNodeLine {
 
             }
         }
-        if(selectedNode.contains(e, width / 2, width / 2, height, true))
+        if(selectedNode.contains(e, linePosition * width, height, true))
         {
             hold = true;
             return;
