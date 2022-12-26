@@ -66,39 +66,30 @@ public class GradientNode implements Comparable<GradientNode> {
             return -1;
     }
 
-    public boolean contains(MouseEvent event, int width, int height, boolean selected)
+    public boolean contains(MouseEvent event, float centerX, float width, float height, boolean selected)
     {
         int multiplier = 1;
         if(selected)
             multiplier = 2;
+
         int x = event.getX();
         int y = event.getY();
 
-        if(width > height) {
-            // x cord check
-            if ((int) (width * position) - BOX_SIZE * multiplier / 2 < x && x < (int) (width * position) + BOX_SIZE * multiplier / 2) {
-                // y cord check
-                if(y > height - BOX_SIZE * multiplier)
-                {
-                    return true;
-                }
-            }
-        }
-        else{
-            if((int) (height * position) - BOX_SIZE * multiplier / 2 < y && y < (int) (height * position) + BOX_SIZE * multiplier / 2)
+        float length = BOX_SIZE * multiplier;
+
+        if((height * position) - length / 2 < y && y < (height * position) + length / 2)
+        {
+            if(centerX + width / 2 - length / 2 < x && x < centerX + width / 2 + length / 2)
             {
-                if(width - BOX_SIZE * multiplier < x)
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
     }
 
-    public boolean mouseEvent(MouseEvent event, int width, int height, boolean selected)
+    public boolean mouseEvent(MouseEvent event, float centerX, int width, int height, boolean selected)
     {
-       if(contains(event, width, height, selected))
+       if(contains(event, centerX, width, height, selected))
        {
            showColorPalette(event.getXOnScreen() + 20, event.getYOnScreen() - 20);
            return true;
@@ -135,55 +126,35 @@ public class GradientNode implements Comparable<GradientNode> {
         dialog.setVisible(true);
     }
 
-    public void paint(Graphics2D g2d, int width, int height)
+    public void paint(Graphics2D g2d, int left, int width, int height)
     {
-        paint(g2d, width, height, false);
+        paint(g2d, left, width, height, false);
     }
 
-    public void paint(Graphics2D g2d, int width, int height, boolean selected)
+    public void paint(Graphics2D g2d, int left, int width, int height, boolean selected)
     {
-        g2d.setColor(color);
-
         int multiplier = 1;
         if(selected)
             multiplier = 2;
 
-        if(width > height)
-        {
-            g2d.fillRect(
-                    (int)(width * position) - BOX_SIZE * multiplier / 2,
-                    height - BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier);
-            if(hsb[2] * (1.25 - hsb[1]) > 1)
-                g2d.setColor(color.darker().darker());
-            else
-                g2d.setColor(Color.WHITE);
-            g2d.drawLine((int)(width * position), 0, (int)(width * position), height - BOX_SIZE * multiplier);
-            g2d.drawRect(
-                    (int)(width * position) - BOX_SIZE * multiplier / 2,
-                    height - BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier);
-        }
+        int length = BOX_SIZE * multiplier;
 
-        else {
-            g2d.fillRect(
-                    width - BOX_SIZE * multiplier,
-                    (int) (height * position) - BOX_SIZE * multiplier / 2,
-                    BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier);
-            if(hsb[2] * (1.25 - hsb[1]) > 1)
-                g2d.setColor(color.darker().darker());
-            else
-                g2d.setColor(Color.WHITE);
-            g2d.drawLine(0, (int) (height * position), width - BOX_SIZE * multiplier, (int) (height * position));
-            g2d.drawRect(
-                    width - BOX_SIZE * multiplier,
-                    (int) (height * position) - BOX_SIZE * multiplier / 2,
-                    BOX_SIZE * multiplier,
-                    BOX_SIZE * multiplier);
-        }
+        g2d.setColor(color);
+        g2d.fillRect(
+                left + width / 2 - length / 2,
+                (int) (height * position) - length / 2,
+                length,
+                length);
+
+        if(hsb[2] * (1.25 - hsb[1]) > 1)
+            g2d.setColor(color.darker().darker());
+        else
+            g2d.setColor(Color.WHITE);
+        g2d.drawRect(
+                width / 2 - length / 2,
+                (int) (height * position) - length / 2,
+                length,
+                length);
     }
 
     @Override

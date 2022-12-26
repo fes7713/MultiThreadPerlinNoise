@@ -1,8 +1,10 @@
 package Noise.Color;
 
 public enum ColorEditorAction {
-    ADD,
-    REMOVE,
+    ADD_CELL,
+    ADD_ROW,
+    DEL_CELL,
+    DEL_ROW,
     SAVE,
     LOAD
 }

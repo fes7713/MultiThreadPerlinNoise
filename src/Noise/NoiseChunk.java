@@ -117,12 +117,12 @@ public class NoiseChunk implements NoiseChunkInterface{
                 (chunkX + chunkShiftX) * width + pixelShiftX,
                 (chunkY + chunkShiftY) * height + pixelShiftY, null
         );
-        g2d.drawRect(
-                (chunkX + chunkShiftX) * width + pixelShiftX,
-                (chunkY + chunkShiftY) * height + pixelShiftY,
-                width,
-                height
-        );
+//        g2d.drawRect(
+//                (chunkX + chunkShiftX) * width + pixelShiftX,
+//                (chunkY + chunkShiftY) * height + pixelShiftY,
+//                width,
+//                height
+//        );
     }
 
     @Override

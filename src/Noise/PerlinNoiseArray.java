@@ -122,12 +122,24 @@ public class PerlinNoiseArray {
             for(int j = 0; j < height - 1; j++)
             {
                 Color color = valueOf(bi.getRGB(i, j));
-                float light = lightIntensityFromPoints(i, j, convertNoise(noiseMap[i][j]), i + 1, j, convertNoise(noiseMap[i + 1][j]), i, j + 1, convertNoise(noiseMap[i][j + 1]), new Vector3f(0, -1, -1));
+                float light = 1000 * (1 +lightIntensity(
+                                zoom, 0, convertNoise(noiseMap[i + 1][j]) - convertNoise(noiseMap[i][j]),
+                                0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
+                                                new Vector3f(0, -1, -1)));
 
 
-//                if(light < 0)
-//                    color = color.darker();
+                if(light > 6)
+                    color = color.brighter();
+                if(light > 4)
+                    color = color.brighter();
+
+
+
                 if(light < -1)
+                    color = color.darker();
+                if(light < -2)
+                    color = color.darker();
+                if(light < -3)
                     color = color.darker();
                 bi.setRGB(i, j, color.getRGB());
             }
@@ -168,24 +180,23 @@ public class PerlinNoiseArray {
         float c2 = a3 * b1 - a1 * b3;
         float c3 = a1 * b2 - a2 * b1;
 
-        return c1 * light.x + c2 * light.y + c3 * light.z;
+        return (c1 * light.x + c2 * light.y + c3 * light.z) / (float)Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3);
     }
 
     public static void main(String[] args)
     {
         Vector3f v1 = new Vector3f(0, 0, 0);
-        Vector3f v2 = new Vector3f(1, 0, 1);
-        Vector3f v3 = new Vector3f(0, 1, 1);
-        Vector3f v4 = new Vector3f(1, 1, 3);
+        Vector3f v2 = new Vector3f(1, 0, 0.005F);
+        Vector3f v3 = new Vector3f(0, 1, 0.01F);
 
-        Vector3f light = new Vector3f(0, -1, 0);
+        Vector3f light = new Vector3f(0, -1, -1);
 
         System.out.println(lightIntensity(v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
 
         Vector3f v5 = new Vector3f();
         v5.cross(v2, v3);
         System.out.println(v5.dot(light));
-        System.out.println(lightIntensityFromPoints(0, 0, 0, 1, 0, 1, 0, 1, 1, light));
+        System.out.println(lightIntensityFromPoints(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
 
         Color c = new Color(5, 98, 33);
         Color c1  = valueOf(c.getRGB());
