@@ -126,12 +126,12 @@ public class GradientNode implements Comparable<GradientNode> {
         dialog.setVisible(true);
     }
 
-    public void paint(Graphics2D g2d, int left, int width, int height)
+    public void paint(Graphics2D g2d, int centerX, int width, int height)
     {
-        paint(g2d, left, width, height, false);
+        paint(g2d, centerX, width, height, false);
     }
 
-    public void paint(Graphics2D g2d, int left, int width, int height, boolean selected)
+    public void paint(Graphics2D g2d, int centerX, int width, int height, boolean selected)
     {
         int multiplier = 1;
         if(selected)
@@ -141,7 +141,7 @@ public class GradientNode implements Comparable<GradientNode> {
 
         g2d.setColor(color);
         g2d.fillRect(
-                left + width / 2 - length / 2,
+                centerX - length / 2,
                 (int) (height * position) - length / 2,
                 length,
                 length);
@@ -151,7 +151,7 @@ public class GradientNode implements Comparable<GradientNode> {
         else
             g2d.setColor(Color.WHITE);
         g2d.drawRect(
-                width / 2 - length / 2,
+                centerX - length / 2,
                 (int) (height * position) - length / 2,
                 length,
                 length);

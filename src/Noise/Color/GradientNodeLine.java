@@ -135,13 +135,13 @@ public class GradientNodeLine {
 
         for (int i = 0; i < LINE_THICKNESS; i++) {
             for (int j = 0; j < height; j++) {
-                bi.setRGB(i + width / 2 - LINE_THICKNESS / 2, j, colors[j]);
+                bi.setRGB(i + (int)(linePosition * width) - LINE_THICKNESS / 2, j, colors[j]);
             }
         }
-        selectedNode.paint((Graphics2D) bi.getGraphics(), 0, width, height, true);
+        selectedNode.paint((Graphics2D) bi.getGraphics(), (int)(linePosition * width), width, height, true);
         for(GradientNode node: nodes)
             if(node != selectedNode)
-                node.paint((Graphics2D) bi.getGraphics(), 0, width, height);
+                node.paint((Graphics2D) bi.getGraphics(), (int)(linePosition * width), width, height);
         g2d.drawImage(bi, 0, 0, width, height, null);
 
 

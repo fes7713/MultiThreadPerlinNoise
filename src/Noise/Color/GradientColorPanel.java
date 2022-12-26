@@ -27,7 +27,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         addMouseMotionListener(this);
 
         gradientLines = new ArrayList<>();
-        gradientLines.add(new GradientNodeLine(0.5F, this::repaint));
+        gradientLines.add(new GradientNodeLine(0.2F, this::repaint));
     }
 
     public void setPaintInterface(PaintInterface pi)
