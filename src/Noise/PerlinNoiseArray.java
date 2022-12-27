@@ -109,40 +109,27 @@ public class PerlinNoiseArray {
 
     public void updateImage(PaintInterface pi)
     {
-        for(int i = 0; i < width; i++)
-        {
-            for(int j = 0; j < height; j++)
-            {
-                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)].getRGB());
-            }
-        }
-
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-                Color color = valueOf(bi.getRGB(i, j));
-                float light = 1000 * (1 +lightIntensity(
-                                zoom, 0, convertNoise(noiseMap[i + 1][j]) - convertNoise(noiseMap[i][j]),
-                                0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
-                                                new Vector3f(0, -1, -1)));
+                float light = 150 * (2 + lightIntensity(
+                        zoom, 0, convertNoise(noiseMap[i + 1][j]) - convertNoise(noiseMap[i][j]),
+                        0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
+                        new Vector3f(0, -1, -1)));
 
-
-                if(light > 6)
-                    color = color.brighter();
-                if(light > 4)
-                    color = color.brighter();
-
-
-
-                if(light < -1)
-                    color = color.darker();
-                if(light < -2)
-                    color = color.darker();
-                if(light < -3)
-                    color = color.darker();
-                bi.setRGB(i, j, color.getRGB());
+                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)][127]);
             }
+        }
+
+        for(int i = 0; i < width; i++)
+        {
+            bi.setRGB(i, height - 1, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)][127]);
+        }
+
+        for(int i = 0; i < height; i++)
+        {
+            bi.setRGB(height - 1, i, ColorProvider.COLORS[(int)(convertNoise(noiseMap[height - 1][i]) * ColorProvider.COLORS.length)][127]);
         }
 
         if(pi != null)

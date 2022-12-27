@@ -52,11 +52,6 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         frame.setVisible(true);
     }
 
-    public Color[] getColors()
-    {
-        return colorPanel.getColorArray();
-    }
-
     @Override
     public void componentResized(ComponentEvent e) {
         System.out.println("Resize");
@@ -101,9 +96,9 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
 
     }
 
-    public Color[] getUpdatedColorArray(int size)
+    public int[][] getUpdatedColorArray(int size)
     {
-        return colorPanel.getUpdatedColorArray(size);
+        return colorPanel.getUpdatedColor2DArray(size, size);
     }
 
     public static void main(String[] argv)

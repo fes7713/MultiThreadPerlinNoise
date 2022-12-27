@@ -139,19 +139,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             repaint();
     }
 
-    public Color[] getUpdatedColorArray(int size)
-    {
-        // TODO delete this later
-        // TODO fix get 0
-
-        return lines.get(0).getUpdatedColorArray(size);
-    }
-    public Color[] getColorArray(){
-        // TODO delete this later
-        // TODO fix get 0
-        return lines.get(0).getColorArray();
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         int width = this.getWidth();

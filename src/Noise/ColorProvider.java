@@ -7,7 +7,7 @@ import java.awt.*;
 public class ColorProvider {
     private static final ColorProvider provider = new ColorProvider();
 
-    public static Color[] COLORS;
+    public static int[][] COLORS;
     private static GradientColorEditorPanel editor;
 
     PaintInterface pi;
@@ -23,7 +23,7 @@ public class ColorProvider {
     }
     public static ColorProvider getInstance(PaintInterface pi){
         provider.setPaintInterface(() -> {
-            COLORS = editor.getColors();
+            COLORS = editor.getUpdatedColorArray(255);
             pi.paint();
         });
         return provider;
@@ -33,7 +33,7 @@ public class ColorProvider {
     {
         this.pi = pi;
         editor.setPaintInterface(() -> {
-            COLORS = editor.getColors();
+            COLORS = editor.getUpdatedColorArray(255);
             pi.paint();
         });
     }
