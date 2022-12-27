@@ -149,7 +149,7 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
                 node.paint(g2d, (int)(position * width), height);
     }
 
-    public boolean contains(MouseEvent event, int width, int height, boolean selected)
+    public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;
         if(selected)
@@ -158,16 +158,15 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         int x = event.getX();
 
         float length = LINE_THICKNESS * multiplier;
-        float pos = position * width;
 
-        if(pos - length / 2 < x && x < pos +  length / 2)
+        if(centerX - length / 2 < x && x < centerX +  length / 2)
         {
             return true;
         }
 
         for(GradientNode node: nodes)
         {
-            if(node.contains(event, position * width, height, node == selectedNode))
+            if(node.contains(event, centerX, height, node == selectedNode))
             {
                 selectedNode = node;
                 return true;
@@ -229,7 +228,7 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         return false;
     }
 
-    public void action(ActionEvent e, JPanel parent)
+    public void action(ActionEvent e)
     {
         System.out.println(e.getActionCommand());
 
@@ -242,72 +241,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
             case DEL_CELL -> {
                 selectedNode = GradientInterface.deleteComponent(nodes, selectedNode);
                 pi.paint();
-            }
-            case LOAD -> {
-                try{
-                    File[] files= new File("presets").listFiles();
-
-                    String[] values = new String[files.length];
-                    IntStream.range(0, values.length).forEach(i -> {
-                        values[i] = files[i].getName();
-                    });
-
-                    Object value = JOptionPane.showInputDialog(parent, "Message",
-                            "Load presets", JOptionPane.ERROR_MESSAGE,
-                            new ImageIcon("icons/preset1.png"), values, values[0]);
-
-                    if(value == null)
-                        return;
-
-                    List<GradientNode> inputNodes = new ArrayList<>();
-                    BufferedReader inputReader = new BufferedReader(new FileReader("presets/" + value));
-
-                    inputReader.lines().forEach(line -> {
-                        GradientNode node = GradientNode.fromString(line, pi);
-                        inputNodes.add(node);
-                    });
-
-                    inputReader.close();
-
-                    if(inputNodes.size() < 2)
-                        return;
-
-                    nodes.clear();
-                    nodes.addAll(inputNodes);
-                    selectedNode = inputNodes.get(0);
-                    pi.paint();
-
-                }catch(IOException ie)
-                {
-                    ie.printStackTrace();
-                }
-            }
-            case SAVE -> {
-                String filename = (String)JOptionPane.showInputDialog(
-                        parent,
-                        "Enter preset file name",
-                        "Preset save form",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        "");
-                if(filename == null)
-                    return;
-                try{
-                    BufferedWriter outputWriter = new BufferedWriter(new FileWriter("presets/" + filename + ".txt"));
-                    for(GradientNode node: nodes)
-                    {
-                        outputWriter.write(node.toString());
-                        outputWriter.newLine();
-                    }
-
-                    outputWriter.flush();
-                    outputWriter.close();
-                }catch(IOException ie)
-                {
-                    ie.printStackTrace();
-                }
-
             }
             default -> {
                 throw new RuntimeException("Error occurred in color gradient editor");

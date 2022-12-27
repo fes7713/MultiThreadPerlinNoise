@@ -1,11 +1,16 @@
 package Noise;
 
+import Noise.Color.GradientNodeLine;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.stream.Stream;
 import javax.vecmath.Vector3f;
 
 
@@ -172,23 +177,50 @@ public class PerlinNoiseArray {
 
     public static void main(String[] args)
     {
-        Vector3f v1 = new Vector3f(0, 0, 0);
-        Vector3f v2 = new Vector3f(1, 0, 0.005F);
-        Vector3f v3 = new Vector3f(0, 1, 0.01F);
+//        Vector3f v1 = new Vector3f(0, 0, 0);
+//        Vector3f v2 = new Vector3f(1, 0, 0.005F);
+//        Vector3f v3 = new Vector3f(0, 1, 0.01F);
+//
+//        Vector3f light = new Vector3f(0, -1, -1);
+//
+//        System.out.println(lightIntensity(v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
+//
+//        Vector3f v5 = new Vector3f();
+//        v5.cross(v2, v3);
+//        System.out.println(v5.dot(light));
+//        System.out.println(lightIntensityFromPoints(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
+//
+//        Color c = new Color(5, 98, 33);
+//        Color c1  = valueOf(c.getRGB());
+//        System.out.println(c1);
+//
+//        System.out.println(Color.WHITE.getRGB());
+        FastNoise fn = new FastNoise();
+        fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
+        fn.SetInterp(FastNoise.Interp.Quintic);
+        PerlinNoiseArray noiseArray = new PerlinNoiseArray(fn, 0, 0, 1, 500, 1);
+        noiseArray.initNoiseMap();
 
-        Vector3f light = new Vector3f(0, -1, -1);
+        for (int i = 1; i < 8; i++) {
+            noiseArray.increaseResolution((int)Math.pow(2, i));
+        }
 
-        System.out.println(lightIntensity(v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < noiseArray.noiseMap[0].length; i++) {
+            sb.append(noiseArray.noiseMap[0][i]);
+            sb.append("\n");
+        }
 
-        Vector3f v5 = new Vector3f();
-        v5.cross(v2, v3);
-        System.out.println(v5.dot(light));
-        System.out.println(lightIntensityFromPoints(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
+        try {
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("data.csv"));
+            outputWriter.write(sb.toString());
+            outputWriter.flush();
+            outputWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Color c = new Color(5, 98, 33);
-        Color c1  = valueOf(c.getRGB());
-        System.out.println(c1);
 
-        System.out.println(Color.WHITE.getRGB());
+
     }
 }

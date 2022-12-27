@@ -1,10 +1,16 @@
 package Noise.Color;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-public interface GradientInterface{
+public interface  GradientInterface{
     void setPosition(float position);
     float getPosition();
+    boolean contains(MouseEvent event, float centerX, float height, boolean selected);
+    void paint(Graphics2D g2d, int width, int height, boolean selected);
+    String toString();
+
 
     static <E extends GradientInterface> E deleteComponent(List<E> list, E targetComponent)
     {

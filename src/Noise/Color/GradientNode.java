@@ -55,6 +55,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
     {
         this.pi = pi;
     }
+
     public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;

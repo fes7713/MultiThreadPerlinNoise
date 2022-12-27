@@ -170,7 +170,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         {
             if(line == selectedLine)
                 continue;
-            if(line.contains(e, width, height, false))
+            if(line.contains(e, line.getPosition() * width, height, false))
             {
                 selectedLine = line;
                 selectedLine.mousePressed(e, width, height);
@@ -179,7 +179,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 return;
             }
         }
-        if(selectedLine.contains(e, width, height, true))
+        if(selectedLine.contains(e, selectedLine.getPosition() * width, height, true))
         {
             hold = true;
             return;
@@ -211,14 +211,14 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         switch (action)
         {
             case ADD_CELL -> {
-                selectedLine.action(e, this);
+                selectedLine.action(e);
             }
             case ADD_ROW -> {
                 selectedLine = GradientInterface.addComponent(lines, selectedLine.clone(), selectedLine);
                 cui.update();
             }
             case DEL_CELL -> {
-                selectedLine.action(e, this);
+                selectedLine.action(e);
             }
             case DEL_ROW -> {
                 selectedLine = GradientInterface.deleteComponent(lines, selectedLine);
