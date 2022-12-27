@@ -42,7 +42,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
 
         selectedNode = nodes.get(0);
 
-        // TODO This could cause paint issue
         updateColorArray(255, true);
         this.pi = pi;
         hold = false;
@@ -149,6 +148,18 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
                 node.paint(g2d, (int)(position * width), height);
     }
 
+    @Override
+    public void brighter() {
+        for(GradientNode node: nodes)
+            node.brighter();
+    }
+
+    @Override
+    public void darker() {
+        for(GradientNode node: nodes)
+            node.darker();
+    }
+
     public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;
@@ -228,14 +239,14 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         return false;
     }
 
-    public void action(ActionEvent e)
+    public void action(ActionEvent e, Component parent)
     {
         System.out.println(e.getActionCommand());
 
         switch (ColorEditorAction.valueOf(e.getActionCommand()))
         {
             case ADD_CELL -> {
-                selectedNode = GradientInterface.addComponent(nodes, selectedNode.clone(), selectedNode);
+                selectedNode = GradientInterface.addComponent(parent, nodes, selectedNode.clone(), selectedNode);
                 pi.paint();
             }
             case DEL_CELL -> {

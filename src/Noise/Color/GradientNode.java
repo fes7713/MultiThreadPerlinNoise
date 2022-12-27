@@ -56,6 +56,16 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
         this.pi = pi;
     }
 
+    @Override
+    public void brighter() {
+        setColor(color.brighter());
+    }
+
+    @Override
+    public void darker() {
+        setColor(color.darker());
+    }
+
     public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;
@@ -149,12 +159,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
 
     @Override
     public int compareTo(GradientNode o) {
-        if (position > o.position)
-            return 1;
-        else if (position == o.position)
-            return 0;
-        else
-            return -1;
+        return Float.compare(position, o.position);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Noise.Color;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -9,6 +10,8 @@ public interface  GradientInterface{
     float getPosition();
     boolean contains(MouseEvent event, float centerX, float height, boolean selected);
     void paint(Graphics2D g2d, int width, int height, boolean selected);
+    void brighter();
+    void darker();
     String toString();
 
 
@@ -24,8 +27,27 @@ public interface  GradientInterface{
             return list.get(0);
     }
 
-    static <E extends GradientInterface> E addComponent(List<E> list, E newComponent, E targetComponent)
+    static <E extends GradientInterface> E addComponent(Component parent, List<E> list, E newComponent, E targetComponent)
     {
+        String selectvalues[] = {"Same", "Brighter", "Darker", "Cancel"};
+
+        int select = JOptionPane.showOptionDialog(parent,
+                "Select add color option",
+                "Add options",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                selectvalues,
+                selectvalues[0]
+        );
+
+        if(select == 3)
+            return targetComponent;
+        else if(select == 1)
+            newComponent.brighter();
+        else if(select == 2)
+            newComponent.darker();
+
         if(newComponent.getPosition() < 0.9F)
             newComponent.setPosition(targetComponent.getPosition() + 0.05F);
         else

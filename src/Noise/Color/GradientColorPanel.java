@@ -211,14 +211,14 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         switch (action)
         {
             case ADD_CELL -> {
-                selectedLine.action(e);
+                selectedLine.action(e, this);
             }
             case ADD_ROW -> {
-                selectedLine = GradientInterface.addComponent(lines, selectedLine.clone(), selectedLine);
+                selectedLine = GradientInterface.addComponent(this, lines, selectedLine.clone(), selectedLine);
                 cui.update();
             }
             case DEL_CELL -> {
-                selectedLine.action(e);
+                selectedLine.action(e, this);
             }
             case DEL_ROW -> {
                 selectedLine = GradientInterface.deleteComponent(lines, selectedLine);

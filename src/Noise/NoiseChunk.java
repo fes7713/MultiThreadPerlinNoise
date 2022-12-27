@@ -91,13 +91,14 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 array.initNoiseMap();
                 Thread.yield();
-                for (int i = 1; i < 8; i++) {
+                for (int i = 1; i < 16; i++) {
                     if(Thread.interrupted())
                     {
                         return;
                     }
                     array.updateImage(pi);
                     array.increaseResolution((int)Math.pow(2, i));
+                    array.generateNormalMap();
                     Thread.yield();
                 }
                 array.updateImage(pi);
