@@ -104,7 +104,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
             if(hsbvals[1]== 0)
                 hsbvals[0] = prehsbvals[0];
 
-
             for (int j = 0; cnt / (float)size < nodes.get(i).getPosition() && cnt < size; j++) {
                 float[] newhsvvals = GradientInterface.interpolateColor(
                         size,

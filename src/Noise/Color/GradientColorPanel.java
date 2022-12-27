@@ -128,6 +128,11 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 Color.RGBtoHSB(tempArray2D[i - 1][p].getRed(), tempArray2D[i - 1][p].getGreen(), tempArray2D[i - 1][p].getBlue(), prehsbvals);
                 Color.RGBtoHSB(tempArray2D[i][p].getRed(), tempArray2D[i][p].getGreen(), tempArray2D[i][p].getBlue(), hsbvals);
 
+                if(prehsbvals[1]== 0)
+                    prehsbvals[0] = hsbvals[0];
+                if(hsbvals[1]== 0)
+                    hsbvals[0] = prehsbvals[0];
+
                 for (int j = 0; cnt / (float) width < lines.get(i).getPosition() && cnt < width; j++) {
                     float[] newhsvvals = GradientInterface.interpolateColor(
                             width,
