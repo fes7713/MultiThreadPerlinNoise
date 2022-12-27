@@ -13,26 +13,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class GradientNodeLine  implements Comparable<GradientNodeLine>{
-    private float linePosition;
-    private final List<GradientNode> nodes;
+public class GradientNodeLine  implements GradientInterface, Comparable<GradientNodeLine>, Cloneable{
+    private float position;
+    private List<GradientNode> nodes;
     private GradientNode selectedNode;
     private Color[] colors;
 
-    boolean hold;
+    private boolean hold;
 
-    PaintInterface pi;
+    private PaintInterface pi;
 
-    private static int LINE_THICKNESS = 10;
+    private static final int LINE_THICKNESS = 10;
 
-    public GradientNodeLine(List<GradientNode> nodes, float linePosition, PaintInterface pi) {
+    public GradientNodeLine(List<GradientNode> nodes, float position, PaintInterface pi) {
         this.nodes = nodes;
 
         /*/
         This is position of gradient line. Ratio to the available width;
         This field should be between 0 and 1;
          */
-        this.linePosition = linePosition;
+        this.position = position;
         nodes.add(new GradientNode(Color.WHITE, 0F, pi));
         nodes.add(new GradientNode(Color.BLACK, 1F, pi));
         selectedNode = nodes.get(0);
@@ -43,17 +43,18 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         hold = false;
     }
 
-    public GradientNodeLine(float linePosition, PaintInterface pi) {
-        this(new ArrayList<>(), linePosition, pi);
-    }
-    public float getLinePosition()
-    {
-        return linePosition;
+    public GradientNodeLine(float position, PaintInterface pi) {
+        this(new ArrayList<>(), position, pi);
     }
 
-    public void setLinePosition(float linePosition)
+    public float getPosition()
     {
-        this.linePosition = Math.max(0, Math.min(1, linePosition));
+        return position;
+    }
+
+    public void setPosition(float position)
+    {
+        this.position = Math.max(0, Math.min(1, position));
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -83,24 +84,24 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         Collections.sort(nodes);
 
         colors= new Color[size];
-        for (int i = 0; i < size * nodes.get(0).getNodePosition(); i++) {
+        for (int i = 0; i < size * nodes.get(0).getPosition(); i++) {
             colors[i] = nodes.get(0).getColor();
         }
 
-        for (int i = (int)(size * nodes.get(nodes.size() - 1).getNodePosition()); i < size; i++) {
+        for (int i = (int)(size * nodes.get(nodes.size() - 1).getPosition()); i < size; i++) {
             colors[i] = nodes.get(nodes.size() - 1).getColor();
         }
 
-        int cnt = (int)(size * nodes.get(0).getNodePosition());
+        int cnt = (int)(size * nodes.get(0).getPosition());
 
         for(int i = 1; i < nodes.size(); i++)
         {
             float[] prehsbvals = nodes.get(i - 1).getHsb();
             float[] hsbvals = nodes.get(i).getHsb();
 
-            for (int j = 0; cnt / (float)size < nodes.get(i).getNodePosition() && cnt < size; j++) {
-                float interval = nodes.get(i).getNodePosition() - nodes.get(i - 1).getNodePosition();
-                float ratio = (cnt / (float)size - nodes.get(i - 1).getNodePosition()) / interval;
+            for (int j = 0; cnt / (float)size < nodes.get(i).getPosition() && cnt < size; j++) {
+                float interval = nodes.get(i).getPosition() - nodes.get(i - 1).getPosition();
+                float ratio = (cnt / (float)size - nodes.get(i - 1).getPosition()) / interval;
 
                 if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
                 {
@@ -141,11 +142,11 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
                 bi.setRGB(i, j, colors[j].getRGB());
             }
         }
-        g2d.drawImage(bi, (int)(linePosition * width) - length / 2, 0, length, height, null);
-        selectedNode.paint(g2d, (int)(linePosition * width), height, true);
+        g2d.drawImage(bi, (int)(position * width) - length / 2, 0, length, height, null);
+        selectedNode.paint(g2d, (int)(position * width), height, true);
         for(GradientNode node: nodes)
             if(node != selectedNode)
-                node.paint(g2d, (int)(linePosition * width), height);
+                node.paint(g2d, (int)(position * width), height);
     }
 
     public boolean contains(MouseEvent event, int width, int height, boolean selected)
@@ -157,16 +158,16 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         int x = event.getX();
 
         float length = LINE_THICKNESS * multiplier;
-        float position = linePosition * width;
+        float pos = position * width;
 
-        if(position - length / 2 < x && x < position +  length / 2)
+        if(pos - length / 2 < x && x < pos +  length / 2)
         {
             return true;
         }
 
         for(GradientNode node: nodes)
         {
-            if(node.contains(event, linePosition * width, height, node == selectedNode))
+            if(node.contains(event, position * width, height, node == selectedNode))
             {
                 selectedNode = node;
                 return true;
@@ -182,7 +183,7 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         {
             for(GradientNode node: nodes)
             {
-                if(node.mouseEvent(e, linePosition * width, height, node == selectedNode))
+                if(node.mouseEvent(e, position * width, height, node == selectedNode))
                 {
                     selectedNode = node;
                     return;
@@ -197,7 +198,7 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         {
             if(node == selectedNode)
                 continue;
-            if(node.contains(e, linePosition * width, height, false))
+            if(node.contains(e, position * width, height, false))
             {
                 selectedNode = node;
                 hold = true;
@@ -206,7 +207,7 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
 
             }
         }
-        if(selectedNode.contains(e, linePosition * width, height, true))
+        if(selectedNode.contains(e, position * width, height, true))
         {
             hold = true;
             return;
@@ -221,7 +222,7 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
             int x = e.getX();
             int y = e.getY();
 
-            selectedNode.setNodePosition(y / (float)height);
+            selectedNode.setPosition(y / (float)height);
             pi.paint();
             return true;
         }
@@ -235,25 +236,18 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
         switch (ColorEditorAction.valueOf(e.getActionCommand()))
         {
             case ADD_CELL -> {
-                GradientNode newNode;
-                if(selectedNode.getNodePosition() < 0.9F)
-                    newNode = new GradientNode(selectedNode, selectedNode.getNodePosition() + 0.05F);
+                GradientNode newNode = selectedNode.clone();
+                if(selectedNode.getPosition() < 0.9F)
+                    newNode.setPosition(selectedNode.getPosition() + 0.05F);
                 else
-                    newNode =new GradientNode(selectedNode, selectedNode.getNodePosition() - 0.05F);
+                    newNode.setPosition(selectedNode.getPosition() - 0.05F);
 
                 nodes.add(newNode);
                 selectedNode = newNode;
                 pi.paint();
             }
             case DEL_CELL -> {
-                if(nodes.size() <= 2)
-                    return;
-                int index = nodes.indexOf(selectedNode);
-                nodes.remove(selectedNode);
-                if(index != 0)
-                    selectedNode = nodes.get(index - 1);
-                else
-                    selectedNode = nodes.get(0);
+                selectedNode = GradientInterface.deleteComponent(nodes, selectedNode);
                 pi.paint();
             }
             case LOAD -> {
@@ -330,11 +324,29 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
 
     @Override
     public int compareTo(GradientNodeLine o) {
-        if (linePosition > o.linePosition)
+        if (position > o.position)
             return 1;
-        else if (linePosition == o.linePosition)
+        else if (position == o.position)
             return 0;
         else
             return -1;
+    }
+
+    @Override
+    public GradientNodeLine clone() {
+        try {
+            GradientNodeLine clone = (GradientNodeLine) super.clone();
+            clone.nodes = new ArrayList<>();
+            for(GradientNode node: nodes)
+                clone.nodes.add(node.clone());
+            clone.selectedNode = clone.nodes.get(0);
+            clone.colors = new Color[colors.length];
+            System.arraycopy(colors, 0, clone.colors, 0, colors.length);
+
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

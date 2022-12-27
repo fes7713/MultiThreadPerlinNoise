@@ -1,7 +1,5 @@
 package Noise.Color;
 
-import Noise.PaintInterface;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -102,19 +100,19 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
         array2D = new int[width][height];
 
-        if(lines.get(0).getLinePosition() > 0)
+        if(lines.get(0).getPosition() > 0)
         {
             for (int i = 0; i < height; i++)
             {
                 int color = tempArray2D[0][i].getRGB();
-                for (int j = 0; j / (float)width < lines.get(0).getLinePosition(); j++) {
+                for (int j = 0; j / (float)width < lines.get(0).getPosition(); j++) {
                     array2D[j][i] = color;
                 }
             }
         }
 
         int size = lines.size();
-        for (int i = (int)(width * lines.get(size - 1).getLinePosition()); i < width; i++) {
+        for (int i = (int)(width * lines.get(size - 1).getPosition()); i < width; i++) {
             for (int j = 0; j < height; j++)
             {
                 array2D[i][j] = tempArray2D[size - 1][j].getRGB();
@@ -122,7 +120,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         }
 
         for (int p = 0; p < height; p++) {
-            int cnt = (int)(lines.get(0).getLinePosition() * width);
+            int cnt = (int)(lines.get(0).getPosition() * width);
             for(int i = 1; i < size; i++) {
                 float[] prehsbvals = new float[3];
                 Color.RGBtoHSB(tempArray2D[i - 1][p].getRed(), tempArray2D[i - 1][p].getGreen(), tempArray2D[i - 1][p].getBlue(), prehsbvals);
@@ -130,9 +128,9 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 float[] hsbvals = new float[3];
                 Color.RGBtoHSB(tempArray2D[i][p].getRed(), tempArray2D[i][p].getGreen(), tempArray2D[i][p].getBlue(), hsbvals);
 
-                for (int j = 0; cnt / (float) width < lines.get(i).getLinePosition() && cnt < width; j++) {
-                    float interval = lines.get(i).getLinePosition() - lines.get(i - 1).getLinePosition();
-                    float ratio = (cnt / (float) width - lines.get(i - 1).getLinePosition()) / interval;
+                for (int j = 0; cnt / (float) width < lines.get(i).getPosition() && cnt < width; j++) {
+                    float interval = lines.get(i).getPosition() - lines.get(i - 1).getPosition();
+                    float ratio = (cnt / (float) width - lines.get(i - 1).getPosition()) / interval;
 
                     if (Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5) {
                         if (prehsbvals[0] > hsbvals[0])
@@ -200,7 +198,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 int x = e.getX();
                 int y = e.getY();
 
-                selectedLine.setLinePosition(x / (float) getWidth());
+                selectedLine.setPosition(x / (float) getWidth());
                 cui.update();
             }
         }
@@ -208,8 +206,38 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(GradientNodeLine line: lines)
-            line.action(e, this);
+        ColorEditorAction action = ColorEditorAction.valueOf(e.getActionCommand());
+
+        switch (action)
+        {
+            case ADD_CELL -> {
+                selectedLine.action(e, this);
+            }
+            case ADD_ROW -> {
+                GradientNodeLine newLine = selectedLine.clone();
+                if(newLine.getPosition() < 0.9F)
+                    newLine.setPosition(selectedLine.getPosition() + 0.05F);
+                else
+                    newLine.setPosition(selectedLine.getPosition() - 0.05F);
+
+                lines.add(newLine);
+                selectedLine = newLine;
+                cui.update();
+            }
+            case DEL_CELL -> {
+                selectedLine.action(e, this);
+            }
+            case DEL_ROW -> {
+                selectedLine = GradientInterface.deleteComponent(lines, selectedLine);
+                cui.update();
+            }
+            case SAVE -> {
+                System.out.println("save");
+            }
+            case LOAD -> {
+                System.out.println("Load");
+            }
+        }
     }
 
     @Override

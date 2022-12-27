@@ -8,28 +8,24 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class GradientNode implements Comparable<GradientNode> {
+public class GradientNode implements GradientInterface, Comparable<GradientNode>, Cloneable{
     private Color color;
     /*/
     Position of color node valued between 0 and 1;
      */
-    private float nodePosition;
+    private float position;
 
     private static final int BOX_SIZE = 20; // in pixel
 
     private final float[] hsb;
     private PaintInterface pi;
 
-    public GradientNode(GradientNode node, float position) {
-        this(node.color, position, node.pi);
-    }
-
     public GradientNode(Color color, float position, PaintInterface pi) {
         this.color = color;
         this.pi = pi;
         hsb = new float[3];
 
-        setNodePosition(position);
+        setPosition(position);
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
     }
 
@@ -46,12 +42,12 @@ public class GradientNode implements Comparable<GradientNode> {
         this.color = color;
     }
 
-    public float getNodePosition() {
-        return nodePosition;
+    public float getPosition() {
+        return position;
     }
 
-    public void setNodePosition(float nodePosition) {
-        this.nodePosition = Math.max(0, Math.min(1, nodePosition));
+    public void setPosition(float position) {
+        this.position = Math.max(0, Math.min(1, position));
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -69,7 +65,7 @@ public class GradientNode implements Comparable<GradientNode> {
 
         float length = BOX_SIZE * multiplier;
 
-        if((height * nodePosition) - length / 2 < y && y < (height * nodePosition) + length / 2)
+        if((height * position) - length / 2 < y && y < (height * position) + length / 2)
         {
             if(centerX - length / 2 < x && x < centerX + length / 2)
             {
@@ -134,7 +130,7 @@ public class GradientNode implements Comparable<GradientNode> {
         g2d.setColor(color);
         g2d.fillRect(
                 centerX - length / 2,
-                (int) (height * nodePosition) - length / 2,
+                (int) (height * position) - length / 2,
                 length,
                 length);
 
@@ -144,25 +140,37 @@ public class GradientNode implements Comparable<GradientNode> {
             g2d.setColor(Color.WHITE);
         g2d.drawRect(
                 centerX - length / 2,
-                (int) (height * nodePosition) - length / 2,
+                (int) (height * position) - length / 2,
                 length,
                 length);
     }
 
     @Override
     public int compareTo(GradientNode o) {
-        if (nodePosition > o.nodePosition)
+        if (position > o.position)
             return 1;
-        else if (nodePosition == o.nodePosition)
+        else if (position == o.position)
             return 0;
         else
             return -1;
     }
 
     @Override
+    protected GradientNode clone() {
+        GradientNode node;
+        try{
+            return (GradientNode) super.clone();
+        }catch(CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public String toString()
     {
-        return "R=" + color.getRed()+ ",G=" + color.getGreen() + ",B=" + color.getBlue() + ",P=" + nodePosition;
+        return "R=" + color.getRed()+ ",G=" + color.getGreen() + ",B=" + color.getBlue() + ",P=" + position;
     }
 
     public static GradientNode fromString(String str, PaintInterface pi)
