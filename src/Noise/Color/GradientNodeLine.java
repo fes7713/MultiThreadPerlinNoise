@@ -236,14 +236,7 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         switch (ColorEditorAction.valueOf(e.getActionCommand()))
         {
             case ADD_CELL -> {
-                GradientNode newNode = selectedNode.clone();
-                if(selectedNode.getPosition() < 0.9F)
-                    newNode.setPosition(selectedNode.getPosition() + 0.05F);
-                else
-                    newNode.setPosition(selectedNode.getPosition() - 0.05F);
-
-                nodes.add(newNode);
-                selectedNode = newNode;
+                selectedNode = GradientInterface.addComponent(nodes, selectedNode.clone(), selectedNode);
                 pi.paint();
             }
             case DEL_CELL -> {

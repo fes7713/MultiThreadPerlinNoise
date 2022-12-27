@@ -213,15 +213,8 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             case ADD_CELL -> {
                 selectedLine.action(e, this);
             }
-            case ADD_ROW -> {
-                GradientNodeLine newLine = selectedLine.clone();
-                if(newLine.getPosition() < 0.9F)
-                    newLine.setPosition(selectedLine.getPosition() + 0.05F);
-                else
-                    newLine.setPosition(selectedLine.getPosition() - 0.05F);
-
-                lines.add(newLine);
-                selectedLine = newLine;
+            case ADD_ROW -> {;
+                selectedLine = GradientInterface.addComponent(lines, selectedLine.clone(), selectedLine);
                 cui.update();
             }
             case DEL_CELL -> {

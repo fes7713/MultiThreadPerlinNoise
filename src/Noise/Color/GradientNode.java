@@ -159,12 +159,14 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
     protected GradientNode clone() {
         GradientNode node;
         try{
-            return (GradientNode) super.clone();
+            node =  (GradientNode) super.clone();
+            node.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue()));
         }catch(CloneNotSupportedException e)
         {
             e.printStackTrace();
             return null;
         }
+        return node;
     }
 
     @Override
