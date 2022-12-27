@@ -12,15 +12,21 @@ import java.util.List;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     private BufferedImage bi;
-    private PaintInterface pi;
+    private ColorUpdateInterface cui;
     private boolean hold;
     private final List<GradientNodeLine> lines;
     private GradientNodeLine selectedLine;
     private int[][] array2D;
 
-    public GradientColorPanel(PaintInterface pi)
+    public GradientColorPanel(ColorUpdateInterface cui)
     {
-        this.pi = pi;
+        this.cui = () -> {
+            this.repaint();
+            if(cui != null)
+                cui.update();
+        };
+
+        System.err.println("Color panel paint interface has been set");
         hold = false;
 
         bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
@@ -28,17 +34,24 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         addMouseMotionListener(this);
 
         lines = new ArrayList<>();
-        lines.add(new GradientNodeLine(0.2F, this::repaint));
-        lines.add(new GradientNodeLine(0.4F, this::repaint));
+        lines.add(new GradientNodeLine(0.2F, this.cui::update));
+        lines.add(new GradientNodeLine(0.4F, this.cui::update));
+        lines.add(new GradientNodeLine(0.7F, this.cui::update));
 
-        lines.add(new GradientNodeLine(0.6F, this::repaint));
         selectedLine = lines.get(0);
     }
 
-    public void setPaintInterface(PaintInterface pi)
+    public void setColorUpdateInterface(ColorUpdateInterface cui)
     {
-        System.err.println("Color panel paint interface has been updated");
-        this.pi = pi;
+        System.err.println("Color panel color update interface has been updated");
+        this.cui = () -> {
+            this.repaint();
+            if(cui != null)
+                cui.update();
+        };
+
+        for (GradientNodeLine line: lines)
+            line.setPaintInterface(this.cui::update);
     }
 
     //    public void set
@@ -63,6 +76,12 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         g.drawImage(bi, 0, 0, width, height, null);
     }
 
+
+
+    public int[][] getColors()
+    {
+        return array2D;
+    }
     public int[][] getUpdatedColor2DArray(int width, int height)
     {
         updateColorArray(width, height);
@@ -134,9 +153,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 }
             }
         }
-
-        if(pi != null)
-            pi.paint();
     }
 
     @Override
@@ -162,7 +178,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             {
                 selectedLine = line;
                 hold = true;
-                repaint();
+                cui.update();
                 return;
             }
         }
@@ -185,7 +201,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                 int y = e.getY();
 
                 selectedLine.setLinePosition(x / (float) getWidth());
-                repaint();
+                cui.update();
             }
         }
     }
@@ -213,4 +229,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
     public void mouseExited(MouseEvent e) {
 
     }
+
+
 }

@@ -60,6 +60,10 @@ public class GradientNodeLine  implements Comparable<GradientNodeLine>{
     {
         System.err.println("Color panel paint interface has been updated");
         this.pi = pi;
+        for(GradientNode node: nodes)
+        {
+            node.setPaintInterface(pi);
+        }
     }
 
     public Color[] getUpdatedColorArray(int size)

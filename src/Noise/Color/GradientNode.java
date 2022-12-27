@@ -18,7 +18,7 @@ public class GradientNode implements Comparable<GradientNode> {
     private static final int BOX_SIZE = 20; // in pixel
 
     private final float[] hsb;
-    private final PaintInterface pi;
+    private PaintInterface pi;
 
     public GradientNode(GradientNode node, float position) {
         this(node.color, position, node.pi);
@@ -54,6 +54,10 @@ public class GradientNode implements Comparable<GradientNode> {
         this.nodePosition = Math.max(0, Math.min(1, nodePosition));
     }
 
+    public void setPaintInterface(PaintInterface pi)
+    {
+        this.pi = pi;
+    }
     public boolean contains(MouseEvent event, float centerX, float height, boolean selected)
     {
         int multiplier = 1;

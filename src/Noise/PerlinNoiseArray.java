@@ -118,18 +118,18 @@ public class PerlinNoiseArray {
                         0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
                         new Vector3f(0, -1, -1)));
 
-                bi.setRGB(i, j, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)][127]);
+                bi.setRGB(i, j, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
             }
         }
 
         for(int i = 0; i < width; i++)
         {
-            bi.setRGB(i, height - 1, ColorProvider.COLORS[(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)][127]);
+            bi.setRGB(i, height - 1, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
-            bi.setRGB(height - 1, i, ColorProvider.COLORS[(int)(convertNoise(noiseMap[height - 1][i]) * ColorProvider.COLORS.length)][127]);
+            bi.setRGB(width - 1, i, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
         }
 
         if(pi != null)

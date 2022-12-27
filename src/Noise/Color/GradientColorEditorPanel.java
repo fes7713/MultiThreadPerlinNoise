@@ -15,13 +15,14 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
     private final GradientColorPanel colorPanel;
     private final List<JButton> buttons;
 
-    public GradientColorEditorPanel(PaintInterface pi)
+    public GradientColorEditorPanel(ColorUpdateInterface cui)
     {
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 2));
 
         buttons = new ArrayList<>();
-        colorPanel = new GradientColorPanel(pi);
+        colorPanel = new GradientColorPanel(cui);
+
 
         Stream.of(ColorEditorAction.values()).forEach(action -> {
             JButton actionButton = new JButton(action.name());
@@ -36,9 +37,9 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         setLayout(new BorderLayout());
     }
 
-    public void setPaintInterface(PaintInterface pi)
+    public void setColorUpdateInterface(ColorUpdateInterface cui)
     {
-        colorPanel.setPaintInterface(pi);
+        colorPanel.setColorUpdateInterface(cui);
     }
 
     public void showFrame()
@@ -101,9 +102,16 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         return colorPanel.getUpdatedColor2DArray(size, size);
     }
 
+    public int[][] getColors()
+    {
+        return colorPanel.getColors();
+    }
+
     public static void main(String[] argv)
     {
-        GradientColorEditorPanel panel = new GradientColorEditorPanel(null);
+        GradientColorEditorPanel panel = new GradientColorEditorPanel(() -> {
+            System.out.println("Image update");
+        });
         panel.showFrame();
     }
 }
