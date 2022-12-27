@@ -7,8 +7,9 @@ import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class GradientNode implements GradientInterface, Comparable<GradientNode>, Cloneable{
+public class GradientNode implements GradientInterface, Comparable<GradientNode>, Cloneable, Serializable {
     private Color color;
     /*/
     Position of color node valued between 0 and 1;

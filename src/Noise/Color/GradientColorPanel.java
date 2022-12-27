@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     private BufferedImage bi;
@@ -171,6 +173,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             if(line.contains(e, width, height, false))
             {
                 selectedLine = line;
+                selectedLine.mousePressed(e, width, height);
                 hold = true;
                 cui.update();
                 return;
@@ -189,15 +192,16 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         int width = this.getWidth();
         int height = this.getHeight();
 
-        if(!selectedLine.mouseDragged(e, width, height)) {
-            if (hold) {
-                int x = e.getX();
-                int y = e.getY();
+        selectedLine.mouseDragged(e, width, height);
 
-                selectedLine.setPosition(x / (float) getWidth());
-                cui.update();
-            }
+        if (hold) {
+            int x = e.getX();
+            int y = e.getY();
+
+            selectedLine.setPosition(x / (float) getWidth());
+            cui.update();
         }
+
     }
 
     @Override
@@ -209,7 +213,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             case ADD_CELL -> {
                 selectedLine.action(e, this);
             }
-            case ADD_ROW -> {;
+            case ADD_ROW -> {
                 selectedLine = GradientInterface.addComponent(lines, selectedLine.clone(), selectedLine);
                 cui.update();
             }
@@ -222,9 +226,71 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             }
             case SAVE -> {
                 System.out.println("save");
+
+                String filename = (String)JOptionPane.showInputDialog(
+                        this,
+                        "Enter preset file name",
+                        "Preset save form",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+                if(filename == null)
+                    return;
+                try{
+                    BufferedWriter outputWriter = new BufferedWriter(new FileWriter("presets/" + filename + ".txt"));
+                    for(GradientNodeLine line: lines)
+                    {
+                        outputWriter.write(line.toString());
+                        outputWriter.newLine();
+                    }
+
+                    outputWriter.flush();
+                    outputWriter.close();
+                }catch(IOException ie)
+                {
+                    ie.printStackTrace();
+                }
             }
             case LOAD -> {
                 System.out.println("Load");
+                try{
+                    File[] files= new File("presets").listFiles();
+
+                    String[] values = new String[files.length];
+                    IntStream.range(0, values.length).forEach(i -> {
+                        values[i] = files[i].getName();
+                    });
+
+                    Object value = JOptionPane.showInputDialog(this, "Message",
+                            "Load presets", JOptionPane.ERROR_MESSAGE,
+                            new ImageIcon("icons/preset1.png"), values, values[0]);
+
+                    if(value == null)
+                        return;
+
+                    List<GradientNodeLine> inputLines = new ArrayList<>();
+                    BufferedReader inputReader = new BufferedReader(new FileReader("presets/" + value));
+
+                    inputReader.lines().forEach(data -> {
+                        GradientNodeLine line = GradientNodeLine.fromString(data, this.cui::update);
+                        inputLines.add(line);
+                    });
+
+                    inputReader.close();
+
+                    if(inputLines.size() < 1)
+                        return;
+
+                    lines.clear();
+                    lines.addAll(inputLines);
+                    selectedLine = inputLines.get(0);
+                    cui.update();
+
+                }catch(IOException ie)
+                {
+                    ie.printStackTrace();
+                }
             }
         }
     }
@@ -246,6 +312,4 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
     public void mouseExited(MouseEvent e) {
 
     }
-
-
 }

@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class GradientNodeLine  implements GradientInterface, Comparable<GradientNodeLine>, Cloneable{
+public class GradientNodeLine  implements GradientInterface, Comparable<GradientNodeLine>, Cloneable, Serializable{
     private float position;
     private List<GradientNode> nodes;
     private GradientNode selectedNode;
@@ -32,9 +33,13 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         This is position of gradient line. Ratio to the available width;
         This field should be between 0 and 1;
          */
+        if(nodes.isEmpty())
+        {
+            nodes.add(new GradientNode(Color.WHITE, 0F, pi));
+            nodes.add(new GradientNode(Color.BLACK, 1F, pi));
+        }
         this.position = position;
-        nodes.add(new GradientNode(Color.WHITE, 0F, pi));
-        nodes.add(new GradientNode(Color.BLACK, 1F, pi));
+
         selectedNode = nodes.get(0);
 
         // TODO This could cause paint issue
@@ -336,5 +341,34 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(position);
+        sb.append("===[");
+        sb.append(nodes.get(0));
+        for(int i = 1; i < nodes.size(); i++)
+        {
+            sb.append("/");
+            sb.append(nodes.get(i));
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static GradientNodeLine fromString(String data, PaintInterface pi)
+    {
+        data = data.replace("[", "").replace("]", "");
+        String[] splitData = data.split("===");
+        float position = Float.parseFloat(splitData[0]);
+        List<GradientNode> nodes = new ArrayList<>(
+                Stream.of(splitData[1].split("/"))
+                .map((nodeStr) -> GradientNode.fromString(nodeStr, pi))
+                .toList()
+        );
+
+        return new GradientNodeLine(nodes, position, pi);
     }
 }
