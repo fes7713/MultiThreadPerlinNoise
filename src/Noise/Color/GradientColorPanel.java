@@ -123,30 +123,21 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             int cnt = (int)(lines.get(0).getPosition() * width);
             for(int i = 1; i < size; i++) {
                 float[] prehsbvals = new float[3];
-                Color.RGBtoHSB(tempArray2D[i - 1][p].getRed(), tempArray2D[i - 1][p].getGreen(), tempArray2D[i - 1][p].getBlue(), prehsbvals);
-
                 float[] hsbvals = new float[3];
+
+                Color.RGBtoHSB(tempArray2D[i - 1][p].getRed(), tempArray2D[i - 1][p].getGreen(), tempArray2D[i - 1][p].getBlue(), prehsbvals);
                 Color.RGBtoHSB(tempArray2D[i][p].getRed(), tempArray2D[i][p].getGreen(), tempArray2D[i][p].getBlue(), hsbvals);
 
                 for (int j = 0; cnt / (float) width < lines.get(i).getPosition() && cnt < width; j++) {
-                    float interval = lines.get(i).getPosition() - lines.get(i - 1).getPosition();
-                    float ratio = (cnt / (float) width - lines.get(i - 1).getPosition()) / interval;
-
-                    if (Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5) {
-                        if (prehsbvals[0] > hsbvals[0])
-                            hsbvals[0] += 1;
-                        else
-                            prehsbvals[0] += 1;
-                    }
-
-                    float[] newhsvvals = new float[3];
-                    for (int k = 0; k < 3; k++) {
-                        newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
-                    }
-
-                    if (newhsvvals[0] > 1)
-                        newhsvvals[0] -= 1;
-
+                    float[] newhsvvals = GradientInterface.interpolateColor(
+                            width,
+                            cnt,
+                            prehsbvals,
+                            hsbvals,
+                            lines.get(i).getPosition(),
+                            lines.get(i - 1).getPosition(),
+                            i
+                    );
                     array2D[cnt++][p] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]).getRGB();
                 }
             }

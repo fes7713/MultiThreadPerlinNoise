@@ -28,4 +28,26 @@ public interface GradientInterface{
         list.add(newComponent);
         return newComponent;
     }
+
+    static float[] interpolateColor(float size, int cnt, float[] prehsbvals, float[] hsbvals, float position, float position2, int i) {
+        float interval = position - position2;
+        float ratio = (cnt / size - position2) / interval;
+
+        if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
+        {
+            if(prehsbvals[0] > hsbvals[0])
+                hsbvals[0] += 1;
+            else
+                prehsbvals[0] += 1;
+        }
+
+        float[] newhsvvals = new float[3];
+        for (int k = 0; k < 3; k++) {
+            newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
+        }
+
+        if(newhsvvals[0] > 1)
+            newhsvvals[0] -= 1;
+        return newhsvvals;
+    }
 }

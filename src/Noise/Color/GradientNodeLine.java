@@ -92,33 +92,29 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
             colors[i] = nodes.get(nodes.size() - 1).getColor();
         }
 
-        int cnt = (int)(size * nodes.get(0).getPosition());
+        int cnt = (int)Math.ceil(size * nodes.get(0).getPosition());
 
         for(int i = 1; i < nodes.size(); i++)
         {
             float[] prehsbvals = nodes.get(i - 1).getHsb();
             float[] hsbvals = nodes.get(i).getHsb();
 
+            if(prehsbvals[1]== 0)
+                prehsbvals[0] = hsbvals[0];
+            if(hsbvals[1]== 0)
+                hsbvals[0] = prehsbvals[0];
+
+
             for (int j = 0; cnt / (float)size < nodes.get(i).getPosition() && cnt < size; j++) {
-                float interval = nodes.get(i).getPosition() - nodes.get(i - 1).getPosition();
-                float ratio = (cnt / (float)size - nodes.get(i - 1).getPosition()) / interval;
-
-                if(Math.abs(prehsbvals[0] - hsbvals[0]) > 0.5)
-                {
-                    if(prehsbvals[0] > hsbvals[0])
-                        hsbvals[0] += 1;
-                    else
-                        prehsbvals[0] += 1;
-                }
-
-                float[] newhsvvals = new float[3];
-                for (int k = 0; k < 3; k++) {
-                    newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
-                }
-
-                if(newhsvvals[0] > 1)
-                    newhsvvals[0] -= 1;
-
+                float[] newhsvvals = GradientInterface.interpolateColor(
+                        size,
+                        cnt,
+                        prehsbvals,
+                        hsbvals,
+                        nodes.get(i).getPosition(),
+                        nodes.get(i - 1).getPosition(),
+                        i
+                );
                 colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
             }
         }

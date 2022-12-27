@@ -17,7 +17,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
 
     private static final int BOX_SIZE = 20; // in pixel
 
-    private final float[] hsb;
+    private float[] hsb;
     private PaintInterface pi;
 
     public GradientNode(Color color, float position, PaintInterface pi) {
@@ -160,6 +160,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
         GradientNode node;
         try{
             node =  (GradientNode) super.clone();
+            node.hsb = new float[3];
             node.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue()));
         }catch(CloneNotSupportedException e)
         {
