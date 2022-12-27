@@ -33,6 +33,7 @@ public class ColorProvider {
     {
         this.pi = pi;
         editor.setPaintInterface(() -> {
+            System.out.println("image update");
             COLORS = editor.getUpdatedColorArray(255);
             pi.paint();
         });

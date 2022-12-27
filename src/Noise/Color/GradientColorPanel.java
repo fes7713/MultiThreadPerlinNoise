@@ -136,7 +136,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         }
 
         if(pi != null)
-            repaint();
+            pi.paint();
     }
 
     @Override
