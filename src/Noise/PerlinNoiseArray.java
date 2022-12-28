@@ -92,12 +92,14 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
+//                x′=xcosθ−ysinθ
+//            y′=xsinθ+ycosθ
                 noiseMap[i][j] = fn.GetNoise(i  * zoom + left, j  * zoom + top);
             }
         }
     }
 
-    public void increaseResolution(int resolution)
+    public void increaseResolution(float resolution)
     {
         for(int i = 0; i < width; i++)
         {
@@ -144,7 +146,9 @@ public class PerlinNoiseArray {
 
     public float convertNoise(float noise)
     {
-        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
+//        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
+//        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
+        return (float)(Math.atan(4 * noise) / Math.PI + 0.5);
     }
 
     public void updateImage(PaintInterface pi)
@@ -159,7 +163,8 @@ public class PerlinNoiseArray {
 //                        new Vector3f(0, -1, -1)));
 
 //                bi.setRGB(i, j, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
-                if(convertNormal(normalMap[i][j]) == 255)
+                // TODO delete
+                if(convertNoise(noiseMap[i][j]) == 255)
                     System.out.println(normalMap[i][j]);
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
@@ -238,23 +243,23 @@ public class PerlinNoiseArray {
         FastNoise fn = new FastNoise();
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
-        PerlinNoiseArray noiseArray = new PerlinNoiseArray(fn, 0, 0, 4, 500000, 1);
-        noiseArray.initNoiseMap();
+        PerlinNoiseArray noiseArray = new PerlinNoiseArray(fn, 0, 0, 4, 10000, 1);
+//        noiseArray.initNoiseMap();
 
-        for (int i = 1; i < 8; i++) {
-            noiseArray.increaseResolution((int)Math.pow(2, i));
+        for (int i = -2; i < 16; i++) {
+            noiseArray.increaseResolution((float)Math.pow(2, i));
         }
 
         noiseArray.generateNormalMap();
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < noiseArray.normalMap[0].length; i++) {
-            sb.append(noiseArray.normalMap[0][i]);
+        for (int i = 0; i < noiseArray.noiseMap[0].length; i++) {
+            sb.append(noiseArray.convertNoise(noiseArray.noiseMap[0][i]));
             sb.append("\n");
         }
 
         try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("normal6.csv"));
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("noise4.csv"));
             outputWriter.write(sb.toString());
             outputWriter.flush();
             outputWriter.close();
