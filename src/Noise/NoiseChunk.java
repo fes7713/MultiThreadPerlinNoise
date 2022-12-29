@@ -91,13 +91,26 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 array.initNoiseMap();
                 Thread.yield();
-                for (int i = 1; i < 16; i++) {
+                for (int i = -1; i < 0; i++) {
                     if(Thread.interrupted())
                     {
                         return;
                     }
+
+                    array.increaseResolution((float)Math.pow(2, i));
                     array.updateImage(pi);
-                    array.increaseResolution((int)Math.pow(2, i));
+                    array.generateNormalMap();
+                    Thread.yield();
+                }
+                for (int i = 1; i < (10); i++) {
+                    if(Thread.interrupted())
+                    {
+                        return;
+                    }
+
+                    array.increaseResolution((float)Math.pow(2, i));
+                    array.updateImage(pi);
+
                     array.generateNormalMap();
                     Thread.yield();
                 }
@@ -118,12 +131,6 @@ public class NoiseChunk implements NoiseChunkInterface{
                 (chunkX + chunkShiftX) * width + pixelShiftX,
                 (chunkY + chunkShiftY) * height + pixelShiftY, null
         );
-//        g2d.drawRect(
-//                (chunkX + chunkShiftX) * width + pixelShiftX,
-//                (chunkY + chunkShiftY) * height + pixelShiftY,
-//                width,
-//                height
-//        );
     }
 
     @Override

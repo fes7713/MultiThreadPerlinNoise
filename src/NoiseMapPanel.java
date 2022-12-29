@@ -92,7 +92,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         if(startLeft < 0)
         {
-            System.out.println("Right");
+//            System.out.println("Right");
             horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight(), true);
             if(startTop < 0)
                 cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
@@ -100,7 +100,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() - 1, true);
         }
         else{
-            System.out.println("Left");
+//            System.out.println("Left");
             horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1, - startTop / mainGroup.getChunkHeight(), true);
             if(startTop < 0)
                 cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1 , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
@@ -110,12 +110,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         if(startTop < 0)
         {
-            System.out.println("Bottom");
+//            System.out.println("Bottom");
             verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
 
         }
         else{
-            System.out.println("Top");
+//            System.out.println("Top");
             verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() -1, true);
 
         }
@@ -226,12 +226,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         float zoom = (float)Math.pow(ZOOM_RATIO, wheelCount);
 
-        System.out.println("old " + startX);
+//        System.out.println("old " + startX);
         startLeft = (int)(mouseX - (mouseX - startLeft) * Math.pow(ZOOM_RATIO, e.getWheelRotation()));
         startTop = (int)(mouseY - (mouseY - startTop) * Math.pow(ZOOM_RATIO, e.getWheelRotation()));
 
-        System.out.println("new " + startX);
-
+//        System.out.println("new " + startX);
+        System.out.println(zoom);
         chunkProvider.zoomChanged(zoom);
 
         updateChunkGroups();

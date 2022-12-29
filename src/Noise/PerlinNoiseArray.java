@@ -148,7 +148,7 @@ public class PerlinNoiseArray {
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
-        return (float)(Math.atan(4 * noise) / Math.PI + 0.5);
+        return (float)(Math.atan( noise * 4) / Math.PI + 0.5);
     }
 
     public void updateImage(PaintInterface pi)
@@ -253,22 +253,54 @@ public class PerlinNoiseArray {
         noiseArray.generateNormalMap();
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < noiseArray.noiseMap[0].length; i++) {
-            sb.append(noiseArray.convertNoise(noiseArray.noiseMap[0][i]));
+        for (int i = 0; i < noiseArray.normalMap[0].length; i++) {
+            sb.append(noiseArray.convertNormal(noiseArray.normalMap[0][i]));
             sb.append("\n");
         }
 
+//        try {
+//            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("normal7.csv"));
+//            outputWriter.write(sb.toString());
+//            outputWriter.flush();
+//            outputWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        for(int i = 0; i < 255; i++)
+            System.out.println(noiseArray.convertNormal(i));
+
+        StringBuilder sb1 = new StringBuilder();
+
+        sb1.append("Zoom\\Resolution,");
+        for (int i = -2; i < 16; i++) {
+            sb1.append(i);
+            sb1.append(",");
+        }
+        sb1.append("\n");
+        for (int i = -10; i < 10; i++) {
+            float zoom = (float)Math.pow(1.1, i);
+            sb1.append(zoom);
+            for (int j = -2; j < 16; j++) {
+                float noise = 0;
+
+                for (int k = -2; k < j; k++) {
+                    float resolution = (float)Math.pow(2, k);
+                    noise += fn.GetNoise((i * zoom) * resolution, (j * zoom) * resolution ) / resolution;
+                }
+                sb1.append(noise);
+                sb1.append(",");
+            }
+            sb1.append("\n");
+        }
         try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("noise4.csv"));
-            outputWriter.write(sb.toString());
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("zoomres.csv"));
+            outputWriter.write(sb1.toString());
             outputWriter.flush();
             outputWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for(int i = 0; i < 255; i++)
-            System.out.println(noiseArray.convertNormal(i));
 
     }
 }
