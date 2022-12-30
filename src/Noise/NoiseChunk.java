@@ -1,7 +1,8 @@
 package Noise;
 
+import Noise.Array.PerlinNoiseArray;
+
 import java.awt.*;
-import java.util.concurrent.Semaphore;
 
 public class NoiseChunk implements NoiseChunkInterface{
     private final String name;

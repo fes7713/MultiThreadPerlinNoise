@@ -1,3 +1,4 @@
+import Noise.Array.VariableChanger;
 import Noise.FastNoise;
 
 import javax.swing.*;
@@ -6,6 +7,7 @@ public class MainFrame {
     public static void main(String[] argv)
     {
         FastNoise fn = new FastNoise();
+
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
         double noise = fn.GetNoise(0, 0);
@@ -14,8 +16,9 @@ public class MainFrame {
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new NoiseMapPanel() ;
-
+        NoiseMapPanel panel = new NoiseMapPanel() ;
+        panel.showColorEditor();
+        panel.showVariableChanger();
         panel.repaint();
 
 
@@ -23,6 +26,7 @@ public class MainFrame {
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);
         frame.repaint();
+
     }
 
 }

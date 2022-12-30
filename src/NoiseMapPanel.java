@@ -1,3 +1,4 @@
+import Noise.Array.VariableChanger;
 import Noise.ChunkProvider;
 import Noise.ColorProvider;
 import Noise.NoiseChunkGroup;
@@ -51,7 +52,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseWheelListener(this);
         colorProvider.setPaintInterface(this::updateImage);
 
-        colorProvider.showColorEditor();
         wheelCount = 0;
     }
 
@@ -68,6 +68,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         horizontalEdgeGroup.updateImage(this::repaint);
         cornerGroup.updateImage(this::repaint);
         repaint();
+    }
+
+    public void showVariableChanger(){
+        VariableChanger vc = new VariableChanger(this::updateImage);
+        vc.showVariableChanger();
+    }
+
+    public void showColorEditor(){
+        colorProvider.showColorEditor();
     }
 
     @Override

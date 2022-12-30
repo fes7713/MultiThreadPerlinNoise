@@ -1,8 +1,11 @@
-package Noise;
+package Noise.Array;
+
+import Noise.ColorProvider;
+import Noise.FastNoise;
+import Noise.PaintInterface;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +14,8 @@ import java.io.IOException;
 
 
 public class PerlinNoiseArray {
+
+
     private float[][] noiseMap;
     private float[][] normalMap;
 
@@ -23,6 +28,16 @@ public class PerlinNoiseArray {
     private BufferedImage bi;
     private float zoom;
 
+//    private float noiseSteepness;
+//    private float noiseShift;
+//    private float normalCoefficient;
+//    private float normalShift;
+
+    private static float NOISE_COEFFICIENT = 4F;
+    private static float NOISE_SHIFT = 0;
+    private static float NORMAL_COEFFICIENT = 0.03F;
+    private static float NORMAL_SHIFT = 125;
+
     public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom){
         this.zoom = zoom;
         this.fn = fn;
@@ -31,10 +46,13 @@ public class PerlinNoiseArray {
         this.width = width;
         this.height = height;
 
-        noiseMap = new float[width][height];
-        // TODo
-        normalMap = new float[width][height];
+//        noiseSteepness = NOISE_COEFFICIENT;
+//        noiseShift = NOISE_SHIFT;
+//        normalCoefficient = NORMAL_COEFFICIENT;
+//        normalShift = NORMAL_SHIFT;
 
+        noiseMap = new float[width][height];
+        normalMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -72,6 +90,39 @@ public class PerlinNoiseArray {
         dimensionChanged();
     }
 
+
+//    public float getNoiseSteepness() {
+//        return noiseSteepness;
+//    }
+//
+//    public void setNoiseSteepness(float noiseSteepness) {
+//        this.noiseSteepness = noiseSteepness;
+//    }
+//
+//    public float getNoiseShift() {
+//        return noiseShift;
+//    }
+//
+//    public void setNoiseShift(float noiseShift) {
+//        this.noiseShift = noiseShift;
+//    }
+//
+//    public float getNormalCoefficient() {
+//        return normalCoefficient;
+//    }
+//
+//    public void setNormalCoefficient(float normalCoefficient) {
+//        this.normalCoefficient = normalCoefficient;
+//    }
+//
+//    public float getNormalShift() {
+//        return normalShift;
+//    }
+//
+//    public void setNormalShift(float normalShift) {
+//        this.normalShift = normalShift;
+//    }
+
     public void reuse(float left, float top, float zoom)
     {
         this.zoom = zoom;
@@ -92,8 +143,6 @@ public class PerlinNoiseArray {
         {
             for(int j = 0; j < height; j++)
             {
-//                x′=xcosθ−ysinθ
-//            y′=xsinθ+ycosθ
                 noiseMap[i][j] = fn.GetNoise(i  * zoom + left, j  * zoom + top);
             }
         }
@@ -110,36 +159,17 @@ public class PerlinNoiseArray {
         }
     }
 
-    public int convertNormal(float normal)
-    {
-//        float t = 2.5F;
-//        int p = 52;
-//        int s = 32;
-//        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
-        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
-    }
-
     public void generateNormalMap()
     {
         Vector3f light = new Vector3f(0, -1, -1);
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
-//                Vector3f v1 = new Vector3f(zoom, 0, noiseMap[i + 1][j] - noiseMap[i][j]);
-//                Vector3f v2 = new Vector3f(0, zoom, noiseMap[i][j + 1] - noiseMap[i][j]);
-//                Vector3f v3 = new Vector3f();
-//                v3.cross(v1, v2);
-//                System.out.println(v3.dot(new Vector3f(0, -1, -1)));
-//                ((A1+1)*4000 + 125;
                 float normal = lightIntensity(
                         zoom, 0, noiseMap[i + 1][j] - noiseMap[i][j],
                         0, zoom, noiseMap[i][j + 1] - noiseMap[i][j],
                         light);
-                float normalized = (normal + 1) * 4096 + 125;
+                normalMap[i][j] = (normal + 1) * 4096 + 125;
 
-//                float normalized = ((normal+1)*1600 + 50)*3.14F;
-                normalMap[i][j] = normalized;
-
-//                normalMap[i][j] = v3.dot(new Vector3f(0, -1, -1));
             }
         }
     }
@@ -148,8 +178,21 @@ public class PerlinNoiseArray {
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
-        return (float)(Math.atan( noise * 4) / Math.PI + 0.5);
+        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
     }
+
+    public float convertNormal(float normal)
+    {
+//        float t = 2.5F;
+//        int p = 52;
+//        int s = 32;
+//        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
+//        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
+        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
+//        return (float)(Math.atan(normal) / Math.PI + 0.5);
+    }
+
+
 
     public void updateImage(PaintInterface pi)
     {
@@ -168,7 +211,7 @@ public class PerlinNoiseArray {
                     System.out.println(normalMap[i][j]);
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
-                                convertNormal(normalMap[i][j])
+                            (int)(convertNormal(normalMap[i][j]) * ColorProvider.COLORS.length)
                         ][
                             (int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)
                         ]);
@@ -187,13 +230,6 @@ public class PerlinNoiseArray {
 
         if(pi != null)
             pi.paint();
-    }
-
-    public static Color valueOf(int color) {
-        float r = ((color >> 16) & 0xff) / 255.0f;
-        float g = ((color >>  8) & 0xff) / 255.0f;
-        float b = ((color      ) & 0xff) / 255.0f;
-        return new Color(r, g, b);
     }
 
     public void saveMapImage()
@@ -218,6 +254,42 @@ public class PerlinNoiseArray {
         float c3 = a1 * b2 - a2 * b1;
 
         return (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+    }
+
+    protected static float getNoiseCoefficient(){
+        return NOISE_COEFFICIENT;
+    }
+
+    protected static void setNoiseCoefficient(float coefficient)
+    {
+        NOISE_COEFFICIENT = coefficient;
+    }
+
+    protected static float getNoiseShift(){
+        return NOISE_SHIFT;
+    }
+
+    protected static void setNoiseShift(float shift)
+    {
+        NOISE_SHIFT = shift;
+    }
+
+    protected static float getNormalCoefficient(){
+        return NORMAL_COEFFICIENT;
+    }
+
+    protected static void setNormalCoefficient(float coefficient)
+    {
+        NORMAL_COEFFICIENT = coefficient;
+    }
+
+    protected static float getNormalShift(){
+        return NORMAL_SHIFT;
+    }
+
+    protected static void setNormalShift(float shift)
+    {
+        NORMAL_SHIFT = shift;
     }
 
     public static void main(String[] args)
@@ -254,18 +326,18 @@ public class PerlinNoiseArray {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < noiseArray.normalMap[0].length; i++) {
-            sb.append(noiseArray.convertNormal(noiseArray.normalMap[0][i]));
+            sb.append(noiseArray.normalMap[0][i]);
             sb.append("\n");
         }
 
-//        try {
-//            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("normal7.csv"));
-//            outputWriter.write(sb.toString());
-//            outputWriter.flush();
-//            outputWriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("normal8.csv"));
+            outputWriter.write(sb.toString());
+            outputWriter.flush();
+            outputWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for(int i = 0; i < 255; i++)
             System.out.println(noiseArray.convertNormal(i));
@@ -293,14 +365,14 @@ public class PerlinNoiseArray {
             }
             sb1.append("\n");
         }
-        try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("zoomres.csv"));
-            outputWriter.write(sb1.toString());
-            outputWriter.flush();
-            outputWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("zoomres.csv"));
+//            outputWriter.write(sb1.toString());
+//            outputWriter.flush();
+//            outputWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }
