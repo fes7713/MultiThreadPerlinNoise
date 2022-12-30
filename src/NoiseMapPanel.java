@@ -1,3 +1,4 @@
+import Noise.Array.PerlinNoiseArrayInterface;
 import Noise.Array.VariableChanger;
 import Noise.ChunkProvider;
 import Noise.ColorProvider;
@@ -51,7 +52,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseListener(this);
         addMouseWheelListener(this);
         colorProvider.setPaintInterface(this::updateImage);
-
+        PerlinNoiseArrayInterface.loadDefaultVariables(null);
         wheelCount = 0;
     }
 

@@ -12,6 +12,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -122,14 +125,14 @@ public interface PerlinNoiseArrayInterface {
         FileManager.writeStringToFile(variableToString(), "variables", filename, "txt");
     }
 
-    static void loadVariable(String foldername, String filename, VariableChanger vc)
+    static boolean loadVariable(String foldername, String filename, VariableChanger vc)
     {
         List<Consumer<Float>> setters = new ArrayList<>(
                 Arrays.asList(PerlinNoiseArray::setNoiseCoefficient,
                         PerlinNoiseArray::setNoiseShift,
                         PerlinNoiseArray::setNormalCoefficient,
                         PerlinNoiseArray::setNormalShift));
-        FileManager.loadStringFromFile(foldername, filename,
+        if(!FileManager.loadStringFromFile(foldername, filename,
                 (data)->{
                     String[] splited = data.split("\n");
                     IntStream.range(0, setters.size())
@@ -137,8 +140,42 @@ public interface PerlinNoiseArrayInterface {
                             .forEach((index) -> {
                                 setters.get(index).accept(Float.parseFloat(splited[index].split(",")[1]));
                             });
-                });
+                }))
+        {
+            return false;
+        }
         if(vc != null)
             vc.updateData();
+        return true;
+    }
+
+    static void saveDefaultVariables(String foldername, VariableChanger vc)
+    {
+        Path p = Paths.get(foldername);
+        if(!Files.exists(p)) {
+            try {
+                Files.createDirectories(p);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        PerlinNoiseArray.setNoiseCoefficient(4.0F);
+        PerlinNoiseArray.setNoiseShift(0);
+        PerlinNoiseArray.setNormalCoefficient(0.03F);
+        PerlinNoiseArray.setNormalShift(125);
+
+        FileManager.writeStringToFile(variableToString(), foldername, "default", "txt");
+        if(vc != null)
+            vc.updateData();
+    }
+
+    static void loadDefaultVariables(VariableChanger vc)
+    {
+        if(!loadVariable("variables", "default.txt", vc))
+        {
+            saveDefaultVariables("variables", vc);
+        }
+        loadVariable("variables", "default.txt", vc);
     }
 }

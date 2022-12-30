@@ -68,18 +68,20 @@ public class FileManager {
         return (String)value;
     }
 
-    public static void loadStringFromFile(String folder, String filenameWithExtension, FileLoadAction fileAction)
+    public static boolean loadStringFromFile(String folder, String filenameWithExtension, FileLoadAction fileAction)
     {
         if(filenameWithExtension == null)
-            return;
+            return false;
         BufferedReader inputReader = null;
         try {
             inputReader = new BufferedReader(new FileReader(folder + "/" + filenameWithExtension));
             String data =  inputReader.lines().collect(Collectors.joining("\n"));
             inputReader.close();
             fileAction.action(data);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
