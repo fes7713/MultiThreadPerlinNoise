@@ -13,7 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class PerlinNoiseArray {
+public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
 
     private float[][] noiseMap;
@@ -251,85 +251,15 @@ public class PerlinNoiseArray {
 
     public static void main(String[] args)
     {
-//        Vector3f v1 = new Vector3f(0, 0, 0);
-//        Vector3f v2 = new Vector3f(1, 0, 0.005F);
-//        Vector3f v3 = new Vector3f(0, 1, 0.01F);
-//
-//        Vector3f light = new Vector3f(0, -1, -1);
-//
-//        System.out.println(lightIntensity(v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
-//
-//        Vector3f v5 = new Vector3f();
-//        v5.cross(v2, v3);
-//        System.out.println(v5.dot(light));
-//        System.out.println(lightIntensityFromPoints(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z, light));
-//
-//        Color c = new Color(5, 98, 33);
-//        Color c1  = valueOf(c.getRGB());
-//        System.out.println(c1);
-//
-//        System.out.println(Color.WHITE.getRGB());
         FastNoise fn = new FastNoise();
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
         PerlinNoiseArray noiseArray = new PerlinNoiseArray(fn, 0, 0, 4, 10000, 1);
 //        noiseArray.initNoiseMap();
-
-        for (int i = -2; i < 16; i++) {
+        for (int i = -2; i < 14; i++) {
             noiseArray.increaseResolution((float)Math.pow(2, i));
         }
 
-        noiseArray.generateNormalMap();
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < noiseArray.normalMap[0].length; i++) {
-            sb.append(noiseArray.normalMap[0][i]);
-            sb.append("\n");
-        }
-
-        try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("normal8.csv"));
-            outputWriter.write(sb.toString());
-            outputWriter.flush();
-            outputWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(int i = 0; i < 255; i++)
-            System.out.println(noiseArray.convertNormal(i));
-
-        StringBuilder sb1 = new StringBuilder();
-
-        sb1.append("Zoom\\Resolution,");
-        for (int i = -2; i < 16; i++) {
-            sb1.append(i);
-            sb1.append(",");
-        }
-        sb1.append("\n");
-        for (int i = -10; i < 10; i++) {
-            float zoom = (float)Math.pow(1.1, i);
-            sb1.append(zoom);
-            for (int j = -2; j < 16; j++) {
-                float noise = 0;
-
-                for (int k = -2; k < j; k++) {
-                    float resolution = (float)Math.pow(2, k);
-                    noise += fn.GetNoise((i * zoom) * resolution, (j * zoom) * resolution ) / resolution;
-                }
-                sb1.append(noise);
-                sb1.append(",");
-            }
-            sb1.append("\n");
-        }
-//        try {
-//            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("zoomres.csv"));
-//            outputWriter.write(sb1.toString());
-//            outputWriter.flush();
-//            outputWriter.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
+        PerlinNoiseArrayInterface.saveZoomTable(fn);
     }
 }
