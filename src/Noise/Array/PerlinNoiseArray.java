@@ -28,11 +28,6 @@ public class PerlinNoiseArray {
     private BufferedImage bi;
     private float zoom;
 
-//    private float noiseSteepness;
-//    private float noiseShift;
-//    private float normalCoefficient;
-//    private float normalShift;
-
     private static float NOISE_COEFFICIENT = 4F;
     private static float NOISE_SHIFT = 0;
     private static float NORMAL_COEFFICIENT = 0.03F;
@@ -45,11 +40,6 @@ public class PerlinNoiseArray {
         this.top = top * zoom;
         this.width = width;
         this.height = height;
-
-//        noiseSteepness = NOISE_COEFFICIENT;
-//        noiseShift = NOISE_SHIFT;
-//        normalCoefficient = NORMAL_COEFFICIENT;
-//        normalShift = NORMAL_SHIFT;
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
@@ -89,39 +79,6 @@ public class PerlinNoiseArray {
         this.width = width;
         dimensionChanged();
     }
-
-
-//    public float getNoiseSteepness() {
-//        return noiseSteepness;
-//    }
-//
-//    public void setNoiseSteepness(float noiseSteepness) {
-//        this.noiseSteepness = noiseSteepness;
-//    }
-//
-//    public float getNoiseShift() {
-//        return noiseShift;
-//    }
-//
-//    public void setNoiseShift(float noiseShift) {
-//        this.noiseShift = noiseShift;
-//    }
-//
-//    public float getNormalCoefficient() {
-//        return normalCoefficient;
-//    }
-//
-//    public void setNormalCoefficient(float normalCoefficient) {
-//        this.normalCoefficient = normalCoefficient;
-//    }
-//
-//    public float getNormalShift() {
-//        return normalShift;
-//    }
-//
-//    public void setNormalShift(float normalShift) {
-//        this.normalShift = normalShift;
-//    }
 
     public void reuse(float left, float top, float zoom)
     {

@@ -60,8 +60,6 @@ public class VariableChanger extends JPanel{
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
 
-
-
         List<JSlider> sliders = Stream.of(noiseSteepnessSlider, noiseShiftSlider, normalSteepnessSlider, normalShiftSlider).toList();
         List<JLabel> labels = Stream.of(noiseSteepnessValue, noiseShiftValue, normalSteepnessValue, normalShiftValue).toList();
 
@@ -109,7 +107,11 @@ public class VariableChanger extends JPanel{
                 .addComponent(noiseSteepnessSlider)
                 .addComponent(noiseShiftSlider)
                 .addComponent(normalSteepnessSlider)
-                .addComponent(normalShiftSlider));
+                .addComponent(normalShiftSlider)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(saveButton)
+                        .addComponent(loadButton)
+                        .addComponent(cancelButton)));
 
         layout.setHorizontalGroup(hGroup);
 
@@ -135,6 +137,11 @@ public class VariableChanger extends JPanel{
                 .addComponent(normalShiftLabel)
                 .addComponent(normalShiftValue)
                 .addComponent(normalShiftSlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(saveButton)
+                .addComponent(loadButton)
+                .addComponent(cancelButton));
 
         layout.setVerticalGroup(vGroup);
     }
