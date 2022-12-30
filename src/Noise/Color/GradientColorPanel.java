@@ -1,5 +1,7 @@
 package Noise.Color;
 
+import Noise.FileManager.FileManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -204,6 +206,18 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
 
     }
 
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for(GradientNodeLine line: lines)
+        {
+            sb.append(line.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         ColorEditorAction action = ColorEditorAction.valueOf(e.getActionCommand());
@@ -226,31 +240,8 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             }
             case SAVE -> {
                 System.out.println("save");
-
-                String filename = (String)JOptionPane.showInputDialog(
-                        this,
-                        "Enter preset file name",
-                        "Preset save form",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        null,
-                        "");
-                if(filename == null)
-                    return;
-                try{
-                    BufferedWriter outputWriter = new BufferedWriter(new FileWriter("presets/" + filename + ".txt"));
-                    for(GradientNodeLine line: lines)
-                    {
-                        outputWriter.write(line.toString());
-                        outputWriter.newLine();
-                    }
-
-                    outputWriter.flush();
-                    outputWriter.close();
-                }catch(IOException ie)
-                {
-                    ie.printStackTrace();
-                }
+                String filename = FileManager.askForFileName(this, "Enter preset file name", "Preset save form");
+                FileManager.writeStringToFile(this.toString(), "presets", filename, "txt");
             }
             case LOAD -> {
                 System.out.println("Load");

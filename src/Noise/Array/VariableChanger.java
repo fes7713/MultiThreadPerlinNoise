@@ -54,6 +54,10 @@ public class VariableChanger extends JPanel{
         this.add(normalShiftSlider);
 
         JButton saveButton = new JButton("Save");
+        saveButton.addActionListener((event) -> {
+            PerlinNoiseArrayInterface.saveVariables(this);
+        });
+
         this.add(saveButton);
         JButton loadButton = new JButton("Load");
         this.add(loadButton);

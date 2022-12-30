@@ -1,13 +1,24 @@
 package Noise.Array;
 
+import Noise.Color.GradientNodeLine;
 import Noise.FastNoise;
+import Noise.FileManager.FileManager;
 import Noise.PaintInterface;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public interface PerlinNoiseArrayInterface {
     void setLeft(float left);
@@ -38,20 +49,8 @@ public interface PerlinNoiseArrayInterface {
             sb.append("\n");
         }
 
-        int cnt = 0;
-        String filename = "noise" + ++cnt + ".csv";
-
-        while(new File(filename).exists())
-            filename = "noise" + ++cnt + ".csv";
-
-        try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter(filename));
-            outputWriter.write(sb.toString());
-            outputWriter.flush();
-            outputWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String filename = FileManager.nextAvailableFileNameIndex("noise", "csv");
+        FileManager.writeStringToFile(sb.toString(), filename);
     }
 
     static void saveNormalArrayToFile(float[][] normalMap){
@@ -61,35 +60,23 @@ public interface PerlinNoiseArrayInterface {
             sb.append("\n");
         }
 
-        int cnt = 0;
-        String filename = "normal" + ++cnt + ".csv";
-
-        while(new File(filename).exists())
-            filename = "normal" + ++cnt + ".csv";
-
-        try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter(filename));
-            outputWriter.write(sb.toString());
-            outputWriter.flush();
-            outputWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String filename = FileManager.nextAvailableFileNameIndex("normal", "csv");
+        FileManager.writeStringToFile(sb.toString(), filename);
     }
 
     static void saveZoomTable(FastNoise fn)
     {
-        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        sb1.append("Zoom\\Resolution,");
+        sb.append("Zoom\\Resolution,");
         for (int i = -2; i < 16; i++) {
-            sb1.append(i);
-            sb1.append(",");
+            sb.append(i);
+            sb.append(",");
         }
-        sb1.append("\n");
+        sb.append("\n");
         for (int i = -10; i < 10; i++) {
             float zoom = (float)Math.pow(1.1, i);
-            sb1.append(zoom);
+            sb.append(zoom);
             for (int j = -2; j < 16; j++) {
                 float noise = 0;
 
@@ -97,25 +84,41 @@ public interface PerlinNoiseArrayInterface {
                     float resolution = (float)Math.pow(2, k);
                     noise += fn.GetNoise((i * zoom) * resolution, (j * zoom) * resolution ) / resolution;
                 }
-                sb1.append(noise);
-                sb1.append(",");
+                sb.append(noise);
+                sb.append(",");
             }
-            sb1.append("\n");
+            sb.append("\n");
         }
 
-        int cnt = 0;
-        String filename = "zoomres" + ++cnt + ".csv";
+        String filename = FileManager.nextAvailableFileNameIndex("zoomres", "csv");
+        FileManager.writeStringToFile(sb.toString(), filename);
+    }
 
-        while(new File(filename).exists())
-            filename = "zoomres" + ++cnt + ".csv";
+    static String variableToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        List<String> titles = Stream.of("NOISE_COEFFICIENT", "NOISE_SHIFT", "NORMAL_COEFFICIENT", "NORMAL_SHIFT").toList();
 
-        try {
-            BufferedWriter outputWriter = new BufferedWriter(new FileWriter(filename));
-            outputWriter.write(sb1.toString());
-            outputWriter.flush();
-            outputWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<Supplier<Float>> getters = new ArrayList<>(
+                Arrays.asList(PerlinNoiseArray::getNoiseCoefficient,
+                        PerlinNoiseArray::getNoiseShift,
+                        PerlinNoiseArray::getNormalCoefficient,
+                        PerlinNoiseArray::getNormalShift));
+
+        IntStream.range(0, titles.size())
+                .boxed()
+                .forEach((index) -> {
+                    sb.append(titles.get(index))
+                            .append(",")
+                            .append(getters.get(index).get())
+                            .append("\n");
+                });
+        return sb.toString();
+    }
+
+    static void saveVariables(Component parent)
+    {
+        String filename = FileManager.askForFileName(parent, "Enter variable file name", "Variable save form");
+        FileManager.writeStringToFile(variableToString(), "variables", filename, "txt");
     }
 }
