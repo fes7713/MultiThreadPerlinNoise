@@ -1,10 +1,13 @@
 package Noise.Array;
 
+import Noise.FileManager.FileManager;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -14,6 +17,11 @@ public class VariableChanger extends JPanel{
 
     static int precision = 1000;
     ImageUpdateInterface iui ;
+
+    JSlider noiseSteepnessSlider;
+    JSlider noiseShiftSlider;
+    JSlider normalSteepnessSlider;
+    JSlider normalShiftSlider;
 
     public VariableChanger(ImageUpdateInterface iui){
         GroupLayout layout = new GroupLayout(this);
@@ -44,22 +52,25 @@ public class VariableChanger extends JPanel{
         JLabel normalShiftValue = new JLabel("0");
         this.add(normalShiftValue);
 
-        JSlider noiseSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getNoiseCoefficient() * precision));
+        noiseSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getNoiseCoefficient() * precision));
         this.add(noiseSteepnessSlider);
-        JSlider noiseShiftSlider = new JSlider(JSlider.HORIZONTAL, 0, 100 * precision, (int)(PerlinNoiseArray.getNoiseShift() * precision));
+        noiseShiftSlider = new JSlider(JSlider.HORIZONTAL, 0, 100 * precision, (int)(PerlinNoiseArray.getNoiseShift() * precision));
         this.add(noiseShiftSlider);
-        JSlider normalSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -1 * precision, 1 * precision, (int)(PerlinNoiseArray.getNormalCoefficient() * precision));
+        normalSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -1 * precision, 1 * precision, (int)(PerlinNoiseArray.getNormalCoefficient() * precision));
         this.add(normalSteepnessSlider);
-        JSlider normalShiftSlider = new JSlider(JSlider.HORIZONTAL, -50 * precision, 200 * precision, (int)(PerlinNoiseArray.getNormalShift() * precision));
+        normalShiftSlider = new JSlider(JSlider.HORIZONTAL, -50 * precision, 200 * precision, (int)(PerlinNoiseArray.getNormalShift() * precision));
         this.add(normalShiftSlider);
 
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener((event) -> {
             PerlinNoiseArrayInterface.saveVariables(this);
         });
-
         this.add(saveButton);
         JButton loadButton = new JButton("Load");
+        loadButton.addActionListener((event)->{
+            String filename = FileManager.askForFileNameFromListInDir(this, "variables", "Select variable file", "Variable load form");
+            PerlinNoiseArrayInterface.loadVariable("variables", filename, this);
+        });
         this.add(loadButton);
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
@@ -157,8 +168,21 @@ public class VariableChanger extends JPanel{
         frame.add(this);
         frame.pack();
         frame.setVisible(true);
+    }
 
-
+    public void updateData()
+    {
+        List<JSlider> sliders = Stream.of(noiseSteepnessSlider, noiseShiftSlider, normalSteepnessSlider, normalShiftSlider).toList();
+        List<Supplier<Float>> getters = new ArrayList<>(
+                Arrays.asList(PerlinNoiseArray::getNoiseCoefficient,
+                        PerlinNoiseArray::getNoiseShift,
+                        PerlinNoiseArray::getNormalCoefficient,
+                        PerlinNoiseArray::getNormalShift));
+        IntStream.range(0, sliders.size())
+                .boxed()
+                .forEach((index) -> {
+                    sliders.get(index).setValue((int)(getters.get(index).get() * precision));
+                });
     }
 
     public static void main(String[] args)
@@ -167,5 +191,6 @@ public class VariableChanger extends JPanel{
             System.out.println("Updating image");
         });
         vc.showVariableChanger();
+
     }
 }

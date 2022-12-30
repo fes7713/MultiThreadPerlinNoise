@@ -121,4 +121,24 @@ public interface PerlinNoiseArrayInterface {
         String filename = FileManager.askForFileName(parent, "Enter variable file name", "Variable save form");
         FileManager.writeStringToFile(variableToString(), "variables", filename, "txt");
     }
+
+    static void loadVariable(String foldername, String filename, VariableChanger vc)
+    {
+        List<Consumer<Float>> setters = new ArrayList<>(
+                Arrays.asList(PerlinNoiseArray::setNoiseCoefficient,
+                        PerlinNoiseArray::setNoiseShift,
+                        PerlinNoiseArray::setNormalCoefficient,
+                        PerlinNoiseArray::setNormalShift));
+        FileManager.loadStringFromFile(foldername, filename,
+                (data)->{
+                    String[] splited = data.split("\n");
+                    IntStream.range(0, setters.size())
+                            .boxed()
+                            .forEach((index) -> {
+                                setters.get(index).accept(Float.parseFloat(splited[index].split(",")[1]));
+                            });
+                });
+        if(vc != null)
+            vc.updateData();
+    }
 }

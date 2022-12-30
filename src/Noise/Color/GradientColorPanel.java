@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     private BufferedImage bi;
@@ -218,6 +219,24 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         return sb.toString();
     }
 
+    public void loadFromString(String data)
+    {
+        List<GradientNodeLine> inputLines = new ArrayList<>();
+
+        Stream.of(data.split("\n")).forEach(str -> {
+            GradientNodeLine line = GradientNodeLine.fromString(str, this.cui::update);
+            inputLines.add(line);
+        });
+
+        if(inputLines.size() < 1)
+            return;
+
+        lines.clear();
+        lines.addAll(inputLines);
+        selectedLine = inputLines.get(0);
+        cui.update();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         ColorEditorAction action = ColorEditorAction.valueOf(e.getActionCommand());
@@ -245,43 +264,12 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             }
             case LOAD -> {
                 System.out.println("Load");
-                try{
-                    File[] files= new File("presets").listFiles();
+                String filename = FileManager.askForFileNameFromListInDir(this,
+                        "presets",
+                        "Message",
+                        "Load presets");
 
-                    String[] values = new String[files.length];
-                    IntStream.range(0, values.length).forEach(i -> {
-                        values[i] = files[i].getName();
-                    });
-
-                    Object value = JOptionPane.showInputDialog(this, "Message",
-                            "Load presets", JOptionPane.ERROR_MESSAGE,
-                            new ImageIcon("icons/preset1.png"), values, values[0]);
-
-                    if(value == null)
-                        return;
-
-                    List<GradientNodeLine> inputLines = new ArrayList<>();
-                    BufferedReader inputReader = new BufferedReader(new FileReader("presets/" + value));
-
-                    inputReader.lines().forEach(data -> {
-                        GradientNodeLine line = GradientNodeLine.fromString(data, this.cui::update);
-                        inputLines.add(line);
-                    });
-
-                    inputReader.close();
-
-                    if(inputLines.size() < 1)
-                        return;
-
-                    lines.clear();
-                    lines.addAll(inputLines);
-                    selectedLine = inputLines.get(0);
-                    cui.update();
-
-                }catch(IOException ie)
-                {
-                    ie.printStackTrace();
-                }
+                FileManager.loadStringFromFile("presets", filename, this::loadFromString);
             }
         }
     }
