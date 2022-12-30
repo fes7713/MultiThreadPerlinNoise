@@ -2,8 +2,6 @@ package Noise;
 
 import Noise.Color.GradientColorEditorPanel;
 
-import java.awt.*;
-
 public class ColorProvider {
     private static final ColorProvider provider = new ColorProvider();
 

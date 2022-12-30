@@ -1,16 +1,11 @@
 package Noise.Array;
 
-import Noise.Color.GradientNodeLine;
 import Noise.FastNoise;
 import Noise.FileManager.FileManager;
 import Noise.PaintInterface;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

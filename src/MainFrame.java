@@ -1,4 +1,3 @@
-import Noise.Array.VariableChanger;
 import Noise.FastNoise;
 
 import javax.swing.*;

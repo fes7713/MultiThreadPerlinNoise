@@ -6,11 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class GradientColorPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
@@ -259,8 +257,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             }
             case SAVE -> {
                 System.out.println("save");
-                String filename = FileManager.askForFileName(this, "Enter preset file name", "Preset save form");
-                FileManager.writeStringToFile(this.toString(), "presets", filename, "txt");
+                GradientInterface.saveCurrentPreset(this, "presets", this);
             }
             case LOAD -> {
                 System.out.println("Load");

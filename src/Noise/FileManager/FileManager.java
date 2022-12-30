@@ -1,7 +1,5 @@
 package Noise.FileManager;
 
-import Noise.Color.GradientNodeLine;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;

@@ -1,7 +1,5 @@
 package Noise.Color;
 
-import Noise.PaintInterface;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -23,6 +21,7 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         buttons = new ArrayList<>();
         colorPanel = new GradientColorPanel(cui);
 
+        GradientInterface.loadDefaultColors(colorPanel);
 
         Stream.of(ColorEditorAction.values()).forEach(action -> {
             JButton actionButton = new JButton(action.name());

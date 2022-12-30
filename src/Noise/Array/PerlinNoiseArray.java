@@ -7,9 +7,7 @@ import Noise.PaintInterface;
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 

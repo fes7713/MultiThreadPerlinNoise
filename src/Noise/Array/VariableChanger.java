@@ -15,7 +15,7 @@ public class VariableChanger extends JPanel{
 
     GroupLayout layout;
 
-    static int precision = 1000;
+    static int precision = 10000;
     ImageUpdateInterface iui ;
 
     JSlider noiseSteepnessSlider;
@@ -54,7 +54,7 @@ public class VariableChanger extends JPanel{
 
         noiseSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getNoiseCoefficient() * precision));
         this.add(noiseSteepnessSlider);
-        noiseShiftSlider = new JSlider(JSlider.HORIZONTAL, 0, 100 * precision, (int)(PerlinNoiseArray.getNoiseShift() * precision));
+        noiseShiftSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getNoiseShift() * precision));
         this.add(noiseShiftSlider);
         normalSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -1 * precision, 1 * precision, (int)(PerlinNoiseArray.getNormalCoefficient() * precision));
         this.add(normalSteepnessSlider);

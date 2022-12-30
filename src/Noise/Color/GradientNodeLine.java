@@ -2,16 +2,14 @@ package Noise.Color;
 
 import Noise.PaintInterface;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class GradientNodeLine  implements GradientInterface, Comparable<GradientNodeLine>, Cloneable, Serializable{

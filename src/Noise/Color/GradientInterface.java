@@ -1,8 +1,14 @@
 package Noise.Color;
 
+import Noise.FileManager.FileManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public interface  GradientInterface{
@@ -77,5 +83,38 @@ public interface  GradientInterface{
         if(newhsvvals[0] > 1)
             newhsvvals[0] -= 1;
         return newhsvvals;
+    }
+
+    static void saveCurrentPreset(Component parent, String foldername, GradientColorPanel gcp)
+    {
+        String filename = FileManager.askForFileName(parent, "Enter preset file name", "Preset save form");
+        FileManager.writeStringToFile(gcp.toString(), foldername, filename, "txt");
+    }
+
+    static void loadDefaultColors(GradientColorPanel gcp)
+    {
+        if(!FileManager.loadStringFromFile("presets", "default.txt", gcp::loadFromString))
+        {
+            String foldername = "presets";
+            Path p = Paths.get(foldername);
+            if(!Files.exists(p)) {
+                try {
+                    Files.createDirectories(p);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+
+            FileManager.writeStringToFile(
+                    """
+                            0.0===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]
+                            0.5===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]
+                            0.1===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]""",
+                    foldername,
+                    "default",
+                    "txt");
+        }
+        FileManager.loadStringFromFile("presets", "default.txt", gcp::loadFromString);
     }
 }
