@@ -248,18 +248,4 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         NORMAL_SHIFT = shift;
     }
-
-    public static void main(String[] args)
-    {
-        FastNoise fn = new FastNoise();
-        fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
-        fn.SetInterp(FastNoise.Interp.Quintic);
-        PerlinNoiseArray noiseArray = new PerlinNoiseArray(fn, 0, 0, 4, 10000, 1);
-//        noiseArray.initNoiseMap();
-        for (int i = -2; i < 14; i++) {
-            noiseArray.increaseResolution((float)Math.pow(2, i));
-        }
-
-        PerlinNoiseArrayInterface.saveZoomTable(fn);
-    }
 }
