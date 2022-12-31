@@ -28,3 +28,16 @@ In order to start application, you need to have Java 17 installed on your comput
 | Zoom | User can zoom into the map by scrolling the mouse
 | Terrain Variable Adjustment | By using the built-in, variable adjustment tool, user can change the shape of the terrain by the simple interaction with GUI form.
 | Color Change View | User can change the coloring of the map by interacting with the gradient color panel built-in the application.
+
+# What is Perlin Noise
+![image](https://user-images.githubusercontent.com/71058334/210123233-30155fd2-7b45-43b2-b3dc-e44ffbcedd11.png)
+![saved](https://user-images.githubusercontent.com/71058334/210123237-b509e4b4-ad7e-465d-9ff6-ec9c3bd07da3.png)
+
+# Color Change Form
+![image](https://user-images.githubusercontent.com/71058334/210123247-c46b3ef1-3ea1-4c60-a0ca-0a02d38b2c57.png)
+- 2D Color interpolation
+- Live change of the color data on the map.
+
+
+# Variable Change Form
+![image](https://user-images.githubusercontent.com/71058334/210123267-03680682-05f1-41c1-a2d4-0dcc8dcc78cd.png)
