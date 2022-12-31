@@ -41,9 +41,11 @@ Second image is the example of the 2D perlin noise with height map data for each
 
 # Color Change Form
 ![image](https://user-images.githubusercontent.com/71058334/210123247-c46b3ef1-3ea1-4c60-a0ca-0a02d38b2c57.png)
+After the successful generation of the monochrome height map image, coloring the map was my next goal to have the clean map image. Colors used in the map is provided by gradient color panel.
+## Key program ideas for the coloring of the map.
 - 2D Color interpolation
 - Live change of the color data on the map.
-
+The color panel takes several color key points to generate complete color map. Colors between key points are linearly interpolated.
 
 # Variable Change Form
 ![image](https://user-images.githubusercontent.com/71058334/210123267-03680682-05f1-41c1-a2d4-0dcc8dcc78cd.png)
