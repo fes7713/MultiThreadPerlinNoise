@@ -19,4 +19,12 @@ In order to start application, you need to have Java 17 installed on your comput
 3. Go to Project Structure and link JDK 17 and vecmath to the project.
 4. Run the project by hitting the Build button in the IED.
 
+# Available functionalities.
 
+| Keyword | Description 
+---- | ----
+| High resolution image | This apprication provides the high resolution image of terrain image. 
+| Move with Mouse | User can move through the map by draging mouse on the map.
+| Zoom | User can zoom into the map by scrolling the mouse
+| Terrain Variable Adjustment | By using the built-in, variable adjustment tool, user can change the shape of the terrain by the simple interaction with GUI form.
+| Color Change View | User can change the coloring of the map by interacting with the gradient color panel built-in the application.
