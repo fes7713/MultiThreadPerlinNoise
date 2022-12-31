@@ -80,6 +80,16 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         colorProvider.showColorEditor();
     }
 
+    public void setMinZoomCount(int zoomCount)
+    {
+        // TODO
+    }
+
+    public void setMaxZoomCount(int zoomCount)
+    {
+        // TODO
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
