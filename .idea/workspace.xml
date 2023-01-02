@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="config files">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/vecmath_1_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="project files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,21 +155,9 @@
       <workItem from="1672192561179" duration="4653000" />
       <workItem from="1672206202951" duration="19779000" />
       <workItem from="1672313048208" duration="30859000" />
-      <workItem from="1672427779051" duration="5815000" />
-    </task>
-    <task id="LOCAL-00037" summary="Gradient color refactored and color point box added">
-      <created>1671776415636</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1671776415636</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Color line">
-      <created>1671778276451</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1671778276451</updated>
+      <workItem from="1672427779051" duration="6690000" />
+      <workItem from="1672482326979" duration="12110000" />
+      <workItem from="1672621168152" duration="18908000" />
     </task>
     <task id="LOCAL-00039" summary="Color Gradient Editor panel done">
       <created>1671793736306</created>
@@ -506,7 +488,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672431279398</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary=" up">
+      <created>1672456637027</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1672456637027</updated>
+    </task>
+    <task id="LOCAL-00087" summary="project files">
+      <created>1672456667661</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1672456667661</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,8 +532,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="first shade" />
-    <MESSAGE value="Created gradient line" />
     <MESSAGE value="Line position of line gradient set" />
     <MESSAGE value="Line gradient paint properly at the specified location by line position field" />
     <MESSAGE value="Line paint bug at the edge of the screen fixed. Selected line is now drawn bigger" />
@@ -561,16 +555,13 @@
     <MESSAGE value="Default variable setting. Image update is needed" />
     <MESSAGE value="default color save and load. imports cleaned" />
     <MESSAGE value="config files" />
-    <option name="LAST_COMMIT_MESSAGE" value="config files" />
+    <MESSAGE value=" up" />
+    <MESSAGE value="project files" />
+    <option name="LAST_COMMIT_MESSAGE" value="project files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/ChunkProvider.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Color/NoiseColor.java</url>
           <line>42</line>
@@ -600,21 +591,6 @@
           <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
           <line>183</line>
           <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java</url>
-          <line>246</line>
-          <option name="timeStamp" value="189" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/GradientInterface.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="192" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
