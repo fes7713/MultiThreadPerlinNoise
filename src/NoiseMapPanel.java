@@ -119,7 +119,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         if(-left * zoom > startLeftMinLimit && (-left + this.getWidth()) * zoom <  startLeftMaxLimit)
             startLeft = left;
         else if((startLeftMaxLimit - startLeftMinLimit) < this.getWidth() * zoom)
-            startLeft =   (int)((((startLeftMaxLimit + startLeftMinLimit) / zoom)  + this.getWidth()) / 2);
+            startLeft =   (int)(( - ((startLeftMaxLimit + startLeftMinLimit) / zoom)  + this.getWidth()) / 2);
         else if(-left * zoom <= startLeftMinLimit)
             startLeft = - (int)(startLeftMinLimit / zoom);
         else
@@ -132,7 +132,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         if(-top * zoom > startTopMinLimit && (-top  + this.getHeight()) * zoom <  startTopMaxLimit)
             startTop = top;
         else if((startTopMaxLimit - startTopMinLimit) < this.getHeight() * zoom)
-            startTop = (int)((((startTopMaxLimit + startTopMinLimit) / zoom) + this.getHeight()) / 2);
+            startTop = (int)(( - ((startTopMaxLimit + startTopMinLimit) / zoom) + this.getHeight()) / 2);
         else if(-top * zoom <= startTopMinLimit)
             startTop = - (int)(startTopMinLimit / zoom);
         else

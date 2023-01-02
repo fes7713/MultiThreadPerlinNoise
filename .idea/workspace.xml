@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Files cleaned and perlin noise variables changed">
-      <change afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Non-zero left min and max sum value test and fix and fall off map class test">
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +73,7 @@
       <recent name="C:\Users\fes77\IdeaProjects\MuthThreadParlinNoise\presets" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainFrame">
+  <component name="RunManager" selected="Application.VariableChanger">
     <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Noise.Array.FallOffImage" />
       <module name="MuthThreadParlinNoise" />
@@ -132,9 +129,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.MainFrame" />
         <item itemvalue="Application.FallOffImage" />
-        <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.PerlinNoiseArray" />
         <item itemvalue="Application.GradientColorEditorPanel" />
       </list>
@@ -159,14 +156,7 @@
       <workItem from="1672313048208" duration="30859000" />
       <workItem from="1672427779051" duration="6690000" />
       <workItem from="1672482326979" duration="12110000" />
-      <workItem from="1672621168152" duration="23162000" />
-    </task>
-    <task id="LOCAL-00042" summary="Color editor buttons grid layput">
-      <created>1671864923303</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1671864923303</updated>
+      <workItem from="1672621168152" duration="23598000" />
     </task>
     <task id="LOCAL-00043" summary="Double click to edit color">
       <created>1671878953529</created>
@@ -504,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672666845695</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Non-zero left min and max sum value test and fix and fall off map class test">
+      <created>1672670272333</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1672670272334</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,8 +531,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Line paint bug at the edge of the screen fixed. Selected line is now drawn bigger" />
-    <MESSAGE value="2D color array" />
     <MESSAGE value="2d color array progress. bug in showing color" />
     <MESSAGE value="Color 2d array connected to the main frame" />
     <MESSAGE value="GradientInterface introduced" />
@@ -559,7 +554,9 @@
     <MESSAGE value="project files" />
     <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
     <MESSAGE value="Files cleaned and perlin noise variables changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Files cleaned and perlin noise variables changed" />
+    <MESSAGE value="Non-zero left min and max sum value test and fix" />
+    <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Non-zero left min and max sum value test and fix and fall off map class test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -591,13 +588,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>394</line>
-          <option name="timeStamp" value="218" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>392</line>
-          <option name="timeStamp" value="219" />
+          <line>117</line>
+          <option name="timeStamp" value="220" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
