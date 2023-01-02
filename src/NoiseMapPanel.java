@@ -41,8 +41,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private static final int CHUNK_SIZE = 5;
     private static final float ZOOM_RATIO = 2;
 
-    private static final int DEFAULT_ZOOM_MAX_LIMIT = 14;
-    private static final int DEFAULT_ZOOM_MIN_LIMIT = -2;
+    private static final int DEFAULT_ZOOM_MAX_LIMIT = 4;
+    private static final int DEFAULT_ZOOM_MIN_LIMIT = - 10;
     private static final int DEFAULT_LEFT_MIN_LIMIT = - 2000;
     private static final int DEFAULT_LEFT_MAX_LIMIT = 2000;
     private static final int DEFAULT_TOP_MIN_LIMIT = -2000;
@@ -238,16 +238,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(mouseX, 0, mouseX, this.getHeight());
         g2d.drawLine(0, mouseY, this.getWidth(), mouseY);
 
-
-        float width = this.getWidth() * zoom;
-        float max_width = (startLeftMaxLimit - startLeftMinLimit);
-        System.out.println(width);
-        System.out.println(max_width);
-        System.out.println((startLeftMaxLimit - startLeftMinLimit) < this.getWidth() * zoom);
-
-        System.out.println("rightBottomCornerX = " + rightBottomCornerX);
-        System.out.println("rightCornerY = " + rightBottomCornerY);
-//        g2d.drawLine(leftTopCornerX, leftTopCornerY, rightBottomCornerX, rightBottomCornerY);
         g2d.drawRect(
                 leftTopCornerX,
                 leftTopCornerY,
@@ -411,6 +401,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             chunkProvider.zoomChanged(zoom);
 
             updateChunkGroups();
+        }
+        else{
+            setStartLeft((int)(mouseX - (mouseX - startLeft) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
+            setStartTop((int)(mouseY - (mouseY - startTop) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
+            repaint();
         }
 
     }

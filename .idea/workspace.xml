@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="project files">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Drag limit, zoom limit and grayed outside limit zone">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,14 +159,7 @@
       <workItem from="1672313048208" duration="30859000" />
       <workItem from="1672427779051" duration="6690000" />
       <workItem from="1672482326979" duration="12110000" />
-      <workItem from="1672621168152" duration="18908000" />
-    </task>
-    <task id="LOCAL-00039" summary="Color Gradient Editor panel done">
-      <created>1671793736306</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1671793736306</updated>
+      <workItem from="1672621168152" duration="19587000" />
     </task>
     <task id="LOCAL-00040" summary="Color Provider and map color changed">
       <created>1671843474400</created>
@@ -502,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672456667661</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Drag limit, zoom limit and grayed outside limit zone">
+      <created>1672666104546</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1672666104546</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +534,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Line position of line gradient set" />
     <MESSAGE value="Line gradient paint properly at the specified location by line position field" />
     <MESSAGE value="Line paint bug at the edge of the screen fixed. Selected line is now drawn bigger" />
     <MESSAGE value="2D color array" />
@@ -557,7 +558,8 @@
     <MESSAGE value="config files" />
     <MESSAGE value=" up" />
     <MESSAGE value="project files" />
-    <option name="LAST_COMMIT_MESSAGE" value="project files" />
+    <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
+    <option name="LAST_COMMIT_MESSAGE" value="Drag limit, zoom limit and grayed outside limit zone" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -578,11 +580,6 @@
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java</url>
-          <line>163</line>
-          <option name="timeStamp" value="179" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java</url>
           <line>142</line>
           <option name="timeStamp" value="187" />
@@ -591,6 +588,16 @@
           <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
           <line>183</line>
           <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>111</line>
+          <option name="timeStamp" value="217" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -147,23 +147,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (float)(Math.atan(normal) / Math.PI + 0.5);
     }
 
-
-
     public void updateImage(PaintInterface pi)
     {
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-//                float light = 150 * (2 + lightIntensity(
-//                        zoom, 0, convertNoise(noiseMap[i + 1][j]) - convertNoise(noiseMap[i][j]),
-//                        0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
-//                        new Vector3f(0, -1, -1)));
-
-//                bi.setRGB(i, j, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
-                // TODO delete
-                if(convertNoise(noiseMap[i][j]) == 255)
-                    System.out.println(normalMap[i][j]);
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
                             (int)(convertNormal(normalMap[i][j]) * ColorProvider.COLORS.length)
