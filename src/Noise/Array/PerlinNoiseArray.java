@@ -133,7 +133,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
-        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
+//        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
+        return (float)(1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
     }
 
     public float convertNormal(float normal)
@@ -143,21 +144,23 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        int s = 32;
 //        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
 //        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
-        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
 //        return (float)(Math.atan(normal) / Math.PI + 0.5);
+//        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
+        return (float)(1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
     }
 
     public void updateImage(PaintInterface pi)
     {
+        int length = ColorProvider.COLORS.length - 1;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
-                            (int)(convertNormal(normalMap[i][j]) * ColorProvider.COLORS.length)
+                            (int)(convertNormal(normalMap[i][j]) * length)
                         ][
-                            (int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)
+                            (int)(convertNoise(noiseMap[i][j]) * length)
                         ]);
             }
         }

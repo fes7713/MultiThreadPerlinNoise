@@ -43,8 +43,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private static final int DEFAULT_ZOOM_MAX_LIMIT = 4;
     private static final int DEFAULT_ZOOM_MIN_LIMIT = - 10;
-    private static final int DEFAULT_LEFT_MIN_LIMIT = - 2000;
-    private static final int DEFAULT_LEFT_MAX_LIMIT = 2000;
+    private static final int DEFAULT_LEFT_MIN_LIMIT = - 3000;
+    private static final int DEFAULT_LEFT_MAX_LIMIT = 5000;
     private static final int DEFAULT_TOP_MIN_LIMIT = -2000;
     private static final int DEFAULT_TOP_MAX_LIMIT = 2000;
 
@@ -101,12 +101,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private boolean setZoomCount(int count)
     {
-        if(minZoomCount < count && count < maxZoomCount)
+        if(minZoomCount <= count && count <= maxZoomCount)
         {
             zoomCount = count;
             return true;
         }
-        else if(minZoomCount >= count)
+        else if(minZoomCount > count)
             zoomCount = minZoomCount;
         else
             zoomCount = maxZoomCount;
@@ -211,7 +211,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         mainGroup.drawImage(g2d);
         g2d.setColor(new Color(0, 0, 0, 0.5F));
         float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
-
+        System.out.println(zoom);
         int rightBottomCornerX = (int)(startLeftMaxLimit / zoom + startLeft);
         int rightBottomCornerY = (int)(startTopMaxLimit / zoom + startTop);
         int leftTopCornerX = (int)(startLeftMinLimit / zoom + startLeft);
@@ -241,8 +241,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawRect(
                 leftTopCornerX,
                 leftTopCornerY,
-                this.getWidth() - leftTopCornerX * 2,
-                this.getHeight() - leftTopCornerY * 2
+                rightBottomCornerX - leftTopCornerX,
+                rightBottomCornerY - leftTopCornerY
         );
 
         g2d.drawLine(0, 0, leftTopCornerX, leftTopCornerY);
