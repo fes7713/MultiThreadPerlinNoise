@@ -167,12 +167,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         for(int i = 0; i < width; i++)
         {
-            bi.setRGB(i, height - 1, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(i, height - 1, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
-            bi.setRGB(width - 1, i, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(width - 1, i, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
         }
 
         if(pi != null)

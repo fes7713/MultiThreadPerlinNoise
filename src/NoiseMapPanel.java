@@ -403,8 +403,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             updateChunkGroups();
         }
         else{
-            setStartLeft((int)(mouseX - (mouseX - startLeft) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
-            setStartTop((int)(mouseY - (mouseY - startTop) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
+            setStartLeft(startLeft);
+            setStartTop(startTop);
             repaint();
         }
 

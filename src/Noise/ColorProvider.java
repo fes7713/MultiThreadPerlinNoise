@@ -3,6 +3,7 @@ package Noise;
 import Noise.Color.GradientColorEditorPanel;
 
 public class ColorProvider {
+    private static int COLOR_LEVEL = 255;
     private static final ColorProvider provider = new ColorProvider();
 
     public static int[][] COLORS;
@@ -15,7 +16,7 @@ public class ColorProvider {
         editor = new GradientColorEditorPanel(() -> {
             System.out.println("Default image update");
         });
-        COLORS = editor.getUpdatedColorArray(255);
+        COLORS = editor.getUpdatedColorArray(COLOR_LEVEL);
     }
 
     public static ColorProvider getInstance(){
@@ -27,7 +28,7 @@ public class ColorProvider {
         this.pi = pi;
         editor.setColorUpdateInterface(() -> {
             System.out.println("image update ex");
-            COLORS = editor.getUpdatedColorArray(255);
+            COLORS = editor.getUpdatedColorArray(COLOR_LEVEL);
             pi.paint();
         });
     }
@@ -35,5 +36,15 @@ public class ColorProvider {
     public void showColorEditor()
     {
         editor.showFrame();
+    }
+
+    public void setColorLevel(int colorLevel)
+    {
+        if(colorLevel < 2)
+            throw new IllegalArgumentException("Illegal color level");
+
+        COLOR_LEVEL = colorLevel;
+        COLORS = editor.getUpdatedColorArray(COLOR_LEVEL);
+        pi.paint();
     }
 }
