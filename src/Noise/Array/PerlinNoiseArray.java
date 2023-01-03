@@ -24,7 +24,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private int height;
     private int width;
 
-    private float centerX = 0;
+    private float centerX = 1000;
     private float centerY = 0;
 
     private final FastNoise fn;
@@ -90,7 +90,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         this.zoom = zoom;
         this.left = left * zoom;
         this.top = top * zoom;
-        generateFallOffMap();
+    }
+
+    @Override
+    public void setCenter(float centerX, float centerY) {
+        this.centerX = centerX;
+        this.centerY = centerY;
     }
 
     @Override
@@ -154,10 +159,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
                 float value = Math.max(Math.abs(x), Math.abs(y));
                 fallOffMap[i][j] = (float)Math.exp(- (
-                        (i  * zoom + left - 0 / 2F) * (i  * zoom + left - 0 / 2F)
+                        (i  * zoom + left - centerX / 2F) * (i  * zoom + left - centerX / 2F)
                                 +
-                        (j * zoom + top - 0 / 2F) * (j * zoom + top - 0 / 2F))
-                        / 50000000F);
+                        (j * zoom + top - centerY / 2F) * (j * zoom + top - centerY / 2F))
+                        / 4000000F);
             }
         }
     }
@@ -193,7 +198,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         .COLORS[
                             (int)(convertNormal(normalMap[i][j])  * fallOffMap[i][j] * length)
                         ][
-                            (int)(convertNoise(noiseMap[i][j])  * fallOffMap[i][j] * length)
+                            (int)(convertNoise(noiseMap[i][j])  * Math.pow(fallOffMap[i][j], 2) * length)
                         ]);
             }
         }
@@ -271,4 +276,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         NORMAL_SHIFT = shift;
     }
+
+
+
 }
