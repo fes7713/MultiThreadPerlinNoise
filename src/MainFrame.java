@@ -16,6 +16,8 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseMapPanel panel = new NoiseMapPanel() ;
+//        MapEditor mapEditor = new MapEditor(panel, panel::updateImage);
+//        mapEditor.showMapEditor();
         panel.showColorEditor();
         panel.showVariableChanger();
         panel.repaint();

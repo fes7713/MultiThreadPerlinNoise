@@ -172,21 +172,37 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         maxZoomCount = zoomCount;
     }
 
-    public void setCenterX(int centerX)
+    public float getCenterX() {
+        return centerX;
+    }
+
+    public float getCenterY() {
+        return centerY;
+    }
+
+    public float getMapWidth() {
+        return mapWidth;
+    }
+
+    public float getMapHeight() {
+        return mapHeight;
+    }
+
+    public void setCenterX(float centerX)
     {
         this.centerX = centerX;
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
     }
 
-    public void setCenterY(int centerY)
+    public void setCenterY(float centerY)
     {
         this.centerY = centerY;
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
     }
 
-    public void setMapWidth(int mapWidth)
+    public void setMapWidth(float mapWidth)
     {
         if(mapWidth < 0)
             return;
@@ -195,7 +211,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setStartTop(startTop);
     }
 
-    public void setMapHeight(int mapHeight)
+    public void setMapHeight(float mapHeight)
     {
         if(mapHeight < 0)
             return;

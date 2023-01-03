@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fall off map">
-      <change afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="replaced limit system to center and length system">
+      <change afterPath="$PROJECT_DIR$/src/MapEditorUpdateInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -76,19 +78,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
-    <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.FallOffImage" />
-      <module name="MuthThreadParlinNoise" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Noise.Color.GradientColorEditorPanel" />
       <module name="MuthThreadParlinNoise" />
@@ -104,6 +93,13 @@
     </configuration>
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainFrame" />
+      <module name="MuthThreadParlinNoise" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MapEditor" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,10 +128,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.PerlinNoiseArray" />
         <item itemvalue="Application.GradientColorEditorPanel" />
-        <item itemvalue="Application.FallOffImage" />
       </list>
     </recent_temporary>
   </component>
@@ -161,13 +157,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00052" summary="No semaphore">
-      <created>1671966955737</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1671966955737</updated>
     </task>
     <task id="LOCAL-00053" summary="Chunk map key problem fixed">
       <created>1671968331503</created>
@@ -505,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672754602178</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="replaced limit system to center and length system">
+      <created>1672758594172</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1672758594172</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,7 +531,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="variable adjusted" />
     <MESSAGE value="Variable changer" />
     <MESSAGE value="Code cleaned" />
     <MESSAGE value="File save function moved to static functions" />
@@ -560,7 +555,8 @@
     <MESSAGE value="fall off recovered" />
     <MESSAGE value="fall off working save" />
     <MESSAGE value="fall off map" />
-    <option name="LAST_COMMIT_MESSAGE" value="fall off map" />
+    <MESSAGE value="replaced limit system to center and length system" />
+    <option name="LAST_COMMIT_MESSAGE" value="replaced limit system to center and length system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
