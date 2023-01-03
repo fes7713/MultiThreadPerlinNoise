@@ -60,3 +60,14 @@ The color panel takes several color key points to generate complete color map. C
 
 # Variable Change Form
 ![image](https://user-images.githubusercontent.com/71058334/210123267-03680682-05f1-41c1-a2d4-0dcc8dcc78cd.png)
+
+# Fall Off Map
+![image](https://user-images.githubusercontent.com/71058334/210405568-f56882c4-2f0b-45d4-90ac-383b1360ac0a.png)
+Edge of the map will be dropped like the above image and the region outside of the boundary is shown in darker color. 
+## Fall Off Map editor
+![image](https://user-images.githubusercontent.com/71058334/210406219-91af2ae6-8e5e-4aa1-ae1d-acffb4d26e52.png)
+
+The application allows user to edit the width and height of the map region as well as the shape of the fall map. Users can interact with fall off map editor to edit inside variables for fall of mapp generator and find the best settings for the map.
+
+
+
