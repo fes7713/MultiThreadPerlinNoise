@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="map editor">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="map editor code fix">
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,13 +153,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00054" summary="Stopping cleared chunks">
-      <created>1671969727597</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1671969727597</updated>
     </task>
     <task id="LOCAL-00055" summary="Color array from Color[] to int[]">
       <created>1671971444415</created>
@@ -502,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672761841739</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="map editor code fix">
+      <created>1672762765155</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1672762765156</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +527,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Code cleaned" />
     <MESSAGE value="File save function moved to static functions" />
     <MESSAGE value="Removed main from PerlinNoiseArray" />
     <MESSAGE value="FileManager" />
@@ -557,7 +551,8 @@
     <MESSAGE value="fall off map" />
     <MESSAGE value="replaced limit system to center and length system" />
     <MESSAGE value="map editor" />
-    <option name="LAST_COMMIT_MESSAGE" value="map editor" />
+    <MESSAGE value="map editor code fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="map editor code fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -586,11 +581,6 @@
           <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
           <line>183</line>
           <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="244" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

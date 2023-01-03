@@ -193,6 +193,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         this.centerX = centerX;
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
+        updateChunkGroups();
     }
 
     public void setCenterY(float centerY)
@@ -200,6 +201,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         this.centerY = centerY;
         setStartTop(startTop);
         chunkProvider.setCenter(centerX, centerY);
+        updateChunkGroups();
     }
 
     public void setMapWidth(float mapWidth)
