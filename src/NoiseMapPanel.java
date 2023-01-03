@@ -22,11 +22,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int startLeft;
     private int startTop;
 
-    private int startLeftMinLimit = DEFAULT_LEFT_MIN_LIMIT;
-    private int startLeftMaxLimit = DEFAULT_LEFT_MAX_LIMIT;
-    private int startTopMinLimit = DEFAULT_TOP_MIN_LIMIT;
-    private int startTopMaxLimit = DEFAULT_TOP_MAX_LIMIT;
-
     private final int tableWidth;
     private final int tableHeight;
 
@@ -43,10 +38,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private static final int DEFAULT_ZOOM_MAX_LIMIT = 4;
     private static final int DEFAULT_ZOOM_MIN_LIMIT = - 10;
-    private static final int DEFAULT_LEFT_MIN_LIMIT = - 8000;
-    private static final int DEFAULT_LEFT_MAX_LIMIT = -2000;
-    private static final int DEFAULT_TOP_MIN_LIMIT = -2000;
-    private static final int DEFAULT_TOP_MAX_LIMIT = 2000;
+    private static final int DEFAULT_CENTERX = 0;
+    private static final int DEFAULT_CENTERY = 0;
+    private static final int DEFAULT_MAP_WIDTH = 4000;
+    private static final int DEFAULT_MAP_HEIGHT = 4000;
+
+    private float centerX;
+    private float centerY;
+    private float mapWidth;
+    private float mapHeight;
 
     public NoiseMapPanel(NoiseChunkGroup ncg)
     {
@@ -71,7 +71,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         zoomCount = 0;
 
         chunkProvider.setImageUpdateInterface(this::updateImage);
-        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
+        centerX = DEFAULT_CENTERX;
+        centerY = DEFAULT_CENTERY;
+        mapWidth = DEFAULT_MAP_WIDTH;
+        mapHeight = DEFAULT_MAP_HEIGHT;
+
+        chunkProvider.setCenter((int)centerX, (int)centerY);
     }
 
     public NoiseMapPanel()
@@ -120,27 +125,27 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private void setStartLeft(int left)
     {
         float zoom = getZoom();
-        if(-left * zoom > startLeftMinLimit && (-left + this.getWidth()) * zoom <  startLeftMaxLimit)
+        if(-left * zoom > centerX - mapWidth / 2 && (-left + this.getWidth()) * zoom <  centerX + mapWidth / 2)
             startLeft = left;
-        else if((startLeftMaxLimit - startLeftMinLimit) < this.getWidth() * zoom)
-            startLeft =   (int)(( - ((startLeftMaxLimit + startLeftMinLimit) / zoom)  + this.getWidth()) / 2);
-        else if(-left * zoom <= startLeftMinLimit)
-            startLeft = - (int)(startLeftMinLimit / zoom);
+        else if(mapWidth < this.getWidth() * zoom)
+            startLeft =   (int)(( - centerX / zoom  + this.getWidth() / 2));
+        else if(-left * zoom <= centerX - mapWidth / 2)
+            startLeft = - (int)((centerX - mapWidth / 2) / zoom);
         else
-            startLeft = - (int)(startLeftMaxLimit  / zoom) + this.getWidth();
+            startLeft = - (int)((centerX + mapWidth / 2)  / zoom) + this.getWidth();
     }
 
     private void setStartTop(int top)
     {
         float zoom = getZoom();
-        if(-top * zoom > startTopMinLimit && (-top  + this.getHeight()) * zoom <  startTopMaxLimit)
+        if(-top * zoom > centerY - mapHeight / 2 && (-top  + this.getHeight()) * zoom <  centerY + mapHeight / 2)
             startTop = top;
-        else if((startTopMaxLimit - startTopMinLimit) < this.getHeight() * zoom)
-            startTop = (int)(( - ((startTopMaxLimit + startTopMinLimit) / zoom) + this.getHeight()) / 2);
-        else if(-top * zoom <= startTopMinLimit)
-            startTop = - (int)(startTopMinLimit / zoom);
+        else if(mapHeight < this.getHeight() * zoom)
+            startTop = (int)(( - centerY / zoom + this.getHeight() / 2));
+        else if(-top * zoom <= centerY - mapHeight / 2)
+            startTop = - (int)((centerY - mapHeight / 2) / zoom);
         else
-            startTop = - (int)(startTopMaxLimit / zoom) + this.getHeight();
+            startTop = - (int)((centerY + mapHeight / 2) / zoom) + this.getHeight();
     }
 
     public void setMinZoomCount(int zoomCount)
@@ -167,46 +172,35 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         maxZoomCount = zoomCount;
     }
 
-    public void setStartLeftMinLimit(int min)
+    public void setCenterX(int centerX)
     {
-        if(startLeftMaxLimit < min)
-        {
-            System.err.println("Error updating start left min");
-            return;
-        }
-
-        startLeftMinLimit = min;
+        this.centerX = centerX;
         setStartLeft(startLeft);
-        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
+        chunkProvider.setCenter(centerX, centerY);
     }
 
-    public void setStartLeftMaxLimit(int max)
+    public void setCenterY(int centerY)
     {
-        if(max < startLeftMinLimit)
-            return;
-
-        startLeftMaxLimit = max;
+        this.centerY = centerY;
         setStartLeft(startLeft);
-        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
+        chunkProvider.setCenter(centerX, centerY);
     }
 
-    public void setStartTopMinLimit(int min)
+    public void setMapWidth(int mapWidth)
     {
-        if(startTopMinLimit < min)
+        if(mapWidth < 0)
             return;
 
-        startTopMinLimit = min;
+        this.mapWidth = mapWidth;
         setStartTop(startTop);
-        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
-    public void setStartTopMaxLimit(int max)
+    public void setMapHeight(int mapHeight)
     {
-        if(max < startTopMaxLimit)
+        if(mapHeight < 0)
             return;
-        startTopMaxLimit = max;
+        this.mapHeight = mapHeight;
         setStartTop(startTop);
-        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     @Override
@@ -220,10 +214,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.setColor(new Color(0, 0, 0, 0.5F));
         float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
         System.out.println(zoom);
-        int rightBottomCornerX = (int)(startLeftMaxLimit / zoom + startLeft);
-        int rightBottomCornerY = (int)(startTopMaxLimit / zoom + startTop);
-        int leftTopCornerX = (int)(startLeftMinLimit / zoom + startLeft);
-        int leftTopCornerY = (int)(startTopMinLimit / zoom + startTop);
+
+        int leftTopCornerX = (int)((centerX - mapWidth / 2) / zoom + startLeft);
+        int leftTopCornerY = (int)((centerY - mapHeight / 2) / zoom + startTop);
+        int rightBottomCornerX = (int)((centerX + mapWidth / 2) / zoom + startLeft);
+        int rightBottomCornerY = (int)((centerY + mapHeight / 2) / zoom + startTop);
 
         g2d.fillPolygon(
                 new int[]{0, 0, leftTopCornerX, leftTopCornerX},

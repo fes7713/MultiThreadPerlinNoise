@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fall off working save">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fall off map">
+      <change afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,13 +161,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00051" summary="Noise chunk map refactored to simpler form">
-      <created>1671964715581</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1671964715581</updated>
     </task>
     <task id="LOCAL-00052" summary="No semaphore">
       <created>1671966955737</created>
@@ -506,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672742871224</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="fall off map">
+      <created>1672754602178</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1672754602178</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +535,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="noise conversion function switched to new one" />
     <MESSAGE value="variable adjusted" />
     <MESSAGE value="Variable changer" />
     <MESSAGE value="Code cleaned" />
@@ -561,7 +559,8 @@
     <MESSAGE value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
     <MESSAGE value="fall off recovered" />
     <MESSAGE value="fall off working save" />
-    <option name="LAST_COMMIT_MESSAGE" value="fall off working save" />
+    <MESSAGE value="fall off map" />
+    <option name="LAST_COMMIT_MESSAGE" value="fall off map" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -590,11 +589,6 @@
           <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
           <line>183</line>
           <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>210</line>
-          <option name="timeStamp" value="240" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
