@@ -36,7 +36,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private static float NORMAL_COEFFICIENT = 0.03F;
     private static float NORMAL_SHIFT = 125;
 
-    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom){
+    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.zoom = zoom;
         this.fn = fn;
         this.left = left * zoom;
@@ -91,6 +91,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         this.left = left * zoom;
         this.top = top * zoom;
         generateFallOffMap();
+    }
+
+    @Override
+    public void setCenter(float centerX, float centerY) {
+        this.centerX = centerX;
+        this.centerY = centerY;
     }
 
     private void dimensionChanged()

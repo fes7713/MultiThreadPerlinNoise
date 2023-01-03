@@ -13,6 +13,7 @@ interface NoiseChunkInterface {
     void updateChunk(PaintInterface pi);
     void stopChunk();
     void reuseChunk(int chunkX, int chunkY, float zoom);
+    void setCenter(float centerX, float centerY);
     void updateImage(PaintInterface pi);
     void drawImage(Graphics2D g2d);
 

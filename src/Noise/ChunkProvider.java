@@ -15,6 +15,9 @@ public class ChunkProvider {
     private int chunkHeight;
     private float zoom;
 
+    private float centerX;
+    private float centerY;
+
     PaintInterface pi;
     private ChunkProvider()
     {
@@ -57,7 +60,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom);
+                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);
