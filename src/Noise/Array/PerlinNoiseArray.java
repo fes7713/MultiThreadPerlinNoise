@@ -23,8 +23,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private int height;
     private int width;
 
-    private float centerX = 0;
-    private float centerY = 0;
+    private float centerX;
+    private float centerY;
 
     private final FastNoise fn;
     private BufferedImage bi;
@@ -34,6 +34,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private static float NOISE_SHIFT = 0;
     private static float NORMAL_COEFFICIENT = 0.03F;
     private static float NORMAL_SHIFT = 125;
+
+    private static float MASK_SIZE = 20;
+    private static float MASK_SHADOW = 2F;
 
     public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.zoom = zoom;
@@ -155,7 +158,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         (i  * zoom + left - centerX) * (i  * zoom + left - centerX)
                                 +
                                 (j * zoom + top - centerY) * (j * zoom + top - centerY))
-                        / 50000000F);
+                        / MASK_SIZE / 1000000F);
             }
         }
     }
@@ -191,7 +194,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         .COLORS[
                         (int)(convertNormal(normalMap[i][j])  * fallOffMap[i][j] * length)
                         ][
-                        (int)(convertNoise(noiseMap[i][j])  * fallOffMap[i][j] * length)
+                        (int)(convertNoise(noiseMap[i][j])  * Math.pow(fallOffMap[i][j], MASK_SHADOW) * length)
                         ]);
             }
         }
@@ -268,5 +271,25 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     protected static void setNormalShift(float shift)
     {
         NORMAL_SHIFT = shift;
+    }
+
+    public static float getMaskSize()
+    {
+        return MASK_SIZE;
+    }
+
+    public static void setMaskSize(float maskSize)
+    {
+        MASK_SIZE = maskSize;
+    }
+
+    public static float getMaskShadow()
+    {
+        return MASK_SHADOW;
+    }
+
+    public static void setMaskShadow(float maskShadow)
+    {
+        MASK_SHADOW = maskShadow;
     }
 }

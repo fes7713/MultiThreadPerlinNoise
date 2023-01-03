@@ -1,3 +1,4 @@
+import Noise.Array.PerlinNoiseArray;
 import Noise.FastNoise;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ public class MapEditor extends JPanel {
     JSlider centerYSlider;
     JSlider widthSlider;
     JSlider heightSlider;
+    JSlider maskSizeSlider;
+    JSlider maskShadowAreaSlider;
 
     NoiseMapPanel nmp;
 
@@ -40,6 +43,10 @@ public class MapEditor extends JPanel {
         this.add(mapWidthLabel);
         JLabel mapHeightLabel = new JLabel("Height");
         this.add(mapHeightLabel);
+        JLabel maskSizeLabel = new JLabel("Mask Shadow Size");
+        this.add(maskSizeLabel);
+        JLabel maskShadowAreaLabel = new JLabel("Mask Shadow Area");
+        this.add(maskShadowAreaLabel);
 
         JLabel centerXValue = new JLabel("0");
         this.add(centerXValue);
@@ -49,6 +56,10 @@ public class MapEditor extends JPanel {
         this.add(widthValue);
         JLabel heightValue = new JLabel("0");
         this.add(heightValue);
+        JLabel maskSizeValue = new JLabel("0");
+        this.add(maskSizeValue);
+        JLabel maskShadowAreaValue = new JLabel("0");
+        this.add(maskShadowAreaValue);
 
         centerXSlider = new JSlider(JSlider.HORIZONTAL, -10000, 10000, (int)nmp.getCenterX());
         this.add(centerXSlider);
@@ -58,6 +69,10 @@ public class MapEditor extends JPanel {
         this.add(widthSlider);
         heightSlider = new JSlider(JSlider.HORIZONTAL, 0, 10000, (int)nmp.getMapHeight());
         this.add(heightSlider);
+        maskSizeSlider = new JSlider(JSlider.HORIZONTAL, 0, 50, (int)PerlinNoiseArray.getMaskSize());
+        this.add(maskSizeSlider);
+        maskShadowAreaSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, (int)PerlinNoiseArray.getMaskShadow());
+        this.add(maskShadowAreaSlider);
 
         JButton saveButton = new JButton("Save");
 //        saveButton.addActionListener((event) -> {
@@ -73,14 +88,22 @@ public class MapEditor extends JPanel {
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
 
-        List<JSlider> sliders = Stream.of(centerXSlider, centerYSlider, widthSlider, heightSlider).toList();
-        List<JLabel> labels = Stream.of(centerXValue, centerYValue, widthValue, heightValue).toList();
+        List<JSlider> sliders = Stream.of(centerXSlider, centerYSlider, widthSlider, heightSlider, maskSizeSlider, maskShadowAreaSlider).toList();
+        List<JLabel> labels = Stream.of(centerXValue, centerYValue, widthValue, heightValue, maskSizeValue, maskShadowAreaValue).toList();
 
         List<Consumer<Float>> setters = new ArrayList<>(
                 Arrays.asList(nmp::setCenterX,
                         nmp::setCenterY,
                         nmp::setMapWidth,
-                        nmp::setMapHeight
+                        nmp::setMapHeight,
+                        (num) -> {
+                            PerlinNoiseArray.setMaskSize(num);
+                            nmp.setCenterX(nmp.getCenterX());
+                        },
+                        (num) -> {
+                            PerlinNoiseArray.setMaskShadow(num);
+                            nmp.setCenterX(nmp.getCenterX());
+                        }
                 ));
 
         IntStream.range(0, sliders.size())
@@ -89,8 +112,11 @@ public class MapEditor extends JPanel {
 
                     labels.get(index).setText(sliders.get(index).getValue() + "");
                     sliders.get(index).addChangeListener((event) -> {
-                        labels.get(index).setText(sliders.get(index).getValue() + "");
-                        setters.get(index).accept((float)sliders.get(index).getValue());
+                        float value = sliders.get(index).getValue();
+                        if(sliders.get(index) == maskShadowAreaSlider)
+                            value /= 10F;
+                        labels.get(index).setText(value + "");
+                        setters.get(index).accept(value);
                         meui.update();
                     });
 
@@ -104,19 +130,25 @@ public class MapEditor extends JPanel {
                 .addComponent(centerXLabel)
                 .addComponent(centerYLabel)
                 .addComponent(mapWidthLabel)
-                .addComponent(mapHeightLabel));
+                .addComponent(mapHeightLabel)
+                .addComponent(maskSizeLabel)
+                .addComponent(maskShadowAreaLabel));
 
         hGroup.addGroup(layout.createParallelGroup()
                 .addComponent(centerXValue)
                 .addComponent(centerYValue)
                 .addComponent(widthValue)
-                .addComponent(heightValue));
+                .addComponent(heightValue)
+                .addComponent(maskSizeValue)
+                .addComponent(maskShadowAreaValue));
 
         hGroup.addGroup(layout.createParallelGroup()
                 .addComponent(centerXSlider)
                 .addComponent(centerYSlider)
                 .addComponent(widthSlider)
                 .addComponent(heightSlider)
+                .addComponent(maskSizeSlider)
+                .addComponent(maskShadowAreaSlider)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addComponent(loadButton)
@@ -146,6 +178,16 @@ public class MapEditor extends JPanel {
                 .addComponent(mapHeightLabel)
                 .addComponent(heightValue)
                 .addComponent(heightSlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(maskSizeLabel)
+                .addComponent(maskSizeValue)
+                .addComponent(maskSizeSlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(maskShadowAreaLabel)
+                .addComponent(maskShadowAreaValue)
+                .addComponent(maskShadowAreaSlider));
 
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(saveButton)

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="map editor code fix">
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Map editor done">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,13 +155,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00055" summary="Color array from Color[] to int[]">
-      <created>1671971444415</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1671971444415</updated>
     </task>
     <task id="LOCAL-00056" summary="Improved zoom jaggy effect (Not much visual change)">
       <created>1671989588762</created>
@@ -497,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672762765156</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Map editor done">
+      <created>1672763040098</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1672763040098</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +529,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="File save function moved to static functions" />
     <MESSAGE value="Removed main from PerlinNoiseArray" />
     <MESSAGE value="FileManager" />
     <MESSAGE value="Save and load variable settings" />
@@ -552,7 +553,8 @@
     <MESSAGE value="replaced limit system to center and length system" />
     <MESSAGE value="map editor" />
     <MESSAGE value="map editor code fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="map editor code fix" />
+    <MESSAGE value="Map editor done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map editor done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
