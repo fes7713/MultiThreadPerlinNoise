@@ -6,6 +6,7 @@ import Noise.PaintInterface;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,11 +17,15 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     private float[][] noiseMap;
     private float[][] normalMap;
+    private float[][] fallOffMap;
 
     private float left;
     private float top;
     private int height;
     private int width;
+
+    private float centerX;
+    private float centerY;
 
     private final FastNoise fn;
     private BufferedImage bi;
@@ -41,6 +46,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -89,6 +95,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -129,11 +136,25 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         }
     }
 
+    public void generateFallOffMap()
+    {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                float x = (i + left) / (float)width * 2 - 1;
+                float y = (j + top) / (float)height * 2 - 1;
+
+                float value = Math.max(Math.abs(x), Math.abs(y));
+                fallOffMap[i][j] = value;
+            }
+        }
+    }
+
     public float convertNoise(float noise)
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
-        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
+//        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
+        return (float)(1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
     }
 
     public float convertNormal(float normal)
@@ -143,44 +164,35 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        int s = 32;
 //        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
 //        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
-        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
 //        return (float)(Math.atan(normal) / Math.PI + 0.5);
+//        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
+        return (float)(1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
     }
-
-
 
     public void updateImage(PaintInterface pi)
     {
+        int length = ColorProvider.COLORS.length - 1;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-//                float light = 150 * (2 + lightIntensity(
-//                        zoom, 0, convertNoise(noiseMap[i + 1][j]) - convertNoise(noiseMap[i][j]),
-//                        0, zoom, convertNoise(noiseMap[i][j + 1]) - convertNoise(noiseMap[i][j]),
-//                        new Vector3f(0, -1, -1)));
-
-//                bi.setRGB(i, j, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)]);
-                // TODO delete
-                if(convertNoise(noiseMap[i][j]) == 255)
-                    System.out.println(normalMap[i][j]);
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
-                            (int)(convertNormal(normalMap[i][j]) * ColorProvider.COLORS.length)
+                            (int)(convertNormal(normalMap[i][j]) * length)
                         ][
-                            (int)(convertNoise(noiseMap[i][j]) * ColorProvider.COLORS.length)
+                            (int)(convertNoise(noiseMap[i][j]) * length)
                         ]);
             }
         }
 
         for(int i = 0; i < width; i++)
         {
-            bi.setRGB(i, height - 1, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(i, height - 1, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
-            bi.setRGB(width - 1, i, ColorProvider.COLORS[127][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(width - 1, i, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
         }
 
         if(pi != null)

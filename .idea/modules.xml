@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MultiThreadPerlinNoise.iml" filepath="$PROJECT_DIR$/MultiThreadPerlinNoise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MuthThreadParlinNoise.iml" filepath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" />
     </modules>
   </component>
 </project>
