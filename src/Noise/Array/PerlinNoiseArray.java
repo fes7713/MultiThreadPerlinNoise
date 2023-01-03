@@ -93,13 +93,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         this.top = top * zoom;
     }
 
-    public void setCenter(float centerX, float centerY)
-    {
-        this.centerX = centerX;
-        this.centerY = centerY;
-        generateFallOffMap();
-    }
-
     @Override
     public void setCenter(float centerX, float centerY) {
         this.centerX = centerX;
