@@ -100,6 +100,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         generateFallOffMap();
     }
 
+    @Override
+    public void setCenter(float centerX, float centerY) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+    }
+
     private void dimensionChanged()
     {
         noiseMap = new float[width][height];

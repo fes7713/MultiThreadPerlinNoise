@@ -15,9 +15,8 @@ public class ChunkProvider {
     private int chunkHeight;
     private float zoom;
 
-    // TODO change later maybe
-    private float centerX = 0;
-    private float centerY = 0;
+    private float centerX;
+    private float centerY;
 
     PaintInterface pi;
     private ChunkProvider()
@@ -48,12 +47,6 @@ public class ChunkProvider {
     public void preload(int left, int top, int width, int height)
     {
         // TODO
-    }
-
-    public void setCenter(float centerX, float centerY)
-    {
-        this.centerX = centerX;
-        this.centerY = centerY;
     }
 
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
