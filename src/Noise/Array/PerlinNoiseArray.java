@@ -6,7 +6,6 @@ import Noise.PaintInterface;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -152,14 +151,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                float x = (i + left) / (float)width * 2 - 1;
-                float y = (j + top) / (float)height * 2 - 1;
-
-                float value = Math.max(Math.abs(x), Math.abs(y));
                 fallOffMap[i][j] = (float)Math.exp(- (
-                        (i  * zoom + left - 0 / 2F) * (i  * zoom + left - 0 / 2F)
+                        (i  * zoom + left - centerX) * (i  * zoom + left - centerX)
                                 +
-                                (j * zoom + top - 0 / 2F) * (j * zoom + top - 0 / 2F))
+                                (j * zoom + top - centerY) * (j * zoom + top - centerY))
                         / 50000000F);
             }
         }

@@ -1,5 +1,7 @@
 package Noise;
 
+import Noise.Array.ImageUpdateInterface;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -19,6 +21,8 @@ public class ChunkProvider {
     private float centerY;
 
     PaintInterface pi;
+    ImageUpdateInterface iui;
+
     private ChunkProvider()
     {
         zoom = 1;
@@ -44,6 +48,11 @@ public class ChunkProvider {
         this.pi = pi;
     }
 
+    public void setImageUpdateInterface(ImageUpdateInterface iui)
+    {
+        this.iui = iui;
+    }
+
     public void preload(int left, int top, int width, int height)
     {
         // TODO
@@ -51,8 +60,13 @@ public class ChunkProvider {
 
     public void setCenter(float centerX, float centerY)
     {
-        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
-            chunk.setCenter(centerX, centerY);
+        this.centerX = centerX;
+        this.centerY = centerY;
+//        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+//        {
+//            chunk.setCenter(centerX, centerY);
+//            chunk.updateImage(null);
+//        }
     }
 
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)

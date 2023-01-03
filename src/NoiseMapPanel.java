@@ -43,8 +43,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private static final int DEFAULT_ZOOM_MAX_LIMIT = 4;
     private static final int DEFAULT_ZOOM_MIN_LIMIT = - 10;
-    private static final int DEFAULT_LEFT_MIN_LIMIT = - 3000;
-    private static final int DEFAULT_LEFT_MAX_LIMIT = 5000;
+    private static final int DEFAULT_LEFT_MIN_LIMIT = - 8000;
+    private static final int DEFAULT_LEFT_MAX_LIMIT = -2000;
     private static final int DEFAULT_TOP_MIN_LIMIT = -2000;
     private static final int DEFAULT_TOP_MAX_LIMIT = 2000;
 
@@ -53,6 +53,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         this.mainGroup = ncg;
 
         tableWidth = tableHeight = CHUNK_SIZE;
+
 
         verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
         horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
@@ -68,6 +69,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         colorProvider.setPaintInterface(this::updateImage);
         PerlinNoiseArrayInterface.loadDefaultVariables(null);
         zoomCount = 0;
+
+        chunkProvider.setImageUpdateInterface(this::updateImage);
+        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     public NoiseMapPanel()
@@ -173,6 +177,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         startLeftMinLimit = min;
         setStartLeft(startLeft);
+        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     public void setStartLeftMaxLimit(int max)
@@ -182,6 +187,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         startLeftMaxLimit = max;
         setStartLeft(startLeft);
+        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     public void setStartTopMinLimit(int min)
@@ -191,6 +197,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         startTopMinLimit = min;
         setStartTop(startTop);
+        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     public void setStartTopMaxLimit(int max)
@@ -199,6 +206,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             return;
         startTopMaxLimit = max;
         setStartTop(startTop);
+        chunkProvider.setCenter((startLeftMinLimit + startLeftMaxLimit) / 2, (startTopMinLimit + startTopMaxLimit) / 2);
     }
 
     @Override
