@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="FallOffMap coding">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Fall off map first iteration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +68,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/NetBeansProjects/RealisticPerlinNoise" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/ProgrammingJava/StudentManager" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -160,14 +165,7 @@
       <workItem from="1672482326979" duration="12110000" />
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
-      <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00046" summary="Preset functions done">
-      <created>1671884070016</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1671884070016</updated>
+      <workItem from="1672732940486" duration="5962000" />
     </task>
     <task id="LOCAL-00047" summary="Preset functions done">
       <created>1671884189100</created>
@@ -505,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672715285961</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Fall off map first iteration">
+      <created>1672737454232</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1672737454232</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add line function added" />
     <MESSAGE value="color interpolation code refactored" />
     <MESSAGE value="Save and load features of color presets" />
     <MESSAGE value="Gradient Interface updated" />
@@ -560,7 +564,8 @@
     <MESSAGE value="Center bug fixed" />
     <MESSAGE value="Zoom limit bug fix" />
     <MESSAGE value="FallOffMap coding" />
-    <option name="LAST_COMMIT_MESSAGE" value="FallOffMap coding" />
+    <MESSAGE value="Fall off map first iteration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fall off map first iteration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -582,38 +587,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java</url>
-          <line>142</line>
+          <line>144</line>
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
           <line>183</line>
           <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="221" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="224" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>123</line>
-          <option name="timeStamp" value="225" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="226" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="227" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

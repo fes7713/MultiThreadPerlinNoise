@@ -21,7 +21,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final PerlinNoiseArray array;
     private Thread thread;
 
-    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom) {
+    public NoiseChunk(String name, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY) {
         this.name = name;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
@@ -33,7 +33,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         chunkShiftX = chunkShiftY = 0;
         pixelShiftX = pixelShiftY = 0;
 
-        array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height, zoom);
+        array = new PerlinNoiseArray(fn, chunkX * width, chunkY * height, width, height, zoom, centerX, centerY);
     }
 
     public String getName()
@@ -76,6 +76,11 @@ public class NoiseChunk implements NoiseChunkInterface{
         this.chunkX = chunkX;
         this.chunkY = chunkY;
         array.reuse(chunkX * width, chunkY * height, zoom);
+    }
+
+    @Override
+    public void setCenter(float centerX, float centerY) {
+        array.setCenter(centerX, centerY);
     }
 
     public void updateChunk(PaintInterface pi)

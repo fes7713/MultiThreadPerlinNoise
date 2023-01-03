@@ -15,6 +15,10 @@ public class ChunkProvider {
     private int chunkHeight;
     private float zoom;
 
+    // TODO change later maybe
+    private float centerX = 0;
+    private float centerY = 0;
+
     PaintInterface pi;
     private ChunkProvider()
     {
@@ -46,6 +50,12 @@ public class ChunkProvider {
         // TODO
     }
 
+    public void setCenter(float centerX, float centerY)
+    {
+        this.centerX = centerX;
+        this.centerY = centerY;
+    }
+
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
         long key = NoiseChunkInterface.getChunkKey(col, row);
@@ -57,7 +67,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom);
+                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);
