@@ -50,13 +50,13 @@ public class MapEditor extends JPanel {
         JLabel heightValue = new JLabel("0");
         this.add(heightValue);
 
-        centerXSlider = new JSlider(JSlider.HORIZONTAL, -100000, 100000, 0);
+        centerXSlider = new JSlider(JSlider.HORIZONTAL, -10000, 10000, (int)nmp.getCenterX());
         this.add(centerXSlider);
-        centerYSlider = new JSlider(JSlider.HORIZONTAL, -100000, 100000, 0);
+        centerYSlider = new JSlider(JSlider.HORIZONTAL, -10000, 10000, (int)nmp.getCenterY());
         this.add(centerYSlider);
-        widthSlider = new JSlider(JSlider.HORIZONTAL, -100000, 100000, 0);
+        widthSlider = new JSlider(JSlider.HORIZONTAL, 0, 10000, (int)nmp.getMapWidth());
         this.add(widthSlider);
-        heightSlider = new JSlider(JSlider.HORIZONTAL, -100000, 100000, 0);
+        heightSlider = new JSlider(JSlider.HORIZONTAL, 0, 10000, (int)nmp.getMapHeight());
         this.add(heightSlider);
 
         JButton saveButton = new JButton("Save");
@@ -80,7 +80,7 @@ public class MapEditor extends JPanel {
                 Arrays.asList(nmp::setCenterX,
                         nmp::setCenterY,
                         nmp::setMapWidth,
-                        nmp::setMapWidth
+                        nmp::setMapHeight
                 ));
 
         IntStream.range(0, sliders.size())

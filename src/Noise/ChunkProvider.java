@@ -62,11 +62,11 @@ public class ChunkProvider {
     {
         this.centerX = centerX;
         this.centerY = centerY;
-//        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
-//        {
-//            chunk.setCenter(centerX, centerY);
-//            chunk.updateImage(null);
-//        }
+        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+        {
+            chunk.setCenter(centerX, centerY);
+            chunk.updateImage(null);
+        }
     }
 
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
