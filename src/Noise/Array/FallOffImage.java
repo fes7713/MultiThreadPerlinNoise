@@ -22,10 +22,17 @@ public class FallOffImage {
     {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                float x = i / (float)width * 2 - 1;
-                float y = j / (float)height * 2 - 1;
-
-                float value = Math.max(Math.abs(x), Math.abs(y));
+//                float x = i / (float)width * 2 - 1;
+//                float y = j / (float)height * 2 - 1;
+//
+//                float value = Math.max(Math.abs(x), Math.abs(y));
+//                bi.setRGB(i, j, new Color(value, value, value).getRGB());
+                float value = (float)Math.exp(
+                        -Math.max(Math.abs(i - width / 2), Math.abs(j - height / 2))
+                        *
+                        Math.max(Math.abs(i - width / 2), Math.abs(j - height / 2))/2000f
+                );
+                System.out.println(value);
                 bi.setRGB(i, j, new Color(value, value, value).getRGB());
             }
         }
@@ -34,7 +41,7 @@ public class FallOffImage {
     public void saveMapImage()
     {
         try {
-            File outfile = new File("falloff.png");
+            File outfile = new File("falloff1.png");
             ImageIO.write(bi, "png", outfile);
         } catch (IOException e) {
             // handle exception

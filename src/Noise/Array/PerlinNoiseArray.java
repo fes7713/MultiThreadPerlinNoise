@@ -6,6 +6,7 @@ import Noise.PaintInterface;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,11 +17,15 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     private float[][] noiseMap;
     private float[][] normalMap;
+    private float[][] fallOffMap;
 
     private float left;
     private float top;
     private int height;
     private int width;
+
+    private float centerX;
+    private float centerY;
 
     private final FastNoise fn;
     private BufferedImage bi;
@@ -41,6 +46,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -89,6 +95,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
@@ -125,6 +132,19 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         light);
                 normalMap[i][j] = (normal + 1) * 4096 + 125;
 
+            }
+        }
+    }
+
+    public void generateFallOffMap()
+    {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                float x = (i + left) / (float)width * 2 - 1;
+                float y = (j + top) / (float)height * 2 - 1;
+
+                float value = Math.max(Math.abs(x), Math.abs(y));
+                fallOffMap[i][j] = value;
             }
         }
     }

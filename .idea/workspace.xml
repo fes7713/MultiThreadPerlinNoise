@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Center bug fixed">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Zoom limit bug fix">
+      <change afterPath="$PROJECT_DIR$/falloff.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/falloff1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,9 +134,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.FallOffImage" />
         <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.VariableChanger" />
-        <item itemvalue="Application.FallOffImage" />
         <item itemvalue="Application.PerlinNoiseArray" />
       </list>
     </recent_temporary>
@@ -159,14 +160,8 @@
       <workItem from="1672313048208" duration="30859000" />
       <workItem from="1672427779051" duration="6690000" />
       <workItem from="1672482326979" duration="12110000" />
-      <workItem from="1672621168152" duration="25993000" />
-    </task>
-    <task id="LOCAL-00044" summary="GradientNode toString and fromString.">
-      <created>1671879768476</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1671879768476</updated>
+      <workItem from="1672621168152" duration="27037000" />
+      <workItem from="1672710091966" duration="4112000" />
     </task>
     <task id="LOCAL-00045" summary="GradientNode toString and fromString.">
       <created>1671879969905</created>
@@ -504,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672670844513</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Zoom limit bug fix">
+      <created>1672673161908</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1672673161908</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +536,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Color 2d array connected to the main frame" />
     <MESSAGE value="GradientInterface introduced" />
     <MESSAGE value="Add line function added" />
     <MESSAGE value="color interpolation code refactored" />
@@ -559,7 +560,8 @@
     <MESSAGE value="Non-zero left min and max sum value test and fix" />
     <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
     <MESSAGE value="Center bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Center bug fixed" />
+    <MESSAGE value="Zoom limit bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zoom limit bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -608,6 +610,11 @@
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
           <line>125</line>
           <option name="timeStamp" value="226" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="227" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
