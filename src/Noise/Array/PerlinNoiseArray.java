@@ -43,6 +43,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         this.top = top * zoom;
         this.width = width;
         this.height = height;
+        this.centerX = centerX;
+        this.centerY = centerY;
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
@@ -97,6 +99,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public void setCenter(float centerX, float centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
+        generateFallOffMap();
     }
 
     private void dimensionChanged()

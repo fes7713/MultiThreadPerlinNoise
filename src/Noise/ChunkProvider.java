@@ -49,6 +49,12 @@ public class ChunkProvider {
         // TODO
     }
 
+    public void setCenter(float centerX, float centerY)
+    {
+        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+            chunk.setCenter(centerX, centerY);
+    }
+
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
         long key = NoiseChunkInterface.getChunkKey(col, row);
@@ -159,5 +165,4 @@ public class ChunkProvider {
             chunkStack.clear();
         }
     }
-
 }

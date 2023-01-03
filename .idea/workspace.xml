@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="FallOffMap coding">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fall off recovered">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,13 +161,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00049" summary="map generated">
-      <created>1671889174534</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1671889174534</updated>
     </task>
     <task id="LOCAL-00050" summary="Zoom function done">
       <created>1671962720001</created>
@@ -510,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672741444012</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="fall off recovered">
+      <created>1672742070744</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1672742070744</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +535,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Gradient Interface updated" />
     <MESSAGE value="done" />
     <MESSAGE value="noise conversion function switched to new one" />
     <MESSAGE value="variable adjusted" />
@@ -565,7 +559,8 @@
     <MESSAGE value="fall off bug" />
     <MESSAGE value="fall off" />
     <MESSAGE value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
+    <MESSAGE value="fall off recovered" />
+    <option name="LAST_COMMIT_MESSAGE" value="fall off recovered" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
