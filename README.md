@@ -46,6 +46,7 @@ Due to the heavy calculation take place in generating height map using perlin no
 I divided map into smaller chunks to have the better program response and the program update each chunk indivisually and shows it once the calculation is done for that chunk.
 - Multisthreading
 Running each chunk in different threads and utilizing the machine performance was very good idea to solve the performance issue.
+<br>
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/71058334/210296985-633e8729-6bfd-4ecd-8c9b-a405b75ce6a4.gif)
 
 
