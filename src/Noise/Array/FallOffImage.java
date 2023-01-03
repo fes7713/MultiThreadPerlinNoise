@@ -32,6 +32,8 @@ public class FallOffImage {
                         *
                         Math.max(Math.abs(i - width / 2), Math.abs(j - height / 2))/2000f
                 );
+
+                value = (float)Math.exp(- ((i - 0 / 2F) *(i - 0 / 2F) +  (j - 0 / 2F) * (j - 0 / 2F)) / 2000F);
                 System.out.println(value);
                 bi.setRGB(i, j, new Color(value, value, value).getRGB());
             }
@@ -41,7 +43,7 @@ public class FallOffImage {
     public void saveMapImage()
     {
         try {
-            File outfile = new File("falloff1.png");
+            File outfile = new File("falloff2.png");
             ImageIO.write(bi, "png", outfile);
         } catch (IOException e) {
             // handle exception

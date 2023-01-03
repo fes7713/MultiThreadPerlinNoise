@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Zoom limit bug fix">
-      <change afterPath="$PROJECT_DIR$/falloff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/falloff1.png" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="FallOffMap coding">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
@@ -161,14 +159,8 @@
       <workItem from="1672427779051" duration="6690000" />
       <workItem from="1672482326979" duration="12110000" />
       <workItem from="1672621168152" duration="27037000" />
-      <workItem from="1672710091966" duration="4112000" />
-    </task>
-    <task id="LOCAL-00045" summary="GradientNode toString and fromString.">
-      <created>1671879969905</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1671879969905</updated>
+      <workItem from="1672710091966" duration="4204000" />
+      <workItem from="1672732940486" duration="2775000" />
     </task>
     <task id="LOCAL-00046" summary="Preset functions done">
       <created>1671884070016</created>
@@ -506,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672673161908</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="FallOffMap coding">
+      <created>1672715285960</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1672715285961</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +535,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GradientInterface introduced" />
     <MESSAGE value="Add line function added" />
     <MESSAGE value="color interpolation code refactored" />
     <MESSAGE value="Save and load features of color presets" />
@@ -561,7 +559,8 @@
     <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
     <MESSAGE value="Center bug fixed" />
     <MESSAGE value="Zoom limit bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Zoom limit bug fix" />
+    <MESSAGE value="FallOffMap coding" />
+    <option name="LAST_COMMIT_MESSAGE" value="FallOffMap coding" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

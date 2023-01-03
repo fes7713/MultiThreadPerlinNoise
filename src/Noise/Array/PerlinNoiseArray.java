@@ -24,8 +24,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private int height;
     private int width;
 
-    private float centerX;
-    private float centerY;
+    private float centerX = 0;
+    private float centerY = 0;
 
     private final FastNoise fn;
     private BufferedImage bi;
@@ -48,6 +48,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        generateFallOffMap();
     }
 
     public void setLeft(float left) {
@@ -89,6 +90,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         this.zoom = zoom;
         this.left = left * zoom;
         this.top = top * zoom;
+        generateFallOffMap();
     }
 
     private void dimensionChanged()
@@ -97,6 +99,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        generateFallOffMap();
     }
 
     public void initNoiseMap()
@@ -144,7 +147,11 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 float y = (j + top) / (float)height * 2 - 1;
 
                 float value = Math.max(Math.abs(x), Math.abs(y));
-                fallOffMap[i][j] = value;
+                fallOffMap[i][j] = (float)Math.exp(- (
+                        (i  * zoom + left - 0 / 2F) * (i  * zoom + left - 0 / 2F)
+                                +
+                        (j * zoom + top - 0 / 2F) * (j * zoom + top - 0 / 2F))
+                        / 50000000F);
             }
         }
     }
@@ -178,9 +185,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             {
                 bi.setRGB(i, j, ColorProvider
                         .COLORS[
-                            (int)(convertNormal(normalMap[i][j]) * length)
+                            (int)(convertNormal(normalMap[i][j])  * fallOffMap[i][j] * length)
                         ][
-                            (int)(convertNoise(noiseMap[i][j]) * length)
+                            (int)(convertNoise(noiseMap[i][j])  * fallOffMap[i][j] * length)
                         ]);
             }
         }
