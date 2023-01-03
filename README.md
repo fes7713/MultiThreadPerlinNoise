@@ -38,6 +38,16 @@ First image shows a example of the 1D perlin noise. X axis represents the positi
 <br>
 Second image is the example of the 2D perlin noise with height map data for each pixel of the image with input of the x and y axis variables.
 
+# Key Programming Solutions
+Due to the heavy calculation take place in generating height map using perlin noise function, run time of the program was my first problem to be solve to have the smooth application exprience.
+## Solutions
+
+- Chunking
+I divided map into smaller chunks to have the better program response and the program update each chunk indivisually and shows it once the calculation is done for that chunk.
+- Multisthreading
+Running each chunk in different threads and utilizing the machine performance was very good idea to solve the performance issue.
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/71058334/210296985-633e8729-6bfd-4ecd-8c9b-a405b75ce6a4.gif)
+
 
 # Color Change Form
 ![image](https://user-images.githubusercontent.com/71058334/210123247-c46b3ef1-3ea1-4c60-a0ca-0a02d38b2c57.png)
