@@ -66,7 +66,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseListener(this);
         addMouseWheelListener(this);
         colorProvider.setPaintInterface(this::updateImage);
-//        chunkProvider.setCenter(startLeftMaxLimit + startLeftMinLimit, startTopMaxLimit + startTopMinLimit);
         PerlinNoiseArrayInterface.loadDefaultVariables(null);
         zoomCount = 0;
     }
@@ -188,7 +187,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setStartTopMinLimit(int min)
     {
         if(startTopMinLimit < min)
-        return;
+            return;
 
         startTopMinLimit = min;
         setStartTop(startTop);

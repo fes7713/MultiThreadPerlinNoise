@@ -12,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,10 +137,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
-        <item itemvalue="Application.FallOffImage" />
-        <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.PerlinNoiseArray" />
+        <item itemvalue="Application.GradientColorEditorPanel" />
+        <item itemvalue="Application.FallOffImage" />
       </list>
     </recent_temporary>
   </component>
@@ -165,27 +166,6 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00046" summary="Preset functions done">
-      <created>1671884070016</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1671884070016</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Preset functions done">
-      <created>1671884189100</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1671884189100</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Class fields encapsulated and code refactored">
-      <created>1671887411515</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1671887411515</updated>
     </task>
     <task id="LOCAL-00049" summary="map generated">
       <created>1671889174534</created>
@@ -509,7 +489,28 @@
       <option name="project" value="LOCAL" />
       <updated>1672715285961</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="fall off bug">
+      <created>1672741256644</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741256644</updated>
+    </task>
+    <task id="LOCAL-00096" summary="fall off">
+      <created>1672741345400</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741345400</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44">
+      <created>1672741444012</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741444012</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,9 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add line function added" />
-    <MESSAGE value="color interpolation code refactored" />
-    <MESSAGE value="Save and load features of color presets" />
     <MESSAGE value="Gradient Interface updated" />
     <MESSAGE value="done" />
     <MESSAGE value="noise conversion function switched to new one" />
@@ -564,7 +562,10 @@
     <MESSAGE value="Center bug fixed" />
     <MESSAGE value="Zoom limit bug fix" />
     <MESSAGE value="FallOffMap coding" />
-    <option name="LAST_COMMIT_MESSAGE" value="FallOffMap coding" />
+    <MESSAGE value="fall off bug" />
+    <MESSAGE value="fall off" />
+    <MESSAGE value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
