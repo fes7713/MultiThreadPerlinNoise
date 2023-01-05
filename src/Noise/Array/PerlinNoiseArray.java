@@ -43,7 +43,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     private static float LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
     private static float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
-    private static final float LIGHTING_Z = -1;
+    private static float LIGHTING_Z = -1;
 
     public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.zoom = zoom;
@@ -318,5 +318,13 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         LIGHTING_STRENGTH = lightingStrength;
         LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
         LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
+    }
+
+    public static float getLightingZ() {
+        return LIGHTING_Z;
+    }
+
+    public static void setLightingZ(float lightingZ) {
+        LIGHTING_Z = lightingZ;
     }
 }
