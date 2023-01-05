@@ -38,9 +38,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private static float MASK_SIZE = 20;
     private static float MASK_SHADOW = 2F;
 
-    private static float LIGHTING_X = 0;
-    private static float LIGHTING_Y = -1;
-    private static float LIGHTING_Z = -1;
+    private static float LIGHTING_ANGLE = 0;
+    private static float LIGHTING_STRENGTH = 1;
+
+    private static float LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+    private static float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
+    private static final float LIGHTING_Z = -1;
 
     public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.zoom = zoom;
@@ -297,27 +300,23 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         MASK_SHADOW = maskShadow;
     }
 
-    protected static float getLightingX() {
-        return LIGHTING_X;
+    public static float getLightingAngle() {
+        return LIGHTING_ANGLE;
     }
 
-    protected static void setLightingX(float lightingX) {
-        LIGHTING_X = lightingX;
+    public static void setLightingAngle(float lightingAngle) {
+        LIGHTING_ANGLE = lightingAngle;
+        LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+        LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     }
 
-    protected static float getLightingY() {
-        return LIGHTING_Y;
+    public static float getLightingStrength() {
+        return LIGHTING_STRENGTH;
     }
 
-    protected static void setLightingY(float lightingY) {
-        LIGHTING_Y = lightingY;
-    }
-
-    protected static float getLightingZ() {
-        return LIGHTING_Z;
-    }
-
-    protected static void setLightingZ(float lightingZ) {
-        LIGHTING_Z = lightingZ;
+    public static void setLightingStrength(float lightingStrength) {
+        LIGHTING_STRENGTH = lightingStrength;
+        LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+        LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     }
 }

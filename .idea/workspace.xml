@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="All done">
-      <change afterPath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="lighting changer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/default.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,14 +162,7 @@
       <workItem from="1672732940486" duration="2775000" />
       <workItem from="1672831832150" duration="599000" />
       <workItem from="1672838967470" duration="12763000" />
-      <workItem from="1672948155410" duration="2595000" />
-    </task>
-    <task id="LOCAL-00059" summary="first shade">
-      <created>1672005746957</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1672005746958</updated>
+      <workItem from="1672948155410" duration="3841000" />
     </task>
     <task id="LOCAL-00060" summary="Created gradient line">
       <created>1672046318215</created>
@@ -510,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672948161440</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="lighting changer">
+      <created>1672950762456</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1672950762456</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +537,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="FileManager" />
     <MESSAGE value="Save and load variable settings" />
     <MESSAGE value="Default variable setting. Image update is needed" />
     <MESSAGE value="default color save and load. imports cleaned" />
@@ -565,7 +561,8 @@
     <MESSAGE value="map editor code fix" />
     <MESSAGE value="Map editor done" />
     <MESSAGE value="All done" />
-    <option name="LAST_COMMIT_MESSAGE" value="All done" />
+    <MESSAGE value="lighting changer" />
+    <option name="LAST_COMMIT_MESSAGE" value="lighting changer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

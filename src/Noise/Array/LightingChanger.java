@@ -13,13 +13,11 @@ public class LightingChanger extends JPanel{
 
     GroupLayout layout;
 
-    static int precision = 100;
+    static int precision = 10;
     ImageUpdateInterface iui ;
 
-    JSlider lightingXSlider;
-    JSlider lightingYSlider;
-    JSlider lightingZSlider;
     JSlider lightingAngleSlider;
+    JSlider lightingStrengthSlider;
 
     public LightingChanger(ImageUpdateInterface iui){
         GroupLayout layout = new GroupLayout(this);
@@ -32,33 +30,20 @@ public class LightingChanger extends JPanel{
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
-        JLabel lightingXLabel = new JLabel("Lighting X");
-        this.add(lightingXLabel);
-        JLabel lightingYLabel = new JLabel("Lighting Y");
-        this.add(lightingYLabel);
-        JLabel lightingZLabel = new JLabel("Lighting Z");
-        this.add(lightingZLabel);
         JLabel lightingAngleLabel = new JLabel("Lighting Angle");
         this.add(lightingAngleLabel);
+        JLabel lightingStrengthLabel = new JLabel("Lighting Strength");
+        this.add(lightingStrengthLabel);
 
-        JLabel lightingXValue = new JLabel("0");
-        this.add(lightingXValue);
-        JLabel lightingYValue = new JLabel("0");
-        this.add(lightingYValue);
-        JLabel lightingZValue = new JLabel("0");
-        this.add(lightingZValue);
         JLabel lightingAngleValue = new JLabel("0");
         this.add(lightingAngleValue);
+        JLabel lightingStrengthValue = new JLabel("0");
+        this.add(lightingStrengthValue);
 
-        lightingXSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getLightingX() * precision));
-        this.add(lightingXSlider);
-        lightingYSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getLightingY() * precision));
-        this.add(lightingYSlider);
-        lightingZSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(PerlinNoiseArray.getLightingZ() * precision));
-        this.add(lightingZSlider);
-        lightingAngleSlider = new JSlider(JSlider.HORIZONTAL, -360 * precision, 360 * precision,
-                (int)(Math.toDegrees(Math.atan(PerlinNoiseArray.getLightingX() / PerlinNoiseArray.getLightingY())) * precision));
-        this.add(lightingAngleValue);
+        lightingAngleSlider = new JSlider(JSlider.HORIZONTAL, -180 * precision, 180 * precision, (int)(PerlinNoiseArray.getLightingAngle() * precision));
+        this.add(lightingAngleSlider);
+        lightingStrengthSlider = new JSlider(JSlider.HORIZONTAL, -5 * precision, 5 * precision, (int)(PerlinNoiseArray.getLightingStrength() * precision));
+        this.add(lightingStrengthSlider);
 
         JButton saveButton = new JButton("Save");
 //        saveButton.addActionListener((event) -> {
@@ -74,17 +59,12 @@ public class LightingChanger extends JPanel{
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
 
-        List<JSlider> sliders = Stream.of(lightingXSlider, lightingYSlider, lightingZSlider, lightingAngleSlider).toList();
-        List<JLabel> labels = Stream.of(lightingXValue, lightingYValue, lightingZValue, lightingAngleValue).toList();
+        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider).toList();
+        List<JLabel> labels = Stream.of(lightingAngleValue, lightingStrengthValue).toList();
 
         List<Consumer<Float>> setters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::setLightingX,
-                        PerlinNoiseArray::setLightingY,
-                        PerlinNoiseArray::setLightingZ,
-                        (numF) -> {
-                            PerlinNoiseArray.setLightingX((float)Math.sin(Math.toRadians(numF)));
-                            PerlinNoiseArray.setLightingY((float)Math.cos(Math.toRadians(numF)));
-                        }));
+                Arrays.asList(PerlinNoiseArray::setLightingAngle,
+                        PerlinNoiseArray::setLightingStrength));
 
         sliders.forEach((slider) -> {
                     slider.setPaintTicks(true);
@@ -109,22 +89,16 @@ public class LightingChanger extends JPanel{
                 = layout.createSequentialGroup();
 
         hGroup.addGroup(layout.createParallelGroup()
-                .addComponent(lightingXLabel)
-                .addComponent(lightingYLabel)
-                .addComponent(lightingZLabel)
-                .addComponent(lightingAngleLabel));
+                .addComponent(lightingAngleLabel)
+                .addComponent(lightingStrengthLabel));
 
         hGroup.addGroup(layout.createParallelGroup()
-                .addComponent(lightingXValue)
-                .addComponent(lightingYValue)
-                .addComponent(lightingZValue)
-                .addComponent(lightingAngleValue));
+                .addComponent(lightingAngleValue)
+                .addComponent(lightingStrengthValue));
 
         hGroup.addGroup(layout.createParallelGroup()
-                .addComponent(lightingXSlider)
-                .addComponent(lightingYSlider)
-                .addComponent(lightingZSlider)
                 .addComponent(lightingAngleSlider)
+                .addComponent(lightingStrengthSlider)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addComponent(loadButton)
@@ -136,24 +110,14 @@ public class LightingChanger extends JPanel{
                 = layout.createSequentialGroup();
 
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addComponent(lightingXLabel)
-                .addComponent(lightingXValue)
-                .addComponent(lightingXSlider));
-
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addComponent(lightingYLabel)
-                .addComponent(lightingYValue)
-                .addComponent(lightingYSlider));
-
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addComponent(lightingZLabel)
-                .addComponent(lightingZValue)
-                .addComponent(lightingZSlider));
-
-        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(lightingAngleLabel)
                 .addComponent(lightingAngleValue)
                 .addComponent(lightingAngleSlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(lightingStrengthLabel)
+                .addComponent(lightingStrengthValue)
+                .addComponent(lightingStrengthSlider));
 
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(saveButton)
@@ -174,12 +138,10 @@ public class LightingChanger extends JPanel{
 
     public void updateData()
     {
-        List<JSlider> sliders = Stream.of(lightingXSlider, lightingYSlider, lightingZSlider).toList();
+        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider).toList();
         List<Supplier<Float>> getters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::getLightingX,
-                        PerlinNoiseArray::getLightingY,
-                        PerlinNoiseArray::getLightingZ,
-                        () -> (float)Math.toDegrees(Math.atan(PerlinNoiseArray.getLightingX() / PerlinNoiseArray.getLightingY()))));
+                Arrays.asList(PerlinNoiseArray::getLightingAngle,
+                        PerlinNoiseArray::getLightingStrength));
         IntStream.range(0, sliders.size())
                 .boxed()
                 .forEach((index) -> {
