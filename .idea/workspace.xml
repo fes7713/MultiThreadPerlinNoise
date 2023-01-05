@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Map editor done">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="All done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,12 +75,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
-    <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Color.GradientColorEditorPanel" />
+    <configuration name="ChunkProvider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Noise.ChunkProvider" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
+          <option name="PATTERN" value="Noise.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,10 +125,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.ChunkProvider" />
         <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.PerlinNoiseArray" />
-        <item itemvalue="Application.GradientColorEditorPanel" />
       </list>
     </recent_temporary>
   </component>
@@ -155,13 +154,8 @@
       <workItem from="1672621168152" duration="27037000" />
       <workItem from="1672710091966" duration="4204000" />
       <workItem from="1672732940486" duration="2775000" />
-    </task>
-    <task id="LOCAL-00056" summary="Improved zoom jaggy effect (Not much visual change)">
-      <created>1671989588762</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1671989588762</updated>
+      <workItem from="1672831832150" duration="599000" />
+      <workItem from="1672838967470" duration="12088000" />
     </task>
     <task id="LOCAL-00057" summary="KeeperClass moved">
       <created>1671989690728</created>
@@ -499,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672763040098</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="All done">
+      <created>1672765503396</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1672765503397</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +530,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removed main from PerlinNoiseArray" />
     <MESSAGE value="FileManager" />
     <MESSAGE value="Save and load variable settings" />
     <MESSAGE value="Default variable setting. Image update is needed" />
@@ -554,7 +554,8 @@
     <MESSAGE value="map editor" />
     <MESSAGE value="map editor code fix" />
     <MESSAGE value="Map editor done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Map editor done" />
+    <MESSAGE value="All done" />
+    <option name="LAST_COMMIT_MESSAGE" value="All done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

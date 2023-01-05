@@ -231,7 +231,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         mainGroup.drawImage(g2d);
         g2d.setColor(new Color(0, 0, 0, 0.5F));
         float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
-        System.out.println(zoom);
 
         int leftTopCornerX = (int)((centerX - mapWidth / 2) / zoom + startLeft);
         int leftTopCornerY = (int)((centerY - mapHeight / 2) / zoom + startTop);
