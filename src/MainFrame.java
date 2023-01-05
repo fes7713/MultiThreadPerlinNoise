@@ -23,6 +23,7 @@ public class MainFrame {
         mapEditor.showMapEditor();
         panel.showColorEditor();
         panel.showVariableChanger();
+        panel.showLightingChanger();
         panel.repaint();
 
 

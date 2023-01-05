@@ -1,3 +1,4 @@
+import Noise.Array.LightingChanger;
 import Noise.Array.PerlinNoiseArrayInterface;
 import Noise.Array.VariableChanger;
 import Noise.ChunkProvider;
@@ -85,6 +86,14 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         mainGroup.loadChunks(0, 0, true);
     }
 
+    public void updateLighting()
+    {
+        mainGroup.updateLighting(this::updateImage);
+        verticalEdgeGroup.updateLighting(this::updateImage);
+        horizontalEdgeGroup.updateLighting(this::updateImage);
+        cornerGroup.updateLighting(this::updateImage);
+    }
+
     public void updateImage()
     {
         mainGroup.updateImage(this::repaint);
@@ -97,6 +106,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void showVariableChanger(){
         VariableChanger vc = new VariableChanger(this::updateImage);
         vc.showVariableChanger();
+    }
+
+    public void showLightingChanger(){
+        LightingChanger lc = new LightingChanger(this::updateLighting);
+        lc.showLightingChanger();
     }
 
     public void showColorEditor(){

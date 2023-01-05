@@ -38,6 +38,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private static float MASK_SIZE = 20;
     private static float MASK_SHADOW = 2F;
 
+    private static float LIGHTING_X = 0;
+    private static float LIGHTING_Y = -1;
+    private static float LIGHTING_Z = -1;
+
     public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.zoom = zoom;
         this.fn = fn;
@@ -137,7 +141,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void generateNormalMap()
     {
-        Vector3f light = new Vector3f(0, -1, -1);
+        Vector3f light = new Vector3f(LIGHTING_X, LIGHTING_Y, LIGHTING_Z);
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
                 float normal = lightIntensity(
@@ -291,5 +295,29 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public static void setMaskShadow(float maskShadow)
     {
         MASK_SHADOW = maskShadow;
+    }
+
+    protected static float getLightingX() {
+        return LIGHTING_X;
+    }
+
+    protected static void setLightingX(float lightingX) {
+        LIGHTING_X = lightingX;
+    }
+
+    protected static float getLightingY() {
+        return LIGHTING_Y;
+    }
+
+    protected static void setLightingY(float lightingY) {
+        LIGHTING_Y = lightingY;
+    }
+
+    protected static float getLightingZ() {
+        return LIGHTING_Z;
+    }
+
+    protected static void setLightingZ(float lightingZ) {
+        LIGHTING_Z = lightingZ;
     }
 }

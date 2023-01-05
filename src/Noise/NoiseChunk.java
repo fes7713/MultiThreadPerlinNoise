@@ -126,6 +126,13 @@ public class NoiseChunk implements NoiseChunkInterface{
         thread.start();
     }
 
+    public void updateLighting(PaintInterface pi)
+    {
+        array.generateNormalMap();
+        if(pi != null)
+            pi.paint();
+    }
+
     public void updateImage(PaintInterface pi)
     {
         array.updateImage(pi);
