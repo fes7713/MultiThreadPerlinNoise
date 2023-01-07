@@ -34,8 +34,8 @@ public interface PerlinNoiseArrayInterface {
     void increaseResolution(float resolution);
     void generateNormalMap();
 
-    float convertNoise(float noise);
-    float convertNormal(float normal);
+    float convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT);
+    float convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT);
     void updateImage(PaintInterface pi);
 
     void saveMapImage();
@@ -91,87 +91,5 @@ public interface PerlinNoiseArrayInterface {
 
         String filename = FileManager.nextAvailableFileNameIndex("zoomres", "csv");
         FileManager.writeStringToFile(sb.toString(), filename);
-    }
-
-    static String variableToString()
-    {
-        StringBuilder sb = new StringBuilder();
-        List<String> titles = Stream.of("NOISE_COEFFICIENT", "NOISE_SHIFT", "NORMAL_COEFFICIENT", "NORMAL_SHIFT").toList();
-
-        List<Supplier<Float>> getters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::getNoiseCoefficient,
-                        PerlinNoiseArray::getNoiseShift,
-                        PerlinNoiseArray::getNormalCoefficient,
-                        PerlinNoiseArray::getNormalShift));
-
-        IntStream.range(0, titles.size())
-                .boxed()
-                .forEach((index) -> {
-                    sb.append(titles.get(index))
-                            .append(",")
-                            .append(getters.get(index).get())
-                            .append("\n");
-                });
-        return sb.toString();
-    }
-
-    static void saveVariables(Component parent)
-    {
-        String filename = FileManager.askForFileName(parent, "Enter variable file name", "Variable save form");
-        FileManager.writeStringToFile(variableToString(), "variables", filename, "txt");
-    }
-
-    static boolean loadVariable(String foldername, String filename, VariableChanger vc)
-    {
-        List<Consumer<Float>> setters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::setNoiseCoefficient,
-                        PerlinNoiseArray::setNoiseShift,
-                        PerlinNoiseArray::setNormalCoefficient,
-                        PerlinNoiseArray::setNormalShift));
-        if(!FileManager.loadStringFromFile(foldername, filename,
-                (data)->{
-                    String[] splited = data.split("\n");
-                    IntStream.range(0, setters.size())
-                            .boxed()
-                            .forEach((index) -> {
-                                setters.get(index).accept(Float.parseFloat(splited[index].split(",")[1]));
-                            });
-                }))
-        {
-            return false;
-        }
-        if(vc != null)
-            vc.updateData();
-        return true;
-    }
-
-    static void saveDefaultVariables(String foldername, VariableChanger vc)
-    {
-        Path p = Paths.get(foldername);
-        if(!Files.exists(p)) {
-            try {
-                Files.createDirectories(p);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-        }
-        PerlinNoiseArray.setNoiseCoefficient(4.0F);
-        PerlinNoiseArray.setNoiseShift(0);
-        PerlinNoiseArray.setNormalCoefficient(0.03F);
-        PerlinNoiseArray.setNormalShift(125);
-
-        FileManager.writeStringToFile(variableToString(), foldername, "default", "txt");
-        if(vc != null)
-            vc.updateData();
-    }
-
-    static void loadDefaultVariables(VariableChanger vc)
-    {
-        if(!loadVariable("variables", "default.txt", vc))
-        {
-            saveDefaultVariables("variables", vc);
-        }
-        loadVariable("variables", "default.txt", vc);
     }
 }

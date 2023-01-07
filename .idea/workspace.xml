@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Chunk provider singleton removed">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Color provider singleton removed">
+      <change afterPath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/NoiseColor.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -87,7 +94,7 @@
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -100,7 +107,7 @@
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,7 +130,7 @@
       </method>
     </configuration>
     <configuration name="VariableChanger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.VariableChanger" />
+      <option name="MAIN_CLASS_NAME" value="VariableChanger" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,10 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.LightingChanger" />
         <item itemvalue="Application.ChunkProvider" />
         <item itemvalue="Application.MapEditor" />
-        <item itemvalue="Application.VariableChanger" />
       </list>
     </recent_temporary>
   </component>
@@ -166,14 +173,7 @@
       <workItem from="1672948155410" duration="4696000" />
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
-      <workItem from="1673067684084" duration="1160000" />
-    </task>
-    <task id="LOCAL-00063" summary="Line paint bug at the edge of the screen fixed. Selected line is now drawn bigger">
-      <created>1672054504308</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1672054504308</updated>
+      <workItem from="1673067684084" duration="7133000" />
     </task>
     <task id="LOCAL-00064" summary="2D color array">
       <created>1672070282720</created>
@@ -511,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673067536505</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Color provider singleton removed">
+      <created>1673068989554</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1673068989554</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="default color save and load. imports cleaned" />
     <MESSAGE value="config files" />
     <MESSAGE value=" up" />
     <MESSAGE value="project files" />
@@ -566,16 +572,12 @@
     <MESSAGE value="lighting changer" />
     <MESSAGE value="lighting changer angle and strength" />
     <MESSAGE value="Chunk provider singleton removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chunk provider singleton removed" />
+    <MESSAGE value="Color provider singleton removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Color provider singleton removed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/NoiseColor.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Color/GradientNode.java</url>
           <line>170</line>
@@ -587,13 +589,8 @@
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="187" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
-          <line>183</line>
+          <url>file://$PROJECT_DIR$/src/VariableChanger.java</url>
+          <line>207</line>
           <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

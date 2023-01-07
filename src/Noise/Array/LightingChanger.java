@@ -1,5 +1,7 @@
 package Noise.Array;
 
+import Noise.ChunkProvider;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,15 +13,16 @@ import java.util.stream.Stream;
 
 public class LightingChanger extends JPanel{
 
-    GroupLayout layout;
-
-    static int precision = 10;
+    ChunkProvider chunkProvider;
     ImageUpdateInterface iui ;
 
     JSlider lightingAngleSlider;
     JSlider lightingStrengthSlider;
 
-    public LightingChanger(ImageUpdateInterface iui){
+    static int precision = 10;
+
+    public LightingChanger(ChunkProvider chunkProvider, ImageUpdateInterface iui){
+        this.chunkProvider = chunkProvider;
         GroupLayout layout = new GroupLayout(this);
         if(iui == null)
             throw new IllegalArgumentException("Image update interface cannot be null");
@@ -40,9 +43,9 @@ public class LightingChanger extends JPanel{
         JLabel lightingStrengthValue = new JLabel("0");
         this.add(lightingStrengthValue);
 
-        lightingAngleSlider = new JSlider(JSlider.HORIZONTAL, -180 * precision, 180 * precision, (int)(PerlinNoiseArray.getLightingAngle() * precision));
+        lightingAngleSlider = new JSlider(JSlider.HORIZONTAL, -180 * precision, 180 * precision, (int)(chunkProvider.getLightingAngle() * precision));
         this.add(lightingAngleSlider);
-        lightingStrengthSlider = new JSlider(JSlider.HORIZONTAL, -5 * precision, 5 * precision, (int)(PerlinNoiseArray.getLightingStrength() * precision));
+        lightingStrengthSlider = new JSlider(JSlider.HORIZONTAL, -5 * precision, 5 * precision, (int)(chunkProvider.getLightingStrength() * precision));
         this.add(lightingStrengthSlider);
 
         JButton saveButton = new JButton("Save");
@@ -63,8 +66,8 @@ public class LightingChanger extends JPanel{
         List<JLabel> labels = Stream.of(lightingAngleValue, lightingStrengthValue).toList();
 
         List<Consumer<Float>> setters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::setLightingAngle,
-                        PerlinNoiseArray::setLightingStrength));
+                Arrays.asList(chunkProvider::setLightingAngle,
+                        chunkProvider::setLightingStrength));
 
         sliders.forEach((slider) -> {
                     slider.setPaintTicks(true);
@@ -140,8 +143,8 @@ public class LightingChanger extends JPanel{
     {
         List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider).toList();
         List<Supplier<Float>> getters = new ArrayList<>(
-                Arrays.asList(PerlinNoiseArray::getLightingAngle,
-                        PerlinNoiseArray::getLightingStrength));
+                Arrays.asList(chunkProvider::getLightingAngle,
+                        chunkProvider::getLightingStrength));
         IntStream.range(0, sliders.size())
                 .boxed()
                 .forEach((index) -> {
@@ -151,7 +154,8 @@ public class LightingChanger extends JPanel{
 
     public static void main(String[] args)
     {
-        LightingChanger vc = new LightingChanger(()-> {
+        ChunkProvider chunkProvider = new ChunkProvider(null, null);
+        LightingChanger vc = new LightingChanger(chunkProvider, ()-> {
             System.out.println("Updating image");
         });
         vc.showLightingChanger();

@@ -1,7 +1,5 @@
 package Noise.Color;
 
-import Noise.ColorProvider;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;

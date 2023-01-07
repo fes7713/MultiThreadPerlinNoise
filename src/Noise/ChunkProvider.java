@@ -1,10 +1,18 @@
 package Noise;
 
-import Noise.Array.ImageUpdateInterface;
+import Noise.FileManager.FileManager;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ChunkProvider {
     private final ColorProvider colorProvider;
@@ -20,6 +28,21 @@ public class ChunkProvider {
     private float centerY;
 
     PaintInterface pi;
+
+    private float NOISE_COEFFICIENT = 4F;
+    private float NOISE_SHIFT = 0;
+    private float NORMAL_COEFFICIENT = 0.03F;
+    private float NORMAL_SHIFT = 125;
+
+    private float MASK_SIZE = 20;
+    private float MASK_SHADOW = 2F;
+
+    private float LIGHTING_ANGLE = 0;
+    private float LIGHTING_STRENGTH = 1;
+
+    private float LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+    private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
+    private float LIGHTING_Z = -1;
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
     {
@@ -68,7 +91,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
+                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, this, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);
@@ -112,59 +135,99 @@ public class ChunkProvider {
         this.zoom = zoom;
     }
 
-    private static class ReusableChunkKeeper
-    {
-        private final Map<Long, NoiseChunkInterface> chunkMap;
-        private final Stack<NoiseChunkInterface> chunkStack;
-
-        public ReusableChunkKeeper() {
-            chunkMap = new HashMap<>();
-            chunkStack = new Stack<>();
-        }
-
-        public void keepAllChunks(Map<Long, NoiseChunkInterface> map)
-        {
-            for(Map.Entry<Long, NoiseChunkInterface> entry: map.entrySet())
-            {
-                chunkMap.put(entry.getKey(), entry.getValue());
-                chunkStack.add(entry.getValue());
-            }
-        }
-
-        public NoiseChunkInterface reuseChunk(int col, int row, float zoom)
-        {
-            long key = NoiseChunkInterface.getChunkKey(col, row);
-
-            if(chunkStack.isEmpty())
-            {
-                return null;
-            }
-
-            NoiseChunkInterface chunk = chunkMap.remove(key);
-            if(chunk != null) {
-                chunkStack.remove(chunk);
-            }
-            else
-            {
-                chunk = chunkStack.pop();
-                chunkMap.remove(chunk.getChunkKey());
-            }
-
-            chunk.reuseChunk(col, row, zoom);
-            return chunk;
-        }
-
-        public boolean isEmpty()
-        {
-            if(chunkStack.isEmpty() != chunkMap.isEmpty())
-                throw new RuntimeException("Chunk keeper has issue with keeping chunks. Chunks do not match");
-            return chunkStack.isEmpty();
-        }
-
-        public void clear()
-        {
-            chunkMap.clear();
-            chunkStack.clear();
-        }
+    public float getNoiseCoefficient(){
+        return NOISE_COEFFICIENT;
     }
+
+    public void setNoiseCoefficient(float coefficient)
+    {
+        NOISE_COEFFICIENT = coefficient;
+    }
+
+    public float getNoiseShift(){
+        return NOISE_SHIFT;
+    }
+
+    public void setNoiseShift(float shift)
+    {
+        NOISE_SHIFT = shift;
+    }
+
+    public float getNormalCoefficient(){
+        return NORMAL_COEFFICIENT;
+    }
+
+    public void setNormalCoefficient(float coefficient)
+    {
+        NORMAL_COEFFICIENT = coefficient;
+    }
+
+    public float getNormalShift(){
+        return NORMAL_SHIFT;
+    }
+
+    public void setNormalShift(float shift)
+    {
+        NORMAL_SHIFT = shift;
+    }
+
+    public float getMaskSize()
+    {
+        return MASK_SIZE;
+    }
+
+    public void setMaskSize(float maskSize)
+    {
+        MASK_SIZE = maskSize;
+    }
+
+    public float getMaskShadow()
+    {
+        return MASK_SHADOW;
+    }
+
+    public void setMaskShadow(float maskShadow)
+    {
+        MASK_SHADOW = maskShadow;
+    }
+
+    public float getLightingAngle() {
+        return LIGHTING_ANGLE;
+    }
+
+    public void setLightingAngle(float lightingAngle) {
+        LIGHTING_ANGLE = lightingAngle;
+        LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+        LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
+    }
+
+    public float getLightingStrength() {
+        return LIGHTING_STRENGTH;
+    }
+
+    public void setLightingStrength(float lightingStrength) {
+        LIGHTING_STRENGTH = lightingStrength;
+        LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
+        LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
+    }
+
+    public float getLightingX() {
+        return LIGHTING_X;
+    }
+
+    public float getLightingY() {
+        return LIGHTING_Y;
+    }
+
+    public float getLightingZ() {
+        return LIGHTING_Z;
+    }
+
+    public void setLightingZ(float lightingZ) {
+        LIGHTING_Z = lightingZ;
+    }
+
+
+
+
 }
