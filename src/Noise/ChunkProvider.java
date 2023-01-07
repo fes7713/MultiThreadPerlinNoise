@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ChunkProvider {
+    private final ColorProvider colorProvider;
     private final FastNoise fn;
     private final Map<Long, NoiseChunkInterface> loadedNoiseMap;
     private final ReusableChunkKeeper keeper;
@@ -19,10 +20,10 @@ public class ChunkProvider {
     private float centerY;
 
     PaintInterface pi;
-    ImageUpdateInterface iui;
 
-    public ChunkProvider(PaintInterface pi)
+    public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
     {
+        this.colorProvider = colorProvider;
         this.pi = pi;
 
         zoom = 1;
@@ -38,11 +39,6 @@ public class ChunkProvider {
     public void setPaintInterface(PaintInterface pi)
     {
         this.pi = pi;
-    }
-
-    public void setImageUpdateInterface(ImageUpdateInterface iui)
-    {
-        this.iui = iui;
     }
 
     public void preload(int left, int top, int width, int height)
@@ -72,7 +68,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
+                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);

@@ -12,6 +12,8 @@ import java.io.IOException;
 
 
 public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
+    private final ColorProvider colorProvider;
+
     private float[][] noiseMap;
     private float[][] normalMap;
     private float[][] fallOffMap;
@@ -43,7 +45,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private static float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private static float LIGHTING_Z = -1;
 
-    public PerlinNoiseArray(FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
+    public PerlinNoiseArray(ColorProvider colorProvider, FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
+        this.colorProvider = colorProvider;
+
         this.zoom = zoom;
         this.fn = fn;
         this.left = left * zoom;
@@ -190,13 +194,13 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void updateImage(PaintInterface pi)
     {
-        int length = ColorProvider.COLORS.length - 1;
+        int length = colorProvider.colors.length - 1;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-                bi.setRGB(i, j, ColorProvider
-                        .COLORS[
+                bi.setRGB(i, j, colorProvider
+                        .colors[
                         (int)(convertNormal(normalMap[i][j])  * fallOffMap[i][j] * length)
                         ][
                         (int)(convertNoise(noiseMap[i][j])  * Math.pow(fallOffMap[i][j], MASK_SHADOW) * length)
@@ -206,12 +210,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         for(int i = 0; i < width; i++)
         {
-            bi.setRGB(i, height - 1, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[i][height - 1]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(i, height - 1, colorProvider.colors[colorProvider.colors.length / 2][(int)(convertNoise(noiseMap[i][height - 1]) * colorProvider.colors.length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
-            bi.setRGB(width - 1, i, ColorProvider.COLORS[ColorProvider.COLORS.length / 2][(int)(convertNoise(noiseMap[width - 1][i]) * ColorProvider.COLORS.length)]);
+            bi.setRGB(width - 1, i, colorProvider.colors[colorProvider.colors.length / 2][(int)(convertNoise(noiseMap[width - 1][i]) * colorProvider.colors.length)]);
         }
 
         if(pi != null)

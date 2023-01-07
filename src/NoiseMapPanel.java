@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener, MouseWheelListener {
     private final ChunkProvider chunkProvider;
-    private final ColorProvider colorProvider = ColorProvider.getInstance();
+    private final ColorProvider colorProvider;
     private NoiseChunkGroup mainGroup;
     private NoiseChunkGroup verticalEdgeGroup;
     private NoiseChunkGroup horizontalEdgeGroup;
@@ -34,6 +34,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int mouseX;
     private int mouseY;
 
+    private static int DEFAULT_COLOR_LEVEL = 255;
     private static final int CHUNK_SIZE = 5;
     private static final float ZOOM_RATIO = 2;
 
@@ -52,8 +53,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public NoiseMapPanel()
     {
         tableWidth = tableHeight = CHUNK_SIZE;
-
-        chunkProvider = new ChunkProvider(this::repaint);
+        colorProvider = new ColorProvider(this::updateImage, DEFAULT_COLOR_LEVEL);
+//        colorProvider.setPaintInterface(this::updateImage);
+        chunkProvider = new ChunkProvider(colorProvider, this::repaint);
         mainGroup = new NoiseChunkGroup(chunkProvider, "Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE);
         verticalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
         horizontalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
@@ -69,7 +71,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseWheelListener(this);
 
 
-        colorProvider.setPaintInterface(this::updateImage);
+
         PerlinNoiseArrayInterface.loadDefaultVariables(null);
         zoomCount = 0;
 
