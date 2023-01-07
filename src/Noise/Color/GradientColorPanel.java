@@ -30,7 +30,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         System.err.println("Color panel paint interface has been set");
         hold = false;
 
-        bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         addMouseListener(this);
         addMouseMotionListener(this);
 
@@ -61,7 +61,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         updateColorArray(width, height);
 
@@ -107,7 +107,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         {
             for (int i = 0; i < height; i++)
             {
-                int color = tempArray2D[0][i].getRGB();
+                int color = GradientInterface.getIntFromColor(tempArray2D[0][i]);
                 for (int j = 0; j / (float)width < lines.get(0).getPosition(); j++) {
                     array2D[j][i] = color;
                 }
@@ -125,11 +125,14 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         for (int p = 0; p < height; p++) {
             int cnt = (int)(lines.get(0).getPosition() * width);
             for(int i = 1; i < size; i++) {
-                float[] prehsbvals = new float[3];
-                float[] hsbvals = new float[3];
+                float[] prehsbvals = new float[GradientNode.COLOR_HSV_ARRAY_SIZE];
+                float[] hsbvals = new float[GradientNode.COLOR_HSV_ARRAY_SIZE];
 
                 Color.RGBtoHSB(tempArray2D[i - 1][p].getRed(), tempArray2D[i - 1][p].getGreen(), tempArray2D[i - 1][p].getBlue(), prehsbvals);
                 Color.RGBtoHSB(tempArray2D[i][p].getRed(), tempArray2D[i][p].getGreen(), tempArray2D[i][p].getBlue(), hsbvals);
+
+                prehsbvals[3] = tempArray2D[i - 1][p].getAlpha();
+                hsbvals[3] = tempArray2D[i][p].getAlpha();
 
                 if(prehsbvals[1]== 0)
                     prehsbvals[0] = hsbvals[0];
@@ -146,7 +149,17 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                             lines.get(i - 1).getPosition(),
                             i
                     );
-                    array2D[cnt++][p] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]).getRGB();
+
+                    Color color = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+
+                    array2D[cnt++][p] = GradientInterface.getIntFromColor(
+                            new Color(
+                                    color.getRed(),
+                                    color.getGreen(),
+                                    color.getBlue(),
+                                    (int)newhsvvals[3]
+                            )
+                    );
                 }
             }
         }

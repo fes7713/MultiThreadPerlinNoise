@@ -14,7 +14,7 @@ public class FallOffImage {
 
     public FallOffImage()
     {
-        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         initImage();
     }
 

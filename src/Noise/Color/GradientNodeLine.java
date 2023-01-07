@@ -100,7 +100,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         {
             float[] prehsbvals = nodes.get(i - 1).getHsb();
             float[] hsbvals = nodes.get(i).getHsb();
-
             if(prehsbvals[1]== 0)
                 prehsbvals[0] = hsbvals[0];
             if(hsbvals[1]== 0)
@@ -116,13 +115,17 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
                         nodes.get(i - 1).getPosition(),
                         i
                 );
-                colors[cnt++] = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+                Color color = Color.getHSBColor(newhsvvals[0], newhsvvals[1], newhsvvals[2]);
+
+                colors[cnt++] = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)newhsvvals[3]);
             }
         }
 
         if(pi != null && update)
             pi.paint();
     }
+
+
 
     public void paint(Graphics2D g2d, int width, int height, boolean selected)
     {
@@ -132,11 +135,11 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
 
         int length = LINE_THICKNESS * multiplier;
 
-        BufferedImage bi = new BufferedImage(length, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bi = new BufferedImage(length, height, BufferedImage.TYPE_INT_ARGB);
 
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                bi.setRGB(i, j, colors[j].getRGB());
+                bi.setRGB(i, j, GradientInterface.getIntFromColor(colors[j]));
             }
         }
         g2d.drawImage(bi, (int)(position * width) - length / 2, 0, length, height, null);

@@ -20,6 +20,12 @@ public interface  GradientInterface{
     void darker();
     String toString();
 
+    static int getIntFromColor(Color color){
+        return ((color.getAlpha() << 24) & 0xFF000000) |
+                ((color.getRed() << 16) & 0x00FF0000) |
+                ((color.getGreen() << 8) & 0x0000FF00) |
+                (color.getBlue() & 0x000000FF);
+    }
 
     static <E extends GradientInterface> E deleteComponent(List<E> list, E targetComponent)
     {
@@ -75,8 +81,8 @@ public interface  GradientInterface{
                 prehsbvals[0] += 1;
         }
 
-        float[] newhsvvals = new float[3];
-        for (int k = 0; k < 3; k++) {
+        float[] newhsvvals = new float[GradientNode.COLOR_HSV_ARRAY_SIZE];
+        for (int k = 0; k < GradientNode.COLOR_HSV_ARRAY_SIZE; k++) {
             newhsvvals[k] = prehsbvals[k] * (1 - ratio) + hsbvals[k] * ratio;
         }
 

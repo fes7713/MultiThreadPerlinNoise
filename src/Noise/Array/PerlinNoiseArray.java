@@ -48,7 +48,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
-        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
 
@@ -106,7 +106,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
-        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
 

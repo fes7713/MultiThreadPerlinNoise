@@ -16,18 +16,18 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
      */
     private float position;
 
-    private static final int BOX_SIZE = 20; // in pixel
-
     private float[] hsb;
     private PaintInterface pi;
 
+    private static final int BOX_SIZE = 20; // in pixel
+    public static final int COLOR_HSV_ARRAY_SIZE = 4;
+
     public GradientNode(Color color, float position, PaintInterface pi) {
-        this.color = color;
         this.pi = pi;
-        hsb = new float[3];
+        hsb = new float[COLOR_HSV_ARRAY_SIZE];
 
         setPosition(position);
-        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+        setColor(color);
     }
 
     public float[] getHsb() {
@@ -40,6 +40,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
 
     public void setColor(Color color) {
         Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+        hsb[3] = color.getAlpha();
         this.color = color;
     }
 
@@ -167,8 +168,8 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
         GradientNode node;
         try{
             node =  (GradientNode) super.clone();
-            node.hsb = new float[3];
-            node.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue()));
+            node.hsb = new float[COLOR_HSV_ARRAY_SIZE];
+            node.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()));
         }catch(CloneNotSupportedException e)
         {
             e.printStackTrace();
@@ -180,7 +181,7 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
     @Override
     public String toString()
     {
-        return "R=" + color.getRed()+ ",G=" + color.getGreen() + ",B=" + color.getBlue() + ",P=" + position;
+        return "R=" + color.getRed()+ ",G=" + color.getGreen() + ",B=" + color.getBlue() + ",A=" + color.getAlpha() + ",P=" + position;
     }
 
     public static GradientNode fromString(String str, PaintInterface pi)
@@ -189,10 +190,22 @@ public class GradientNode implements GradientInterface, Comparable<GradientNode>
                 .replace("R=", "")
                 .replace("G=", "")
                 .replace("B=", "")
+                .replace("A=", "")
                 .replace("P=", "")
                 .split(",");
+        Color color;
+        if(parts.length == 4)
+        {
+            color = new Color(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            return new GradientNode(color, Float.parseFloat(parts[3]), pi);
+        }
+        else if(parts.length == 5)
+        {
+            color = new Color(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+            return new GradientNode(color, Float.parseFloat(parts[4]), pi);
+        }
+        else
+            throw new RuntimeException("Error parsing color");
 
-        Color color = new Color(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
-        return new GradientNode(color, Float.parseFloat(parts[3]), pi);
     }
 }
