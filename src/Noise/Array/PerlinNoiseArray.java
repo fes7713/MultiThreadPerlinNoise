@@ -12,8 +12,6 @@ import java.io.IOException;
 
 
 public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
-
-
     private float[][] noiseMap;
     private float[][] normalMap;
     private float[][] fallOffMap;

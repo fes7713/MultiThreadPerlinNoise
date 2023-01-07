@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.util.stream.Stream;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener, MouseWheelListener {
-    private final ChunkProvider chunkProvider = ChunkProvider.getInstance(this::repaint);
+    private final ChunkProvider chunkProvider;
     private final ColorProvider colorProvider = ColorProvider.getInstance();
     private NoiseChunkGroup mainGroup;
     private NoiseChunkGroup verticalEdgeGroup;
@@ -49,17 +49,17 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private float mapWidth;
     private float mapHeight;
 
-    public NoiseMapPanel(NoiseChunkGroup ncg)
+    public NoiseMapPanel()
     {
-        this.mainGroup = ncg;
-
         tableWidth = tableHeight = CHUNK_SIZE;
 
+        chunkProvider = new ChunkProvider(this::repaint);
+        mainGroup = new NoiseChunkGroup(chunkProvider, "Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE);
+        verticalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
+        horizontalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
+        cornerGroup = new NoiseChunkGroup(chunkProvider, "Horizontal Chunk",  100, 100,1, 1);
 
-        verticalEdgeGroup = new NoiseChunkGroup("Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
-        horizontalEdgeGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 200,1, CHUNK_SIZE);
-        cornerGroup = new NoiseChunkGroup("Horizontal Chunk",  100, 100,1, 1);
-
+        mainGroup.loadChunks(0, 0, true);
         verticalEdgeGroup.loadChunks(0, 0, true);
         horizontalEdgeGroup.loadChunks(0, 0, true);
         cornerGroup.loadChunks(0, 0, true);
@@ -67,23 +67,19 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseMotionListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
+
+
         colorProvider.setPaintInterface(this::updateImage);
         PerlinNoiseArrayInterface.loadDefaultVariables(null);
         zoomCount = 0;
 
-        chunkProvider.setImageUpdateInterface(this::updateImage);
+
         centerX = DEFAULT_CENTERX;
         centerY = DEFAULT_CENTERY;
         mapWidth = DEFAULT_MAP_WIDTH;
         mapHeight = DEFAULT_MAP_HEIGHT;
 
         chunkProvider.setCenter((int)centerX, (int)centerY);
-    }
-
-    public NoiseMapPanel()
-    {
-        this(new NoiseChunkGroup("Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE));
-        mainGroup.loadChunks(0, 0, true);
     }
 
     public void updateLighting()
@@ -345,13 +341,13 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         chunkProvider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
 
         mainGroup =
-                new NoiseChunkGroup("Main",  width, height,tableWidth, tableHeight);
+                new NoiseChunkGroup(chunkProvider, "Main",  width, height,tableWidth, tableHeight);
         verticalEdgeGroup =
-                new NoiseChunkGroup("Vertical",  width, mainGroup.getChunkHeight(),tableWidth, 1);
+                new NoiseChunkGroup(chunkProvider, "Vertical",  width, mainGroup.getChunkHeight(),tableWidth, 1);
         horizontalEdgeGroup =
-                new NoiseChunkGroup("Horizontal",  mainGroup.getChunkWidth(), height,1, tableHeight);
+                new NoiseChunkGroup(chunkProvider, "Horizontal",  mainGroup.getChunkWidth(), height,1, tableHeight);
         cornerGroup =
-                new NoiseChunkGroup("Corner",  mainGroup.getChunkWidth(), mainGroup.getChunkHeight(),1, 1);
+                new NoiseChunkGroup(chunkProvider, "Corner",  mainGroup.getChunkWidth(), mainGroup.getChunkHeight(),1, 1);
 
         updateChunkGroups();
 

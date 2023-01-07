@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ChunkProvider {
-    private static final ChunkProvider provider = new ChunkProvider();
-
     private final FastNoise fn;
     private final Map<Long, NoiseChunkInterface> loadedNoiseMap;
     private final ReusableChunkKeeper keeper;
@@ -23,8 +21,10 @@ public class ChunkProvider {
     PaintInterface pi;
     ImageUpdateInterface iui;
 
-    private ChunkProvider()
+    public ChunkProvider(PaintInterface pi)
     {
+        this.pi = pi;
+
         zoom = 1;
         loadedNoiseMap = new HashMap<>();
         keeper = new ReusableChunkKeeper();
@@ -33,14 +33,6 @@ public class ChunkProvider {
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
         chunkWidth = chunkHeight = 200;
-    }
-
-    public static ChunkProvider getInstance(){
-        return provider;
-    }
-    public static ChunkProvider getInstance(PaintInterface pi){
-        provider.setPaintInterface(pi);
-        return provider;
     }
 
     public void setPaintInterface(PaintInterface pi)

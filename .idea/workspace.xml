@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="lighting changer angle and strength">
+      <change afterPath="$PROJECT_DIR$/presets/TestNewSaveFunction.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/realmapDarker.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,14 +164,9 @@
       <workItem from="1672732940486" duration="2775000" />
       <workItem from="1672831832150" duration="599000" />
       <workItem from="1672838967470" duration="12763000" />
-      <workItem from="1672948155410" duration="4542000" />
-    </task>
-    <task id="LOCAL-00061" summary="Line position of line gradient set">
-      <created>1672046983572</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1672046983572</updated>
+      <workItem from="1672948155410" duration="4696000" />
+      <workItem from="1673039896023" duration="1061000" />
+      <workItem from="1673041350140" duration="4294000" />
     </task>
     <task id="LOCAL-00062" summary="Line gradient paint properly at the specified location by line position field">
       <created>1672047185306</created>
@@ -504,7 +504,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672952150456</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="lighting changer angle and strength">
+      <created>1672952773185</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1672952773185</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,10 +596,15 @@
           <line>183</line>
           <option name="timeStamp" value="188" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Noise/NoiseChunk.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="189" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1671970016376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673066032016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

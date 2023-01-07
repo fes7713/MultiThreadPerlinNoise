@@ -16,7 +16,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
 
     private final ChunkProvider provider;
 
-    public NoiseChunkGroup(String name, int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
+    public NoiseChunkGroup(ChunkProvider provider, String name, int canvasWidth, int canvasHeight, int tableWidth, int tableHeight) {
         this.name = name;
         this.tableWidth = tableWidth;
         this.tableHeight = tableHeight;
@@ -26,7 +26,7 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
-        provider = ChunkProvider.getInstance();
+        this.provider = provider;
 
         System.err.printf("%-20s Chunks are not loaded\n", "[" + name + "]");
     }
