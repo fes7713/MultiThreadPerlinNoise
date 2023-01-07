@@ -189,14 +189,14 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float NORMAL_COEFFICIENT = chunkProvider.getNormalCoefficient();
         float NORMAL_SHIFT = chunkProvider.getNormalShift();
         float MASK_SHADOW = chunkProvider.getMaskShadow();
+        int[][] colors = colorProvider.getColors();
 
-        int length = colorProvider.colors.length - 1;
+        int length = colors.length - 1;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-                bi.setRGB(i, j, colorProvider
-                        .colors[
+                bi.setRGB(i, j, colors[
                         (int)(convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT)  * fallOffMap[i][j] * length)
                         ][
                         (int)(convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT)  * Math.pow(fallOffMap[i][j], MASK_SHADOW) * length)
@@ -209,9 +209,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             bi.setRGB(
                     i,
                     height - 1,
-                    colorProvider.colors
-                            [colorProvider.colors.length / 2]
-                            [(int)(convertNoise(noiseMap[i][height - 1], NORMAL_COEFFICIENT, NORMAL_SHIFT) * colorProvider.colors.length)]);
+                    colors
+                        [colors.length / 2]
+                        [(int)(convertNoise(noiseMap[i][height - 1], NORMAL_COEFFICIENT, NORMAL_SHIFT) * colors.length)]);
         }
 
         for(int i = 0; i < height; i++)
@@ -219,9 +219,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             bi.setRGB(
                     width - 1,
                     i,
-                    colorProvider.colors
-                            [colorProvider.colors.length / 2]
-                            [(int)(convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT) * colorProvider.colors.length)]);
+                    colors
+                        [colors.length / 2]
+                        [(int)(convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT) * colors.length)]);
         }
 
         if(pi != null)

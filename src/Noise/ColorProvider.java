@@ -5,10 +5,10 @@ import Noise.Color.GradientColorEditorPanel;
 public class ColorProvider {
     private int colorLevel;
 
-    public int[][] colors;
+    private  int[][] colors;
     private GradientColorEditorPanel editor;
 
-    PaintInterface pi;
+    private PaintInterface pi;
 
     public ColorProvider(PaintInterface pi, int colorLevel)
     {
@@ -33,6 +33,11 @@ public class ColorProvider {
     public void showColorEditor()
     {
         editor.showFrame();
+    }
+
+    public int[][] getColors()
+    {
+        return colors;
     }
 
     public void setColorLevel(int colorLevel)

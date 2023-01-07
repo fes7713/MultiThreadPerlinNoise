@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,14 +162,7 @@
       <workItem from="1672948155410" duration="4696000" />
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
-      <workItem from="1673067684084" duration="7974000" />
-    </task>
-    <task id="LOCAL-00065" summary="2d color array progress. bug in showing color">
-      <created>1672104315512</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1672104315513</updated>
+      <workItem from="1673067684084" duration="8331000" />
     </task>
     <task id="LOCAL-00066" summary="2d color array progress. bug in showing color">
       <created>1672104756996</created>
@@ -507,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673075476240</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
+      <created>1673076356113</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1673076356113</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
