@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Adapted to Alpha colors">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code Cleaned">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/default.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/realcolormap2d3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/realcolormap2d3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientNodeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientNodeLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/NetBeansProjects/RealisticPerlinNoise" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -87,19 +87,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
-    <configuration name="ChunkProvider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.ChunkProvider" />
-      <module name="MuthThreadParlinNoise" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Noise.Color.GradientColorEditorPanel" />
       <module name="MuthThreadParlinNoise" />
@@ -133,6 +120,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MapEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MapEditor" />
+      <module name="MuthThreadParlinNoise" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="VariableChanger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="VariableChanger" />
       <module name="MuthThreadParlinNoise" />
@@ -143,10 +137,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.LightingChanger" />
-        <item itemvalue="Application.ChunkProvider" />
       </list>
     </recent_temporary>
   </component>
@@ -177,14 +171,7 @@
       <workItem from="1672948155410" duration="4696000" />
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
-      <workItem from="1673067684084" duration="14660000" />
-    </task>
-    <task id="LOCAL-00068" summary="GradientInterface introduced">
-      <created>1672133417700</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1672133417700</updated>
+      <workItem from="1673067684084" duration="26725000" />
     </task>
     <task id="LOCAL-00069" summary="Add line function added">
       <created>1672133857548</created>
@@ -522,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673094346720</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Code Cleaned">
+      <created>1673095163892</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1673095163892</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +546,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
     <MESSAGE value="Files cleaned and perlin noise variables changed" />
     <MESSAGE value="Non-zero left min and max sum value test and fix" />
     <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
@@ -577,25 +570,26 @@
     <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
     <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapted to Alpha colors" />
+    <MESSAGE value="Code Cleaned" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code Cleaned" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/NoiseChunk.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="189" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Noise/Color/GradientNode.java</url>
           <line>202</line>
           <option name="timeStamp" value="194" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java</url>
-          <line>148</line>
-          <option name="timeStamp" value="197" />
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>481</line>
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="206" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

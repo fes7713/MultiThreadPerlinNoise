@@ -40,6 +40,11 @@ public class ColorProvider {
         return colors;
     }
 
+    public int getColorLevel()
+    {
+        return colorLevel;
+    }
+
     public void setColorLevel(int colorLevel)
     {
         if(colorLevel < 2)

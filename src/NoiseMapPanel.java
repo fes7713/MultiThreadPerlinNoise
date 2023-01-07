@@ -32,7 +32,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int mouseX;
     private int mouseY;
 
-    private static int DEFAULT_COLOR_LEVEL = 255;
+    private static int DEFAULT_COLOR_LEVEL = 4096;
     private static final int CHUNK_SIZE = 5;
     private static final float ZOOM_RATIO = 2;
 
@@ -49,6 +49,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private float mapHeight;
 
     private final VariableChanger vc;
+    private final MapEditor me;
 
     public NoiseMapPanel()
     {
@@ -73,15 +74,13 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         vc = new VariableChanger(this, chunkProvider, this::updateImage);
         vc.loadDefaultVariables(null);
+        me = new MapEditor(this, this::repaint);
+        me.loadDefaultMapSetting();
+
         zoomCount = 0;
-
-
-        centerX = DEFAULT_CENTERX;
-        centerY = DEFAULT_CENTERY;
-        mapWidth = DEFAULT_MAP_WIDTH;
-        mapHeight = DEFAULT_MAP_HEIGHT;
-
         chunkProvider.setCenter((int)centerX, (int)centerY);
+        setCenterX(centerX);
+        setCenterY(centerY);
     }
 
     public void updateLighting()
@@ -105,6 +104,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         vc.showVariableChanger();
     }
 
+    public void showMapEditor(){
+        me.showMapEditor();
+    }
+
     public void showLightingChanger(){
         LightingChanger lc = new LightingChanger(chunkProvider, this::updateLighting);
         lc.showLightingChanger();
@@ -117,6 +120,21 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private float getZoom()
     {
         return (float)Math.pow(ZOOM_RATIO, zoomCount);
+    }
+
+    public int getColorLevel()
+    {
+        return colorProvider.getColorLevel();
+    }
+
+    public void setColorLevel(float colorLevel)
+    {
+        colorProvider.setColorLevel((int)colorLevel);
+    }
+
+    public void setColorLevel(int colorLevel)
+    {
+        colorProvider.setColorLevel(colorLevel);
     }
 
     private boolean setZoomCount(int count)
@@ -139,7 +157,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         if(-left * zoom > centerX - mapWidth / 2 && (-left + this.getWidth()) * zoom <  centerX + mapWidth / 2)
             startLeft = left;
         else if(mapWidth < this.getWidth() * zoom)
-            startLeft =   (int)(( - centerX / zoom  + this.getWidth() / 2));
+            startLeft = (int)(( - centerX / zoom  + this.getWidth() / 2));
         else if(-left * zoom <= centerX - mapWidth / 2)
             startLeft = - (int)((centerX - mapWidth / 2) / zoom);
         else
@@ -202,7 +220,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterX(float centerX)
     {
         this.centerX = centerX;
-        setStartLeft(startLeft);
+        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
     }
@@ -210,7 +228,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterY(float centerY)
     {
         this.centerY = centerY;
-        setStartTop(startTop);
+        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
     }
@@ -438,6 +456,35 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             setStartTop(startTop);
             repaint();
         }
+    }
 
+    @Override
+    public String toString()
+    {
+        return "CenterX," + centerX + "\n" +
+                "CenterY," + centerY + "\n" +
+                "Width," + mapWidth + "\n" +
+                "Height," + mapHeight + "\n" +
+                "Color," + colorProvider.getColorLevel();
+    }
+
+    public void fromString(String setting)
+    {
+        String[] split = setting
+                .replace("CenterX,", "")
+                .replace("CenterY,", "")
+                .replace("Width,", "")
+                .replace("Height,", "")
+                .replace("Color,", "")
+                .strip()
+                .split("\n");
+        if(split.length != 5)
+            throw new RuntimeException("Illegal NoiseMapFile setting data");
+        centerX = Float.parseFloat(split[0]);
+        centerY = Float.parseFloat(split[1]);
+        mapWidth = Float.parseFloat(split[2]);
+        mapHeight = Float.parseFloat(split[3]);
+        setColorLevel(Float.parseFloat(split[4]));
+        chunkProvider.setCenter((int)centerX, (int)centerY);
     }
 }

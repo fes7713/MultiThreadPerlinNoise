@@ -17,18 +17,19 @@ public class MainFrame {
 
         NoiseMapPanel panel = new NoiseMapPanel() ;
         //            panel.updateImage();
-        MapEditor mapEditor = new MapEditor(panel, panel::repaint);
-        mapEditor.showMapEditor();
+//        MapEditor mapEditor = new MapEditor(panel, panel::repaint);
+//        mapEditor.showMapEditor();
         panel.showColorEditor();
         panel.showVariableChanger();
         panel.showLightingChanger();
-        panel.repaint();
+        panel.showMapEditor();
+//        panel.repaint();
 
 
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);
-        frame.repaint();
+//        frame.repaint();
 
     }
 

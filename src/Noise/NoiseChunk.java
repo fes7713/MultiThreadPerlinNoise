@@ -97,7 +97,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 array.initNoiseMap();
                 Thread.yield();
-                for (int i = -3; i < 0; i++) {
+                for (int i = -2; i < 0; i++) {
                     if(Thread.interrupted())
                     {
                         return;
@@ -108,7 +108,7 @@ public class NoiseChunk implements NoiseChunkInterface{
                     array.generateNormalMap();
                     Thread.yield();
                 }
-                for (int i = 1; i < 10; i++) {
+                for (int i = 1; i < 14; i++) {
                     if(Thread.interrupted())
                     {
                         return;
