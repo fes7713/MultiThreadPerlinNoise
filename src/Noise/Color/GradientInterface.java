@@ -41,7 +41,7 @@ public interface  GradientInterface{
 
     static <E extends GradientInterface> E addComponent(Component parent, List<E> list, E newComponent, E targetComponent)
     {
-        String selectvalues[] = {"Same", "Brighter", "Darker", "Cancel"};
+        String[] selectValues = {"Same", "Brighter", "Darker", "Cancel"};
 
         int select = JOptionPane.showOptionDialog(parent,
                 "Select add color option",
@@ -49,8 +49,8 @@ public interface  GradientInterface{
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                selectvalues,
-                selectvalues[0]
+                selectValues,
+                selectValues[0]
         );
 
         if(select == 3)
@@ -91,18 +91,18 @@ public interface  GradientInterface{
         return newhsvvals;
     }
 
-    static void saveCurrentPreset(Component parent, String foldername, GradientColorPanel gcp)
+    static void saveCurrentPreset(Component parent, String folderName, GradientColorPanel gcp)
     {
         String filename = FileManager.askForFileName(parent, "Enter preset file name", "Preset save form");
-        FileManager.writeStringToFile(gcp.toString(), foldername, filename, "txt");
+        FileManager.writeStringToFile(gcp.toString(), folderName, filename, "txt");
     }
 
     static void loadDefaultColors(GradientColorPanel gcp)
     {
         if(!FileManager.loadStringFromFile("presets", "default.txt", gcp::loadFromString))
         {
-            String foldername = "presets";
-            Path p = Paths.get(foldername);
+            String folderName = "presets";
+            Path p = Paths.get(folderName);
             if(!Files.exists(p)) {
                 try {
                     Files.createDirectories(p);
@@ -117,7 +117,7 @@ public interface  GradientInterface{
                             0.0===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]
                             0.5===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]
                             0.1===[R=255,G=255,B=255,P=0.0/R=0,G=0,B=0,P=1.0]""",
-                    foldername,
+                    folderName,
                     "default",
                     "txt");
         }

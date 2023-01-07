@@ -55,7 +55,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
             line.setPaintInterface(this.cui::update);
     }
 
-    //    public void set
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -78,11 +77,6 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
     }
 
 
-
-    public int[][] getColors()
-    {
-        return array2D;
-    }
     public int[][] getUpdatedColor2DArray(int width, int height)
     {
         updateColorArray(width, height);

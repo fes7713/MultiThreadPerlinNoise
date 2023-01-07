@@ -69,12 +69,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
         }
     }
 
-    public Color[] getUpdatedColorArray(int size)
-    {
-        updateColorArray(size, true);
-        return colors;
-    }
-
     public Color[] getColorArray(){
         return colors;
     }
@@ -215,7 +209,6 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
                 hold = true;
                 pi.paint();
                 return;
-
             }
         }
         if(selectedNode.contains(e, position * width, height, true))
@@ -254,9 +247,7 @@ public class GradientNodeLine  implements GradientInterface, Comparable<Gradient
                 selectedNode = GradientInterface.deleteComponent(nodes, selectedNode);
                 pi.paint();
             }
-            default -> {
-                throw new RuntimeException("Error occurred in color gradient editor");
-            }
+            default -> throw new RuntimeException("Error occurred in color gradient editor");
         }
     }
 

@@ -6,7 +6,7 @@ public class ColorProvider {
     private int colorLevel;
 
     private  int[][] colors;
-    private GradientColorEditorPanel editor;
+    private final GradientColorEditorPanel editor;
 
     private PaintInterface pi;
 

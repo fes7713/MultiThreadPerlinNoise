@@ -1,18 +1,7 @@
 package Noise;
 
-import Noise.FileManager.FileManager;
-
-import java.awt.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChunkProvider {
     private final ColorProvider colorProvider;
@@ -221,9 +210,5 @@ public class ChunkProvider {
 
     public float getLightingZ() {
         return LIGHTING_Z;
-    }
-
-    public void setLightingZ(float lightingZ) {
-        LIGHTING_Z = lightingZ;
     }
 }

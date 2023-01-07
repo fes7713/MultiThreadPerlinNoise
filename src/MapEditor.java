@@ -1,5 +1,3 @@
-import Noise.Array.PerlinNoiseArray;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,15 +58,8 @@ public class MapEditor extends JPanel {
         this.add(heightSlider);
 
         JButton saveButton = new JButton("Save");
-//        saveButton.addActionListener((event) -> {
-//            PerlinNoiseArrayInterface.saveVariables(this);
-//        });
         this.add(saveButton);
         JButton loadButton = new JButton("Load");
-//        loadButton.addActionListener((event)->{
-//            String filename = FileManager.askForFileNameFromListInDir(this, "variables", "Select variable file", "Variable load form");
-//            PerlinNoiseArrayInterface.loadVariable("variables", filename, this);
-//        });
         this.add(loadButton);
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);

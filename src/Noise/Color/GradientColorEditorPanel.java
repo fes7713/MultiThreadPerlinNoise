@@ -12,7 +12,6 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
     private final JPanel buttonPanel;
     private final GradientColorPanel colorPanel;
     private final List<JButton> buttons;
-//    private final JSlider colorLevelSlider;
 
     public GradientColorEditorPanel(ColorUpdateInterface cui)
     {
@@ -23,11 +22,6 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         colorPanel = new GradientColorPanel(cui);
 
         GradientInterface.loadDefaultColors(colorPanel);
-
-//        colorLevelSlider = new JSlider(0, 1000);
-//        colorLevelSlider.setOrientation(JSlider.VERTICAL);
-//        ColorProvider.getInstance().setPaintInterface(this::repaint);
-//        colorLevelSlider.addChangeListener((e -> ColorProvider.getInstance().setColorLevel(colorLevelSlider.getValue())));
 
         Stream.of(ColorEditorAction.values()).forEach(action -> {
             JButton actionButton = new JButton(action.name());
@@ -75,15 +69,11 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         {
             buttonPanel.setLayout(new GridLayout(6, 1));
             add(buttonPanel, BorderLayout.EAST);
-//            colorLevelSlider.setOrientation(JSlider.HORIZONTAL);
-//            add(colorLevelSlider, BorderLayout.SOUTH);
         }
         else
         {
             buttonPanel.setLayout(new GridLayout(3, 2));
             add(buttonPanel, BorderLayout.NORTH);
-//            colorLevelSlider.setOrientation(JSlider.VERTICAL);
-//            add(colorLevelSlider, BorderLayout.EAST);
         }
 
         buttons.forEach(buttonPanel::add);
@@ -109,11 +99,6 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
     public int[][] getUpdatedColorArray(int size)
     {
         return colorPanel.getUpdatedColor2DArray(size, size);
-    }
-
-    public int[][] getColors()
-    {
-        return colorPanel.getColors();
     }
 
     public static void main(String[] argv)

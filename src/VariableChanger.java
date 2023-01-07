@@ -1,5 +1,4 @@
 import Noise.Array.ImageUpdateInterface;
-import Noise.Array.PerlinNoiseArray;
 import Noise.ChunkProvider;
 import Noise.FileManager.FileManager;
 

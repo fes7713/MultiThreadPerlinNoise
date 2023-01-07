@@ -12,14 +12,13 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LightingChanger extends JPanel{
+    private final ChunkProvider chunkProvider;
+    private final ImageUpdateInterface iui ;
 
-    ChunkProvider chunkProvider;
-    ImageUpdateInterface iui ;
+    private final JSlider lightingAngleSlider;
+    private final JSlider lightingStrengthSlider;
 
-    JSlider lightingAngleSlider;
-    JSlider lightingStrengthSlider;
-
-    static int precision = 10;
+    private static final int precision = 10;
 
     public LightingChanger(ChunkProvider chunkProvider, ImageUpdateInterface iui){
         this.chunkProvider = chunkProvider;
@@ -49,15 +48,8 @@ public class LightingChanger extends JPanel{
         this.add(lightingStrengthSlider);
 
         JButton saveButton = new JButton("Save");
-//        saveButton.addActionListener((event) -> {
-//            PerlinNoiseArrayInterface.saveVariables(this);
-//        });
         this.add(saveButton);
         JButton loadButton = new JButton("Load");
-//        loadButton.addActionListener((event)->{
-//            String filename = FileManager.askForFileNameFromListInDir(this, "variables", "Select variable file", "Variable load form");
-//            PerlinNoiseArrayInterface.loadVariable("variables", filename, this);
-//        });
         this.add(loadButton);
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
@@ -86,7 +78,6 @@ public class LightingChanger extends JPanel{
                     });
 
                 });
-
 
         GroupLayout.SequentialGroup hGroup
                 = layout.createSequentialGroup();
