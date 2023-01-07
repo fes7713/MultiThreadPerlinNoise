@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Color provider singleton removed">
-      <change afterPath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
       <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/NoiseColor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +162,7 @@
       <workItem from="1672948155410" duration="4696000" />
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
-      <workItem from="1673067684084" duration="7133000" />
-    </task>
-    <task id="LOCAL-00064" summary="2D color array">
-      <created>1672070282720</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1672070282721</updated>
+      <workItem from="1673067684084" duration="7974000" />
     </task>
     <task id="LOCAL-00065" summary="2d color array progress. bug in showing color">
       <created>1672104315512</created>
@@ -518,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673068989554</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
+      <created>1673075476240</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1673075476240</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +537,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="config files" />
     <MESSAGE value=" up" />
     <MESSAGE value="project files" />
     <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
@@ -573,7 +561,8 @@
     <MESSAGE value="lighting changer angle and strength" />
     <MESSAGE value="Chunk provider singleton removed" />
     <MESSAGE value="Color provider singleton removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Color provider singleton removed" />
+    <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
+    <option name="LAST_COMMIT_MESSAGE" value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

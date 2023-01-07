@@ -104,14 +104,8 @@ public class VariableChanger extends JPanel{
                         chunkProvider::setNoiseShift,
                         chunkProvider::setNormalCoefficient,
                         chunkProvider::setNormalShift,
-                        (num) -> {
-                            chunkProvider.setMaskSize(num);
-                            nmp.setCenterX(nmp.getCenterX());
-                        },
-                        (num) -> {
-                            chunkProvider.setMaskShadow(num);
-                            nmp.setCenterX(nmp.getCenterX());
-                        }));
+                        chunkProvider::setMaskSize,
+                        chunkProvider::setMaskShadow));
 
         sliders.forEach((slider) -> {
                     slider.setPaintTicks(true);

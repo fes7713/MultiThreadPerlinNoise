@@ -226,8 +226,4 @@ public class ChunkProvider {
     public void setLightingZ(float lightingZ) {
         LIGHTING_Z = lightingZ;
     }
-
-
-
-
 }
