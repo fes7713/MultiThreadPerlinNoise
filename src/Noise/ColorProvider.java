@@ -30,6 +30,11 @@ public class ColorProvider {
         });
     }
 
+    public void loadColorPreset(String fileNameWithExtension)
+    {
+        editor.loadColorPreset(fileNameWithExtension);
+    }
+
     public void showColorEditor()
     {
         editor.showFrame();

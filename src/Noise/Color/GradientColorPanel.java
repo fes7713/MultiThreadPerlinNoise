@@ -242,6 +242,11 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
         cui.update();
     }
 
+    public void loadColorPreset(String fileNameWithExtension)
+    {
+        FileManager.loadStringFromFile("presets", fileNameWithExtension, this::loadFromString);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         ColorEditorAction action = ColorEditorAction.valueOf(e.getActionCommand());
@@ -273,7 +278,7 @@ public class GradientColorPanel extends JPanel implements MouseListener, MouseMo
                         "Message",
                         "Load presets");
 
-                FileManager.loadStringFromFile("presets", filename, this::loadFromString);
+                loadColorPreset(filename);
             }
         }
     }

@@ -122,7 +122,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = fn.GetNoise(i  * zoom + left, j  * zoom + top);
+                noiseMap[i][j] = 0;
             }
         }
     }

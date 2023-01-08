@@ -41,6 +41,10 @@ public class GradientColorEditorPanel extends JPanel implements ComponentListene
         colorPanel.setColorUpdateInterface(cui);
     }
 
+    public void loadColorPreset(String fileNameWithExtension){
+        colorPanel.loadColorPreset(fileNameWithExtension);
+    }
+
     public void showFrame()
     {
         JFrame frame = new JFrame("Window");
