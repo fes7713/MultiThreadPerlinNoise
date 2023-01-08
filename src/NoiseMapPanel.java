@@ -52,7 +52,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private final VariableChanger vc;
     private final MapEditor me;
-//    private final Timer timer;
+    private final Timer timer;
     public NoiseMapPanel()
     {
         tableWidth = tableHeight = CHUNK_SIZE;
@@ -84,6 +84,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setCenterX(centerX);
         setCenterY(centerY);
         moveCenter();
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                setCenterX(centerX + 1);
+                setStartLeft(startLeft - 1);
+            }
+        }, 1000, 10);
     }
 
     public void updateLighting()

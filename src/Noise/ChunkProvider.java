@@ -104,14 +104,17 @@ public class ChunkProvider {
 
     public void clearMap(boolean reusable)
     {
-        for(NoiseChunkInterface chunk: loadedNoiseMap.values()) {
-            chunk.stopChunk();
+        synchronized (loadedNoiseMap)
+        {
+            for(NoiseChunkInterface chunk: loadedNoiseMap.values()) {
+                chunk.stopChunk();
 
+            }
+            keeper.clear();
+            if(reusable)
+                keeper.keepAllChunks(loadedNoiseMap);
+            loadedNoiseMap.clear();
         }
-        keeper.clear();
-        if(reusable)
-            keeper.keepAllChunks(loadedNoiseMap);
-        loadedNoiseMap.clear();
     }
 
     public void dimensionChanged(int chunkWidth, int chunkHeight)
