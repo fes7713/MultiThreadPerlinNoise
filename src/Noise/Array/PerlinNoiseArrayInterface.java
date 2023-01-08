@@ -22,8 +22,8 @@ public interface PerlinNoiseArrayInterface {
     void increaseResolution(float resolution);
     void generateNormalMap();
 
-    float convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT);
-    float convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT);
+    double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT);
+    double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT);
     void updateImage(PaintInterface pi);
 
     void saveMapImage();

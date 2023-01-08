@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code Cleaned">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Color slider and setCenter will center the screen to the map too">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presets/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/default.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presets/realcolormap2d3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/realcolormap2d3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setting/default.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,21 +167,9 @@
       <workItem from="1672948155410" duration="4696000" />
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
-      <workItem from="1673067684084" duration="26725000" />
-    </task>
-    <task id="LOCAL-00069" summary="Add line function added">
-      <created>1672133857548</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1672133857549</updated>
-    </task>
-    <task id="LOCAL-00070" summary="color interpolation code refactored">
-      <created>1672136418513</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1672136418513</updated>
+      <workItem from="1673067684084" duration="27265000" />
+      <workItem from="1673139934594" duration="3223000" />
+      <workItem from="1673158085668" duration="8601000" />
     </task>
     <task id="LOCAL-00071" summary="color interpolation code refactored">
       <created>1672136505062</created>
@@ -516,7 +500,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673095163892</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Color slider and setCenter will center the screen to the map too">
+      <created>1673115943400</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1673115943400</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Color slider and setCenter will center the screen to the map too">
+      <created>1673115959127</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1673115959127</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Files cleaned and perlin noise variables changed" />
     <MESSAGE value="Non-zero left min and max sum value test and fix" />
     <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
     <MESSAGE value="Center bug fixed" />
@@ -571,7 +568,8 @@
     <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
     <MESSAGE value="Code Cleaned" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code Cleaned" />
+    <MESSAGE value="Color slider and setCenter will center the screen to the map too" />
+    <option name="LAST_COMMIT_MESSAGE" value="Color slider and setCenter will center the screen to the map too" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -583,18 +581,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>481</line>
+          <line>500</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>81</line>
+          <line>83</line>
           <option name="timeStamp" value="206" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673066032016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -6,6 +6,8 @@ import Noise.NoiseChunkGroup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Stream;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener, MouseWheelListener {
@@ -50,7 +52,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private final VariableChanger vc;
     private final MapEditor me;
-
+//    private final Timer timer;
     public NoiseMapPanel()
     {
         tableWidth = tableHeight = CHUNK_SIZE;
@@ -81,6 +83,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         chunkProvider.setCenter((int)centerX, (int)centerY);
         setCenterX(centerX);
         setCenterY(centerY);
+        moveCenter();
     }
 
     public void updateLighting()
@@ -217,10 +220,17 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return mapHeight;
     }
 
+    public void moveCenter()
+    {
+        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
+        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
+    }
+
     public void setCenterX(float centerX)
     {
         this.centerX = centerX;
-        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
+//        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
+        setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
     }
@@ -228,7 +238,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterY(float centerY)
     {
         this.centerY = centerY;
-        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
+//        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
+        setStartTop(startTop);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
     }

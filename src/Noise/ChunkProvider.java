@@ -62,10 +62,10 @@ public class ChunkProvider {
     {
         this.centerX = centerX;
         this.centerY = centerY;
-        for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+        synchronized (loadedNoiseMap)
         {
-            chunk.setCenter(centerX, centerY);
-            chunk.updateImage(null);
+            for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+                chunk.setCenter(centerX, centerY);
         }
     }
 
@@ -94,7 +94,10 @@ public class ChunkProvider {
             }
             else
                 noiseChunk.updateChunk(null);
-            loadedNoiseMap.put(key, noiseChunk);
+            synchronized (loadedNoiseMap)
+            {
+                loadedNoiseMap.put(key, noiseChunk);
+            }
             return noiseChunk;
         }
     }

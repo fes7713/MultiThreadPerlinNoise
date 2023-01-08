@@ -18,6 +18,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     private float[][] noiseMap;
     private float[][] normalMap;
+    private float[][] convNoiseMap;
+    private float[][] convNormalMap;
     private float[][] fallOffMap;
 
     private float left;
@@ -48,6 +50,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
+        convNoiseMap = new float[width][height];
+        convNormalMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -106,6 +110,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
         fallOffMap = new float[width][height];
+        convNoiseMap = new float[width][height];
+        convNormalMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -150,27 +156,47 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void generateFallOffMap()
     {
-        float MASK_SIZE = chunkProvider.getMaskSize();
+        float MASK_SIZE = chunkProvider.getMaskSize() * 1000000;
+        float MASK_SHADOW = chunkProvider.getMaskShadow();
+        int[][] colors = colorProvider.getColors();
+        float fallOff = 1;
+        int length = colors.length;
+
+        float x;
+        float y;
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
+                x = i  * zoom + left - centerX;
+                y = j * zoom + top - centerY;
                 fallOffMap[i][j] = (float)Math.exp(- (
-                        (i  * zoom + left - centerX) * (i  * zoom + left - centerX)
-                                +
-                                (j * zoom + top - centerY) * (j * zoom + top - centerY))
-                        / MASK_SIZE / 1000000F);
+                        x * x
+                        +
+                        y * y)
+                        / MASK_SIZE);
+
+                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
+//                for(int k = 0; k < MASK_SHADOW; k++)
+//                    fallOff *= fallOffMap[i][j];
+
+                bi.setRGB(i, j, colors[
+                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
+                        ][
+                        (int)(convNoiseMap[i][j]  * fallOff)
+                        ]);
             }
         }
     }
 
-    public float convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)
+    public double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
-        return (float)(1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
+        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
     }
 
-    public float convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
+    public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
     {
 //        float t = 2.5F;
 //        int p = 52;
@@ -179,7 +205,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
 //        return (float)(Math.atan(normal) / Math.PI + 0.5);
 //        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
-        return (float)(1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
+        return (1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
     }
 
     public void updateImage(PaintInterface pi)
@@ -190,38 +216,57 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float NORMAL_SHIFT = chunkProvider.getNormalShift();
         float MASK_SHADOW = chunkProvider.getMaskShadow();
         int[][] colors = colorProvider.getColors();
-
-        int length = colors.length - 1;
+        float fallOff = 1;
+        int length = colors.length;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
+                fallOff = 1;
+                for(int k = 0; k < MASK_SHADOW; k++)
+                    fallOff *= fallOffMap[i][j];
+
+                convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
+                convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
+
                 bi.setRGB(i, j, colors[
-                        (int)(convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT)  * fallOffMap[i][j] * length)
+                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
                         ][
-                        (int)(convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT)  * Math.pow(fallOffMap[i][j], MASK_SHADOW) * length)
+                        (int)(convNoiseMap[i][j]  * fallOff * length)
                         ]);
             }
         }
 
         for(int i = 0; i < width; i++)
         {
+            fallOff = 1;
+            for(int k = 0; k < MASK_SHADOW; k++)
+                fallOff *= fallOffMap[i][height - 1];
+
+            convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
+
             bi.setRGB(
                     i,
                     height - 1,
                     colors
                         [colors.length / 2]
-                        [(int)(convertNoise(noiseMap[i][height - 1], NORMAL_COEFFICIENT, NORMAL_SHIFT) * colors.length)]);
+                        [(int)(convNoiseMap[i][height - 1] * fallOff * length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
+            fallOff = 1;
+            for(int k = 0; k < MASK_SHADOW; k++)
+                fallOff *= fallOffMap[width - 1][i];
+
+            convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
+
             bi.setRGB(
                     width - 1,
                     i,
                     colors
                         [colors.length / 2]
-                        [(int)(convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT) * colors.length)]);
+                        [(int)(convNoiseMap[width - 1][i] * fallOff * length)]);
         }
 
         if(pi != null)
