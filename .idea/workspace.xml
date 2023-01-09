@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Main save">
-      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code migrated">
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,13 +170,6 @@
       <workItem from="1673039896023" duration="1061000" />
       <workItem from="1673041350140" duration="4344000" />
       <workItem from="1673067684084" duration="14660000" />
-    </task>
-    <task id="LOCAL-00068" summary="GradientInterface introduced">
-      <created>1672133417700</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1672133417700</updated>
     </task>
     <task id="LOCAL-00069" summary="Add line function added">
       <created>1672133857548</created>
@@ -518,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673094346720</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Code migrated">
+      <created>1673272241928</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1673272241928</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
     <MESSAGE value="Files cleaned and perlin noise variables changed" />
     <MESSAGE value="Non-zero left min and max sum value test and fix" />
     <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
@@ -573,7 +568,8 @@
     <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
     <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapted to Alpha colors" />
+    <MESSAGE value="Code migrated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code migrated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

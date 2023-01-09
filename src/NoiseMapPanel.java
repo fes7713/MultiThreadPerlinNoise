@@ -18,8 +18,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     private int startX;
     private int startY;
-    private int startLeft;
-    private int startTop;
+    private float startLeft;
+    private float startTop;
 
     private final int tableWidth;
     private final int tableHeight;
@@ -82,6 +82,26 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         mapHeight = DEFAULT_MAP_HEIGHT;
 
         chunkProvider.setCenter((int)centerX, (int)centerY);
+//        setCenterX(centerX);
+//        setCenterY(centerY);
+//        moveCenter();
+
+
+    }
+
+    public void loadVariables(String fileName)
+    {
+        vc.loadVariable("variables", fileName, vc);
+    }
+
+    public void loadColorPreset(String fileName)
+    {
+        colorProvider.loadColorPreset(fileName);
+    }
+
+    public void loadMapSetting(String fileName)
+    {
+//        me.loadMapSetting(fileName);
     }
 
     public void updateLighting()
@@ -119,6 +139,31 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return (float)Math.pow(ZOOM_RATIO, zoomCount);
     }
 
+    public int getColorLevel()
+    {
+        return colorProvider.getColorLevel();
+    }
+
+    public void setResolutionMin(int resolutionMin)
+    {
+        chunkProvider.setResolutionMin(resolutionMin);
+    }
+
+    public void setResolutionMax(int resolutionMax)
+    {
+        chunkProvider.setResolutionMax(resolutionMax);
+    }
+
+    public void setColorLevel(float colorLevel)
+    {
+        colorProvider.setColorLevel((int)colorLevel);
+    }
+
+    public void setColorLevel(int colorLevel)
+    {
+        colorProvider.setColorLevel(colorLevel);
+    }
+
     private boolean setZoomCount(int count)
     {
         if(minZoomCount <= count && count <= maxZoomCount)
@@ -133,30 +178,39 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return false;
     }
 
-    private void setStartLeft(int left)
-    {
-        float zoom = getZoom();
-        if(-left * zoom > centerX - mapWidth / 2 && (-left + this.getWidth()) * zoom <  centerX + mapWidth / 2)
-            startLeft = left;
-        else if(mapWidth < this.getWidth() * zoom)
-            startLeft =   (int)(( - centerX / zoom  + this.getWidth() / 2));
-        else if(-left * zoom <= centerX - mapWidth / 2)
-            startLeft = - (int)((centerX - mapWidth / 2) / zoom);
-        else
-            startLeft = - (int)((centerX + mapWidth / 2)  / zoom) + this.getWidth();
+    public float getStartLeft() {
+        return startLeft;
     }
 
-    private void setStartTop(int top)
+    public float getStartTop() {
+        return startTop;
+    }
+
+    public void setStartLeft(float left)
     {
         float zoom = getZoom();
-        if(-top * zoom > centerY - mapHeight / 2 && (-top  + this.getHeight()) * zoom <  centerY + mapHeight / 2)
+        if(-left > centerX - mapWidth / 2 && (-left + this.getWidth() * zoom )<  centerX + mapWidth / 2)
+            startLeft = left;
+        else if(mapWidth < this.getWidth() * zoom)
+            startLeft = (int)(( - centerX  + this.getWidth() / 2 * zoom));
+        else if(-left <= centerX - mapWidth / 2)
+            startLeft = - (int)((centerX - mapWidth / 2));
+        else
+            startLeft = - (int)(centerX + mapWidth / 2 - this.getWidth() * zoom);
+    }
+
+    public void setStartTop(float top)
+    {
+        startTop = top;
+        float zoom = getZoom();
+        if(-top > centerY - mapHeight / 2 && (-top  + this.getHeight() * zoom) <  centerY + mapHeight / 2)
             startTop = top;
         else if(mapHeight < this.getHeight() * zoom)
-            startTop = (int)(( - centerY / zoom + this.getHeight() / 2));
-        else if(-top * zoom <= centerY - mapHeight / 2)
-            startTop = - (int)((centerY - mapHeight / 2) / zoom);
+            startTop = (int)(( - centerY / zoom + this.getHeight() / 2 * zoom));
+        else if(-top <= centerY - mapHeight / 2)
+            startTop = - (int)((centerY - mapHeight / 2));
         else
-            startTop = - (int)((centerY + mapHeight / 2) / zoom) + this.getHeight();
+            startTop = - (int)(centerY + mapHeight / 2 - this.getHeight() * zoom);
     }
 
     public void setMinZoomCount(int zoomCount)
@@ -199,9 +253,16 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return mapHeight;
     }
 
+    public void moveCenter()
+    {
+        setStartLeft((int)(( - centerX + this.getWidth() / 2 * getZoom())));
+        setStartTop((int)(( - centerY + this.getHeight() / 2 * getZoom())));
+    }
+
     public void setCenterX(float centerX)
     {
         this.centerX = centerX;
+//        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
@@ -210,6 +271,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterY(float centerY)
     {
         this.centerY = centerY;
+//        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
         setStartTop(startTop);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
@@ -243,10 +305,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.setColor(new Color(0, 0, 0, 0.5F));
         float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
 
-        int leftTopCornerX = (int)((centerX - mapWidth / 2) / zoom + startLeft);
-        int leftTopCornerY = (int)((centerY - mapHeight / 2) / zoom + startTop);
-        int rightBottomCornerX = (int)((centerX + mapWidth / 2) / zoom + startLeft);
-        int rightBottomCornerY = (int)((centerY + mapHeight / 2) / zoom + startTop);
+        int leftTopCornerX = (int)((centerX - mapWidth / 2 + startLeft) / zoom);
+        int leftTopCornerY = (int)((centerY - mapHeight / 2 + startTop) / zoom);
+        int rightBottomCornerX = (int)((centerX + mapWidth / 2 + startLeft) / zoom);
+        int rightBottomCornerY = (int)((centerY + mapHeight / 2 + startTop) / zoom);
 
         g2d.fillPolygon(
                 new int[]{0, 0, leftTopCornerX, leftTopCornerX},
@@ -281,51 +343,59 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(this.getWidth(), this.getHeight(), rightBottomCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), 0, rightBottomCornerX, leftTopCornerY);
 
-        g2d.drawString("(" + (int)((mouseX - startLeft) * zoom)   + ", " + (int)((mouseY - startTop) * zoom) + ")", mouseX + 20, mouseY + 20);
+        g2d.drawString("(" + (int)((mouseX * zoom - startLeft))   + ", " + (int)((mouseY * zoom - startTop)) + ")", mouseX + 20, mouseY + 20);
     }
 
-    private void updateChunkGroups()
+    public void clearChunks()
     {
+        chunkProvider.clearMap(false);
+    }
+
+    public void updateChunkGroups()
+    {
+        float zoom = getZoom();
+
+        int chunkX = (int)(- startLeft / zoom / mainGroup.getChunkWidth());
+        int chunkY = (int)(- startTop / zoom / mainGroup.getChunkHeight());
 //        if(startLeft)
-        mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
+        mainGroup.loadChunks(chunkX, - (int)startTop / mainGroup.getChunkHeight(), true);
 
         if(startLeft < 0)
         {
 //            System.out.println("Right");
-            horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight(), true);
+            horizontalEdgeGroup.loadChunks(chunkX + CHUNK_SIZE , chunkY, true);
             if(startTop < 0)
-                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+                cornerGroup.loadChunks(chunkX + CHUNK_SIZE , chunkY + CHUNK_SIZE, true);
             else
-                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() + CHUNK_SIZE , - startTop / mainGroup.getChunkHeight() - 1, true);
+                cornerGroup.loadChunks(chunkX + CHUNK_SIZE , chunkY - 1, true);
         }
         else{
 //            System.out.println("Left");
-            horizontalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1, - startTop / mainGroup.getChunkHeight(), true);
+            horizontalEdgeGroup.loadChunks(chunkX - 1, chunkY, true);
             if(startTop < 0)
-                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1 , - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+                cornerGroup.loadChunks(chunkX - 1 , chunkY + CHUNK_SIZE, true);
             else
-                cornerGroup.loadChunks(- startLeft / mainGroup.getChunkWidth() - 1 , - startTop / mainGroup.getChunkHeight() - 1, true);
+                cornerGroup.loadChunks(chunkX - 1 , chunkY - 1, true);
         }
 
         if(startTop < 0)
         {
 //            System.out.println("Bottom");
-            verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() + CHUNK_SIZE, true);
+            verticalEdgeGroup.loadChunks(chunkX, chunkY + CHUNK_SIZE, true);
         }
         else{
 //            System.out.println("Top");
-            verticalEdgeGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight() -1, true);
+            verticalEdgeGroup.loadChunks(chunkX, chunkY -1, true);
         }
 
-        mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);
-
+        mainGroup.loadChunks(chunkX, chunkY, true);
 
         Stream.of(mainGroup, horizontalEdgeGroup, verticalEdgeGroup, cornerGroup)
                 .forEach(group -> {
-                    group.setChunkShiftX(startLeft / mainGroup.getChunkWidth());
-                    group.setChunkShiftY(startTop / mainGroup.getChunkHeight());
-                    group.setPixelShiftX(startLeft % mainGroup.getChunkWidth());
-                    group.setPixelShiftY(startTop % mainGroup.getChunkHeight());
+                    group.setChunkShiftX((int)(startLeft / zoom) / mainGroup.getChunkWidth());
+                    group.setChunkShiftY((int)(startTop / zoom) / mainGroup.getChunkHeight());
+                    group.setPixelShiftX((int)(startLeft / zoom) % mainGroup.getChunkWidth());
+                    group.setPixelShiftY((int)(startTop / zoom) % mainGroup.getChunkHeight());
                 });
 
         repaint();
@@ -379,8 +449,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         startX = mouseX;
         startY = mouseY;
 
-        setStartLeft(startLeft + diffX);
-        setStartTop(startTop + diffY);
+        float zoom = getZoom();
+        setStartLeft(startLeft + diffX * zoom);
+        setStartTop(startTop + diffY * zoom);
+        System.out.println(startLeft);
 
         updateChunkGroups();
     }
@@ -421,14 +493,17 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
 //        zoomCount -= e.getWheelRotation();
+        float pre = (float)Math.pow(ZOOM_RATIO, zoomCount);
         if(setZoomCount(zoomCount - e.getWheelRotation()))
         {
             System.out.println(zoomCount);
 
             float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
 
-            setStartLeft((int)(mouseX - (mouseX - startLeft) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
-            setStartTop((int)(mouseY - (mouseY - startTop) * Math.pow(ZOOM_RATIO, e.getWheelRotation())));
+//            setStartLeft((int)(mouseX * zoom * (1 - Math.pow(ZOOM_RATIO, e.getWheelRotation()))) + startLeft);
+//            setStartTop((int)(mouseY  * zoom * (1 - Math.pow(ZOOM_RATIO, e.getWheelRotation()))) + startTop);
+            setStartLeft((int)(mouseX * (zoom - pre)) + startLeft);
+            setStartTop((int)(mouseY * (zoom - pre)) + startTop);
             chunkProvider.zoomChanged(zoom);
 
             updateChunkGroups();
@@ -438,6 +513,35 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             setStartTop(startTop);
             repaint();
         }
+    }
 
+    @Override
+    public String toString()
+    {
+        return "CenterX," + centerX + "\n" +
+                "CenterY," + centerY + "\n" +
+                "Width," + mapWidth + "\n" +
+                "Height," + mapHeight + "\n" +
+                "Color," + colorProvider.getColorLevel();
+    }
+
+    public void fromString(String setting)
+    {
+        String[] split = setting
+                .replace("CenterX,", "")
+                .replace("CenterY,", "")
+                .replace("Width,", "")
+                .replace("Height,", "")
+                .replace("Color,", "")
+                .strip()
+                .split("\n");
+        if(split.length != 5)
+            throw new RuntimeException("Illegal NoiseMapFile setting data");
+        centerX = Float.parseFloat(split[0]);
+        centerY = Float.parseFloat(split[1]);
+        mapWidth = Float.parseFloat(split[2]);
+        mapHeight = Float.parseFloat(split[3]);
+        setColorLevel(Float.parseFloat(split[4]));
+        chunkProvider.setCenter((int)centerX, (int)centerY);
     }
 }

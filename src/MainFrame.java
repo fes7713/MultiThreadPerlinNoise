@@ -35,7 +35,7 @@ public class MainFrame {
 
 
 //        cloud.showColorEditor();
-//        panel.showColorEditor();
+        panel.showColorEditor();
 //        panel.showVariableChanger();
 //        panel.showLightingChanger();
 //        panel.showMapEditor();
