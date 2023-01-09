@@ -35,7 +35,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         pixelShiftX = pixelShiftY = 0;
 
         this.chunkProvider = chunkProvider;
-        array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * width, chunkY * height, width, height, zoom, centerX, centerY);
+        array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * width * zoom, chunkY * height * zoom, width, height, zoom, centerX, centerY);
     }
 
     public String getName()
@@ -77,7 +77,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void reuseChunk(int chunkX, int chunkY, float zoom) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
-        array.reuse(chunkX * width, chunkY * height, zoom);
+        array.reuse(chunkX * width * zoom, chunkY * height * zoom, zoom);
     }
 
     @Override

@@ -41,15 +41,15 @@ public class MainFrame {
 
 //        frame.addMouseWheelListener(panel);
 //        frame.addMouseListener(panel);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                panel.setCenterX(panel.getCenterX() + 1);
-                panel.setStartLeft(panel.getStartLeft() - 1);
-                panel.repaint();
-            }
-        }, 1, 10);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                panel.setCenterX(panel.getCenterX() + 1);
+//                panel.setStartLeft(panel.getStartLeft() - 1);
+//                panel.repaint();
+//            }
+//        }, 1, 10);
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);

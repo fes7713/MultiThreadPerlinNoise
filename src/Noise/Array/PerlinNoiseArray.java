@@ -40,8 +40,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         this.zoom = zoom;
         this.fn = fn;
-        this.left = left * zoom;
-        this.top = top * zoom;
+        this.left = left;
+        this.top = top;
         this.width = width;
         this.height = height;
         this.centerX = centerX;
@@ -93,8 +93,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public void reuse(float left, float top, float zoom)
     {
         this.zoom = zoom;
-        this.left = left * zoom;
-        this.top = top * zoom;
+        this.left = left;
+        this.top = top;
         generateFallOffMap();
     }
 

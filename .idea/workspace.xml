@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Color presets and initNoiseMap Changed">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/JDesktopPaneTest9.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Map move save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setting/default.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
@@ -167,14 +166,7 @@
       <workItem from="1673067684084" duration="27265000" />
       <workItem from="1673139934594" duration="3223000" />
       <workItem from="1673158085668" duration="22034000" />
-      <workItem from="1673235420103" duration="5442000" />
-    </task>
-    <task id="LOCAL-00075" summary="noise conversion function switched to new one">
-      <created>1672266192977</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1672266192978</updated>
+      <workItem from="1673235420103" duration="12791000" />
     </task>
     <task id="LOCAL-00076" summary="variable adjusted">
       <created>1672276117652</created>
@@ -512,7 +504,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673192255701</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Map move save">
+      <created>1673253038011</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1673253038011</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,7 +541,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Zoom limit bug fix" />
     <MESSAGE value="FallOffMap coding" />
     <MESSAGE value="fall off bug" />
     <MESSAGE value="fall off" />
@@ -567,7 +565,8 @@
     <MESSAGE value="Default setting changed. setCenter changed" />
     <MESSAGE value="synchronized" />
     <MESSAGE value="Color presets and initNoiseMap Changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Color presets and initNoiseMap Changed" />
+    <MESSAGE value="Map move save" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map move save" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -579,13 +578,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>532</line>
+          <line>541</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MainFrame.java</url>
           <line>47</line>
           <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Noise/NoiseChunk.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="202" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <line>199</line>
+          <option name="timeStamp" value="203" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
