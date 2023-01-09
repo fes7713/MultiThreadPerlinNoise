@@ -209,7 +209,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         {
             for(int j = 0; j < height - 1; j++)
             {
-                for(int k = 0; k < MASK_SHADOW; k++)
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
                 convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
             }

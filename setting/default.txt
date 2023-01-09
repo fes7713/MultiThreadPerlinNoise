@@ -2,4 +2,4 @@ CenterX,0
 CenterY,0
 Width,4000
 Height,4000
-Color,512
+Color,255

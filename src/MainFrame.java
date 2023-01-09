@@ -18,8 +18,8 @@ public class MainFrame {
 //        cloud.setOpaque(false);
 
 
-        OverlayLayout layout = new OverlayLayout(panel);
-        panel.setLayout(layout);
+//        OverlayLayout layout = new OverlayLayout(panel);
+//        panel.setLayout(layout);
 //        panel.add(cloud);
 //
 //        cloud.addComponentListener(panel);
