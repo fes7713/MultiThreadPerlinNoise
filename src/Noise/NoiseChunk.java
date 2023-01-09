@@ -18,6 +18,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     private int pixelShiftX;
     private int pixelShiftY;
 
+    private final ChunkProvider chunkProvider;
     private final PerlinNoiseArray array;
     private Thread thread;
 
@@ -33,6 +34,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         chunkShiftX = chunkShiftY = 0;
         pixelShiftX = pixelShiftY = 0;
 
+        this.chunkProvider = chunkProvider;
         array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * width, chunkY * height, width, height, zoom, centerX, centerY);
     }
 
@@ -108,7 +110,10 @@ public class NoiseChunk implements NoiseChunkInterface{
 //                    array.generateNormalMap();
 //                    Thread.yield();
 //                }
-                for (int i = -2; i < 14; i++) {
+                int resolutionMin = chunkProvider.getResolutionMin();
+                int resolutionMax = chunkProvider.getResolutionMax();
+
+                for (int i = resolutionMin; i < resolutionMax; i++) {
                     if(Thread.interrupted())
                     {
                         return;

@@ -33,7 +33,8 @@ public class ChunkProvider {
     private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Z = -1;
 
-    private float RESOLUTION_MAX = 16;
+    private int RESOLUTION_MIN = -2;
+    private int RESOLUTION_MAX = 14;
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
     {
@@ -218,5 +219,21 @@ public class ChunkProvider {
 
     public float getLightingZ() {
         return LIGHTING_Z;
+    }
+
+    public int getResolutionMin() {
+        return RESOLUTION_MIN;
+    }
+
+    public void setResolutionMin(int RESOLUTION_MIN) {
+        this.RESOLUTION_MIN = RESOLUTION_MIN;
+    }
+
+    public int getResolutionMax() {
+        return RESOLUTION_MAX;
+    }
+
+    public void setResolutionMax(int RESOLUTION_MAX) {
+        this.RESOLUTION_MAX = RESOLUTION_MAX;
     }
 }

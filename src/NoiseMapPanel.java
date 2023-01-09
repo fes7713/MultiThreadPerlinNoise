@@ -84,6 +84,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setCenterX(centerX);
         setCenterY(centerY);
         moveCenter();
+
+
     }
 
     public void loadVariables(String fileName)
@@ -145,6 +147,16 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return colorProvider.getColorLevel();
     }
 
+    public void setResolutionMin(int resolutionMin)
+    {
+        chunkProvider.setResolutionMin(resolutionMin);
+    }
+
+    public void setResolutionMax(int resolutionMax)
+    {
+        chunkProvider.setResolutionMax(resolutionMax);
+    }
+
     public void setColorLevel(float colorLevel)
     {
         colorProvider.setColorLevel((int)colorLevel);
@@ -169,7 +181,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return false;
     }
 
-    private void setStartLeft(int left)
+    public int getStartLeft() {
+        return startLeft;
+    }
+
+    public int getStartTop() {
+        return startTop;
+    }
+
+    public void setStartLeft(int left)
     {
         float zoom = getZoom();
         if(-left * zoom > centerX - mapWidth / 2 && (-left + this.getWidth()) * zoom <  centerX + mapWidth / 2)
@@ -182,7 +202,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             startLeft = - (int)((centerX + mapWidth / 2)  / zoom) + this.getWidth();
     }
 
-    private void setStartTop(int top)
+    public void setStartTop(int top)
     {
         float zoom = getZoom();
         if(-top * zoom > centerY - mapHeight / 2 && (-top  + this.getHeight()) * zoom <  centerY + mapHeight / 2)
@@ -328,7 +348,12 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawString("(" + (int)((mouseX - startLeft) * zoom)   + ", " + (int)((mouseY - startTop) * zoom) + ")", mouseX + 20, mouseY + 20);
     }
 
-    private void updateChunkGroups()
+    public void clearChunks()
+    {
+        chunkProvider.clearMap(false);
+    }
+
+    public void updateChunkGroups()
     {
 //        if(startLeft)
         mainGroup.loadChunks(- startLeft / mainGroup.getChunkWidth(), - startTop / mainGroup.getChunkHeight(), true);

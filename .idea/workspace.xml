@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="synchronized">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Color presets and initNoiseMap Changed">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JDesktopPaneTest9.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
@@ -66,6 +66,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
@@ -77,6 +78,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\fes77\IdeaProjects\MuthThreadParlinNoise\src" />
       <recent name="C:\Users\fes77\IdeaProjects\MuthThreadParlinNoise\presets" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -97,15 +99,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LightingChanger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.LightingChanger" />
+    <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="JDesktopPaneTest9" />
       <module name="MuthThreadParlinNoise" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,10 +130,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.JDesktopPaneTest9" />
         <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.VariableChanger" />
-        <item itemvalue="Application.LightingChanger" />
       </list>
     </recent_temporary>
   </component>
@@ -170,21 +166,8 @@
       <workItem from="1673041350140" duration="4344000" />
       <workItem from="1673067684084" duration="27265000" />
       <workItem from="1673139934594" duration="3223000" />
-      <workItem from="1673158085668" duration="15935000" />
-    </task>
-    <task id="LOCAL-00073" summary="Gradient Interface updated">
-      <created>1672145182699</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1672145182699</updated>
-    </task>
-    <task id="LOCAL-00074" summary="done">
-      <created>1672167740087</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1672167740087</updated>
+      <workItem from="1673158085668" duration="22034000" />
+      <workItem from="1673235420103" duration="5442000" />
     </task>
     <task id="LOCAL-00075" summary="noise conversion function switched to new one">
       <created>1672266192977</created>
@@ -515,7 +498,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673171170825</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="Color presets and initNoiseMap Changed">
+      <created>1673192176825</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1673192176825</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Color presets and initNoiseMap Changed">
+      <created>1673192255701</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1673192255701</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +542,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Center bug fixed" />
     <MESSAGE value="Zoom limit bug fix" />
     <MESSAGE value="FallOffMap coding" />
     <MESSAGE value="fall off bug" />
@@ -570,7 +566,8 @@
     <MESSAGE value="Color slider and setCenter will center the screen to the map too" />
     <MESSAGE value="Default setting changed. setCenter changed" />
     <MESSAGE value="synchronized" />
-    <option name="LAST_COMMIT_MESSAGE" value="synchronized" />
+    <MESSAGE value="Color presets and initNoiseMap Changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Color presets and initNoiseMap Changed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -582,8 +579,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>507</line>
+          <line>532</line>
           <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainFrame.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="199" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
