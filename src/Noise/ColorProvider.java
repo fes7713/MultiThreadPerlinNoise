@@ -30,6 +30,11 @@ public class ColorProvider {
         });
     }
 
+    public void loadColorPreset(String fileNameWithExtension)
+    {
+        editor.loadColorPreset(fileNameWithExtension);
+    }
+
     public void showColorEditor()
     {
         editor.showFrame();
@@ -38,6 +43,11 @@ public class ColorProvider {
     public int[][] getColors()
     {
         return colors;
+    }
+
+    public int getColorLevel()
+    {
+        return colorLevel;
     }
 
     public void setColorLevel(int colorLevel)

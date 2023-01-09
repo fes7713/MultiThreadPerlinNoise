@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Main save">
       <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ColorProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="ZoomTest" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,9 +139,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
-        <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.VariableChanger" />
         <item itemvalue="Application.LightingChanger" />
+        <item itemvalue="Application.GradientColorEditorPanel" />
         <item itemvalue="Application.ChunkProvider" />
       </list>
     </recent_temporary>

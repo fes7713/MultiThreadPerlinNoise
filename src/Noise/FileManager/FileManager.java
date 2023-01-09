@@ -3,6 +3,8 @@ package Noise.FileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,6 +39,16 @@ public class FileManager {
 
     public static void writeStringToFile(String data, String folder, String filename, String extension)
     {
+        if(!Files.exists(Paths.get(folder)))
+        {
+            try {
+                Files.createDirectories(Paths.get(folder));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+
         writeStringToFile(data, folder + "/" + filename + "." + extension);
     }
 
