@@ -161,19 +161,19 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float x;
         float y;
         float value;
-        for (int i = 0; i < width / 2; i++) {
-            for (int j = 0; j < height / 2; j++) {
-                x = i * 2 * zoom + left - centerX;
-                y = j * 2 * zoom + top - centerY;
+        for (int i = 0; i + 1 < width; i+= 2) {
+            for (int j = 0; j + 1 < height; j+=2) {
+                x = i * zoom + left - centerX;
+                y = j * zoom + top - centerY;
                 value = (float)Math.exp(- (
                         x * x
                         +
                         y * y)
                         / MASK_SIZE);
-                fallOffMap[i * 2][j * 2] = value;
-                fallOffMap[i * 2 + 1][j * 2] = value;
-                fallOffMap[i * 2][j * 2 + 1] = value;
-                fallOffMap[i * 2 + 1][j * 2 + 1] = value;
+                fallOffMap[i][j] = value;
+                fallOffMap[i + 1][j] = value;
+                fallOffMap[i][j + 1] = value;
+                fallOffMap[i + 1][j + 1] = value;
             }
         }
     }
@@ -234,8 +234,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for (int j = 0; j < height; j++) {
 
                 fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-//                for(int k = 0; k < MASK_SHADOW; k++)
-//                    fallOff *= fallOffMap[i][j];
 
                 bi.setRGB(i, j, colors[
                         (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)

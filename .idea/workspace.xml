@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="startLeft = startLeft * zoom">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Zoom Blank Chunk Bug Fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,13 +163,6 @@
       <workItem from="1673139934594" duration="3223000" />
       <workItem from="1673158085668" duration="22034000" />
       <workItem from="1673235420103" duration="17025000" />
-    </task>
-    <task id="LOCAL-00077" summary="Variable changer">
-      <created>1672392954817</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1672392954818</updated>
     </task>
     <task id="LOCAL-00078" summary="Code cleaned">
       <created>1672393849507</created>
@@ -510,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673264426551</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="Zoom Blank Chunk Bug Fix">
+      <created>1673277747137</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1673277747137</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +537,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fall off bug" />
     <MESSAGE value="fall off" />
     <MESSAGE value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
     <MESSAGE value="fall off recovered" />
@@ -565,7 +561,8 @@
     <MESSAGE value="Color presets and initNoiseMap Changed" />
     <MESSAGE value="Map move save" />
     <MESSAGE value="startLeft = startLeft * zoom" />
-    <option name="LAST_COMMIT_MESSAGE" value="startLeft = startLeft * zoom" />
+    <MESSAGE value="Zoom Blank Chunk Bug Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zoom Blank Chunk Bug Fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
