@@ -61,6 +61,11 @@ public class ChunkProvider {
         // TODO
     }
 
+    public int getLoadedChunkSize()
+    {
+        return loadedNoiseMap.size();
+    }
+
     public void setCenter(float centerX, float centerY)
     {
         this.centerX = centerX;

@@ -116,13 +116,13 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         generateFallOffMap();
     }
 
-    public void initNoiseMap()
+    public void initNoiseMap(float resolution)
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = 0;
+                noiseMap[i][j] = fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
             }
         }
     }

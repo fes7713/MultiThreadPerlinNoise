@@ -34,7 +34,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int mouseX;
     private int mouseY;
 
-    private static int DEFAULT_COLOR_LEVEL = 4096;
+    private static int DEFAULT_COLOR_LEVEL = 256;
     private static final int CHUNK_SIZE = 5;
     private static final float ZOOM_RATIO = 2;
 
@@ -361,7 +361,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         int chunkX = (int)(- startLeft / zoom / mainGroup.getChunkWidth());
         int chunkY = (int)(- startTop / zoom / mainGroup.getChunkHeight());
 //        if(startLeft)
-        mainGroup.loadChunks(chunkX, - (int)startTop / mainGroup.getChunkHeight(), true);
+        mainGroup.loadChunks(chunkX, chunkY, true);
 
         if(startLeft < 0)
         {
@@ -391,7 +391,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             verticalEdgeGroup.loadChunks(chunkX, chunkY -1, true);
         }
 
-        mainGroup.loadChunks(chunkX, chunkY, true);
+//        mainGroup.loadChunks(chunkX, chunkY, true);
 
         Stream.of(mainGroup, horizontalEdgeGroup, verticalEdgeGroup, cornerGroup)
                 .forEach(group -> {
@@ -401,6 +401,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                     group.setPixelShiftY((int)(startTop / zoom) % mainGroup.getChunkHeight());
                 });
 
+        System.out.println("Size " + chunkProvider.getLoadedChunkSize());
         repaint();
     }
 

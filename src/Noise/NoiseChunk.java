@@ -97,8 +97,7 @@ public class NoiseChunk implements NoiseChunkInterface{
             public void run() {
                 super.run();
 
-                array.initNoiseMap();
-                Thread.yield();
+
 //                for (int i = -2; i < 0; i++) {
 //                    if(Thread.interrupted())
 //                    {
@@ -113,7 +112,12 @@ public class NoiseChunk implements NoiseChunkInterface{
                 int resolutionMin = chunkProvider.getResolutionMin();
                 int resolutionMax = chunkProvider.getResolutionMax();
 
-                for (int i = resolutionMin; i < resolutionMax; i++) {
+                array.initNoiseMap(resolutionMin);
+                array.generateNormalMap();
+                array.updateImage(pi);
+                Thread.yield();
+
+                for (int i = resolutionMin + 1; i < resolutionMax; i++) {
                     if(Thread.interrupted())
                     {
                         return;

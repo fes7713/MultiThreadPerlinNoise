@@ -18,7 +18,7 @@ public interface PerlinNoiseArrayInterface {
 
     void reuse(float left, float top, float zoom);
     void setCenter(float centerX, float centerY);
-    void initNoiseMap();
+    void initNoiseMap(float resolution);
     void increaseResolution(float resolution);
     void generateNormalMap();
 
