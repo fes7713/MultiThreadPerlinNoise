@@ -85,6 +85,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         array.setCenter(centerX, centerY);
     }
 
+    @Override
     public void updateChunk(PaintInterface pi)
     {
         if(thread.isAlive())
@@ -136,6 +137,7 @@ public class NoiseChunk implements NoiseChunkInterface{
         thread.start();
     }
 
+    @Override
     public void updateLighting(PaintInterface pi)
     {
         array.generateNormalMap();
@@ -144,11 +146,18 @@ public class NoiseChunk implements NoiseChunkInterface{
             pi.paint();
     }
 
+    @Override
     public void updateImage(PaintInterface pi)
     {
         array.updateImage(pi);
     }
 
+    @Override
+    public void variableChanged() {
+        array.convertData();
+    }
+
+    @Override
     public void drawImage(Graphics2D g2d)
     {
         g2d.drawImage(array.getImage(),

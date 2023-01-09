@@ -16,6 +16,7 @@ interface NoiseChunkInterface {
     void setCenter(float centerX, float centerY);
     void updateLighting(PaintInterface pi);
     void updateImage(PaintInterface pi);
+    void variableChanged();
     void drawImage(Graphics2D g2d);
 
     String getName();

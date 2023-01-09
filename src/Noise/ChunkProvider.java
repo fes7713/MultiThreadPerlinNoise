@@ -33,7 +33,7 @@ public class ChunkProvider {
     private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Z = -1;
 
-    private int RESOLUTION_MIN = -2;
+    private int RESOLUTION_MIN = -3;
     private int RESOLUTION_MAX = 14;
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
@@ -74,6 +74,15 @@ public class ChunkProvider {
         {
             for(NoiseChunkInterface chunk: loadedNoiseMap.values())
                 chunk.setCenter(centerX, centerY);
+        }
+    }
+
+    public void applyVariableChange()
+    {
+        synchronized (loadedNoiseMap)
+        {
+            for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+                chunk.variableChanged();
         }
     }
 

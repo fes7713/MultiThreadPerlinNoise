@@ -75,7 +75,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
 
         vc = new VariableChanger(this, chunkProvider, this::updateImage);
-        vc.loadDefaultVariables(null);
+        vc.loadDefaultVariables(vc);
         me = new MapEditor(this, this::repaint);
         me.loadDefaultMapSetting();
 
@@ -401,7 +401,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                     group.setPixelShiftY((int)(startTop / zoom) % mainGroup.getChunkHeight());
                 });
 
-        System.out.println("Size " + chunkProvider.getLoadedChunkSize());
         repaint();
     }
 

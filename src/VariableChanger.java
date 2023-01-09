@@ -119,6 +119,7 @@ public class VariableChanger extends JPanel{
                     sliders.get(index).addChangeListener((event) -> {
                         labels.get(index).setText(sliders.get(index).getValue() / (float)precision + "");
                         setters.get(index).accept(sliders.get(index).getValue() / (float)precision);
+                        chunkProvider.applyVariableChange();
                         iui.update();
                     });
 

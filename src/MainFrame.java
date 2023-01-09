@@ -9,47 +9,65 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseMapPanel panel = new NoiseMapPanel() ;
-//        NoiseMapPanel cloud = new NoiseMapPanel() ;
-//        cloud.setResolutionMin(-2);
-//        cloud.setResolutionMax(5);
-//        cloud.loadColorPreset("cloud.txt");
-//        cloud.clearChunks();
-//        cloud.updateChunkGroups();
-//        cloud.setOpaque(false);
+        NoiseMapPanel cloud = new NoiseMapPanel() ;
+        NoiseMapPanel cloudHigh = new NoiseMapPanel() ;
+        cloud.setResolutionMin(-4);
+        cloud.setResolutionMax(1);
+        cloud.loadColorPreset("cloud3.txt");
+        cloud.loadVariables("cloud2.txt");
+        cloud.clearChunks();
+        cloud.updateChunkGroups();
+        cloud.setOpaque(false);
+
+        cloudHigh.setResolutionMin(-6);
+        cloudHigh.setResolutionMax(-4);
+        cloudHigh.loadColorPreset("cloud3.txt");
+        cloudHigh.loadVariables("cloudHigh1.txt");
+        cloudHigh.clearChunks();
+        cloudHigh.updateChunkGroups();
+        cloudHigh.setOpaque(false);
 
 
-//        OverlayLayout layout = new OverlayLayout(panel);
-//        panel.setLayout(layout);
-//        panel.add(cloud);
+        OverlayLayout layout = new OverlayLayout(panel);
+        panel.setLayout(layout);
+        panel.add(cloud);
+        panel.add(cloudHigh);
 //
-//        cloud.addComponentListener(panel);
-//        cloud.addMouseMotionListener(panel);
-//        cloud.addMouseListener(panel);
-//        cloud.addMouseWheelListener(panel);
-        //            panel.updateImage();
-//        MapEditor mapEditor = new MapEditor(panel, panel::repaint);
-//        mapEditor.showMapEditor();
+        cloud.addComponentListener(panel);
+        cloud.addMouseMotionListener(panel);
+        cloud.addMouseListener(panel);
+        cloud.addMouseWheelListener(panel);
+
+        cloud.addComponentListener(cloudHigh);
+        cloud.addMouseMotionListener(cloudHigh);
+        cloud.addMouseListener(cloudHigh);
+        cloud.addMouseWheelListener(cloudHigh);
+
+
 //        panel.add(cloud);
 
 
-//        cloud.showColorEditor();
+        cloud.showColorEditor();
+        cloudHigh.showVariableChanger();
 //        panel.showColorEditor();
 //        panel.showVariableChanger();
 //        panel.showLightingChanger();
 //        panel.showMapEditor();
 //        panel.repaint();
 
-//        frame.addMouseWheelListener(panel);
-//        frame.addMouseListener(panel);
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                panel.setCenterX(panel.getCenterX() + 1);
-//                panel.setStartLeft(panel.getStartLeft() - 1);
-//                panel.repaint();
-//            }
-//        }, 1, 10);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                cloud.setCenterX(cloud.getCenterX() + 2);
+                cloud.setStartLeft(cloud.getStartLeft() - 2);
+                cloud.repaint();
+
+                cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
+                cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
+                cloudHigh.repaint();
+            }
+        }, 1000, 50);
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);

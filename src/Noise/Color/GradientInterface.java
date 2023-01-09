@@ -88,6 +88,9 @@ public interface  GradientInterface{
 
         if(newhsvvals[0] > 1)
             newhsvvals[0] -= 1;
+
+        if(newhsvvals[3] >= 256)
+            newhsvvals[3] = 255;
         return newhsvvals;
     }
 

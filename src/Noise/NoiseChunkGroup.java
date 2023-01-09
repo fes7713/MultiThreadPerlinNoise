@@ -146,6 +146,15 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     }
 
     @Override
+    public void variableChanged() {
+        for (int i = 0; i < tableWidth; i++) {
+            for (int j = 0; j < tableHeight; j++) {
+                chunkTable[i][j].variableChanged();
+            }
+        }
+    }
+
+    @Override
     public void drawImage(Graphics2D g2d) {
         for (int i = 0; i < tableWidth; i++) {
             for (int j = 0; j < tableHeight; j++) {
