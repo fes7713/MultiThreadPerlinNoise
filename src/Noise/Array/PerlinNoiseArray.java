@@ -158,32 +158,22 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         float MASK_SIZE = chunkProvider.getMaskSize() * 1000000;
         float MASK_SHADOW = chunkProvider.getMaskShadow();
-        int[][] colors = colorProvider.getColors();
-        float fallOff = 1;
-        int length = colors.length;
-
         float x;
         float y;
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                x = i  * zoom + left - centerX;
-                y = j * zoom + top - centerY;
-                fallOffMap[i][j] = (float)Math.exp(- (
+        float value;
+        for (int i = 0; i < width / 2; i++) {
+            for (int j = 0; j < height / 2; j++) {
+                x = i * 2 * zoom + left - centerX;
+                y = j * 2 * zoom + top - centerY;
+                value = (float)Math.exp(- (
                         x * x
                         +
                         y * y)
                         / MASK_SIZE);
-
-                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-//                for(int k = 0; k < MASK_SHADOW; k++)
-//                    fallOff *= fallOffMap[i][j];
-
-                bi.setRGB(i, j, colors[
-                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
-                        ][
-                        (int)(convNoiseMap[i][j]  * fallOff)
-                        ]);
+                fallOffMap[i * 2][j * 2] = value;
+                fallOffMap[i * 2 + 1][j * 2] = value;
+                fallOffMap[i * 2][j * 2 + 1] = value;
+                fallOffMap[i * 2 + 1][j * 2 + 1] = value;
             }
         }
     }
@@ -208,67 +198,53 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return (1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
     }
 
-    public void updateImage(PaintInterface pi)
+    public void convertData()
     {
         float NOISE_COEFFICIENT = chunkProvider.getNoiseCoefficient();
         float NOISE_SHIFT = chunkProvider.getNoiseShift();
         float NORMAL_COEFFICIENT = chunkProvider.getNormalCoefficient();
         float NORMAL_SHIFT = chunkProvider.getNormalShift();
         float MASK_SHADOW = chunkProvider.getMaskShadow();
-        int[][] colors = colorProvider.getColors();
-        float fallOff = 1;
-        int length = colors.length;
         for(int i = 0; i < width - 1; i++)
         {
             for(int j = 0; j < height - 1; j++)
             {
-                fallOff = 1;
                 for(int k = 0; k < MASK_SHADOW; k++)
-                    fallOff *= fallOffMap[i][j];
-
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
                 convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
-
-                bi.setRGB(i, j, colors[
-                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
-                        ][
-                        (int)(convNoiseMap[i][j]  * fallOff * length)
-                        ]);
             }
         }
 
         for(int i = 0; i < width; i++)
         {
-            fallOff = 1;
-            for(int k = 0; k < MASK_SHADOW; k++)
-                fallOff *= fallOffMap[i][height - 1];
-
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
-
-            bi.setRGB(
-                    i,
-                    height - 1,
-                    colors
-                        [colors.length / 2]
-                        [(int)(convNoiseMap[i][height - 1] * fallOff * length)]);
         }
 
         for(int i = 0; i < height; i++)
         {
-            fallOff = 1;
-            for(int k = 0; k < MASK_SHADOW; k++)
-                fallOff *= fallOffMap[width - 1][i];
-
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
-
-            bi.setRGB(
-                    width - 1,
-                    i,
-                    colors
-                        [colors.length / 2]
-                        [(int)(convNoiseMap[width - 1][i] * fallOff * length)]);
         }
+    }
 
+    public void updateImage(PaintInterface pi)
+    {
+        int[][] colors = colorProvider.getColors();
+        int length = colors.length;
+        float fallOff;
+        for(int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+
+                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
+//                for(int k = 0; k < MASK_SHADOW; k++)
+//                    fallOff *= fallOffMap[i][j];
+
+                bi.setRGB(i, j, colors[
+                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
+                        ][
+                        (int)(convNoiseMap[i][j]  * fallOff)
+                        ]);
+            }
+        }
         if(pi != null)
             pi.paint();
     }
