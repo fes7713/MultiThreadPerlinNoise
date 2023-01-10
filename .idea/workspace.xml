@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="MuthThreadParlinNoise:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="2 layers of cloud">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="ResuableChunkKeeper validation">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MuthThreadParlinNoise_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JDesktopPaneTest9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/JDesktopPaneTest9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MapEditorUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MapEditorUpdateInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/FallOffImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/ImageUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/ImageUpdateInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/ColorEditorAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/ColorEditorAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/ColorUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/ColorUpdateInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientColorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientNodeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientNodeLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ColorProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/FastNoise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/FastNoise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/FileManager/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroupInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroupInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/PaintInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/PaintInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ReusableChunkKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,9 +105,9 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="profiler.jvm" />
   </component>
   <component name="RecentsManager">
@@ -84,11 +121,11 @@
   </component>
   <component name="RunManager" selected="Application.MainFrame">
     <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.FallOffImage" />
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.FallOffImage" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
+          <option name="PATTERN" value="map.Noise.Array.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,11 +134,11 @@
       </method>
     </configuration>
     <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Color.GradientColorEditorPanel" />
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Color.GradientColorEditorPanel" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Color.*" />
+          <option name="PATTERN" value="map.Noise.Color.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -110,21 +147,21 @@
       </method>
     </configuration>
     <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="JDesktopPaneTest9" />
+      <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainFrame" />
+      <option name="MAIN_CLASS_NAME" value="map.MainFrame" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="MapEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MapEditor" />
+      <option name="MAIN_CLASS_NAME" value="map.MapEditor" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -133,9 +170,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.FallOffImage" />
         <item itemvalue="Application.JDesktopPaneTest9" />
-        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.GradientColorEditorPanel" />
       </list>
     </recent_temporary>
@@ -171,14 +208,10 @@
       <workItem from="1673139934594" duration="3223000" />
       <workItem from="1673158085668" duration="22034000" />
       <workItem from="1673235420103" duration="17025000" />
-      <workItem from="1673316211280" duration="3026000" />
-    </task>
-    <task id="LOCAL-00080" summary="Removed main from PerlinNoiseArray">
-      <created>1672395120125</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1672395120125</updated>
+      <workItem from="1673316211280" duration="3134000" />
+      <workItem from="1673354786391" duration="7000" />
+      <workItem from="1673368149429" duration="1373000" />
+      <workItem from="1673370692799" duration="68000" />
     </task>
     <task id="LOCAL-00081" summary="FileManager">
       <created>1672416141986</created>
@@ -516,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673286026093</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="ResuableChunkKeeper validation">
+      <created>1673326480545</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1673326480545</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fall off recovered" />
     <MESSAGE value="fall off working save" />
     <MESSAGE value="fall off map" />
     <MESSAGE value="replaced limit system to center and length system" />
@@ -572,18 +611,19 @@
     <MESSAGE value="Zoom Blank Chunk Bug Fix" />
     <MESSAGE value="fallOff speed update" />
     <MESSAGE value="2 layers of cloud" />
-    <option name="LAST_COMMIT_MESSAGE" value="2 layers of cloud" />
+    <MESSAGE value="ResuableChunkKeeper validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="ResuableChunkKeeper validation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
+          <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
           <line>541</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/ChunkProvider.java</url>
+          <url>file://$PROJECT_DIR$/src/map/Noise/ChunkProvider.java</url>
           <line>81</line>
           <option name="timeStamp" value="226" />
         </line-breakpoint>
