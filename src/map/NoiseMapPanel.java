@@ -455,7 +455,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         float zoom = getZoom();
         setStartLeft(startLeft + diffX * zoom);
         setStartTop(startTop + diffY * zoom);
-        System.out.println(startLeft);
+//        System.out.println(startLeft);
 
         updateChunkGroups();
     }
@@ -499,7 +499,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         float pre = (float)Math.pow(ZOOM_RATIO, zoomCount);
         if(setZoomCount(zoomCount - e.getWheelRotation()))
         {
-            System.out.println(zoomCount);
+//            System.out.println(zoomCount);
 
             float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
 

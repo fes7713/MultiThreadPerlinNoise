@@ -9,41 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="ResuableChunkKeeper validation">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MuthThreadParlinNoise_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Package">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JDesktopPaneTest9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/JDesktopPaneTest9.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapEditorUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MapEditorUpdateInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/FallOffImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/ImageUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/ImageUpdateInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/ColorEditorAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/ColorEditorAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/ColorUpdateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/ColorUpdateInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorEditorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientColorEditorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientColorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientColorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientNodeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Color/GradientNodeLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ColorProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/FastNoise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/FastNoise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/FileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/FileManager/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroupInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroupInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/PaintInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/PaintInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ReusableChunkKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,13 +180,8 @@
       <workItem from="1673354786391" duration="7000" />
       <workItem from="1673368149429" duration="1373000" />
       <workItem from="1673370692799" duration="68000" />
-    </task>
-    <task id="LOCAL-00081" summary="FileManager">
-      <created>1672416141986</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1672416141986</updated>
+      <workItem from="1673370820703" duration="41000" />
+      <workItem from="1673370883612" duration="29000" />
     </task>
     <task id="LOCAL-00082" summary="Save and load variable settings">
       <created>1672422326442</created>
@@ -556,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673326480545</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="Package">
+      <created>1673370855122</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1673370855123</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +557,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fall off working save" />
     <MESSAGE value="fall off map" />
     <MESSAGE value="replaced limit system to center and length system" />
     <MESSAGE value="map editor" />
@@ -612,7 +581,8 @@
     <MESSAGE value="fallOff speed update" />
     <MESSAGE value="2 layers of cloud" />
     <MESSAGE value="ResuableChunkKeeper validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="ResuableChunkKeeper validation" />
+    <MESSAGE value="Package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
