@@ -1,8 +1,7 @@
 package Noise;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ReusableChunkKeeper
 {
@@ -21,6 +20,8 @@ public class ReusableChunkKeeper
             chunkMap.put(entry.getKey(), entry.getValue());
             chunkStack.add(entry.getValue());
         }
+        if(chunkStack.isEmpty() != chunkMap.isEmpty())
+            throw new RuntimeException("!!!!Chunk keeper has issue with keeping chunks. Chunks do not match");
     }
 
     public NoiseChunkInterface reuseChunk(int col, int row, float zoom)
@@ -41,7 +42,8 @@ public class ReusableChunkKeeper
             chunk = chunkStack.pop();
             chunkMap.remove(chunk.getChunkKey());
         }
-
+        if(chunkStack.isEmpty() != chunkMap.isEmpty())
+            throw new RuntimeException("AAAAAChunk keeper has issue with keeping chunks. Chunks do not match");
         chunk.reuseChunk(col, row, zoom);
         return chunk;
     }
@@ -49,8 +51,32 @@ public class ReusableChunkKeeper
     public boolean isEmpty()
     {
         if(chunkStack.isEmpty() != chunkMap.isEmpty())
-            throw new RuntimeException("Chunk keeper has issue with keeping chunks. Chunks do not match");
+        {
+            while(chunkStack.size() != chunkMap.size())
+            {
+                reconstructData();
+            }
+        }
+
         return chunkStack.isEmpty();
+    }
+
+    private void reconstructData(){
+        System.out.println("reconstructData");
+        List<NoiseChunkInterface> chunks = new ArrayList<>();
+        NoiseChunkInterface chunk;
+
+        while(!chunkStack.isEmpty()){
+            chunk = chunkStack.pop();
+            if(chunkMap.containsValue(chunk))
+                chunks.add(chunk);
+        }
+        chunkStack.clear();
+        chunkMap.clear();
+        chunkStack.addAll(chunks);
+        chunks.stream().forEach(c -> {
+            chunkMap.put(c.getChunkKey(), c);
+        });
     }
 
     public void clear()

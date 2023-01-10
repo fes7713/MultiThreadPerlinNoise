@@ -4,30 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fallOff speed update">
-      <change afterPath="$PROJECT_DIR$/falloff3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/cloud1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/cloud2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/cloud3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setting/OceanMountainIslands.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/cloud.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/cloud1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/cloud2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/cloudHigh.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/cloudHigh1.txt" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="2 layers of cloud">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/falloff1.png" beforeDir="false" afterPath="$PROJECT_DIR$/falloff1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MuthThreadParlinNoise/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setting/default.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Color/GradientInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/NoiseChunkInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoiseMapPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/ReusableChunkKeeper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,13 +171,7 @@
       <workItem from="1673139934594" duration="3223000" />
       <workItem from="1673158085668" duration="22034000" />
       <workItem from="1673235420103" duration="17025000" />
-    </task>
-    <task id="LOCAL-00079" summary="File save function moved to static functions">
-      <created>1672395089997</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1672395089997</updated>
+      <workItem from="1673316211280" duration="3026000" />
     </task>
     <task id="LOCAL-00080" summary="Removed main from PerlinNoiseArray">
       <created>1672395120125</created>
@@ -536,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673280644364</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="2 layers of cloud">
+      <created>1673286026093</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1673286026093</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -567,7 +547,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44" />
     <MESSAGE value="fall off recovered" />
     <MESSAGE value="fall off working save" />
     <MESSAGE value="fall off map" />
@@ -592,7 +571,8 @@
     <MESSAGE value="startLeft = startLeft * zoom" />
     <MESSAGE value="Zoom Blank Chunk Bug Fix" />
     <MESSAGE value="fallOff speed update" />
-    <option name="LAST_COMMIT_MESSAGE" value="fallOff speed update" />
+    <MESSAGE value="2 layers of cloud" />
+    <option name="LAST_COMMIT_MESSAGE" value="2 layers of cloud" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

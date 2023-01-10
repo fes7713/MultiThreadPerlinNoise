@@ -269,6 +269,4 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         return (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
     }
-
-
 }
