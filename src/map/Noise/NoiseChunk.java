@@ -13,6 +13,9 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final int width;
     private final int height;
 
+    private final int arrayWidth;
+    private final int arrayHeight;
+
     private int chunkShiftX;
     private int chunkShiftY;
     private int pixelShiftX;
@@ -22,20 +25,28 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final PerlinNoiseArray array;
     private Thread thread;
 
-    public NoiseChunk(String name, ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY) {
+    public NoiseChunk(String name, ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY, int arrayWidth, int arrayHeight) {
         this.name = name;
         this.chunkX = chunkX;
         this.chunkY = chunkY;
 
         this.width = width;
         this.height = height;
+        this. arrayWidth = arrayWidth;
+        this.arrayHeight = arrayHeight;
+
         thread = new Thread();
 
         chunkShiftX = chunkShiftY = 0;
         pixelShiftX = pixelShiftY = 0;
 
         this.chunkProvider = chunkProvider;
-        array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * width * zoom, chunkY * height * zoom, width, height, zoom, centerX, centerY);
+        array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * arrayWidth * zoom, chunkY * arrayHeight * zoom, arrayWidth, arrayHeight, zoom, centerX, centerY);
+    }
+
+    public NoiseChunk(String name, ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY)
+    {
+        this(name, chunkProvider, colorProvider, fn, chunkX, chunkY, width, height, zoom, centerX, centerY, width, height);
     }
 
     public String getName()
@@ -77,7 +88,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void reuseChunk(int chunkX, int chunkY, float zoom) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
-        array.reuse(chunkX * width * zoom, chunkY * height * zoom, zoom);
+        array.reuse(chunkX * arrayWidth * zoom, chunkY * arrayHeight * zoom, zoom);
     }
 
     @Override
@@ -98,18 +109,6 @@ public class NoiseChunk implements NoiseChunkInterface{
             public void run() {
                 super.run();
 
-
-//                for (int i = -2; i < 0; i++) {
-//                    if(Thread.interrupted())
-//                    {
-//                        return;
-//                    }
-//
-//                    array.increaseResolution((float)Math.pow(2, i));
-//                    array.updateImage(pi);
-//                    array.generateNormalMap();
-//                    Thread.yield();
-//                }
                 int resolutionMin = chunkProvider.getResolutionMin();
                 int resolutionMax = chunkProvider.getResolutionMax();
 
@@ -162,7 +161,9 @@ public class NoiseChunk implements NoiseChunkInterface{
     {
         g2d.drawImage(array.getImage(),
                 (chunkX + chunkShiftX) * width + pixelShiftX,
-                (chunkY + chunkShiftY) * height + pixelShiftY, null
+                (chunkY + chunkShiftY) * height + pixelShiftY,
+                width,
+                height, null
         );
     }
 

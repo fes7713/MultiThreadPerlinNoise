@@ -55,10 +55,15 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 //    private final Timer timer;
     public NoiseMapPanel()
     {
+        this(1, 1);
+    }
+
+    public NoiseMapPanel(float widthDivider, float heightDivider)
+    {
         tableWidth = tableHeight = CHUNK_SIZE;
         colorProvider = new ColorProvider(this::updateImage, DEFAULT_COLOR_LEVEL);
 //        colorProvider.setPaintInterface(this::updateImage);
-        chunkProvider = new ChunkProvider(colorProvider, this::repaint);
+        chunkProvider = new ChunkProvider(colorProvider, widthDivider, heightDivider, this::repaint);
         mainGroup = new NoiseChunkGroup(chunkProvider, "Chunk",  100, 200,CHUNK_SIZE, CHUNK_SIZE);
         verticalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Vertical Chunk",  100, 200,CHUNK_SIZE, 1);
         horizontalEdgeGroup = new NoiseChunkGroup(chunkProvider, "Horizontal Chunk",  100, 200,1, CHUNK_SIZE);

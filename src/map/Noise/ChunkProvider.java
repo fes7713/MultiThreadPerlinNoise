@@ -11,6 +11,13 @@ public class ChunkProvider {
 
     private int chunkWidth;
     private int chunkHeight;
+
+    private int arrayWidth;
+    private int arrayHeight;
+
+    private final float widthArrayDivider;
+    private final float heightArrayDivider;
+
     private float zoom;
 
     private float centerX;
@@ -38,7 +45,14 @@ public class ChunkProvider {
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
     {
+        this(colorProvider, 1, 1, pi);
+    }
+
+    public ChunkProvider(ColorProvider colorProvider, float widthArrayDivider, float heightArrayDivider, PaintInterface pi)
+    {
         this.colorProvider = colorProvider;
+        this.widthArrayDivider = widthArrayDivider;
+        this.heightArrayDivider = heightArrayDivider;
         this.pi = pi;
 
         zoom = 1;
@@ -49,6 +63,9 @@ public class ChunkProvider {
         fn.SetNoiseType(FastNoise.NoiseType.CubicFractal);
         fn.SetInterp(FastNoise.Interp.Quintic);
         chunkWidth = chunkHeight = 200;
+
+        arrayWidth = (int)(chunkWidth / widthArrayDivider);
+        arrayHeight = (int)(chunkHeight / heightArrayDivider);
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -97,7 +114,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, this, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY);
+                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, this, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY, arrayWidth, arrayHeight);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);
@@ -139,6 +156,9 @@ public class ChunkProvider {
         clearMap(false);
         this.chunkWidth = chunkWidth;
         this.chunkHeight = chunkHeight;
+
+        arrayWidth = (int)(chunkWidth / widthArrayDivider);
+        arrayHeight = (int)(chunkHeight / heightArrayDivider);
     }
 
     public void zoomChanged(float zoom)

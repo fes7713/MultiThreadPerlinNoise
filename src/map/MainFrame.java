@@ -11,8 +11,8 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseMapPanel panel = new NoiseMapPanel() ;
-        NoiseMapPanel cloud = new NoiseMapPanel() ;
-        NoiseMapPanel cloudHigh = new NoiseMapPanel() ;
+        NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
+        NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;
         cloud.setResolutionMin(-4);
         cloud.setResolutionMax(1);
         cloud.loadColorPreset("cloud3.txt");
