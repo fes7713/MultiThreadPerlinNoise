@@ -450,14 +450,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
         chunkProvider.dimensionChanged((int)Math.ceil(width / (double)tableWidth), (int)Math.ceil(height / (double)tableHeight));
 
-        mainGroup =
-                new NoiseChunkGroup(chunkProvider, "Main",  width, height,tableWidth, tableHeight);
-        verticalEdgeGroup =
-                new NoiseChunkGroup(chunkProvider, "Vertical",  width, mainGroup.getChunkHeight(),tableWidth, 1);
-        horizontalEdgeGroup =
-                new NoiseChunkGroup(chunkProvider, "Horizontal",  mainGroup.getChunkWidth(), height,1, tableHeight);
-        cornerGroup =
-                new NoiseChunkGroup(chunkProvider, "Corner",  mainGroup.getChunkWidth(), mainGroup.getChunkHeight(),1, 1);
+        mainGroup.setCanvasDimension(width, height);
+        verticalEdgeGroup.setCanvasDimension(width, mainGroup.getChunkHeight());
+        horizontalEdgeGroup.setCanvasDimension(mainGroup.getChunkWidth(), height);
+        cornerGroup.setCanvasDimension(mainGroup.getChunkWidth(), mainGroup.getChunkHeight());
 
         updateChunkGroups();
 

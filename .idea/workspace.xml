@@ -9,9 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="coordinate conversion functions  added">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Chunk border removed. ReusableChunkKeeper error recovery">
+      <change afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroupInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroupInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,14 +190,7 @@
       <workItem from="1673428690540" duration="2668000" />
       <workItem from="1673432510319" duration="609000" />
       <workItem from="1673444210484" duration="29000" />
-      <workItem from="1673445086674" duration="2482000" />
-    </task>
-    <task id="LOCAL-00086" summary=" up">
-      <created>1672456637027</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1672456637027</updated>
+      <workItem from="1673445086674" duration="3527000" />
     </task>
     <task id="LOCAL-00087" summary="project files">
       <created>1672456667661</created>
@@ -533,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673432387286</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="Chunk border removed. ReusableChunkKeeper error recovery">
+      <created>1673447759628</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1673447759628</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +566,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="map editor code fix" />
     <MESSAGE value="Map editor done" />
     <MESSAGE value="All done" />
     <MESSAGE value="lighting changer" />
@@ -589,14 +590,15 @@
     <MESSAGE value="setCenter" />
     <MESSAGE value="setCenterY bug fixed" />
     <MESSAGE value="coordinate conversion functions  added" />
-    <option name="LAST_COMMIT_MESSAGE" value="coordinate conversion functions  added" />
+    <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
+    <option name="LAST_COMMIT_MESSAGE" value="Chunk border removed. ReusableChunkKeeper error recovery" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
-          <line>577</line>
+          <line>571</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

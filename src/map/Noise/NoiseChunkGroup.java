@@ -11,8 +11,8 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     private final int tableWidth;
     private final int tableHeight;
 
-    private final int canvasWidth;
-    private final int canvasHeight;
+    private int canvasWidth;
+    private int canvasHeight;
 
     private final ChunkProvider provider;
 
@@ -172,6 +172,12 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     @Override
     public int getChunkHeight() {
         return (int)Math.ceil(canvasHeight / (double)tableHeight);
+    }
+
+    @Override
+    public void setCanvasDimension(int width, int height) {
+        canvasWidth = width;
+        canvasHeight = height;
     }
 
     public String toString()
