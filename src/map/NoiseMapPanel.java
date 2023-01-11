@@ -262,6 +262,17 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setStartTop((int)(( - centerY + this.getHeight() / 2 * getZoom())));
     }
 
+    public void setCenter(float centerX, float centerY)
+    {
+        this.centerX = centerX;
+        this.centerY = centerY;
+
+        setStartLeft(startLeft);
+        setStartTop(startTop);
+        chunkProvider.setCenter(centerX, centerY);
+        updateChunkGroups();
+    }
+
     public void setCenterX(float centerX)
     {
         this.centerX = centerX;
@@ -391,8 +402,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
             verticalEdgeGroup.loadChunks(chunkX, chunkY -1, true);
         }
 
-//        mainGroup.loadChunks(chunkX, chunkY, true);
-
         Stream.of(mainGroup, horizontalEdgeGroup, verticalEdgeGroup, cornerGroup)
                 .forEach(group -> {
                     group.setChunkShiftX((int)(startLeft / zoom) / mainGroup.getChunkWidth());
@@ -499,8 +508,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         float pre = (float)Math.pow(ZOOM_RATIO, zoomCount);
         if(setZoomCount(zoomCount - e.getWheelRotation()))
         {
-//            System.out.println(zoomCount);
-
             float zoom = (float)Math.pow(ZOOM_RATIO, zoomCount);
 
 //            setStartLeft((int)(mouseX * zoom * (1 - Math.pow(ZOOM_RATIO, e.getWheelRotation()))) + startLeft);

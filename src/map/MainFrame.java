@@ -58,18 +58,18 @@ public class MainFrame {
 //        panel.repaint();
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                cloud.setCenterX(cloud.getCenterX() + 2);
-                cloud.setStartLeft(cloud.getStartLeft() - 2);
-                cloud.repaint();
-
-                cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
-                cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
-                cloudHigh.repaint();
-            }
-        }, 1000, 50);
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                cloud.setCenterX(cloud.getCenterX() + 2);
+//                cloud.setStartLeft(cloud.getStartLeft() - 2);
+//                cloud.repaint();
+//
+//                cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
+//                cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
+//                cloudHigh.repaint();
+//            }
+//        }, 1000, 50);
         frame.add(panel);
         frame.setBounds(0, 0, 500, 500);
         frame.setVisible(true);
