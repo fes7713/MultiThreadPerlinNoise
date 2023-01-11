@@ -339,8 +339,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 4);
 
         g2d.setColor(Color.WHITE);
-        g2d.drawLine(mouseX, 0, mouseX, this.getHeight());
-        g2d.drawLine(0, mouseY, this.getWidth(), mouseY);
+//        g2d.drawLine(mouseX, 0, mouseX, this.getHeight());
+//        g2d.drawLine(0, mouseY, this.getWidth(), mouseY);
 
         g2d.drawRect(
                 leftTopCornerX,
@@ -353,8 +353,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(0, this.getHeight(), leftTopCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), this.getHeight(), rightBottomCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), 0, rightBottomCornerX, leftTopCornerY);
-
-        g2d.drawString("(" + (int)((mouseX * zoom - startLeft))   + ", " + (int)((mouseY * zoom - startTop)) + ")", mouseX + 20, mouseY + 20);
+//
+//        g2d.drawString("(" + (int)getGameX(mouseX)   + ", " + (int)getGameY(mouseY) + ")", mouseX + 20, mouseY + 20);
     }
 
     public void clearChunks()
@@ -408,6 +408,26 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 });
 
         repaint();
+    }
+
+    public float getGameX(int screenX)
+    {
+        return screenX * getZoom() - startLeft;
+    }
+
+    public float getGameY(int screenY)
+    {
+        return screenY * getZoom() - startTop;
+    }
+
+    public int getScreenX(float gameX)
+    {
+        return (int)((gameX + startLeft) / getZoom());
+    }
+
+    public int getScreenY(float gameY)
+    {
+        return (int)((gameY + startTop) / getZoom());
     }
 
     @Override

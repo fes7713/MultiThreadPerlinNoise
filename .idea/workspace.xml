@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="setCenter">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="setCenterY bug fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
@@ -185,14 +185,7 @@
       <workItem from="1673370883612" duration="165000" />
       <workItem from="1673410024059" duration="10000" />
       <workItem from="1673423299892" duration="1186000" />
-      <workItem from="1673428690540" duration="1009000" />
-    </task>
-    <task id="LOCAL-00084" summary="default color save and load. imports cleaned">
-      <created>1672430760631</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1672430760631</updated>
+      <workItem from="1673428690540" duration="2430000" />
     </task>
     <task id="LOCAL-00085" summary="config files">
       <created>1672431279398</created>
@@ -530,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673428902118</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="setCenterY bug fixed">
+      <created>1673430230225</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1673430230225</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="replaced limit system to center and length system" />
     <MESSAGE value="map editor" />
     <MESSAGE value="map editor code fix" />
     <MESSAGE value="Map editor done" />
@@ -586,14 +585,15 @@
     <MESSAGE value="ResuableChunkKeeper validation" />
     <MESSAGE value="Package" />
     <MESSAGE value="setCenter" />
-    <option name="LAST_COMMIT_MESSAGE" value="setCenter" />
+    <MESSAGE value="setCenterY bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="setCenterY bug fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
-          <line>545</line>
+          <line>567</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
