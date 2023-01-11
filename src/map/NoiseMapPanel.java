@@ -204,12 +204,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public void setStartTop(float top)
     {
-        startTop = top;
         float zoom = getZoom();
         if(-top > centerY - mapHeight / 2 && (-top  + this.getHeight() * zoom) <  centerY + mapHeight / 2)
             startTop = top;
         else if(mapHeight < this.getHeight() * zoom)
-            startTop = (int)(( - centerY / zoom + this.getHeight() / 2 * zoom));
+            startTop = (int)(( - centerY + this.getHeight() / 2 * zoom));
         else if(-top <= centerY - mapHeight / 2)
             startTop = - (int)((centerY - mapHeight / 2));
         else
@@ -276,7 +275,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterX(float centerX)
     {
         this.centerX = centerX;
-//        setStartLeft((int)(( - centerX / getZoom()  + this.getWidth() / 2)));
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
@@ -285,7 +283,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setCenterY(float centerY)
     {
         this.centerY = centerY;
-//        setStartTop((int)(( - centerY / getZoom() + this.getHeight() / 2)));
         setStartTop(startTop);
         chunkProvider.setCenter(centerX, centerY);
         updateChunkGroups();
