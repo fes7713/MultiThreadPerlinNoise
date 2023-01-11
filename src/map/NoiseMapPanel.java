@@ -420,6 +420,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         return screenY * getZoom() - startTop;
     }
 
+    public float getGameSize(int screenSize)
+    {
+        return screenSize * getZoom();
+    }
+
     public int getScreenX(float gameX)
     {
         return (int)((gameX + startLeft) / getZoom());
@@ -428,6 +433,11 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public int getScreenY(float gameY)
     {
         return (int)((gameY + startTop) / getZoom());
+    }
+
+    public int getScreenSize(float gameSize)
+    {
+        return (int)(gameSize / getZoom());
     }
 
     @Override

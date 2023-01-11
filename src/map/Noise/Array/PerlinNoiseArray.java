@@ -176,6 +176,35 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 fallOffMap[i + 1][j + 1] = value;
             }
         }
+
+        if(width % 2 == 1)
+        {
+            x = (width - 1) * zoom + left - centerX;
+            for (int j = 0; j < height; j++) {
+                y = j * zoom + top - centerY;
+                value = (float)Math.exp(- (
+                        x * x
+                        +
+                        y * y)
+                        / MASK_SIZE);
+                fallOffMap[width - 1][j] = value;
+            }
+        }
+
+        if(height % 2 == 1)
+        {
+            y = (height - 1) * zoom + top - centerY;
+            for (int i = 0; i < width; i++) {
+                x = i * zoom + left - centerX;
+                value = (float)Math.exp(- (
+                        x * x
+                        +
+                        y * y)
+                        / MASK_SIZE);
+                fallOffMap[i][height - 1] = value;
+            }
+        }
+
     }
 
     public double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)
@@ -217,11 +246,13 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width; i++)
         {
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
+            convNormalMap[i][height - 1] = convNormalMap[i][height - 2];
         }
 
         for(int i = 0; i < height; i++)
         {
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
+            convNormalMap[width - 1][i] = convNormalMap[width - 2][i];
         }
     }
 

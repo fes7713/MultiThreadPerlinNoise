@@ -19,8 +19,9 @@ public class ReusableChunkKeeper
             chunkMap.put(entry.getKey(), entry.getValue());
             chunkStack.add(entry.getValue());
         }
-        if(chunkStack.isEmpty() != chunkMap.isEmpty())
-            throw new RuntimeException("!!!!Chunk keeper has issue with keeping chunks. Chunks do not match");
+        // Error checking
+        while(chunkStack.size() != chunkMap.size())
+            reconstructData();
     }
 
     public NoiseChunkInterface reuseChunk(int col, int row, float zoom)
@@ -41,8 +42,11 @@ public class ReusableChunkKeeper
             chunk = chunkStack.pop();
             chunkMap.remove(chunk.getChunkKey());
         }
-        if(chunkStack.isEmpty() != chunkMap.isEmpty())
-            throw new RuntimeException("AAAAAChunk keeper has issue with keeping chunks. Chunks do not match");
+
+        // Error checking
+        while(chunkStack.size() != chunkMap.size())
+            reconstructData();
+
         chunk.reuseChunk(col, row, zoom);
         return chunk;
     }
@@ -61,7 +65,7 @@ public class ReusableChunkKeeper
     }
 
     private void reconstructData(){
-        System.out.println("reconstructData");
+        System.err.println("Error in chunk keeper. Reconstructing data structure in chunk keeper");
         List<NoiseChunkInterface> chunks = new ArrayList<>();
         NoiseChunkInterface chunk;
 
