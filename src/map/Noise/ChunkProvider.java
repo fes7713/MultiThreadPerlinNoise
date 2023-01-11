@@ -90,7 +90,10 @@ public class ChunkProvider {
         synchronized (loadedNoiseMap)
         {
             for(NoiseChunkInterface chunk: loadedNoiseMap.values())
+            {
                 chunk.setCenter(centerX, centerY);
+                chunk.updateImage(pi);
+            }
         }
     }
 

@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Resize error fixed">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Resolution control">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,14 +188,7 @@
       <workItem from="1673428690540" duration="2668000" />
       <workItem from="1673432510319" duration="609000" />
       <workItem from="1673444210484" duration="29000" />
-      <workItem from="1673445086674" duration="5984000" />
-    </task>
-    <task id="LOCAL-00088" summary="Drag limit, zoom limit and grayed outside limit zone">
-      <created>1672666104546</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1672666104546</updated>
+      <workItem from="1673445086674" duration="7227000" />
     </task>
     <task id="LOCAL-00089" summary="Files cleaned and perlin noise variables changed">
       <created>1672666838143</created>
@@ -535,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673448640176</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="Resolution control">
+      <created>1673451281853</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1673451281853</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,7 +564,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="All done" />
     <MESSAGE value="lighting changer" />
     <MESSAGE value="lighting changer angle and strength" />
     <MESSAGE value="Chunk provider singleton removed" />
@@ -591,14 +588,15 @@
     <MESSAGE value="coordinate conversion functions  added" />
     <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
     <MESSAGE value="Resize error fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resize error fixed" />
+    <MESSAGE value="Resolution control" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resolution control" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
-          <line>571</line>
+          <line>576</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
