@@ -273,4 +273,12 @@ public class ChunkProvider {
     public void setResolutionMax(int RESOLUTION_MAX) {
         this.RESOLUTION_MAX = RESOLUTION_MAX;
     }
+
+    public float getWidthArrayDivider(){
+        return widthArrayDivider;
+    }
+
+    public float getHeightArrayDivider(){
+        return heightArrayDivider;
+    }
 }

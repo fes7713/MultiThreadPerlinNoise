@@ -279,6 +279,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public void setCenterX(float centerX)
     {
+        System.out.println(centerX);
+        System.out.println(startLeft);
         this.centerX = centerX;
         setStartLeft(startLeft);
         chunkProvider.setCenter(centerX, centerY);

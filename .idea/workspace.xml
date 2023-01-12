@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Resolution control">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="setCenter function not image update bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,14 +190,9 @@
       <workItem from="1673428690540" duration="2668000" />
       <workItem from="1673432510319" duration="609000" />
       <workItem from="1673444210484" duration="29000" />
-      <workItem from="1673445086674" duration="7227000" />
-    </task>
-    <task id="LOCAL-00089" summary="Files cleaned and perlin noise variables changed">
-      <created>1672666838143</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1672666838144</updated>
+      <workItem from="1673445086674" duration="8766000" />
+      <workItem from="1673493283203" duration="515000" />
+      <workItem from="1673512119090" duration="1430000" />
     </task>
     <task id="LOCAL-00090" summary="Files cleaned and perlin noise variables changed">
       <created>1672666845695</created>
@@ -533,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673451281853</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="setCenter function not image update bug fix">
+      <created>1673457371071</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1673457371071</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +568,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="lighting changer" />
     <MESSAGE value="lighting changer angle and strength" />
     <MESSAGE value="Chunk provider singleton removed" />
     <MESSAGE value="Color provider singleton removed" />
@@ -589,19 +592,20 @@
     <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
     <MESSAGE value="Resize error fixed" />
     <MESSAGE value="Resolution control" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resolution control" />
+    <MESSAGE value="setCenter function not image update bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="setCenter function not image update bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
-          <line>576</line>
+          <line>578</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/ChunkProvider.java</url>
-          <line>98</line>
+          <line>101</line>
           <option name="timeStamp" value="226" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
