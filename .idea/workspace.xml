@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="MuthThreadParlinNoise:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Zoom limit bug fix">
-      <change afterPath="$PROJECT_DIR$/falloff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/falloff1.png" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="setCenter function not image update bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/FallOffImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="old_check" />
+        <entry key="$PROJECT_DIR$" value="NewSpeedTest1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,39 +56,47 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2IyJiSaVOJet3eibRxD8Wz5KSl1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/NetBeansProjects/RealisticPerlinNoise" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="profiler.jvm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\fes77\IdeaProjects\MuthThreadParlinNoise\src" />
       <recent name="C:\Users\fes77\IdeaProjects\MuthThreadParlinNoise\presets" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Noise.Array" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
     <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.FallOffImage" />
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.FallOffImage" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
+          <option name="PATTERN" value="map.Noise.Array.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -92,40 +105,34 @@
       </method>
     </configuration>
     <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Color.GradientColorEditorPanel" />
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Color.GradientColorEditorPanel" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
+          <option name="PATTERN" value="map.Noise.Color.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
+      <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainFrame" />
+      <option name="MAIN_CLASS_NAME" value="map.MainFrame" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerlinNoiseArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.PerlinNoiseArray" />
-      <module name="MuthThreadParlinNoise" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Noise.Array.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VariableChanger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Noise.Array.VariableChanger" />
+    <configuration name="MapEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.MapEditor" />
       <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -134,10 +141,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.FallOffImage" />
+        <item itemvalue="Application.JDesktopPaneTest9" />
         <item itemvalue="Application.GradientColorEditorPanel" />
-        <item itemvalue="Application.VariableChanger" />
-        <item itemvalue="Application.PerlinNoiseArray" />
       </list>
     </recent_temporary>
   </component>
@@ -161,322 +168,31 @@
       <workItem from="1672427779051" duration="6690000" />
       <workItem from="1672482326979" duration="12110000" />
       <workItem from="1672621168152" duration="27037000" />
-      <workItem from="1672710091966" duration="4112000" />
-    </task>
-    <task id="LOCAL-00045" summary="GradientNode toString and fromString.">
-      <created>1671879969905</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1671879969905</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Preset functions done">
-      <created>1671884070016</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1671884070016</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Preset functions done">
-      <created>1671884189100</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1671884189100</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Class fields encapsulated and code refactored">
-      <created>1671887411515</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1671887411515</updated>
-    </task>
-    <task id="LOCAL-00049" summary="map generated">
-      <created>1671889174534</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1671889174534</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Zoom function done">
-      <created>1671962720001</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1671962720001</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Noise chunk map refactored to simpler form">
-      <created>1671964715581</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1671964715581</updated>
-    </task>
-    <task id="LOCAL-00052" summary="No semaphore">
-      <created>1671966955737</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1671966955737</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Chunk map key problem fixed">
-      <created>1671968331503</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1671968331503</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Stopping cleared chunks">
-      <created>1671969727597</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1671969727597</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Color array from Color[] to int[]">
-      <created>1671971444415</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1671971444415</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Improved zoom jaggy effect (Not much visual change)">
-      <created>1671989588762</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1671989588762</updated>
-    </task>
-    <task id="LOCAL-00057" summary="KeeperClass moved">
-      <created>1671989690728</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1671989690728</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Default zoom ratio changed">
-      <created>1671995077806</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1671995077806</updated>
-    </task>
-    <task id="LOCAL-00059" summary="first shade">
-      <created>1672005746957</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1672005746958</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Created gradient line">
-      <created>1672046318215</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1672046318216</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Line position of line gradient set">
-      <created>1672046983572</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1672046983572</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Line gradient paint properly at the specified location by line position field">
-      <created>1672047185306</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1672047185306</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Line paint bug at the edge of the screen fixed. Selected line is now drawn bigger">
-      <created>1672054504308</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1672054504308</updated>
-    </task>
-    <task id="LOCAL-00064" summary="2D color array">
-      <created>1672070282720</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1672070282721</updated>
-    </task>
-    <task id="LOCAL-00065" summary="2d color array progress. bug in showing color">
-      <created>1672104315512</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1672104315513</updated>
-    </task>
-    <task id="LOCAL-00066" summary="2d color array progress. bug in showing color">
-      <created>1672104756996</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1672104756996</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Color 2d array connected to the main frame">
-      <created>1672123722153</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1672123722153</updated>
-    </task>
-    <task id="LOCAL-00068" summary="GradientInterface introduced">
-      <created>1672133417700</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1672133417700</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Add line function added">
-      <created>1672133857548</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1672133857549</updated>
-    </task>
-    <task id="LOCAL-00070" summary="color interpolation code refactored">
-      <created>1672136418513</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1672136418513</updated>
-    </task>
-    <task id="LOCAL-00071" summary="color interpolation code refactored">
-      <created>1672136505062</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1672136505062</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Save and load features of color presets">
-      <created>1672140939512</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1672140939512</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Gradient Interface updated">
-      <created>1672145182699</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1672145182699</updated>
-    </task>
-    <task id="LOCAL-00074" summary="done">
-      <created>1672167740087</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1672167740087</updated>
-    </task>
-    <task id="LOCAL-00075" summary="noise conversion function switched to new one">
-      <created>1672266192977</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1672266192978</updated>
-    </task>
-    <task id="LOCAL-00076" summary="variable adjusted">
-      <created>1672276117652</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1672276117652</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Variable changer">
-      <created>1672392954817</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1672392954818</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Code cleaned">
-      <created>1672393849507</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1672393849507</updated>
-    </task>
-    <task id="LOCAL-00079" summary="File save function moved to static functions">
-      <created>1672395089997</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1672395089997</updated>
-    </task>
-    <task id="LOCAL-00080" summary="Removed main from PerlinNoiseArray">
-      <created>1672395120125</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1672395120125</updated>
-    </task>
-    <task id="LOCAL-00081" summary="FileManager">
-      <created>1672416141986</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1672416141986</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Save and load variable settings">
-      <created>1672422326442</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1672422326442</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Default variable setting. Image update is needed">
-      <created>1672423356764</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1672423356764</updated>
-    </task>
-    <task id="LOCAL-00084" summary="default color save and load. imports cleaned">
-      <created>1672430760631</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1672430760631</updated>
-    </task>
-    <task id="LOCAL-00085" summary="config files">
-      <created>1672431279398</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1672431279398</updated>
-    </task>
-    <task id="LOCAL-00086" summary=" up">
-      <created>1672456637027</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1672456637027</updated>
-    </task>
-    <task id="LOCAL-00087" summary="project files">
-      <created>1672456667661</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1672456667661</updated>
-    </task>
-    <task id="LOCAL-00088" summary="Drag limit, zoom limit and grayed outside limit zone">
-      <created>1672666104546</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1672666104546</updated>
-    </task>
-    <task id="LOCAL-00089" summary="Files cleaned and perlin noise variables changed">
-      <created>1672666838143</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1672666838144</updated>
+      <workItem from="1672710091966" duration="4204000" />
+      <workItem from="1672732940486" duration="2775000" />
+      <workItem from="1672831832150" duration="599000" />
+      <workItem from="1672838967470" duration="12763000" />
+      <workItem from="1672948155410" duration="4696000" />
+      <workItem from="1673039896023" duration="1061000" />
+      <workItem from="1673041350140" duration="4344000" />
+      <workItem from="1673067684084" duration="27265000" />
+      <workItem from="1673139934594" duration="3223000" />
+      <workItem from="1673158085668" duration="22034000" />
+      <workItem from="1673235420103" duration="17025000" />
+      <workItem from="1673316211280" duration="3134000" />
+      <workItem from="1673354786391" duration="7000" />
+      <workItem from="1673368149429" duration="1373000" />
+      <workItem from="1673370692799" duration="68000" />
+      <workItem from="1673370820703" duration="41000" />
+      <workItem from="1673370883612" duration="165000" />
+      <workItem from="1673410024059" duration="10000" />
+      <workItem from="1673423299892" duration="1186000" />
+      <workItem from="1673428690540" duration="2668000" />
+      <workItem from="1673432510319" duration="609000" />
+      <workItem from="1673444210484" duration="29000" />
+      <workItem from="1673445086674" duration="8766000" />
+      <workItem from="1673493283203" duration="515000" />
+      <workItem from="1673512119090" duration="1430000" />
     </task>
     <task id="LOCAL-00090" summary="Files cleaned and perlin noise variables changed">
       <created>1672666845695</created>
@@ -506,7 +222,322 @@
       <option name="project" value="LOCAL" />
       <updated>1672673161908</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="FallOffMap coding">
+      <created>1672715285960</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1672715285961</updated>
+    </task>
+    <task id="LOCAL-00095" summary="fall off bug">
+      <created>1672741256644</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741256644</updated>
+    </task>
+    <task id="LOCAL-00096" summary="fall off">
+      <created>1672741345400</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741345400</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44">
+      <created>1672741444012</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1672741444012</updated>
+    </task>
+    <task id="LOCAL-00098" summary="fall off recovered">
+      <created>1672742070744</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1672742070744</updated>
+    </task>
+    <task id="LOCAL-00099" summary="fall off working save">
+      <created>1672742871224</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1672742871224</updated>
+    </task>
+    <task id="LOCAL-00100" summary="fall off map">
+      <created>1672754602178</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1672754602178</updated>
+    </task>
+    <task id="LOCAL-00101" summary="replaced limit system to center and length system">
+      <created>1672758594172</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1672758594172</updated>
+    </task>
+    <task id="LOCAL-00102" summary="map editor">
+      <created>1672761841738</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1672761841739</updated>
+    </task>
+    <task id="LOCAL-00103" summary="map editor code fix">
+      <created>1672762765155</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1672762765156</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Map editor done">
+      <created>1672763040098</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1672763040098</updated>
+    </task>
+    <task id="LOCAL-00105" summary="All done">
+      <created>1672765503396</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1672765503397</updated>
+    </task>
+    <task id="LOCAL-00106" summary="All done">
+      <created>1672947030585</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1672947030585</updated>
+    </task>
+    <task id="LOCAL-00107" summary="All done">
+      <created>1672948161439</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1672948161440</updated>
+    </task>
+    <task id="LOCAL-00108" summary="lighting changer">
+      <created>1672950762456</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1672950762456</updated>
+    </task>
+    <task id="LOCAL-00109" summary="lighting changer angle and strength">
+      <created>1672952150456</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1672952150456</updated>
+    </task>
+    <task id="LOCAL-00110" summary="lighting changer angle and strength">
+      <created>1672952773185</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1672952773185</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Chunk provider singleton removed">
+      <created>1673067536505</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1673067536505</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Color provider singleton removed">
+      <created>1673068989554</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1673068989554</updated>
+    </task>
+    <task id="LOCAL-00113" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
+      <created>1673075476240</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1673075476240</updated>
+    </task>
+    <task id="LOCAL-00114" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
+      <created>1673076356113</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1673076356113</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Getter for colors">
+      <created>1673076568252</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1673076568252</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Adapted to Alpha colors">
+      <created>1673094346720</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1673094346720</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Code Cleaned">
+      <created>1673095163892</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1673095163892</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Color slider and setCenter will center the screen to the map too">
+      <created>1673115943400</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1673115943400</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Color slider and setCenter will center the screen to the map too">
+      <created>1673115959127</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1673115959127</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Default setting changed. setCenter changed">
+      <created>1673170112892</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1673170112892</updated>
+    </task>
+    <task id="LOCAL-00121" summary="synchronized">
+      <created>1673171170825</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1673171170825</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Color presets and initNoiseMap Changed">
+      <created>1673192176825</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1673192176825</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Color presets and initNoiseMap Changed">
+      <created>1673192255701</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1673192255701</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Map move save">
+      <created>1673253038011</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1673253038011</updated>
+    </task>
+    <task id="LOCAL-00125" summary="startLeft = startLeft * zoom">
+      <created>1673264426551</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1673264426551</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Zoom Blank Chunk Bug Fix">
+      <created>1673277747137</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1673277747137</updated>
+    </task>
+    <task id="LOCAL-00127" summary="fallOff speed update">
+      <created>1673280644364</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1673280644364</updated>
+    </task>
+    <task id="LOCAL-00128" summary="2 layers of cloud">
+      <created>1673286026093</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1673286026093</updated>
+    </task>
+    <task id="LOCAL-00129" summary="ResuableChunkKeeper validation">
+      <created>1673326480545</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1673326480545</updated>
+    </task>
+    <task id="LOCAL-00130" summary="Package">
+      <created>1673370855122</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1673370855123</updated>
+    </task>
+    <task id="LOCAL-00131" summary="Package">
+      <created>1673370936910</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1673370936911</updated>
+    </task>
+    <task id="LOCAL-00132" summary="setCenter">
+      <created>1673428902118</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1673428902118</updated>
+    </task>
+    <task id="LOCAL-00133" summary="setCenterY bug fixed">
+      <created>1673430230225</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1673430230225</updated>
+    </task>
+    <task id="LOCAL-00134" summary="coordinate conversion functions  added">
+      <created>1673432387286</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1673432387286</updated>
+    </task>
+    <task id="LOCAL-00135" summary="Chunk border removed. ReusableChunkKeeper error recovery">
+      <created>1673447759628</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1673447759628</updated>
+    </task>
+    <task id="LOCAL-00136" summary="Resize error fixed">
+      <created>1673448640176</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1673448640176</updated>
+    </task>
+    <task id="LOCAL-00137" summary="Resolution control">
+      <created>1673451281853</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1673451281853</updated>
+    </task>
+    <task id="LOCAL-00138" summary="setCenter function not image update bug fix">
+      <created>1673457371071</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1673457371071</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,90 +567,61 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GradientInterface introduced" />
-    <MESSAGE value="Add line function added" />
-    <MESSAGE value="color interpolation code refactored" />
-    <MESSAGE value="Save and load features of color presets" />
-    <MESSAGE value="Gradient Interface updated" />
-    <MESSAGE value="done" />
-    <MESSAGE value="noise conversion function switched to new one" />
-    <MESSAGE value="variable adjusted" />
-    <MESSAGE value="Variable changer" />
-    <MESSAGE value="Code cleaned" />
-    <MESSAGE value="File save function moved to static functions" />
-    <MESSAGE value="Removed main from PerlinNoiseArray" />
-    <MESSAGE value="FileManager" />
-    <MESSAGE value="Save and load variable settings" />
-    <MESSAGE value="Default variable setting. Image update is needed" />
-    <MESSAGE value="default color save and load. imports cleaned" />
-    <MESSAGE value="config files" />
-    <MESSAGE value=" up" />
-    <MESSAGE value="project files" />
-    <MESSAGE value="Drag limit, zoom limit and grayed outside limit zone" />
-    <MESSAGE value="Files cleaned and perlin noise variables changed" />
-    <MESSAGE value="Non-zero left min and max sum value test and fix" />
-    <MESSAGE value="Non-zero left min and max sum value test and fix and fall off map class test" />
-    <MESSAGE value="Center bug fixed" />
-    <MESSAGE value="Zoom limit bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Zoom limit bug fix" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="lighting changer angle and strength" />
+    <MESSAGE value="Chunk provider singleton removed" />
+    <MESSAGE value="Color provider singleton removed" />
+    <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
+    <MESSAGE value="Getter for colors" />
+    <MESSAGE value="Adapted to Alpha colors" />
+    <MESSAGE value="Code Cleaned" />
+    <MESSAGE value="Color slider and setCenter will center the screen to the map too" />
+    <MESSAGE value="Default setting changed. setCenter changed" />
+    <MESSAGE value="synchronized" />
+    <MESSAGE value="Color presets and initNoiseMap Changed" />
+    <MESSAGE value="Map move save" />
+    <MESSAGE value="startLeft = startLeft * zoom" />
+    <MESSAGE value="Zoom Blank Chunk Bug Fix" />
+    <MESSAGE value="fallOff speed update" />
+    <MESSAGE value="2 layers of cloud" />
+    <MESSAGE value="ResuableChunkKeeper validation" />
+    <MESSAGE value="Package" />
+    <MESSAGE value="setCenter" />
+    <MESSAGE value="setCenterY bug fixed" />
+    <MESSAGE value="coordinate conversion functions  added" />
+    <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
+    <MESSAGE value="Resize error fixed" />
+    <MESSAGE value="Resolution control" />
+    <MESSAGE value="setCenter function not image update bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="setCenter function not image update bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/NoiseColor.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="140" />
+          <url>file://$PROJECT_DIR$/src/map/NoiseMapPanel.java</url>
+          <line>578</line>
+          <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/GradientNode.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Color/GradientNode.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/PerlinNoiseArrayInterface.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="187" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Noise/Array/VariableChanger.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="221" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="224" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>123</line>
-          <option name="timeStamp" value="225" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>125</line>
+          <url>file://$PROJECT_DIR$/src/map/Noise/ChunkProvider.java</url>
+          <line>101</line>
           <option name="timeStamp" value="226" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/NoiseMapPanel.java</url>
-          <line>103</line>
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>248</line>
           <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/NoiseChunk.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="228" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1671970016376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

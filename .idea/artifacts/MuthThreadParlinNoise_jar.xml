@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MuthThreadParlinNoise:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar</output-path>
+    <root id="archive" name="MuthThreadParlinNoise.jar">
+      <element id="module-output" name="MuthThreadParlinNoise" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jar_files (2)/vecmath-1.5.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
