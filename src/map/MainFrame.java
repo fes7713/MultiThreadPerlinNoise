@@ -10,7 +10,7 @@ public class MainFrame {
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        NoiseMapPanel panel = new NoiseMapPanel() ;
+        NoiseMapPanel panel = new NoiseMapPanel(2, 2) ;
         NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
         NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;
         cloud.setResolutionMin(-4);
@@ -49,27 +49,27 @@ public class MainFrame {
 //        panel.add(cloud);
 
 
-        cloud.showColorEditor();
-        cloud.showMapEditor();
-
-        cloudHigh.showVariableChanger();
+//        cloud.showColorEditor();
+//        cloud.showMapEditor();
+//
+//        cloudHigh.showVariableChanger();
 
 //        panel.showColorEditor();
 //        panel.showVariableChanger();
 //        panel.showLightingChanger();
-//        panel.showMapEditor();
+        panel.showMapEditor();
 //        panel.repaint();
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                cloud.setCenterX(cloud.getCenterX() + 2);
-                cloud.setStartLeft(cloud.getStartLeft() - 2);
-                cloud.repaint();
-
-                cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
-                cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
+//                cloud.setCenterX(cloud.getCenterX() + 2);
+//                cloud.setStartLeft(cloud.getStartLeft() - 2);
+//                cloud.repaint();
+//
+//                cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
+//                cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
 //                cloudHigh.setCenterY(cloudHigh.getCenterY() + 0.6F);
 //                cloudHigh.setStartTop(cloudHigh.getStartTop() - 0.6F);
 

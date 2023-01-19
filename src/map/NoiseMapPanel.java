@@ -142,7 +142,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         colorProvider.showColorEditor();
     }
 
-    private float getZoom()
+    public float getZoom()
     {
         return (float)Math.pow(ZOOM_RATIO, zoomCount);
     }
