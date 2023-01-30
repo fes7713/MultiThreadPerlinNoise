@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="setCenter function not image update bug fix">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Low resolution center shift bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ReusableChunkKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ReusableChunkKeeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,14 +192,10 @@
       <workItem from="1673444210484" duration="29000" />
       <workItem from="1673445086674" duration="8766000" />
       <workItem from="1673493283203" duration="515000" />
-      <workItem from="1673512119090" duration="1430000" />
-    </task>
-    <task id="LOCAL-00090" summary="Files cleaned and perlin noise variables changed">
-      <created>1672666845695</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1672666845695</updated>
+      <workItem from="1673512119090" duration="3883000" />
+      <workItem from="1673542342899" duration="1208000" />
+      <workItem from="1673587173861" duration="37000" />
+      <workItem from="1673980210890" duration="667000" />
     </task>
     <task id="LOCAL-00091" summary="Non-zero left min and max sum value test and fix and fall off map class test">
       <created>1672670272333</created>
@@ -537,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673457371071</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="Low resolution center shift bug fix">
+      <created>1673515843061</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1673515843061</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +571,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="lighting changer angle and strength" />
     <MESSAGE value="Chunk provider singleton removed" />
     <MESSAGE value="Color provider singleton removed" />
     <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
@@ -593,7 +595,8 @@
     <MESSAGE value="Resize error fixed" />
     <MESSAGE value="Resolution control" />
     <MESSAGE value="setCenter function not image update bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="setCenter function not image update bug fix" />
+    <MESSAGE value="Low resolution center shift bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Low resolution center shift bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

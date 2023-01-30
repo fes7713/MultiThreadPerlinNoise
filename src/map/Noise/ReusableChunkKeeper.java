@@ -69,17 +69,21 @@ public class ReusableChunkKeeper
         List<NoiseChunkInterface> chunks = new ArrayList<>();
         NoiseChunkInterface chunk;
 
-        while(!chunkStack.isEmpty()){
-            chunk = chunkStack.pop();
-            if(chunkMap.containsValue(chunk))
-                chunks.add(chunk);
+        synchronized (this)
+        {
+            while(!chunkStack.isEmpty()){
+                chunk = chunkStack.pop();
+                if(chunkMap.containsValue(chunk))
+                    chunks.add(chunk);
+            }
+            chunkStack.clear();
+            chunkMap.clear();
+            chunkStack.addAll(chunks);
+            chunks.forEach(c -> {
+                chunkMap.put(c.getChunkKey(), c);
+            });
         }
-        chunkStack.clear();
-        chunkMap.clear();
-        chunkStack.addAll(chunks);
-        chunks.stream().forEach(c -> {
-            chunkMap.put(c.getChunkKey(), c);
-        });
+
     }
 
     public void clear()
