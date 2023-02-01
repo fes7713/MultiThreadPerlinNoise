@@ -9,7 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Chunk lack bug fixed" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="merged">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +74,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="profiler.jvm" />
@@ -129,17 +132,6 @@
     <configuration name="MapEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="map.MapEditor" />
       <module name="MuthThreadParlinNoise" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,7 +195,14 @@
       <workItem from="1673587173861" duration="37000" />
       <workItem from="1673980210890" duration="667000" />
       <workItem from="1675185583646" duration="2415000" />
-      <workItem from="1675199066068" duration="6310000" />
+      <workItem from="1675199066068" duration="5745000" />
+    </task>
+    <task id="LOCAL-00091" summary="Non-zero left min and max sum value test and fix and fall off map class test">
+      <created>1672670272333</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1672670272334</updated>
     </task>
     <task id="LOCAL-00092" summary="Center bug fixed">
       <created>1672670844513</created>
@@ -541,14 +540,7 @@
       <option name="project" value="LOCAL" />
       <updated>1673515843061</updated>
     </task>
-    <task id="LOCAL-00140" summary="Chunk lack bug fixed">
-      <created>1675218622029</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1675218622030</updated>
-    </task>
-    <option name="localTasksCounter" value="141" />
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,10 +568,10 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Color provider singleton removed" />
     <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
     <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
@@ -604,10 +596,9 @@
     <MESSAGE value="setCenter function not image update bug fix" />
     <MESSAGE value="Low resolution center shift bug fix" />
     <MESSAGE value="merged" />
-    <MESSAGE value="Chunk lack bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chunk lack bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1671970016376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

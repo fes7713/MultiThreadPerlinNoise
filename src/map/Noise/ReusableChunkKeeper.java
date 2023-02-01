@@ -28,13 +28,13 @@ public class ReusableChunkKeeper
     {
         long key = NoiseChunkInterface.getChunkKey(col, row);
 
-        if(chunkStack.isEmpty())
-        {
-            return null;
-        }
-
         synchronized(this)
         {
+            if(chunkStack.isEmpty())
+            {
+                return null;
+            }
+
             NoiseChunkInterface chunk = chunkMap.remove(key);
             if(chunk != null) {
                 chunkStack.remove(chunk);
@@ -91,7 +91,11 @@ public class ReusableChunkKeeper
 
     public void clear()
     {
-        chunkMap.clear();
-        chunkStack.clear();
+        synchronized (this)
+        {
+            chunkMap.clear();
+            chunkStack.clear();
+        }
+
     }
 }
