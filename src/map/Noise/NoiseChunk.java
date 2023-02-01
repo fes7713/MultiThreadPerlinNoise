@@ -102,7 +102,11 @@ public class NoiseChunk implements NoiseChunkInterface{
                 if(Thread.interrupted())
                     return;
                 array.initNoiseMap(resolutionMin);
+                if(Thread.interrupted())
+                    return;
                 array.generateNormalMap();
+                if(Thread.interrupted())
+                    return;
                 array.updateImage(pi);
                 if(Thread.interrupted())
                     return;
@@ -110,14 +114,17 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 for (int i = resolutionMin + 1; i < resolutionMax; i++) {
                     if(Thread.interrupted())
-                    {
                         return;
-                    }
-
                     array.increaseResolution((float)Math.pow(2, i));
+                    if(Thread.interrupted())
+                        return;
                     array.updateImage(pi);
+                    if(Thread.interrupted())
+                        return;
                     Thread.yield();
                     array.generateNormalMap();
+                    if(Thread.interrupted())
+                        return;
                     array.convertData();
 
                 }
