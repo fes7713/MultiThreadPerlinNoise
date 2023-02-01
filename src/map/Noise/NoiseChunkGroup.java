@@ -43,11 +43,6 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
         }
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
     @Override
     public long getChunkKey() {
         return key;

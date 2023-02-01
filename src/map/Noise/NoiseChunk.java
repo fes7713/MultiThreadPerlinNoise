@@ -5,8 +5,6 @@ import map.Noise.Array.PerlinNoiseArray;
 import java.awt.*;
 
 public class NoiseChunk implements NoiseChunkInterface{
-    private final String name;
-
     private int chunkX;
     private int chunkY;
 
@@ -25,8 +23,7 @@ public class NoiseChunk implements NoiseChunkInterface{
     private final PerlinNoiseArray array;
     private Thread thread;
 
-    public NoiseChunk(String name, ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY, int arrayWidth, int arrayHeight) {
-        this.name = name;
+    public NoiseChunk(ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY, int arrayWidth, int arrayHeight) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
 
@@ -42,16 +39,6 @@ public class NoiseChunk implements NoiseChunkInterface{
 
         this.chunkProvider = chunkProvider;
         array = new PerlinNoiseArray(chunkProvider, colorProvider, fn, chunkX * arrayWidth * zoom, chunkY * arrayHeight * zoom, arrayWidth, arrayHeight, zoom, centerX, centerY);
-    }
-
-    public NoiseChunk(String name, ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, int chunkX, int chunkY, int width, int height, float zoom, float centerX, float centerY)
-    {
-        this(name, chunkProvider, colorProvider, fn, chunkX, chunkY, width, height, zoom, centerX, centerY, width, height);
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     @Override
@@ -112,9 +99,13 @@ public class NoiseChunk implements NoiseChunkInterface{
                 int resolutionMin = chunkProvider.getResolutionMin();
                 int resolutionMax = chunkProvider.getResolutionMax();
 
+                if(Thread.interrupted())
+                    return;
                 array.initNoiseMap(resolutionMin);
                 array.generateNormalMap();
                 array.updateImage(pi);
+                if(Thread.interrupted())
+                    return;
                 Thread.yield();
 
                 for (int i = resolutionMin + 1; i < resolutionMax; i++) {
@@ -170,6 +161,6 @@ public class NoiseChunk implements NoiseChunkInterface{
     @Override
     public String toString()
     {
-        return name;
+        return "Chunk" + chunkX + "-" + chunkY;
     }
 }

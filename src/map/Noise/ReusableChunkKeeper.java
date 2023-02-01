@@ -33,22 +33,25 @@ public class ReusableChunkKeeper
             return null;
         }
 
-        NoiseChunkInterface chunk = chunkMap.remove(key);
-        if(chunk != null) {
-            chunkStack.remove(chunk);
-        }
-        else
+        synchronized(this)
         {
-            chunk = chunkStack.pop();
-            chunkMap.remove(chunk.getChunkKey());
+            NoiseChunkInterface chunk = chunkMap.remove(key);
+            if(chunk != null) {
+                chunkStack.remove(chunk);
+            }
+            else
+            {
+                chunk = chunkStack.pop();
+                chunkMap.remove(chunk.getChunkKey());
+            }
+
+            // Error checking
+            while(chunkStack.size() != chunkMap.size())
+                reconstructData();
+
+            chunk.reuseChunk(col, row, zoom);
+            return chunk;
         }
-
-        // Error checking
-        while(chunkStack.size() != chunkMap.size())
-            reconstructData();
-
-        chunk.reuseChunk(col, row, zoom);
-        return chunk;
     }
 
     public boolean isEmpty()

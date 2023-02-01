@@ -109,7 +109,6 @@ public class ChunkProvider {
     public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
         long key = NoiseChunkInterface.getChunkKey(col, row);
-
         if(loadedNoiseMap.containsKey(key))
         {
             return loadedNoiseMap.get(key);
@@ -117,7 +116,7 @@ public class ChunkProvider {
         else{
             NoiseChunkInterface noiseChunk;
             if(keeper.isEmpty())
-                noiseChunk = new NoiseChunk("Chunk" + col + "-" + row, this, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY, arrayWidth, arrayHeight);
+                noiseChunk = new NoiseChunk(this, colorProvider, fn, col, row, chunkWidth, chunkHeight, zoom, centerX, centerY, arrayWidth, arrayHeight);
             else
             {
                 noiseChunk = keeper.reuseChunk(col, row, zoom);
@@ -166,8 +165,11 @@ public class ChunkProvider {
 
     public void zoomChanged(float zoom)
     {
-        clearMap(true);
-        this.zoom = zoom;
+        synchronized(this)
+        {
+            clearMap(true);
+            this.zoom = zoom;
+        }
     }
 
     public float getNoiseCoefficient(){

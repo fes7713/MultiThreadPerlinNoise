@@ -19,8 +19,6 @@ interface NoiseChunkInterface {
     void variableChanged();
     void drawImage(Graphics2D g2d);
 
-    String getName();
-
     static long getChunkKey(int col, int row)
     {
         return (((long)col) << 32) | (row & 0xffffffffL);
