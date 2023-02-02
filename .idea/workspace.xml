@@ -9,9 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="merged">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="cloud">
+      <change afterPath="$PROJECT_DIR$/variables/cloudHigh2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/cloudHigh3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="NewSpeedTest1" />
+        <entry key="$PROJECT_DIR$" value="ChunkLackTest" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -140,9 +144,9 @@
       <list>
         <item itemvalue="Application.MainFrame" />
         <item itemvalue="Application.MapEditor" />
-        <item itemvalue="Application.FallOffImage" />
         <item itemvalue="Application.JDesktopPaneTest9" />
         <item itemvalue="Application.GradientColorEditorPanel" />
+        <item itemvalue="Application.FallOffImage" />
       </list>
     </recent_temporary>
   </component>
@@ -196,13 +200,9 @@
       <workItem from="1673980210890" duration="667000" />
       <workItem from="1675185583646" duration="2415000" />
       <workItem from="1675199066068" duration="5745000" />
-    </task>
-    <task id="LOCAL-00091" summary="Non-zero left min and max sum value test and fix and fall off map class test">
-      <created>1672670272333</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1672670272334</updated>
+      <workItem from="1675219515852" duration="426000" />
+      <workItem from="1675368747626" duration="908000" />
+      <workItem from="1675371579979" duration="2163000" />
     </task>
     <task id="LOCAL-00092" summary="Center bug fixed">
       <created>1672670844513</created>
@@ -540,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673515843061</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="Chink reuse fix">
+      <created>1675219264605</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1675219264605</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,8 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Color provider singleton removed" />
-    <MESSAGE value="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved" />
     <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
     <MESSAGE value="Code Cleaned" />
@@ -596,7 +601,9 @@
     <MESSAGE value="setCenter function not image update bug fix" />
     <MESSAGE value="Low resolution center shift bug fix" />
     <MESSAGE value="merged" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged" />
+    <MESSAGE value="Chink reuse fix" />
+    <MESSAGE value="cloud" />
+    <option name="LAST_COMMIT_MESSAGE" value="cloud" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

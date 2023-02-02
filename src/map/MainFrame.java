@@ -49,15 +49,15 @@ public class MainFrame {
 //        panel.add(cloud);
 
 
-//        cloud.showColorEditor();
-//        cloud.showMapEditor();
+        cloudHigh.showColorEditor();
+        cloudHigh.showMapEditor();
 //
-//        cloudHigh.showVariableChanger();
+        cloudHigh.showVariableChanger();
 
 //        panel.showColorEditor();
 //        panel.showVariableChanger();
 //        panel.showLightingChanger();
-        panel.showMapEditor();
+//        panel.showMapEditor();
 //        panel.repaint();
 
         Timer timer = new Timer();

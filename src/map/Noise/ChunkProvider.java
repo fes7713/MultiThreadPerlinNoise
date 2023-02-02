@@ -106,7 +106,7 @@ public class ChunkProvider {
         }
     }
 
-    public NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
+    public synchronized NoiseChunkInterface requestNoiseChunk(int col, int row, boolean paintUpdate)
     {
         long key = NoiseChunkInterface.getChunkKey(col, row);
         if(loadedNoiseMap.containsKey(key))
