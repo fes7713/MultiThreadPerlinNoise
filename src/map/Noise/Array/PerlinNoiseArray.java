@@ -156,13 +156,18 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void generateFallOffMap()
     {
+        generateFallOffMap(0, 0, width, height);
+    }
+
+    public void generateFallOffMap(int startLeft, int startTop, int lengthWidth, int lengthHeight)
+    {
         float MASK_SIZE = chunkProvider.getMaskSize() * 1000000;
         float MASK_SHADOW = chunkProvider.getMaskShadow();
         float x;
         float y;
         float value;
-        for (int i = 0; i + 1 < width; i+= 2) {
-            for (int j = 0; j + 1 < height; j+=2) {
+        for (int i = startLeft; i + 1 < startLeft + lengthWidth; i+= 2) {
+            for (int j = startTop; j + 1 < startTop + lengthHeight; j+=2) {
                 x = i * zoom + left - centerX;
                 y = j * zoom + top - centerY;
                 value = (float)Math.exp(- (
@@ -177,10 +182,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             }
         }
 
-        if(width % 2 == 1)
+        if(lengthWidth % 2 == 1)
         {
-            x = (width - 1) * zoom + left - centerX;
-            for (int j = 0; j < height; j++) {
+            x = (lengthWidth + startLeft - 1) * zoom + left - centerX;
+            for (int j = startTop; j < lengthHeight + startTop; j++) {
                 y = j * zoom + top - centerY;
                 value = (float)Math.exp(- (
                         x * x
@@ -191,10 +196,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             }
         }
 
-        if(height % 2 == 1)
+        if(lengthHeight % 2 == 1)
         {
-            y = (height - 1) * zoom + top - centerY;
-            for (int i = 0; i < width; i++) {
+            y = (lengthHeight + startTop - 1) * zoom + top - centerY;
+            for (int i = startLeft; i < lengthWidth + startLeft; i++) {
                 x = i * zoom + left - centerX;
                 value = (float)Math.exp(- (
                         x * x
@@ -204,7 +209,64 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 fallOffMap[i][height - 1] = value;
             }
         }
+    }
 
+    // Direction
+    // ->->->
+    @Override
+    public float[][] pushMaskLeft(int amount, float[][] incomingPixels, float[][] buffer) {
+        if(amount == 0)
+            return null;
+        if(amount > 0){
+            for(int i = 0; i < amount; i++)
+            {
+                for(int j = 0; j < height; j++)
+                {
+                    buffer[i][j] = fallOffMap[width - amount + i][j];
+                }
+            }
+
+            for(int i = 0; i < width - amount; i++)
+            {
+                for(int j = 0; j < height; j++)
+                {
+                    fallOffMap[width - i - 1][j] = fallOffMap[width - amount - i - 1][j];
+                }
+            }
+
+            if(incomingPixels == null)
+            {
+                generateFallOffMap(width - amount, 0, amount, height);
+                incomingPixels = new float[amount][height];
+            }
+            else{
+                for(int i = 0; i < amount; i++)
+                {
+                    for(int j = 0; j < height; j++)
+                    {
+                        fallOffMap[width - amount + i][j] = incomingPixels[i][j];
+                    }
+                }
+            }
+        }
+        else{
+            System.out.println("Not implemented");
+        }
+
+        for (int i = 0; i < amount; i++) {
+            for (int j = 0; j < height; j++) {
+                incomingPixels[i][j] = buffer[i][j];
+            }
+        }
+
+        return incomingPixels;
+    }
+
+    // Direction
+    // ->->->
+    @Override
+    public float[][] pushMaskTop(int amount, float[][] incomingPixels, float[][] buffer) {
+        return new float[0][];
     }
 
     public double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)

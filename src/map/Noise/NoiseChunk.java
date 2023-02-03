@@ -166,6 +166,16 @@ public class NoiseChunk implements NoiseChunkInterface{
     }
 
     @Override
+    public float[][] pushMaskLeft(int amount, float[][] incomingPixels, float[][] buffer) {
+        return array.pushMaskLeft(amount, incomingPixels, buffer);
+    }
+
+    @Override
+    public float[][] pushMaskTop(int amount, float[][] incomingPixels, float[][] buffer) {
+        return array.pushMaskTop(amount, incomingPixels, buffer);
+    }
+
+    @Override
     public String toString()
     {
         return "Chunk" + chunkX + "-" + chunkY;

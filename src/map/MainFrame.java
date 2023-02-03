@@ -66,14 +66,15 @@ public class MainFrame {
             public void run() {
                 cloud.setCenterX(cloud.getCenterX() + 2);
                 cloud.setStartLeft(cloud.getStartLeft() - 2);
-                cloud.repaint();
+//                cloud.moveLeft(10);
 
                 cloudHigh.setCenterX(cloudHigh.getCenterX() + 0.6F);
                 cloudHigh.setStartLeft(cloudHigh.getStartLeft() - 0.6F);
                 cloudHigh.setCenterY(cloudHigh.getCenterY() + 0.6F);
                 cloudHigh.setStartTop(cloudHigh.getStartTop() - 0.6F);
 
-                cloudHigh.repaint();
+//                cloudHigh.repaint();
+                cloud.repaint();
             }
         }, 1000, 50);
         frame.add(panel);

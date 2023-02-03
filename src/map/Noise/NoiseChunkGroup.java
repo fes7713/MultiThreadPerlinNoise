@@ -159,6 +159,28 @@ public class NoiseChunkGroup implements NoiseChunkInterface, NoiseChunkGroupInte
     }
 
     @Override
+    public float[][] pushMaskLeft(int amount, float[][] incomingPixels, float[][] buffer) {
+        if(amount == 0)
+            return null;
+        if(buffer == null)
+            buffer = new float[amount][getChunkHeight()];
+        if(amount > 0) {
+            for(int i = 0; i < tableHeight; i++)
+            {
+                for (int j = 0; j < tableWidth; j++) {
+                    incomingPixels = chunkTable[tableWidth - j - 1][i].pushMaskLeft(amount, incomingPixels, buffer);
+                }
+            }
+        }
+        return incomingPixels;
+    }
+
+    @Override
+    public float[][] pushMaskTop(int amount, float[][] incomingPixels, float[][] buffer) {
+        return new float[0][];
+    }
+
+    @Override
     public int getChunkWidth() {
         return (int)Math.ceil(canvasWidth / (double)tableWidth);
 
