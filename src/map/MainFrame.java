@@ -11,6 +11,9 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         NoiseMapPanel panel = new NoiseMapPanel(2, 2) ;
+        OverlayLayout layout = new OverlayLayout(panel);
+        panel.setLayout(layout);
+
         NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
         NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;
         cloud.setResolutionMin(-4);
@@ -29,29 +32,24 @@ public class MainFrame {
         cloudHigh.updateChunkGroups();
         cloudHigh.setOpaque(false);
 
-
-        OverlayLayout layout = new OverlayLayout(panel);
-        panel.setLayout(layout);
         panel.add(cloud);
         panel.add(cloudHigh);
 //
-        cloud.addComponentListener(panel);
-        cloud.addMouseMotionListener(panel);
-        cloud.addMouseListener(panel);
-        cloud.addMouseWheelListener(panel);
-
-        cloud.addComponentListener(cloudHigh);
-        cloud.addMouseMotionListener(cloudHigh);
-        cloud.addMouseListener(cloudHigh);
-        cloud.addMouseWheelListener(cloudHigh);
+//        cloud.addComponentListener(panel);
+//        cloud.addMouseMotionListener(panel);
+//        cloud.addMouseListener(panel);
+//        cloud.addMouseWheelListener(panel);
+//
+//        cloud.addComponentListener(cloudHigh);
+//        cloud.addMouseMotionListener(cloudHigh);
+//        cloud.addMouseListener(cloudHigh);
+//        cloud.addMouseWheelListener(cloudHigh);
 
 
 //        panel.add(cloud);
 
-
         cloudHigh.showColorEditor();
         cloudHigh.showMapEditor();
-//
         cloudHigh.showVariableChanger();
 
 //        panel.showColorEditor();

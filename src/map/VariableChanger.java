@@ -31,12 +31,10 @@ public class VariableChanger extends JPanel{
 
     static int precision = 10000;
 
-    public VariableChanger(NoiseMapPanel nmp, ChunkProvider chunkProvider, ImageUpdateInterface iui){
+    public VariableChanger(ChunkProvider chunkProvider, ImageUpdateInterface iui){
         this.chunkProvider = chunkProvider;
 
         GroupLayout layout = new GroupLayout(this);
-        if(iui == null)
-            throw new IllegalArgumentException("Image update interface cannot be null");
         this.iui = iui;
 
         this.setLayout(layout);
@@ -91,7 +89,7 @@ public class VariableChanger extends JPanel{
         JButton loadButton = new JButton("Load");
         loadButton.addActionListener((event)->{
             String filename = FileManager.askForFileNameFromListInDir(this, "variables", "Select variable file", "Variable load form");
-            loadVariable("variables", filename, this);
+            loadVariable("variables", filename, true);
         });
         this.add(loadButton);
         JButton cancelButton = new JButton("Cancel");
@@ -122,7 +120,8 @@ public class VariableChanger extends JPanel{
                         labels.get(index).setText(sliders.get(index).getValue() / (float)precision + "");
                         setters.get(index).accept(sliders.get(index).getValue() / (float)precision);
                         chunkProvider.applyVariableChange();
-                        iui.update();
+                        if(iui != null)
+                            iui.update();
                     });
 
                 });
@@ -258,7 +257,19 @@ public class VariableChanger extends JPanel{
         FileManager.writeStringToFile(variableToString(), "variables", filename, "txt");
     }
 
-    public boolean loadVariable(String foldername, String filename, VariableChanger vc)
+    public boolean loadVariable(){
+        return loadVariable(false);
+    }
+
+    public boolean loadVariable(boolean update){
+        return loadVariable("variables", "default.txt", update);
+    }
+
+    public boolean loadVariable(String foldername, String filename){
+        return loadVariable(foldername, filename, false);
+    }
+
+    public boolean loadVariable(String foldername, String filename, boolean update)
     {
         List<Consumer<Float>> setters = new ArrayList<>(
                 Arrays.asList(chunkProvider::setNoiseCoefficient,
@@ -279,8 +290,8 @@ public class VariableChanger extends JPanel{
         {
             return false;
         }
-        if(vc != null)
-            vc.updateData();
+        if(update)
+            updateData();
         return true;
     }
 
@@ -307,18 +318,18 @@ public class VariableChanger extends JPanel{
 
     public void loadDefaultVariables(VariableChanger vc)
     {
-        if(!loadVariable("variables", "default.txt", vc))
+        if(!loadVariable(true))
         {
             saveDefaultVariables("variables", vc);
         }
-        loadVariable("variables", "default.txt", vc);
+        loadVariable(true);
     }
 
     public static void main(String[] args)
     {
         ChunkProvider chunkProvider = new ChunkProvider(null, null);
         NoiseMapPanel nmp = new NoiseMapPanel();
-        VariableChanger vc = new VariableChanger(nmp, chunkProvider, ()-> {
+        VariableChanger vc = new VariableChanger(chunkProvider, ()-> {
             System.out.println("Updating image");
         });
         vc.showVariableChanger();

@@ -79,7 +79,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         addMouseWheelListener(this);
 
 
-        vc = new VariableChanger(this, chunkProvider, this::updateImage);
+        vc = new VariableChanger(chunkProvider, this::updateImage);
         vc.loadDefaultVariables(vc);
         me = new MapEditor(this, this::repaint);
         me.loadDefaultMapSetting();
@@ -95,7 +95,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public void loadVariables(String fileName)
     {
-        vc.loadVariable("variables", fileName, vc);
+        vc.loadVariable("variables", fileName, true);
     }
 
     public void loadColorPreset(String fileName)

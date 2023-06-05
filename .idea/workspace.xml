@@ -9,15 +9,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="cloud">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="centerX faster calculation WIP">
+      <change afterPath="$PROJECT_DIR$/Test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/falloff2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/i-9.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise4.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noise7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal4.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/normal9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/null.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zoomres.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zoomres1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunkInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,9 +117,16 @@
       <recent name="Noise.Array" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainFrame">
-    <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.FallOffImage" />
+  <component name="RunManager" selected="Application.PerlinNoiseArray">
+    <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
+      <module name="MuthThreadParlinNoise" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LightingChanger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.LightingChanger" />
       <module name="MuthThreadParlinNoise" />
       <extension name="coverage">
         <pattern>
@@ -104,26 +134,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GradientColorEditorPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="map.Noise.Color.GradientColorEditorPanel" />
-      <module name="MuthThreadParlinNoise" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="map.Noise.Color.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
-      <module name="MuthThreadParlinNoise" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -142,13 +152,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PerlinNoiseArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.PerlinNoiseArray" />
+      <module name="MuthThreadParlinNoise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="map.Noise.Array.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.PerlinNoiseArray" />
         <item itemvalue="Application.MapEditor" />
+        <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.LightingChanger" />
         <item itemvalue="Application.JDesktopPaneTest9" />
-        <item itemvalue="Application.GradientColorEditorPanel" />
-        <item itemvalue="Application.FallOffImage" />
       </list>
     </recent_temporary>
   </component>
@@ -205,13 +228,12 @@
       <workItem from="1675219515852" duration="426000" />
       <workItem from="1675368747626" duration="908000" />
       <workItem from="1675371579979" duration="2163000" />
-    </task>
-    <task id="LOCAL-00092" summary="Center bug fixed">
-      <created>1672670844513</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1672670844513</updated>
+      <workItem from="1675533661833" duration="3854000" />
+      <workItem from="1678143950649" duration="600000" />
+      <workItem from="1679320068282" duration="46000" />
+      <workItem from="1679968479828" duration="26000" />
+      <workItem from="1681488457111" duration="283000" />
+      <workItem from="1685961186274" duration="7889000" />
     </task>
     <task id="LOCAL-00093" summary="Zoom limit bug fix">
       <created>1672673161908</created>
@@ -549,7 +571,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675219264605</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="centerX faster calculation WIP">
+      <created>1675403428929</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1675403428929</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,7 +609,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Getter for colors" />
     <MESSAGE value="Adapted to Alpha colors" />
     <MESSAGE value="Code Cleaned" />
     <MESSAGE value="Color slider and setCenter will center the screen to the map too" />
@@ -605,7 +633,29 @@
     <MESSAGE value="merged" />
     <MESSAGE value="Chink reuse fix" />
     <MESSAGE value="cloud" />
-    <option name="LAST_COMMIT_MESSAGE" value="cloud" />
+    <MESSAGE value="centerX faster calculation WIP" />
+    <option name="LAST_COMMIT_MESSAGE" value="centerX faster calculation WIP" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>297</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/ColorProvider.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/ColorProvider.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

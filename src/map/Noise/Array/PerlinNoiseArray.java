@@ -4,6 +4,7 @@ import map.Noise.ChunkProvider;
 import map.Noise.ColorProvider;
 import map.Noise.FastNoise;
 import map.Noise.PaintInterface;
+import map.VariableChanger;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
@@ -321,13 +322,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public void updateImage(PaintInterface pi)
     {
         int[][] colors = colorProvider.getColors();
-        int length = colors.length;
+        int length = colors.length - 1;
         float fallOff;
         for(int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
                 fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-
                 bi.setRGB(i, j, colors[
                         (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
                         ][
@@ -361,5 +361,36 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float c3 = a1 * b2 - a2 * b1;
 
         return (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+    }
+
+    public static void main(String[] args)
+    {
+        ColorProvider colorProvider = new ColorProvider(null, 256);
+        ChunkProvider chunkProvider = new ChunkProvider(colorProvider, null);
+        VariableChanger vc = new VariableChanger(chunkProvider, null);
+        vc.loadVariable();
+        PerlinNoiseArray array = new PerlinNoiseArray(chunkProvider, colorProvider, new FastNoise(), -500, -500, 4000, 2000, 0.1F, 500, 500);
+        int resolutionMin = chunkProvider.getResolutionMin();
+        int resolutionMax = chunkProvider.getResolutionMax();
+
+        if(Thread.interrupted())
+            return;
+        array.initNoiseMap(resolutionMin);
+        array.generateNormalMap();
+        array.updateImage(null);
+
+        for (int i = resolutionMin + 1; i < resolutionMax + 4; i++) {
+            array.increaseResolution((float)Math.pow(2, i));
+            array.updateImage(null);
+            array.generateNormalMap();
+            array.convertData();
+
+        }
+        File outputfile = new File("image.png");
+        try {
+            ImageIO.write(array.bi, "png", outputfile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
