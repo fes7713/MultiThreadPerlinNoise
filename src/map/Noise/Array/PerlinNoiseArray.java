@@ -8,6 +8,7 @@ import map.VariableChanger;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private float[][] convNoiseMap;
     private float[][] convNormalMap;
     private float[][] fallOffMap;
+    private float[][] shadowMap;
 
     private float left;
     private float top;
@@ -53,6 +55,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
         convNormalMap = new float[width][height];
+        shadowMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -145,12 +148,24 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
+//                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
                 float normal = lightIntensity(
-                        zoom, 0, noiseMap[i + 1][j] - noiseMap[i][j],
-                        0, zoom, noiseMap[i][j + 1] - noiseMap[i][j],
+                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 4096,
+                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 4096,
                         light);
-                normalMap[i][j] = (normal + 1) * 4096 + 125;
+                normalMap[i][j] = normal;
+            }
+        }
+    }
 
+    public void generateShadowMap()
+    {
+        for(int i = 0; i < width - 1; i++) {
+            for (int j = 0; j < height - 1; j++) {
+                if(normalMap[i][j] < 0)
+                {
+
+                }
             }
         }
     }
@@ -287,7 +302,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
 //        return (float)(Math.atan(normal) / Math.PI + 0.5);
 //        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
-        return (1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
+//        return (1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
+        return (2 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal)))) - 1;
     }
 
     public void convertData()
@@ -328,11 +344,40 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for (int j = 0; j < height; j++) {
 
                 fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-                bi.setRGB(i, j, colors[
-                        (int)(convNormalMap[i][j]  * fallOffMap[i][j] * length)
+                int color = colors[
+                        length/2
                         ][
                         (int)(convNoiseMap[i][j]  * fallOff)
-                        ]);
+                        ];
+                Color c = new Color(color);
+                if(c.getRed() * normalMap[i][j] > 256)
+                    System.out.println(c.getRed() * convNormalMap[i][j]);
+                Color c1 = new Color(
+                        (int)Math.max(c.getRed() * convNormalMap[i][j], 0),
+                        (int)Math.max(c.getGreen() * convNormalMap[i][j], 0),
+                        (int)Math.max(c.getBlue() * convNormalMap[i][j], 0)
+                );
+
+                Color c2 = new Color(
+                        (int)Math.min(c1.getRed() + c.getRed() * 0.1, 255),
+                        (int)Math.min(c1.getGreen() + c.getGreen() * 0.1, 255),
+                        (int)Math.min(c1.getBlue() + c.getBlue() * 0.1, 255)
+                );
+
+//                Color c3 = new Color(
+//                        c2.getRed() + (int)Math.max(-c.getRed() * convNormalMap[i][j] * 0.1, 0),
+//                        c2.getGreen() + (int)Math.max(-c.getGreen() * convNormalMap[i][j] * 0.1, 0),
+//                        c2.getBlue() + (int)Math.max(- c.getBlue() * convNormalMap[i][j] * 0.1, 0)
+//                );
+
+
+//                bi.setRGB(i, j, colors[
+//                        length/2
+//                        ][
+//                        (int)(convNoiseMap[i][j]  * fallOff)
+//                        ]);
+
+                bi.setRGB(i, j, c2.getRGB());
             }
         }
         if(pi != null)
@@ -366,6 +411,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public static void main(String[] args)
     {
         ColorProvider colorProvider = new ColorProvider(null, 256);
+        colorProvider.loadColorPreset("PhongRealisticColor1.txt");
         ChunkProvider chunkProvider = new ChunkProvider(colorProvider, null);
         VariableChanger vc = new VariableChanger(chunkProvider, null);
         vc.loadVariable();

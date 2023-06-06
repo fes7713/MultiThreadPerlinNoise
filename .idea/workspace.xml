@@ -9,38 +9,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="centerX faster calculation WIP">
-      <change afterPath="$PROJECT_DIR$/Test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/falloff2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/i-9.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noise7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normal9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/null.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zoomres.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zoomres1.csv" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Phong shading diffuse">
+      <change afterPath="$PROJECT_DIR$/image1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhong.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhong1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhong11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhong12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhong2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imagePhongShadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongRealisticColor.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongRealisticColor1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/PhongLightModel.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/null.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/null.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ColorProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ColorProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +104,7 @@
       <recent name="Noise.Array" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PerlinNoiseArray">
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
       <module name="MuthThreadParlinNoise" />
@@ -167,10 +154,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PerlinNoiseArray" />
-        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.PerlinNoiseArray" />
         <item itemvalue="Application.LightingChanger" />
+        <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.JDesktopPaneTest9" />
       </list>
     </recent_temporary>
@@ -233,14 +220,9 @@
       <workItem from="1679320068282" duration="46000" />
       <workItem from="1679968479828" duration="26000" />
       <workItem from="1681488457111" duration="283000" />
-      <workItem from="1685961186274" duration="7889000" />
-    </task>
-    <task id="LOCAL-00093" summary="Zoom limit bug fix">
-      <created>1672673161908</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1672673161908</updated>
+      <workItem from="1685961186274" duration="19307000" />
+      <workItem from="1686020082817" duration="2095000" />
+      <workItem from="1686043966401" duration="6602000" />
     </task>
     <task id="LOCAL-00094" summary="FallOffMap coding">
       <created>1672715285960</created>
@@ -578,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675403428929</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="variable changer decoupled with noise map panel.">
+      <created>1685973781805</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1685973781806</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,8 +598,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adapted to Alpha colors" />
-    <MESSAGE value="Code Cleaned" />
     <MESSAGE value="Color slider and setCenter will center the screen to the map too" />
     <MESSAGE value="Default setting changed. setCenter changed" />
     <MESSAGE value="synchronized" />
@@ -634,25 +621,22 @@
     <MESSAGE value="Chink reuse fix" />
     <MESSAGE value="cloud" />
     <MESSAGE value="centerX faster calculation WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="centerX faster calculation WIP" />
+    <MESSAGE value="variable changer decoupled with noise map panel." />
+    <MESSAGE value="Phong shading diffuse" />
+    <option name="LAST_COMMIT_MESSAGE" value="Phong shading diffuse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>297</line>
-          <option name="timeStamp" value="5" />
+          <line>434</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/ColorProvider.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/ColorProvider.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>304</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
