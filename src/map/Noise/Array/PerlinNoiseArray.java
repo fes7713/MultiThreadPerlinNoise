@@ -21,10 +21,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private float[][] noiseMap;
     private float[][] normalMap;
     private float[][] convNoiseMap;
-    private float[][] convNormalMap;
     private float[][] fallOffMap;
     private float[][] specularMap;
-    private float[][] convSpecularMap;
 
     private float left;
     private float top;
@@ -53,11 +51,10 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        specularMap = new float[width][height];
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
-        convNormalMap = new float[width][height];
-        specularMap = new float[width][height];
-        convSpecularMap = new float[width][height];
+
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -115,11 +112,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        specularMap = new float[width][height];
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
-        convNormalMap = new float[width][height];
-        specularMap = new float[width][height];
-        convSpecularMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -235,83 +230,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         }
     }
 
-    // Direction
-    // ->->->
-    @Override
-    public float[][] pushMaskLeft(int amount, float[][] incomingPixels, float[][] buffer) {
-        if(amount == 0)
-            return null;
-        if(amount > 0){
-            for(int i = 0; i < amount; i++)
-            {
-                for(int j = 0; j < height; j++)
-                {
-                    buffer[i][j] = fallOffMap[width - amount + i][j];
-                }
-            }
-
-            for(int i = 0; i < width - amount; i++)
-            {
-                for(int j = 0; j < height; j++)
-                {
-                    fallOffMap[width - i - 1][j] = fallOffMap[width - amount - i - 1][j];
-                }
-            }
-
-            if(incomingPixels == null)
-            {
-                generateFallOffMap(width - amount, 0, amount, height);
-                incomingPixels = new float[amount][height];
-            }
-            else{
-                for(int i = 0; i < amount; i++)
-                {
-                    for(int j = 0; j < height; j++)
-                    {
-                        fallOffMap[width - amount + i][j] = incomingPixels[i][j];
-                    }
-                }
-            }
-        }
-        else{
-            System.out.println("Not implemented");
-        }
-
-        for (int i = 0; i < amount; i++) {
-            for (int j = 0; j < height; j++) {
-                incomingPixels[i][j] = buffer[i][j];
-            }
-        }
-
-        return incomingPixels;
-    }
-
-    // Direction
-    // ->->->
-    @Override
-    public float[][] pushMaskTop(int amount, float[][] incomingPixels, float[][] buffer) {
-        return new float[0][];
-    }
-
     public double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)
     {
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
         return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
-    }
-
-    public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
-    {
-//        float t = 2.5F;
-//        int p = 52;
-//        int s = 32;
-//        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
-//        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
-//        return (float)(Math.atan(normal) / Math.PI + 0.5);
-//        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
-//        return (1 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal - NORMAL_SHIFT))));
-        return (2 / (1 + Math.exp(-NORMAL_COEFFICIENT * (normal)))) - 1;
     }
 
     public void convertData()
@@ -326,14 +250,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for(int j = 0; j < height - 1; j++)
             {
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
-                convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
             }
         }
 
         for(int i = 0; i < width; i++)
         {
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
-            convNormalMap[i][height - 1] = convNormalMap[i][height - 2];
             normalMap[i][height - 1] = normalMap[i][height - 2];
             specularMap[i][height - 1] = specularMap[i][height - 2];
         }
@@ -341,7 +263,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < height; i++)
         {
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
-            convNormalMap[width - 1][i] = convNormalMap[width - 2][i];
             normalMap[width - 1][i] = normalMap[width - 2][i];
             specularMap[width - 1][i] = specularMap[width - 2][i];
         }
@@ -363,9 +284,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         ];
                 Color c = new Color(color);
                 Color c1 = new Color(
-                        (int)Math.max(c.getRed() * convNormalMap[i][j], 0),
-                        (int)Math.max(c.getGreen() * convNormalMap[i][j], 0),
-                        (int)Math.max(c.getBlue() * convNormalMap[i][j], 0)
+                        (int)Math.max(c.getRed() * normalMap[i][j], 0),
+                        (int)Math.max(c.getGreen() * normalMap[i][j], 0),
+                        (int)Math.max(c.getBlue() * normalMap[i][j], 0)
                 );
 
                 Color c2 = new Color(

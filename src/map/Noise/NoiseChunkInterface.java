@@ -19,9 +19,6 @@ interface NoiseChunkInterface {
     void variableChanged();
     void drawImage(Graphics2D g2d);
 
-    float[][] pushMaskLeft(int amount, float[][] incomingPixels, float[][] buffer);
-    float[][] pushMaskTop(int amount, float[][] incomingPixels, float[][] buffer);
-
     static long getChunkKey(int col, int row)
     {
         return (((long)col) << 32) | (row & 0xffffffffL);

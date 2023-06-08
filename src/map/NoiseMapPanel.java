@@ -295,33 +295,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         updateChunkGroups();
     }
 
-    public void moveLeft(int amount)
-    {
-        if(amount == 0)
-            return;
-        float[][] incomingPixels = null;
-        float[][] buffer = new float[amount][horizontalEdgeGroup.getChunkHeight()];
-        if(amount > 0)
-        {
-            if(startLeft < 0)
-            {
-                System.out.println("Right");
-                incomingPixels = horizontalEdgeGroup.pushMaskLeft(amount, null, buffer);
-                mainGroup.pushMaskLeft(amount, incomingPixels, buffer);
-                incomingPixels = cornerGroup.pushMaskLeft(amount, null, buffer);
-                verticalEdgeGroup.pushMaskLeft(amount, incomingPixels, buffer);
-            }
-            else{
-                System.out.println("Left");
-                incomingPixels = mainGroup.pushMaskLeft(amount, null, buffer);
-                horizontalEdgeGroup.pushMaskLeft(amount, incomingPixels, buffer);
-
-                incomingPixels = verticalEdgeGroup.pushMaskLeft(amount, null, buffer);
-                cornerGroup.pushMaskLeft(amount, incomingPixels, buffer);
-            }
-        }
-    }
-
     public void setMapWidth(float mapWidth)
     {
         if(mapWidth < 0)
