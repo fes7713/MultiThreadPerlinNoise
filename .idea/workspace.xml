@@ -9,9 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Specular shading working">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code clean up pushMask method removed. convNormalMap removed">
+      <change afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imageWithSpecular9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongRealisticColor2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imageWithSpecular2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/default.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/null.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/null.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,14 +221,7 @@
       <workItem from="1686020082817" duration="2095000" />
       <workItem from="1686043966401" duration="16808000" />
       <workItem from="1686146267162" duration="4745000" />
-      <workItem from="1686189583392" duration="5063000" />
-    </task>
-    <task id="LOCAL-00097" summary="Revert &quot;Fall off map first iteration&quot;&#10;&#10;This reverts commit eb820e44">
-      <created>1672741444012</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1672741444012</updated>
+      <workItem from="1686189583392" duration="8160000" />
     </task>
     <task id="LOCAL-00098" summary="fall off recovered">
       <created>1672742070744</created>
@@ -553,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686217166856</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="Code clean up pushMask method removed. convNormalMap removed">
+      <created>1686217652243</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1686217652243</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +597,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="synchronized" />
     <MESSAGE value="Color presets and initNoiseMap Changed" />
     <MESSAGE value="Map move save" />
     <MESSAGE value="startLeft = startLeft * zoom" />
@@ -609,14 +621,15 @@
     <MESSAGE value="Phong shading diffuse" />
     <MESSAGE value="Specular shading" />
     <MESSAGE value="Specular shading working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Specular shading working" />
+    <MESSAGE value="Code clean up pushMask method removed. convNormalMap removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code clean up pushMask method removed. convNormalMap removed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>436</line>
+          <line>435</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

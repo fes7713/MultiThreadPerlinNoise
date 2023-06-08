@@ -123,10 +123,6 @@ public class NoiseChunk implements NoiseChunkInterface{
                         return;
                     Thread.yield();
                     array.generateNormalMap();
-                    if(Thread.interrupted())
-                        return;
-                    array.convertData();
-
                 }
                 array.updateImage(pi);
             }
@@ -138,7 +134,6 @@ public class NoiseChunk implements NoiseChunkInterface{
     public void updateLighting(PaintInterface pi)
     {
         array.generateNormalMap();
-        array.convertData();
         if(pi != null)
             pi.paint();
     }

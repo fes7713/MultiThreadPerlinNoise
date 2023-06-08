@@ -143,6 +143,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void generateNormalMap()
     {
+        convertData();
         Vector3f light = new Vector3f(
                 chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
         for(int i = 0; i < width - 1; i++) {
@@ -155,6 +156,13 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 normalMap[i][j] = normal;
             }
         }
+
+        for(int i = 0; i < width; i++)
+            normalMap[i][height - 1] = normalMap[i][height - 2];
+
+        for(int i = 0; i < height; i++)
+            normalMap[width - 1][i] = normalMap[width - 2][i];
+
         generateSpecularMap();
     }
 
@@ -165,12 +173,17 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
                 float specular = specularIntensity(
-                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 80,
-                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 80,
+                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 20,
+                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 20,
                         light);
                 specularMap[i][j] = specular;
             }
         }
+        for(int i = 0; i < width; i++)
+            specularMap[i][height - 1] = specularMap[i][height - 2];
+
+        for(int i = 0; i < height; i++)
+            specularMap[width - 1][i] = specularMap[width - 2][i];
     }
 
     public void generateFallOffMap()
@@ -242,30 +255,17 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         float NOISE_COEFFICIENT = chunkProvider.getNoiseCoefficient();
         float NOISE_SHIFT = chunkProvider.getNoiseShift();
-        float NORMAL_COEFFICIENT = chunkProvider.getNormalCoefficient();
-        float NORMAL_SHIFT = chunkProvider.getNormalShift();
-        float MASK_SHADOW = chunkProvider.getMaskShadow();
+
         for(int i = 0; i < width - 1; i++)
-        {
             for(int j = 0; j < height - 1; j++)
-            {
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
-            }
-        }
 
         for(int i = 0; i < width; i++)
-        {
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
-            normalMap[i][height - 1] = normalMap[i][height - 2];
-            specularMap[i][height - 1] = specularMap[i][height - 2];
-        }
+
 
         for(int i = 0; i < height; i++)
-        {
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
-            normalMap[width - 1][i] = normalMap[width - 2][i];
-            specularMap[width - 1][i] = specularMap[width - 2][i];
-        }
     }
 
     public void updateImage(PaintInterface pi)
@@ -403,7 +403,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 /
                 (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
 
-        int intensitySpecular = 5;
+        int intensitySpecular = 15;
 
         if(specularDot1 < 0)
             return 0;
@@ -431,7 +431,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             array.increaseResolution((float)Math.pow(2, i));
             array.updateImage(null);
             array.generateNormalMap();
-            array.convertData();
 
         }
         File outputfile = new File("image.png");
