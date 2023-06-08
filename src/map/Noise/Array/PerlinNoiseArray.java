@@ -170,8 +170,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
                 float specular = specularIntensity(
-                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 50,
-                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 50,
+                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 80,
+                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 80,
                         light);
                 specularMap[i][j] = specular;
             }
@@ -327,7 +327,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             {
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
                 convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
-                convSpecularMap[i][j] = (float)convertNormal(specularMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
             }
         }
 
@@ -335,7 +334,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         {
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
             convNormalMap[i][height - 1] = convNormalMap[i][height - 2];
-            convSpecularMap[i][height - 1] = convSpecularMap[i][height - 2];
+            normalMap[i][height - 1] = normalMap[i][height - 2];
             specularMap[i][height - 1] = specularMap[i][height - 2];
         }
 
@@ -343,7 +342,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         {
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
             convNormalMap[width - 1][i] = convNormalMap[width - 2][i];
-            convSpecularMap[width - 1][i] = convSpecularMap[width - 2][i];
+            normalMap[width - 1][i] = normalMap[width - 2][i];
             specularMap[width - 1][i] = specularMap[width - 2][i];
         }
     }
@@ -363,8 +362,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         (int)(convNoiseMap[i][j]  * fallOff)
                         ];
                 Color c = new Color(color);
-                if(c.getRed() * normalMap[i][j] > 256)
-                    System.out.println(c.getRed() * convNormalMap[i][j]);
                 Color c1 = new Color(
                         (int)Math.max(c.getRed() * convNormalMap[i][j], 0),
                         (int)Math.max(c.getGreen() * convNormalMap[i][j], 0),
@@ -485,7 +482,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 /
                 (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
 
-        int intensitySpecular = 9;
+        int intensitySpecular = 5;
 
         if(specularDot1 < 0)
             return 0;
