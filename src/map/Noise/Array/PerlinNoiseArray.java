@@ -23,7 +23,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private float[][] convNoiseMap;
     private float[][] convNormalMap;
     private float[][] fallOffMap;
-    private float[][] shadowMap;
+    private float[][] specularMap;
+    private float[][] convSpecularMap;
 
     private float left;
     private float top;
@@ -55,7 +56,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
         convNormalMap = new float[width][height];
-        shadowMap = new float[width][height];
+        specularMap = new float[width][height];
+        convSpecularMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -116,6 +118,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
         convNormalMap = new float[width][height];
+        specularMap = new float[width][height];
+        convSpecularMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
@@ -156,16 +160,20 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 normalMap[i][j] = normal;
             }
         }
+        generateSpecularMap();
     }
 
-    public void generateShadowMap()
+    public void generateSpecularMap()
     {
+        Vector3f light = new Vector3f(
+                chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
-                if(normalMap[i][j] < 0)
-                {
-
-                }
+                float specular = specularIntensity(
+                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 50,
+                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 50,
+                        light);
+                specularMap[i][j] = specular;
             }
         }
     }
@@ -319,6 +327,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             {
                 convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
                 convNormalMap[i][j] = (float)convertNormal(normalMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
+                convSpecularMap[i][j] = (float)convertNormal(specularMap[i][j], NORMAL_COEFFICIENT, NORMAL_SHIFT);
             }
         }
 
@@ -326,12 +335,16 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         {
             convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
             convNormalMap[i][height - 1] = convNormalMap[i][height - 2];
+            convSpecularMap[i][height - 1] = convSpecularMap[i][height - 2];
+            specularMap[i][height - 1] = specularMap[i][height - 2];
         }
 
         for(int i = 0; i < height; i++)
         {
             convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
             convNormalMap[width - 1][i] = convNormalMap[width - 2][i];
+            convSpecularMap[width - 1][i] = convSpecularMap[width - 2][i];
+            specularMap[width - 1][i] = specularMap[width - 2][i];
         }
     }
 
@@ -365,6 +378,18 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 );
 
 //                Color c3 = new Color(
+//                        (int)Math.min(c2.getRed() + 255 * convSpecularMap[i][j], 255),
+//                        (int)Math.min(c2.getGreen() + 255 * convSpecularMap[i][j], 255),
+//                        (int)Math.min(c2.getBlue() + 255 * convSpecularMap[i][j], 255)
+//                );
+
+                Color c3 = new Color(
+                        (int)Math.min(c2.getRed() + c.getRed() * specularMap[i][j], 255),
+                        (int)Math.min(c2.getGreen() + c.getGreen() * specularMap[i][j], 255),
+                        (int)Math.min(c2.getBlue() + c.getBlue() * specularMap[i][j], 255)
+                );
+
+//                Color c3 = new Color(
 //                        c2.getRed() + (int)Math.max(-c.getRed() * convNormalMap[i][j] * 0.1, 0),
 //                        c2.getGreen() + (int)Math.max(-c.getGreen() * convNormalMap[i][j] * 0.1, 0),
 //                        c2.getBlue() + (int)Math.max(- c.getBlue() * convNormalMap[i][j] * 0.1, 0)
@@ -377,7 +402,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //                        (int)(convNoiseMap[i][j]  * fallOff)
 //                        ]);
 
-                bi.setRGB(i, j, c2.getRGB());
+                bi.setRGB(i, j, c3.getRGB());
             }
         }
         if(pi != null)
@@ -406,6 +431,65 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float c3 = a1 * b2 - a2 * b1;
 
         return (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+    }
+
+    public static float specularIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light)
+    {
+        final float c1 = a2 * b3 - a3 * b2;
+        final float c2 = b1 * a3 - b3 * a1;
+        final float c3 = a1 * b2 - a2 * b1;
+
+        //light.dot(normal);
+//        float alpha = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+//
+////        normal.scale(2);
+////        normal.scale(alpha);
+////        normal.sub(light);
+//
+//        c1 = c1 * 2 * alpha - light.x;
+//        c2 = c2 * 2 * alpha - light.y;
+//        c3 = c3 * 2 * alpha - light.z;
+//
+        Vector3f camera = new Vector3f(0, 0, -1);
+//
+//        //normal.dot(camera);
+//        float specularDot = (float)((c1 * camera.x + c2 * camera.y + c3 * camera.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+//        int intensitySpecular = 9;
+//
+//        if(specularDot < 0)
+//            return 0;
+//        return (float)Math.pow(specularDot, intensitySpecular);
+//        Vector3f lightNegative = new Vector3f(-light.x, -light.y, -light.z);
+        float normalLength = (float)Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3);
+//        float LightNegativeNormalDot = lightNegative.x * c1 + lightNegative.y * c2 + lightNegative.z * c3;
+//
+//        float coefficient = LightNegativeNormalDot / (normalLength * normalLength);
+//        Vector3f adjustedNormal = new Vector3f(c1 * coefficient, c2 * coefficient, c3 * coefficient);
+//        Vector3f reflected = new Vector3f(light.x + 2 * adjustedNormal.x, light.y + 2 * adjustedNormal.y, light.z + 2 * adjustedNormal.z);
+//
+//        float specularDot = (float)((reflected.x * camera.x + reflected.y * camera.y + reflected.z * camera.z)
+//                /
+//                (Math.sqrt(reflected.x * reflected.x + reflected.y * reflected.y + reflected.z * reflected.z)));
+
+        // r = f - 2 Dot (f, n_normal)* n_normal
+
+        Vector3f normalNormalised = new Vector3f(c1 / normalLength, c2 / normalLength, c3 / normalLength);
+        float lightNormalNormalizedDot = light.x * normalNormalised.x + light.y * normalNormalised.y + light.z * normalNormalised.z;
+
+        Vector3f reflected1 = new Vector3f(
+                light.x - 2 * lightNormalNormalizedDot * normalNormalised.x,
+                light.y - 2 * lightNormalNormalizedDot * normalNormalised.y,
+                light.z - 2 * lightNormalNormalizedDot * normalNormalised.z);
+
+        float specularDot1 = (float)((reflected1.x * camera.x + reflected1.y * camera.y + reflected1.z * camera.z)
+                /
+                (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
+
+        int intensitySpecular = 9;
+
+        if(specularDot1 < 0)
+            return 0;
+        return (float)Math.pow(specularDot1, intensitySpecular);
     }
 
     public static void main(String[] args)

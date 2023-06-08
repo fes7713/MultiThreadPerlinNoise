@@ -26,8 +26,8 @@ public class ColorProvider {
         editor.setColorUpdateInterface(() -> {
             System.out.println("image update ex");
             colors = editor.getUpdatedColorArray(colorLevel);
-
-            pi.paint();
+            if(pi != null)
+                pi.paint();
         });
     }
 
