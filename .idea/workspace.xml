@@ -9,16 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Specular shading adjusting save">
-      <change afterPath="$PROJECT_DIR$/imageWithSpecular11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imageWithSpecular12.png" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Phong shading done.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -217,14 +211,7 @@
       <workItem from="1686043966401" duration="16808000" />
       <workItem from="1686146267162" duration="4745000" />
       <workItem from="1686189583392" duration="8160000" />
-      <workItem from="1686361909003" duration="10818000" />
-    </task>
-    <task id="LOCAL-00098" summary="fall off recovered">
-      <created>1672742070744</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1672742070744</updated>
+      <workItem from="1686361909003" duration="12301000" />
     </task>
     <task id="LOCAL-00099" summary="fall off working save">
       <created>1672742871224</created>
@@ -562,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686217652243</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="Phong shading done.">
+      <created>1686407443662</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1686407443663</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Color presets and initNoiseMap Changed" />
     <MESSAGE value="Map move save" />
     <MESSAGE value="startLeft = startLeft * zoom" />
     <MESSAGE value="Zoom Blank Chunk Bug Fix" />
@@ -618,14 +611,15 @@
     <MESSAGE value="Specular shading" />
     <MESSAGE value="Specular shading working" />
     <MESSAGE value="Code clean up pushMask method removed. convNormalMap removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code clean up pushMask method removed. convNormalMap removed" />
+    <MESSAGE value="Phong shading done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Phong shading done." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>433</line>
+          <line>414</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

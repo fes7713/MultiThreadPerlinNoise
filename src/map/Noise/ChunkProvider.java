@@ -34,16 +34,16 @@ public class ChunkProvider {
     private float MASK_SHADOW = 2F;
 
     private float LIGHTING_ANGLE = 0;
-    private float LIGHTING_STRENGTH = 1;
+    private float LIGHTING_STRENGTH = 0.6F;
 
     private float LIGHTING_X = LIGHTING_STRENGTH * (float)Math.cos(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Z = -1;
 
-    private int SPECULAR_BRIGHTNESS = 100;
-    private int SPECULAR_INTENSITY = 6;
+    private int SPECULAR_BRIGHTNESS = 60;
+    private int SPECULAR_INTENSITY = 9;
 
-    private float AMBIENT_INTENSITY = 0.2F;
+    private float AMBIENT_INTENSITY = 0.5F;
 
     private int RESOLUTION_MIN = -3;
     private int RESOLUTION_MAX = 14;
