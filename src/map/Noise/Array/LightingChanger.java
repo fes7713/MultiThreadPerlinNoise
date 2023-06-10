@@ -17,6 +17,9 @@ public class LightingChanger extends JPanel{
 
     private final JSlider lightingAngleSlider;
     private final JSlider lightingStrengthSlider;
+    private final JSlider specularBrightnessSlider;
+    private final JSlider specularIntensitySlider;
+    private final JSlider ambientIntensitySlider;
 
     private static final int precision = 10;
 
@@ -36,16 +39,34 @@ public class LightingChanger extends JPanel{
         this.add(lightingAngleLabel);
         JLabel lightingStrengthLabel = new JLabel("Lighting Strength");
         this.add(lightingStrengthLabel);
+        JLabel specularBrightnessLabel = new JLabel("Specular Brightness");
+        this.add(specularBrightnessLabel);
+        JLabel specularIntensityLabel = new JLabel("Specular Intensity");
+        this.add(specularIntensityLabel);
+        JLabel ambientIntensityLabel = new JLabel("Ambient Intensity");
+        this.add(specularIntensityLabel);
 
         JLabel lightingAngleValue = new JLabel("0");
         this.add(lightingAngleValue);
         JLabel lightingStrengthValue = new JLabel("0");
         this.add(lightingStrengthValue);
+        JLabel specularBrightnessValue = new JLabel("0");
+        this.add(specularBrightnessValue);
+        JLabel specularIntensityValue = new JLabel("0");
+        this.add(specularIntensityValue);
+        JLabel ambientIntensityValue = new JLabel("0");
+        this.add(specularIntensityValue);
 
         lightingAngleSlider = new JSlider(JSlider.HORIZONTAL, -180 * precision, 180 * precision, (int)(chunkProvider.getLightingAngle() * precision));
         this.add(lightingAngleSlider);
         lightingStrengthSlider = new JSlider(JSlider.HORIZONTAL, -5 * precision, 5 * precision, (int)(chunkProvider.getLightingStrength() * precision));
         this.add(lightingStrengthSlider);
+        specularBrightnessSlider = new JSlider(JSlider.HORIZONTAL, 0, 200 * precision, (int)(chunkProvider.getSpecularBrightness() * precision));
+        this.add(specularBrightnessSlider);
+        specularIntensitySlider = new JSlider(JSlider.HORIZONTAL, 0, 50 * precision, (int)(chunkProvider.getSpecularIntensity() * precision));
+        this.add(specularIntensitySlider);
+        ambientIntensitySlider = new JSlider(JSlider.HORIZONTAL, 0, 1 * precision, (int)(chunkProvider.getAmbientIntensity() * precision));
+        this.add(ambientIntensitySlider);
 
         JButton saveButton = new JButton("Save");
         this.add(saveButton);
@@ -54,12 +75,15 @@ public class LightingChanger extends JPanel{
         JButton cancelButton = new JButton("Cancel");
         this.add(cancelButton);
 
-        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider).toList();
-        List<JLabel> labels = Stream.of(lightingAngleValue, lightingStrengthValue).toList();
+        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider, specularBrightnessSlider, specularIntensitySlider, ambientIntensitySlider).toList();
+        List<JLabel> labels = Stream.of(lightingAngleValue, lightingStrengthValue, specularBrightnessValue, specularIntensityValue, ambientIntensityValue).toList();
 
         List<Consumer<Float>> setters = new ArrayList<>(
                 Arrays.asList(chunkProvider::setLightingAngle,
-                        chunkProvider::setLightingStrength));
+                        chunkProvider::setLightingStrength,
+                        chunkProvider::setSpecularBrightness,
+                        chunkProvider::setSpecularIntensity,
+                        chunkProvider::setAmbientIntensity));
 
         sliders.forEach((slider) -> {
                     slider.setPaintTicks(true);
@@ -84,15 +108,24 @@ public class LightingChanger extends JPanel{
 
         hGroup.addGroup(layout.createParallelGroup()
                 .addComponent(lightingAngleLabel)
-                .addComponent(lightingStrengthLabel));
+                .addComponent(lightingStrengthLabel)
+                .addComponent(specularBrightnessLabel)
+                .addComponent(specularIntensityLabel)
+                .addComponent(ambientIntensityLabel));
 
         hGroup.addGroup(layout.createParallelGroup()
                 .addComponent(lightingAngleValue)
-                .addComponent(lightingStrengthValue));
+                .addComponent(lightingStrengthValue)
+                .addComponent(specularBrightnessValue)
+                .addComponent(specularIntensityValue)
+                .addComponent(ambientIntensityValue));
 
         hGroup.addGroup(layout.createParallelGroup()
                 .addComponent(lightingAngleSlider)
                 .addComponent(lightingStrengthSlider)
+                .addComponent(specularBrightnessSlider)
+                .addComponent(specularIntensitySlider)
+                .addComponent(ambientIntensitySlider)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addComponent(loadButton)
@@ -114,6 +147,21 @@ public class LightingChanger extends JPanel{
                 .addComponent(lightingStrengthSlider));
 
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(specularBrightnessLabel)
+                .addComponent(specularBrightnessValue)
+                .addComponent(specularBrightnessSlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(specularIntensityLabel)
+                .addComponent(specularIntensityValue)
+                .addComponent(specularIntensitySlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(ambientIntensityLabel)
+                .addComponent(ambientIntensityValue)
+                .addComponent(ambientIntensitySlider));
+
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(saveButton)
                 .addComponent(loadButton)
                 .addComponent(cancelButton));
@@ -132,7 +180,7 @@ public class LightingChanger extends JPanel{
 
     public void updateData()
     {
-        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider).toList();
+        List<JSlider> sliders = Stream.of(lightingAngleSlider, lightingStrengthSlider, specularBrightnessSlider, specularIntensitySlider, ambientIntensitySlider).toList();
         List<Supplier<Float>> getters = new ArrayList<>(
                 Arrays.asList(chunkProvider::getLightingAngle,
                         chunkProvider::getLightingStrength));

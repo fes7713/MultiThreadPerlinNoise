@@ -13,10 +13,10 @@ import java.util.stream.Stream;
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener, MouseWheelListener {
     private final ChunkProvider chunkProvider;
     private final ColorProvider colorProvider;
-    private NoiseChunkGroup mainGroup;
-    private NoiseChunkGroup verticalEdgeGroup;
-    private NoiseChunkGroup horizontalEdgeGroup;
-    private NoiseChunkGroup cornerGroup;
+    private final NoiseChunkGroup mainGroup;
+    private final NoiseChunkGroup verticalEdgeGroup;
+    private final NoiseChunkGroup horizontalEdgeGroup;
+    private final NoiseChunkGroup cornerGroup;
 
     private int startX;
     private int startY;

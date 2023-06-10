@@ -10,7 +10,7 @@ public class MainFrame {
         JFrame frame = new JFrame("New Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        NoiseMapPanel panel = new NoiseMapPanel(2, 2) ;
+        NoiseMapPanel panel = new NoiseMapPanel(1, 1) ;
         OverlayLayout layout = new OverlayLayout(panel);
         panel.setLayout(layout);
         panel.showLightingChanger();

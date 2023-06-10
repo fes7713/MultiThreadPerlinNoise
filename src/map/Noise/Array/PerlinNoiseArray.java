@@ -150,8 +150,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for (int j = 0; j < height - 1; j++) {
 //                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
                 float normal = lightIntensity(
-                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 4096,
-                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 4096,
+                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]) * 4096,
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]) * 4096,
                         light);
                 normalMap[i][j] = normal;
             }
@@ -170,12 +170,16 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         Vector3f light = new Vector3f(
                 chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
+
+        int specularBrightness = chunkProvider.getSpecularBrightness();
+        int specularIntensity = chunkProvider.getSpecularIntensity();
+
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
                 float specular = specularIntensity(
-                        zoom, 0, (noiseMap[i + 1][j] - noiseMap[i][j]) * 20,
-                        0, zoom, (noiseMap[i][j + 1] - noiseMap[i][j]) * 20,
-                        light);
+                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]) * specularBrightness,
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]) * specularBrightness,
+                        light, specularIntensity);
                 specularMap[i][j] = specular;
             }
         }
@@ -248,7 +252,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
-        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
+//        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
+        return 0.6*noise + 0.2;
+//        return NOISE_COEFFICIENT*noise + NOISE_SHIFT;
     }
 
     public void convertData()
@@ -277,22 +283,41 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for (int j = 0; j < height; j++) {
 
                 fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-                int color = colors[
-                        length/2
-                        ][
-                        (int)(convNoiseMap[i][j]  * fallOff)
-                        ];
+//                int color = colors[
+//                        length/2
+//                        ][
+//                        (int)(convNoiseMap[i][j]  * fallOff)
+//                        ];
+                int color;
+
+                if(convNoiseMap[i][j] * fallOff < 0)
+                {
+                    color = colors[length/2][0];
+                }
+                else if(convNoiseMap[i][j] * fallOff < colors[length/2].length)
+                {
+                    color = colors[length/2][(int)(convNoiseMap[i][j] * fallOff)];
+                }
+                else{
+                    color = colors[length/2][colors[length/2].length - 1];
+                }
+
+
                 Color c = new Color(color);
-                Color c1 = new Color(
-                        (int)Math.max(c.getRed() * normalMap[i][j], 0),
-                        (int)Math.max(c.getGreen() * normalMap[i][j], 0),
-                        (int)Math.max(c.getBlue() * normalMap[i][j], 0)
+
+                // Diffusion
+                Vector3f c1 = new Vector3f(
+                        c.getRed() * normalMap[i][j],
+                        c.getGreen() * normalMap[i][j],
+                        c.getBlue() * normalMap[i][j]
                 );
 
-                Color c2 = new Color(
-                        (int)Math.min(c1.getRed() + c.getRed() * 0.1, 255),
-                        (int)Math.min(c1.getGreen() + c.getGreen() * 0.1, 255),
-                        (int)Math.min(c1.getBlue() + c.getBlue() * 0.1, 255)
+                float ambientIntensity = chunkProvider.getAmbientIntensity();
+                // Ambient
+                Vector3f c2 = new Vector3f(
+                        c1.x + c.getRed() * ambientIntensity,
+                        c1.y + c.getGreen() * ambientIntensity,
+                        c1.z + c.getBlue() * ambientIntensity
                 );
 
 //                Color c3 = new Color(
@@ -301,12 +326,17 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //                        (int)Math.min(c2.getBlue() + 255 * convSpecularMap[i][j], 255)
 //                );
 
-                Color c3 = new Color(
-                        (int)Math.min(c2.getRed() + c.getRed() * specularMap[i][j], 255),
-                        (int)Math.min(c2.getGreen() + c.getGreen() * specularMap[i][j], 255),
-                        (int)Math.min(c2.getBlue() + c.getBlue() * specularMap[i][j], 255)
+                Vector3f c3 = new Vector3f(
+                        c2.x + c.getRed() * specularMap[i][j],
+                        c2.y + c.getGreen() * specularMap[i][j],
+                        c2.z + c.getBlue() * specularMap[i][j]
                 );
 
+                Color c4 = new Color(
+                        (int)Math.min(c3.x, 255),
+                        (int)Math.min(c3.y, 255),
+                        (int)Math.min(c3.z, 255)
+                );
 //                Color c3 = new Color(
 //                        c2.getRed() + (int)Math.max(-c.getRed() * convNormalMap[i][j] * 0.1, 0),
 //                        c2.getGreen() + (int)Math.max(-c.getGreen() * convNormalMap[i][j] * 0.1, 0),
@@ -320,7 +350,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //                        (int)(convNoiseMap[i][j]  * fallOff)
 //                        ]);
 
-                bi.setRGB(i, j, c3.getRGB());
+                bi.setRGB(i, j, c4.getRGB());
             }
         }
         if(pi != null)
@@ -348,48 +378,20 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         float c2 = b1 * a3 - b3 * a1;
         float c3 = a1 * b2 - a2 * b1;
 
-        return (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+        float intensity = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+        if(intensity < 0)
+            return 0;
+        return intensity;
     }
 
-    public static float specularIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light)
+    public static float specularIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light, int specularIntensity)
     {
         final float c1 = a2 * b3 - a3 * b2;
         final float c2 = b1 * a3 - b3 * a1;
         final float c3 = a1 * b2 - a2 * b1;
-
-        //light.dot(normal);
-//        float alpha = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
-//
-////        normal.scale(2);
-////        normal.scale(alpha);
-////        normal.sub(light);
-//
-//        c1 = c1 * 2 * alpha - light.x;
-//        c2 = c2 * 2 * alpha - light.y;
-//        c3 = c3 * 2 * alpha - light.z;
 //
         Vector3f camera = new Vector3f(0, 0, -1);
-//
-//        //normal.dot(camera);
-//        float specularDot = (float)((c1 * camera.x + c2 * camera.y + c3 * camera.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
-//        int intensitySpecular = 9;
-//
-//        if(specularDot < 0)
-//            return 0;
-//        return (float)Math.pow(specularDot, intensitySpecular);
-//        Vector3f lightNegative = new Vector3f(-light.x, -light.y, -light.z);
         float normalLength = (float)Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3);
-//        float LightNegativeNormalDot = lightNegative.x * c1 + lightNegative.y * c2 + lightNegative.z * c3;
-//
-//        float coefficient = LightNegativeNormalDot / (normalLength * normalLength);
-//        Vector3f adjustedNormal = new Vector3f(c1 * coefficient, c2 * coefficient, c3 * coefficient);
-//        Vector3f reflected = new Vector3f(light.x + 2 * adjustedNormal.x, light.y + 2 * adjustedNormal.y, light.z + 2 * adjustedNormal.z);
-//
-//        float specularDot = (float)((reflected.x * camera.x + reflected.y * camera.y + reflected.z * camera.z)
-//                /
-//                (Math.sqrt(reflected.x * reflected.x + reflected.y * reflected.y + reflected.z * reflected.z)));
-
-        // r = f - 2 Dot (f, n_normal)* n_normal
 
         Vector3f normalNormalised = new Vector3f(c1 / normalLength, c2 / normalLength, c3 / normalLength);
         float lightNormalNormalizedDot = light.x * normalNormalised.x + light.y * normalNormalised.y + light.z * normalNormalised.z;
@@ -403,11 +405,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 /
                 (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
 
-        int intensitySpecular = 15;
-
         if(specularDot1 < 0)
             return 0;
-        return (float)Math.pow(specularDot1, intensitySpecular);
+        return (float)Math.pow(specularDot1, specularIntensity);
     }
 
     public static void main(String[] args)
@@ -417,22 +417,20 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         ChunkProvider chunkProvider = new ChunkProvider(colorProvider, null);
         VariableChanger vc = new VariableChanger(chunkProvider, null);
         vc.loadVariable();
-        PerlinNoiseArray array = new PerlinNoiseArray(chunkProvider, colorProvider, new FastNoise(), -500, -500, 4000, 2000, 0.1F, 500, 500);
+        PerlinNoiseArray array = new PerlinNoiseArray(chunkProvider, colorProvider, new FastNoise(), -500, -500, 100, 100, 1, 500, 500);
         int resolutionMin = chunkProvider.getResolutionMin();
         int resolutionMax = chunkProvider.getResolutionMax();
 
         if(Thread.interrupted())
             return;
         array.initNoiseMap(resolutionMin);
-        array.generateNormalMap();
-        array.updateImage(null);
 
         for (int i = resolutionMin + 1; i < resolutionMax + 4; i++) {
             array.increaseResolution((float)Math.pow(2, i));
-            array.updateImage(null);
-            array.generateNormalMap();
-
         }
+        array.generateNormalMap();
+        array.updateImage(null);
+
         File outputfile = new File("image.png");
         try {
             ImageIO.write(array.bi, "png", outputfile);

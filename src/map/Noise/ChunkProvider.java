@@ -40,6 +40,11 @@ public class ChunkProvider {
     private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Z = -1;
 
+    private int SPECULAR_BRIGHTNESS = 100;
+    private int SPECULAR_INTENSITY = 6;
+
+    private float AMBIENT_INTENSITY = 0.2F;
+
     private int RESOLUTION_MIN = -3;
     private int RESOLUTION_MAX = 14;
 
@@ -258,6 +263,36 @@ public class ChunkProvider {
 
     public float getLightingZ() {
         return LIGHTING_Z;
+    }
+
+    public int getSpecularBrightness()
+    {
+        return SPECULAR_BRIGHTNESS;
+    }
+
+    public void setSpecularBrightness(float brightness)
+    {
+        SPECULAR_BRIGHTNESS = (int)brightness;
+    }
+
+    public int getSpecularIntensity()
+    {
+        return SPECULAR_INTENSITY;
+    }
+
+    public void setSpecularIntensity(float intensity)
+    {
+        SPECULAR_INTENSITY = (int)intensity;
+    }
+
+    public float getAmbientIntensity()
+    {
+        return AMBIENT_INTENSITY;
+    }
+
+    public void setAmbientIntensity(float intensity)
+    {
+        AMBIENT_INTENSITY = intensity;
     }
 
     public int getResolutionMin() {
