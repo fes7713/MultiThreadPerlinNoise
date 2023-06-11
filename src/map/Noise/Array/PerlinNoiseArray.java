@@ -22,6 +22,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private float[][] normalMap;
     private float[][] convNoiseMap;
     private float[][] fallOffMap;
+    private float[][] diffusionMap;
     private float[][] specularMap;
 
     private float left;
@@ -51,6 +52,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
         noiseMap = new float[width][height];
         normalMap = new float[width][height];
+        diffusionMap = new float[width][height];
         specularMap = new float[width][height];
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
@@ -144,15 +146,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public void generateNormalMap()
     {
         convertData();
-        Vector3f light = new Vector3f(
-                chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
 //                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
-                float normal = lightIntensity(
-                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]) * 4096,
-                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]) * 4096,
-                        light);
+                float normal = normalIntensity(
+                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]));
                 normalMap[i][j] = normal;
             }
         }
@@ -163,7 +162,32 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < height; i++)
             normalMap[width - 1][i] = normalMap[width - 2][i];
 
+        generateDiffusionMap();
         generateSpecularMap();
+    }
+
+    public void generateDiffusionMap()
+    {
+        Vector3f light = new Vector3f(
+                chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
+        double lightLength = Math.sqrt(light.x * light.x + light.y * light.y + light.z * light.z);
+
+        for(int i = 0; i < width - 1; i++) {
+            for (int j = 0; j < height - 1; j++) {
+//                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
+                float diffusion = diffusionIntensity(
+                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]),
+                        light, lightLength);
+                diffusionMap[i][j] = diffusion;
+            }
+        }
+
+        for(int i = 0; i < width; i++)
+            diffusionMap[i][height - 1] = diffusionMap[i][height - 2];
+
+        for(int i = 0; i < height; i++)
+            diffusionMap[width - 1][i] = diffusionMap[width - 2][i];
     }
 
     public void generateSpecularMap()
@@ -177,8 +201,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
                 float specular = specularIntensity(
-                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]) * specularBrightness,
-                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]) * specularBrightness,
+                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]),
                         light, specularIntensity);
                 specularMap[i][j] = specular;
             }
@@ -254,7 +278,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
 //        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
 //        return 0.6*noise + 0.2;
-        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
+//        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
+//        return Math.abs(NOISE_COEFFICIENT * Math.pow(noise, 3)) + Math.abs(NOISE_COEFFICIENT * noise);
+        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * (noise))) - 1) + NOISE_SHIFT) * 100;
     }
 
     public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
@@ -294,7 +320,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
-                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
+                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j] / 100;
 
                 int heightIndex;
 
@@ -312,15 +338,15 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
                 int colorIndex;
 
-                double normal = convertNormal(normalMap[i][j], chunkProvider.getNormalCoefficient(), chunkProvider.getNormalShift());
+//                double normal = convertNormal(normalMap[i][j], chunkProvider.getNormalCoefficient(), chunkProvider.getNormalShift());
 
-                if(normal < 0)
+                if(normalMap[i][j] < 0)
                 {
                     colorIndex = 0;
                 }
-                else if(normal < 1)
+                else if(normalMap[i][j] < 1)
                 {
-                    colorIndex = (int)(normal * colors[0].length);
+                    colorIndex = (int)(normalMap[i][j] * colors[0].length);
                 }
                 else{
                     colorIndex = colors[0].length - 1;
@@ -332,9 +358,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
                 // Diffusion
                 Vector3f c1 = new Vector3f(
-                        c.getRed() * normalMap[i][j],
-                        c.getGreen() * normalMap[i][j],
-                        c.getBlue() * normalMap[i][j]
+                        c.getRed() * diffusionMap[i][j],
+                        c.getGreen() * diffusionMap[i][j],
+                        c.getBlue() * diffusionMap[i][j]
                 );
 
                 float ambientIntensity = chunkProvider.getAmbientIntensity();
@@ -344,6 +370,12 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         c1.y + c.getGreen() * ambientIntensity,
                         c1.z + c.getBlue() * ambientIntensity
                 );
+
+//                Vector3f c2 = new Vector3f(
+//                        c.getRed() + c.getRed() * ambientIntensity,
+//                        c.getGreen() + c.getGreen() * ambientIntensity,
+//                        c.getBlue() + c.getBlue() * ambientIntensity
+//                );
 
                 Vector3f c3 = new Vector3f(
                         c2.x + c.getRed() * specularMap[i][j],
@@ -358,6 +390,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 );
 
                 bi.setRGB(i, j, c4.getRGB());
+//                bi.setRGB(i, j, color);
             }
         }
         if(pi != null)
@@ -379,13 +412,23 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return bi;
     }
 
-    public static float lightIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light)
+    public static float normalIntensity(float a1, float a2, float a3, float b1, float b2, float b3)
     {
         float c1 = a2 * b3 - a3 * b2;
         float c2 = b1 * a3 - b3 * a1;
         float c3 = a1 * b2 - a2 * b1;
 
-        float intensity = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+        Vector3f vertical = new Vector3f(0, 0, 1);
+        return (float)((c1 * vertical.x + c2 * vertical.y + c3 * vertical.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+    }
+
+    public static float diffusionIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light, double lightLength)
+    {
+        float c1 = a2 * b3 - a3 * b2;
+        float c2 = b1 * a3 - b3 * a1;
+        float c3 = a1 * b2 - a2 * b1;
+
+        float intensity = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)) / lightLength);
 //        if(intensity < 0)
 //            return 0;
         return intensity;

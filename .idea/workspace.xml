@@ -10,25 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Rigged terrain">
-      <change afterPath="$PROJECT_DIR$/presets/Fuji.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongJungle.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/Fuji.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/RidggedRealisticTerrain.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/null.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/null.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ChunkLackTest" />
+        <entry key="$PROJECT_DIR$" value="RiggedTerrain" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -158,8 +150,8 @@
       <list>
         <item itemvalue="Application.MainFrame" />
         <item itemvalue="Application.PerlinNoiseArray" />
-        <item itemvalue="Application.LightingChanger" />
         <item itemvalue="Application.MapEditor" />
+        <item itemvalue="Application.LightingChanger" />
         <item itemvalue="Application.JDesktopPaneTest9" />
       </list>
     </recent_temporary>
@@ -590,7 +582,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="RiggedTerrain" />
                       </list>
                     </value>
                   </entry>
@@ -636,13 +628,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>440</line>
+          <line>483</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>273</line>
-          <option name="timeStamp" value="41" />
+          <line>342</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>359</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

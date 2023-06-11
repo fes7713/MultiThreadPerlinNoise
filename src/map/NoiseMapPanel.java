@@ -34,7 +34,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private int mouseX;
     private int mouseY;
 
-    private static int DEFAULT_COLOR_LEVEL = 256;
+    private static final int DEFAULT_COLOR_LEVEL = 256;
     private static final int CHUNK_SIZE = 5;
     private static final float ZOOM_RATIO = 2;
 
@@ -44,6 +44,9 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private static final int DEFAULT_CENTERY = 0;
     private static final int DEFAULT_MAP_WIDTH = 4000;
     private static final int DEFAULT_MAP_HEIGHT = 4000;
+
+    private static final int CANVAS_WIDTH = 100;
+    private static final int CANVAS_HEIGHT = 200;
 
     private float centerX;
     private float centerY;
