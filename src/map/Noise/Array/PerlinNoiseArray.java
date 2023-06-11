@@ -280,7 +280,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return 0.6*noise + 0.2;
 //        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
 //        return Math.abs(NOISE_COEFFICIENT * Math.pow(noise, 3)) + Math.abs(NOISE_COEFFICIENT * noise);
-        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * (noise))) - 1) + NOISE_SHIFT) * 100;
+        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * (noise))) - 1) + NOISE_SHIFT) * chunkProvider.getSpecularBrightness();
     }
 
     public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
@@ -320,7 +320,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         for(int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
-                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j] / 100;
+                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j] / chunkProvider.getSpecularBrightness();
 
                 int heightIndex;
 

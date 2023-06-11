@@ -10,18 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Rigged terrain">
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/RiggedTerrain2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presets/null.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/null.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

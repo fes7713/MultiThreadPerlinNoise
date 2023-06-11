@@ -61,7 +61,7 @@ public class LightingChanger extends JPanel{
         this.add(lightingAngleSlider);
         lightingStrengthSlider = new JSlider(JSlider.HORIZONTAL, -5 * precision, 5 * precision, (int)(chunkProvider.getLightingStrength() * precision));
         this.add(lightingStrengthSlider);
-        specularBrightnessSlider = new JSlider(JSlider.HORIZONTAL, 0, 200 * precision, (int)(chunkProvider.getSpecularBrightness() * precision));
+        specularBrightnessSlider = new JSlider(JSlider.HORIZONTAL, 0, 400 * precision, (int)(chunkProvider.getSpecularBrightness() * precision));
         this.add(specularBrightnessSlider);
         specularIntensitySlider = new JSlider(JSlider.HORIZONTAL, 0, 50 * precision, (int)(chunkProvider.getSpecularIntensity() * precision));
         this.add(specularIntensitySlider);
