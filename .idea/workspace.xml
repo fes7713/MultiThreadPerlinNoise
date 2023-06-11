@@ -9,27 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Rigged terrain">
-      <change afterPath="$PROJECT_DIR$/presets/Fuji.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/Fuji3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongColorShadow3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongDesert2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongJungle.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/Fuji.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/RidggedRealisticTerrain.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Steepness color change">
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,14 +209,7 @@
       <workItem from="1686146267162" duration="4745000" />
       <workItem from="1686189583392" duration="8160000" />
       <workItem from="1686361909003" duration="17410000" />
-      <workItem from="1686456456230" duration="1535000" />
-    </task>
-    <task id="LOCAL-00100" summary="fall off map">
-      <created>1672754602178</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1672754602178</updated>
+      <workItem from="1686456456230" duration="1969000" />
     </task>
     <task id="LOCAL-00101" summary="replaced limit system to center and length system">
       <created>1672758594172</created>
@@ -573,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686408910290</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="Steepness color change">
+      <created>1686478032342</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1686478032342</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +585,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="startLeft = startLeft * zoom" />
     <MESSAGE value="Zoom Blank Chunk Bug Fix" />
     <MESSAGE value="fallOff speed update" />
     <MESSAGE value="2 layers of cloud" />
@@ -629,19 +609,20 @@
     <MESSAGE value="Code clean up pushMask method removed. convNormalMap removed" />
     <MESSAGE value="Phong shading done." />
     <MESSAGE value="Rigged terrain" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rigged terrain" />
+    <MESSAGE value="Steepness color change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Steepness color change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>440</line>
+          <line>445</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>273</line>
+          <line>278</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>

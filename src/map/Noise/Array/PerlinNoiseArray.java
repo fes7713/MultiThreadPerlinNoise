@@ -121,11 +121,16 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public void initNoiseMap(float resolution)
     {
+        float coefficient = chunkProvider.getNoiseCoefficient();
+        float shift = chunkProvider.getNoiseShift();
+
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
+                noiseMap[i][j] = - coefficient *
+                        Math.abs(fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution)
+                        + shift;
             }
         }
     }
@@ -253,8 +258,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
 //        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
-//        return 0.6*noise + 0.2;
-        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
+        return 0.6*noise + 0.2;
+//        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
     }
 
     public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
