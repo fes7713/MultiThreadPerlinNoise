@@ -257,6 +257,18 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
     }
 
+    public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
+    {
+//        float t = 2.5F;
+//        int p = 52;
+//        int s = 32;
+//        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
+//        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
+//        return (float)(Math.atan(normal) / Math.PI + 0.5);
+//        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
+        return NORMAL_COEFFICIENT * (normal + NORMAL_SHIFT);
+    }
+
     public void convertData()
     {
         float NOISE_COEFFICIENT = chunkProvider.getNoiseCoefficient();
@@ -283,24 +295,38 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
             for (int j = 0; j < height; j++) {
 
                 fallOff = length * fallOffMap[i][j] * fallOffMap[i][j];
-//                int color = colors[
-//                        length/2
-//                        ][
-//                        (int)(convNoiseMap[i][j]  * fallOff)
-//                        ];
-                int color;
+
+                int heightIndex;
 
                 if(convNoiseMap[i][j] * fallOff < 0)
                 {
-                    color = colors[length/2][0];
+                    heightIndex = 0;
                 }
-                else if(convNoiseMap[i][j] * fallOff < colors[length/2].length)
+                else if(convNoiseMap[i][j] * fallOff < colors[0].length)
                 {
-                    color = colors[length/2][(int)(convNoiseMap[i][j] * fallOff)];
+                    heightIndex = (int)(convNoiseMap[i][j] * fallOff);
                 }
                 else{
-                    color = colors[length/2][colors[length/2].length - 1];
+                    heightIndex = colors[0].length - 1;
                 }
+
+                int colorIndex;
+
+                double normal = convertNormal(normalMap[i][j], chunkProvider.getNormalCoefficient(), chunkProvider.getNormalShift());
+
+                if(normal < 0)
+                {
+                    colorIndex = 0;
+                }
+                else if(normal < 1)
+                {
+                    colorIndex = (int)(normal * colors[0].length);
+                }
+                else{
+                    colorIndex = colors[0].length - 1;
+                }
+
+                int color = colors[colorIndex][heightIndex];
 
                 Color c = new Color(color);
 

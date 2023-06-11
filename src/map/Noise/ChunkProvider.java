@@ -28,7 +28,7 @@ public class ChunkProvider {
     private float NOISE_COEFFICIENT = 4F;
     private float NOISE_SHIFT = 0;
     private float NORMAL_COEFFICIENT = 0.03F;
-    private float NORMAL_SHIFT = 125;
+    private float NORMAL_SHIFT = 0;
 
     private float MASK_SIZE = 20;
     private float MASK_SHADOW = 2F;
