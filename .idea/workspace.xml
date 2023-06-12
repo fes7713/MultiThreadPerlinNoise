@@ -574,7 +574,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="PhongShadingSpeedup" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -620,7 +620,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>471</line>
+          <line>493</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

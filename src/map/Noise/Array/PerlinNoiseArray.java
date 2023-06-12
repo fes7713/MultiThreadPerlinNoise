@@ -402,7 +402,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     {
         float a = 1;
         for(int i = 0; i < n; i++)
-            a *= n;
+            a *= p;
         return a;
     }
 
