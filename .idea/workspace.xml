@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Specular shading calc fixed">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fixed pow calc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
     </list>
@@ -213,13 +213,6 @@
       <workItem from="1686456456230" duration="1535000" />
       <workItem from="1686509936366" duration="405000" />
       <workItem from="1686537735149" duration="2448000" />
-    </task>
-    <task id="LOCAL-00103" summary="map editor code fix">
-      <created>1672762765155</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1672762765156</updated>
     </task>
     <task id="LOCAL-00104" summary="Map editor done">
       <created>1672763040098</created>
@@ -557,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686539544831</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="fixed pow calc">
+      <created>1686553868580</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1686553868580</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +588,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2 layers of cloud" />
     <MESSAGE value="ResuableChunkKeeper validation" />
     <MESSAGE value="Package" />
     <MESSAGE value="setCenter" />
@@ -613,25 +612,21 @@
     <MESSAGE value="Lighting constants adjusted." />
     <MESSAGE value="Dot and cross product methods replacing the redundant codes" />
     <MESSAGE value="Specular shading calc fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Specular shading calc fixed" />
+    <MESSAGE value="fixed pow calc" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed pow calc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>493</line>
+          <line>441</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>321</line>
+          <line>318</line>
           <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>338</line>
-          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
