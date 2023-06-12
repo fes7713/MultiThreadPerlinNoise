@@ -398,6 +398,15 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return new Vector3f(c1, c2, c3);
     }
 
+    public static float pow(float p, int n)
+    {
+        float a = 1;
+        for(int i = 0; i < n; i++)
+            a *= n;
+        return a;
+    }
+
+
     public static float normalIntensity(Vector3f normal, float normalLength)
     {
         Vector3f vertical = new Vector3f(0, 0, 1);
@@ -429,7 +438,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
 //        if(specularDot1 < 0)
 //            return 0;
-        return (float)Math.pow(specularDot1, specularIntensity);
+        return pow(specularDot1, specularIntensity);
     }
 
     public static void main(String[] args)
