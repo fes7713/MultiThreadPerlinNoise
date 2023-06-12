@@ -186,13 +186,6 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         }
     }
 
-    public void generateDiffusionMap()
-    {
-    }
-
-    public void generateSpecularMap() {
-    }
-
     public void generateFallOffMap()
     {
         generateFallOffMap(0, 0, width, height);
