@@ -166,7 +166,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                 float diffusion = diffusionIntensity(normal, normalLength, light, lightLength);
                 diffusionMap[i][j] = diffusion;
 
-                float specular = specularIntensity(normal, normalLength, light, specularIntensity);
+                float specular = specularIntensity(normal, normalLength, light, lightLength, specularIntensity);
                 specularMap[i][j] = specular;
             }
         }
@@ -416,21 +416,23 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return dot(normal, light, normalLength, lightLength);
     }
 
-    public static float specularIntensity(Vector3f normal, float normalLength, Vector3f light, int specularIntensity)
+    public static float specularIntensity(Vector3f normal, float normalLength, Vector3f light, float lightLength, int specularIntensity)
     {
         Vector3f camera = new Vector3f(0, 0, -1);
 
         Vector3f normalNormalised = new Vector3f(normal.x / normalLength, normal.y / normalLength, normal.z / normalLength);
-        float lightNormalNormalizedDot = light.x * normalNormalised.x + light.y * normalNormalised.y + light.z * normalNormalised.z;
+        float lightNormalNormalizedDot = dot(light, normalNormalised, lightLength, 1);
+//                light.x * normalNormalised.x + light.y * normalNormalised.y + light.z * normalNormalised.z;
 
         Vector3f reflected1 = new Vector3f(
                 light.x - 2 * lightNormalNormalizedDot * normalNormalised.x,
                 light.y - 2 * lightNormalNormalizedDot * normalNormalised.y,
                 light.z - 2 * lightNormalNormalizedDot * normalNormalised.z);
 
-        float specularDot1 = (float)((reflected1.x * camera.x + reflected1.y * camera.y + reflected1.z * camera.z)
-                /
-                (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
+        float specularDot1 = dot(reflected1, camera, reflected1.length(), 1);
+//                (float)((reflected1.x * camera.x + reflected1.y * camera.y + reflected1.z * camera.z)
+//                /
+//                (Math.sqrt(reflected1.x * reflected1.x + reflected1.y * reflected1.y + reflected1.z * reflected1.z)));
 
 //        if(specularDot1 < 0)
 //            return 0;
