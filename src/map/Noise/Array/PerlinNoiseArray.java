@@ -146,72 +146,51 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     public void generateNormalMap()
     {
         convertData();
-        for(int i = 0; i < width - 1; i++) {
-            for (int j = 0; j < height - 1; j++) {
-//                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
-                float normal = normalIntensity(
-                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
-                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]));
-                normalMap[i][j] = normal;
-            }
-        }
-
-        for(int i = 0; i < width; i++)
-            normalMap[i][height - 1] = normalMap[i][height - 2];
-
-        for(int i = 0; i < height; i++)
-            normalMap[width - 1][i] = normalMap[width - 2][i];
-
-        generateDiffusionMap();
-        generateSpecularMap();
-    }
-
-    public void generateDiffusionMap()
-    {
         Vector3f light = new Vector3f(
                 chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
-        double lightLength = Math.sqrt(light.x * light.x + light.y * light.y + light.z * light.z);
-
-        for(int i = 0; i < width - 1; i++) {
-            for (int j = 0; j < height - 1; j++) {
-//                System.out.println((noiseMap[i + 1][j] - noiseMap[i][j]) * 4096);
-                float diffusion = diffusionIntensity(
-                        zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
-                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]),
-                        light, lightLength);
-                diffusionMap[i][j] = diffusion;
-            }
-        }
-
-        for(int i = 0; i < width; i++)
-            diffusionMap[i][height - 1] = diffusionMap[i][height - 2];
-
-        for(int i = 0; i < height; i++)
-            diffusionMap[width - 1][i] = diffusionMap[width - 2][i];
-    }
-
-    public void generateSpecularMap()
-    {
-        Vector3f light = new Vector3f(
-                chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
-
+        float lightLength = light.length();
         int specularBrightness = chunkProvider.getSpecularBrightness();
         int specularIntensity = chunkProvider.getSpecularIntensity();
 
         for(int i = 0; i < width - 1; i++) {
             for (int j = 0; j < height - 1; j++) {
-                float specular = specularIntensity(
+                Vector3f normal = cross(
                         zoom, 0, (convNoiseMap[i + 1][j] - convNoiseMap[i][j]),
-                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]),
-                        light, specularIntensity);
+                        0, zoom, (convNoiseMap[i][j + 1] - convNoiseMap[i][j]));
+
+                float normalLength = normal.length();
+
+                float normalDot = normalIntensity(normal, normalLength);
+                normalMap[i][j] = normalDot;
+
+                float diffusion = diffusionIntensity(normal, normalLength, light, lightLength);
+                diffusionMap[i][j] = diffusion;
+
+                float specular = specularIntensity(normal, normalLength, light, specularIntensity);
                 specularMap[i][j] = specular;
             }
         }
+
         for(int i = 0; i < width; i++)
+        {
+            normalMap[i][height - 1] = normalMap[i][height - 2];
+            diffusionMap[i][height - 1] = diffusionMap[i][height - 2];
             specularMap[i][height - 1] = specularMap[i][height - 2];
+        }
 
         for(int i = 0; i < height; i++)
+        {
+            normalMap[width - 1][i] = normalMap[width - 2][i];
+            diffusionMap[width - 1][i] = diffusionMap[width - 2][i];
             specularMap[width - 1][i] = specularMap[width - 2][i];
+        }
+    }
+
+    public void generateDiffusionMap()
+    {
+    }
+
+    public void generateSpecularMap() {
     }
 
     public void generateFallOffMap()
@@ -412,38 +391,36 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return bi;
     }
 
-    public static float normalIntensity(float a1, float a2, float a3, float b1, float b2, float b3)
+    public static float dot(Vector3f a, Vector3f b, float aLength, float bLength)
     {
-        float c1 = a2 * b3 - a3 * b2;
-        float c2 = b1 * a3 - b3 * a1;
-        float c3 = a1 * b2 - a2 * b1;
-
-        Vector3f vertical = new Vector3f(0, 0, 1);
-        return (float)((c1 * vertical.x + c2 * vertical.y + c3 * vertical.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)));
+        return (a.x * b.x + a.y * b.y + a.z * b.z) / aLength / bLength;
     }
 
-    public static float diffusionIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light, double lightLength)
-    {
-        float c1 = a2 * b3 - a3 * b2;
-        float c2 = b1 * a3 - b3 * a1;
-        float c3 = a1 * b2 - a2 * b1;
-
-        float intensity = (float)((c1 * light.x + c2 * light.y + c3 * light.z) / (Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3)) / lightLength);
-//        if(intensity < 0)
-//            return 0;
-        return intensity;
-    }
-
-    public static float specularIntensity(float a1, float a2, float a3, float b1, float b2, float b3, Vector3f light, int specularIntensity)
+    public static Vector3f cross(float a1, float a2, float a3, float b1, float b2, float b3)
     {
         final float c1 = a2 * b3 - a3 * b2;
         final float c2 = b1 * a3 - b3 * a1;
         final float c3 = a1 * b2 - a2 * b1;
-//
-        Vector3f camera = new Vector3f(0, 0, -1);
-        float normalLength = (float)Math.sqrt(c1 * c1 + c2 * c2 + c3 * c3);
 
-        Vector3f normalNormalised = new Vector3f(c1 / normalLength, c2 / normalLength, c3 / normalLength);
+        return new Vector3f(c1, c2, c3);
+    }
+
+    public static float normalIntensity(Vector3f normal, float normalLength)
+    {
+        Vector3f vertical = new Vector3f(0, 0, 1);
+        return (normal.x * vertical.x + normal.y * vertical.y + normal.z * vertical.z) / normalLength;
+    }
+
+    public static float diffusionIntensity(Vector3f normal, float normalLength, Vector3f light, float lightLength)
+    {
+        return dot(normal, light, normalLength, lightLength);
+    }
+
+    public static float specularIntensity(Vector3f normal, float normalLength, Vector3f light, int specularIntensity)
+    {
+        Vector3f camera = new Vector3f(0, 0, -1);
+
+        Vector3f normalNormalised = new Vector3f(normal.x / normalLength, normal.y / normalLength, normal.z / normalLength);
         float lightNormalNormalizedDot = light.x * normalNormalised.x + light.y * normalNormalised.y + light.z * normalNormalised.z;
 
         Vector3f reflected1 = new Vector3f(

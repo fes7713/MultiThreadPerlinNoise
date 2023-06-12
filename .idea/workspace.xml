@@ -9,13 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Rigged terrain">
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/PhongShadingMountain6.txt" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting constants adjusted.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="RiggedTerrain" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -215,13 +211,8 @@
       <workItem from="1686189583392" duration="8160000" />
       <workItem from="1686361909003" duration="17410000" />
       <workItem from="1686456456230" duration="1535000" />
-    </task>
-    <task id="LOCAL-00100" summary="fall off map">
-      <created>1672754602178</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1672754602178</updated>
+      <workItem from="1686509936366" duration="405000" />
+      <workItem from="1686537735149" duration="1424000" />
     </task>
     <task id="LOCAL-00101" summary="replaced limit system to center and length system">
       <created>1672758594172</created>
@@ -559,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686408910290</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="Lighting constants adjusted.">
+      <created>1686509426729</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1686509426729</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +588,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="startLeft = startLeft * zoom" />
     <MESSAGE value="Zoom Blank Chunk Bug Fix" />
     <MESSAGE value="fallOff speed update" />
     <MESSAGE value="2 layers of cloud" />
@@ -615,30 +612,31 @@
     <MESSAGE value="Code clean up pushMask method removed. convNormalMap removed" />
     <MESSAGE value="Phong shading done." />
     <MESSAGE value="Rigged terrain" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rigged terrain" />
+    <MESSAGE value="Lighting constants adjusted." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lighting constants adjusted." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>483</line>
+          <line>460</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>342</line>
+          <line>321</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>359</line>
+          <line>338</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1673165126209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MuthThreadParlinNoise$MainFrame.ic" NAME="MainFrame Coverage Results" MODIFIED="1686537881607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
