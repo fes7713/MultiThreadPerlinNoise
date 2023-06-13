@@ -9,9 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="fixed pow calc">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting constants adjusted and algorithm revised">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,20 +215,7 @@
       <workItem from="1686456456230" duration="1535000" />
       <workItem from="1686509936366" duration="405000" />
       <workItem from="1686537735149" duration="2448000" />
-    </task>
-    <task id="LOCAL-00104" summary="Map editor done">
-      <created>1672763040098</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1672763040098</updated>
-    </task>
-    <task id="LOCAL-00105" summary="All done">
-      <created>1672765503396</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1672765503397</updated>
+      <workItem from="1686638975130" duration="1658000" />
     </task>
     <task id="LOCAL-00106" summary="All done">
       <created>1672947030585</created>
@@ -557,7 +546,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686553868580</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="Lighting constants adjusted and algorithm revised">
+      <created>1686563639572</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1686563639572</updated>
+    </task>
+    <task id="LOCAL-00154" summary="Lighting constants adjusted and algorithm revised">
+      <created>1686571807601</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1686571807601</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ResuableChunkKeeper validation" />
     <MESSAGE value="Package" />
     <MESSAGE value="setCenter" />
     <MESSAGE value="setCenterY bug fixed" />
@@ -613,20 +615,16 @@
     <MESSAGE value="Dot and cross product methods replacing the redundant codes" />
     <MESSAGE value="Specular shading calc fixed" />
     <MESSAGE value="fixed pow calc" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed pow calc" />
+    <MESSAGE value="Lighting constants adjusted and algorithm revised" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lighting constants adjusted and algorithm revised" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>441</line>
+          <line>418</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>318</line>
-          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -254,33 +254,14 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * noise)) - 1) + NOISE_SHIFT) * chunkProvider.getSpecularBrightness();
     }
 
-    public double convertNormal(float normal, float NORMAL_COEFFICIENT, float NORMAL_SHIFT)
-    {
-//        float t = 2.5F;
-//        int p = 52;
-//        int s = 32;
-//        return (int)(Math.atan((normal - t * p) / s) * t * s + t * p);
-//        return (int)(Math.atan((normal - 125) / 32F) * 80 + 125);
-//        return (float)(Math.atan(normal) / Math.PI + 0.5);
-//        return (float)(Math.atan( (normal - NORMAL_SHIFT) * NORMAL_COEFFICIENT) / Math.PI + 0.5);
-        return NORMAL_COEFFICIENT * (normal + NORMAL_SHIFT);
-    }
-
     public void convertData()
     {
         float NOISE_COEFFICIENT = chunkProvider.getNoiseCoefficient();
         float NOISE_SHIFT = chunkProvider.getNoiseShift();
 
-        for(int i = 0; i < width - 1; i++)
-            for(int j = 0; j < height - 1; j++)
-                convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
-
         for(int i = 0; i < width; i++)
-            convNoiseMap[i][height - 1] = (float)convertNoise(noiseMap[i][height - 1], NOISE_COEFFICIENT, NOISE_SHIFT);
-
-
-        for(int i = 0; i < height; i++)
-            convNoiseMap[width - 1][i] = (float)convertNoise(noiseMap[width - 1][i], NOISE_COEFFICIENT, NOISE_SHIFT);
+            for(int j = 0; j < height; j++)
+                convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
     }
 
     public void updateImage(PaintInterface pi)

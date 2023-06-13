@@ -40,8 +40,8 @@ public class ChunkProvider {
     private float LIGHTING_Y = LIGHTING_STRENGTH * (float)Math.sin(Math.toRadians(LIGHTING_ANGLE));
     private float LIGHTING_Z = -1;
 
-    private int SPECULAR_BRIGHTNESS = 300;
-    private int SPECULAR_INTENSITY = 2;
+    private int SPECULAR_BRIGHTNESS = 400;
+    private int SPECULAR_INTENSITY = 4;
 
     private float AMBIENT_INTENSITY = 0.1F;
 
