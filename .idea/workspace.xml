@@ -9,11 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting constants adjusted and algorithm revised">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code clean up and lighting constants changed">
+      <change afterPath="$PROJECT_DIR$/src/map/Cursor/CoordinateCursorGraphics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/Cursor/CursorGraphics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/Cursor/EmptyCursorGraphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,14 +217,7 @@
       <workItem from="1686456456230" duration="1535000" />
       <workItem from="1686509936366" duration="405000" />
       <workItem from="1686537735149" duration="2448000" />
-      <workItem from="1686638975130" duration="1658000" />
-    </task>
-    <task id="LOCAL-00106" summary="All done">
-      <created>1672947030585</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1672947030585</updated>
+      <workItem from="1686638975130" duration="9298000" />
     </task>
     <task id="LOCAL-00107" summary="All done">
       <created>1672948161439</created>
@@ -560,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686571807601</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="Code clean up and lighting constants changed">
+      <created>1686641267049</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1686641267050</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Package" />
     <MESSAGE value="setCenter" />
     <MESSAGE value="setCenterY bug fixed" />
     <MESSAGE value="coordinate conversion functions  added" />
@@ -616,7 +617,8 @@
     <MESSAGE value="Specular shading calc fixed" />
     <MESSAGE value="fixed pow calc" />
     <MESSAGE value="Lighting constants adjusted and algorithm revised" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lighting constants adjusted and algorithm revised" />
+    <MESSAGE value="Code clean up and lighting constants changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code clean up and lighting constants changed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

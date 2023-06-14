@@ -1,9 +1,13 @@
 package map;
 
+import map.Cursor.CoordinateCursorGraphics;
+import map.Cursor.CursorGraphics;
+import map.Cursor.EmptyCursorGraphics;
 import map.Noise.Array.LightingChanger;
 import map.Noise.ChunkProvider;
 import map.Noise.ColorProvider;
 import map.Noise.NoiseChunkGroup;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +15,26 @@ import java.awt.event.*;
 import java.util.stream.Stream;
 
 public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMotionListener, MouseListener, MouseWheelListener {
+    @NotNull
     private final ChunkProvider chunkProvider;
+    @NotNull
     private final ColorProvider colorProvider;
+    @NotNull
     private final NoiseChunkGroup mainGroup;
+    @NotNull
     private final NoiseChunkGroup verticalEdgeGroup;
+    @NotNull
     private final NoiseChunkGroup horizontalEdgeGroup;
+    @NotNull
     private final NoiseChunkGroup cornerGroup;
+
+    @NotNull
+    private CursorGraphics cursorGraphics;
+
+    @NotNull
+    private final VariableChanger vc;
+    @NotNull
+    private final MapEditor me;
 
     private int startX;
     private int startY;
@@ -53,9 +71,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private float mapWidth;
     private float mapHeight;
 
-    private final VariableChanger vc;
-    private final MapEditor me;
-//    private final Timer timer;
     public NoiseMapPanel()
     {
         this(1, 1);
@@ -93,7 +108,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setCenterY(centerY);
         moveCenter();
 
-
+        cursorGraphics = new EmptyCursorGraphics() {};
     }
 
     public void loadVariables(String fileName)
@@ -315,6 +330,14 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         setStartTop(startTop);
     }
 
+    public void hideCursorGraphics() {
+        this.cursorGraphics = new EmptyCursorGraphics() {};
+    }
+
+    public void showCursorGraphics() {
+        this.cursorGraphics = new CoordinateCursorGraphics() {};
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -349,8 +372,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
                 4);
 
         g2d.setColor(Color.WHITE);
-//        g2d.drawLine(mouseX, 0, mouseX, this.getHeight());
-//        g2d.drawLine(0, mouseY, this.getWidth(), mouseY);
 
         g2d.drawRect(
                 leftTopCornerX,
@@ -363,8 +384,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(0, this.getHeight(), leftTopCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), this.getHeight(), rightBottomCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), 0, rightBottomCornerX, leftTopCornerY);
-//
-//        g2d.drawString("(" + (int)getGameX(mouseX)   + ", " + (int)getGameY(mouseY) + ")", mouseX + 20, mouseY + 20);
+
+        cursorGraphics.drawCursor(g2d, 0, 0, zoom);
     }
 
     public void clearChunks()
@@ -498,7 +519,6 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         float zoom = getZoom();
         setStartLeft(startLeft + diffX * zoom);
         setStartTop(startTop + diffY * zoom);
-//        System.out.println(startLeft);
 
         updateChunkGroups();
     }
