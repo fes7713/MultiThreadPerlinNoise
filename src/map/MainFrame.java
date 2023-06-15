@@ -16,6 +16,7 @@ public class MainFrame {
         panel.showLightingChanger();
         panel.showVariableChanger();
         panel.showColorEditor();
+        panel.showCursorGraphics();
 
 //        NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
 //        NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;

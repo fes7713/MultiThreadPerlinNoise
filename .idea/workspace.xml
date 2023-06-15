@@ -9,12 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Code clean up and lighting constants changed">
-      <change afterPath="$PROJECT_DIR$/src/map/Cursor/CoordinateCursorGraphics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/Cursor/CursorGraphics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/Cursor/EmptyCursorGraphics.java" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="CursorGraphics design added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MuthThreadParlinNoise.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Cursor/CoordinateCursorGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Cursor/CoordinateCursorGraphics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Cursor/CursorGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Cursor/CursorGraphics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Cursor/EmptyCursorGraphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Cursor/EmptyCursorGraphics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -217,14 +217,8 @@
       <workItem from="1686456456230" duration="1535000" />
       <workItem from="1686509936366" duration="405000" />
       <workItem from="1686537735149" duration="2448000" />
-      <workItem from="1686638975130" duration="9298000" />
-    </task>
-    <task id="LOCAL-00107" summary="All done">
-      <created>1672948161439</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1672948161440</updated>
+      <workItem from="1686638975130" duration="12503000" />
+      <workItem from="1686789923824" duration="3293000" />
     </task>
     <task id="LOCAL-00108" summary="lighting changer">
       <created>1672950762456</created>
@@ -562,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686641267050</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="CursorGraphics design added">
+      <created>1686744237338</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1686744237338</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +594,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="setCenter" />
     <MESSAGE value="setCenterY bug fixed" />
     <MESSAGE value="coordinate conversion functions  added" />
     <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
@@ -618,7 +618,8 @@
     <MESSAGE value="fixed pow calc" />
     <MESSAGE value="Lighting constants adjusted and algorithm revised" />
     <MESSAGE value="Code clean up and lighting constants changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code clean up and lighting constants changed" />
+    <MESSAGE value="CursorGraphics design added" />
+    <option name="LAST_COMMIT_MESSAGE" value="CursorGraphics design added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

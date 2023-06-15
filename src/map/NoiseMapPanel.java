@@ -338,6 +338,10 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         this.cursorGraphics = new CoordinateCursorGraphics() {};
     }
 
+    public void setCursorGraphics(@NotNull CursorGraphics cursorGraphics){
+        this.cursorGraphics = cursorGraphics;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -385,7 +389,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
         g2d.drawLine(this.getWidth(), this.getHeight(), rightBottomCornerX, rightBottomCornerY);
         g2d.drawLine(this.getWidth(), 0, rightBottomCornerX, leftTopCornerY);
 
-        cursorGraphics.drawCursor(g2d, 0, 0, zoom);
+        cursorGraphics.drawCursor(g2d, mouseX, mouseY, (int)getGameX(mouseX), (int)getGameY(mouseY));
     }
 
     public void clearChunks()
