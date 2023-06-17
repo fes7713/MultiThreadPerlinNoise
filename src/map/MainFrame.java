@@ -30,7 +30,7 @@ public class MainFrame {
                   panel.setLightingTime(counter / 60, counter % 60);
                   System.out.println(counter / 60 % 24 +  " : " + counter % 60);
               }
-          }, 1000, 500);
+          }, 1000, 100);
 
 //        NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
 //        NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;

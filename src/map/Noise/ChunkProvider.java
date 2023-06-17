@@ -189,8 +189,8 @@ public class ChunkProvider {
 
     private void updateLighting()
     {
-        LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(-LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(-LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
+        LIGHTING_X = -(float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
+        LIGHTING_Y = -(float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
         LIGHTING_Z = -(float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ALTITUDE)));
     }
 
@@ -286,9 +286,7 @@ public class ChunkProvider {
 
     public void setLightingStrength(float lightingStrength) {
         LIGHTING_STRENGTH = lightingStrength;
-        LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Z = -(float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ALTITUDE)));
+        updateLighting();
     }
 
     public float getLightingX() {

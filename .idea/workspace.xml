@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Facade for lighting color">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting timer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,14 +217,7 @@
       <workItem from="1686638975130" duration="12503000" />
       <workItem from="1686789923824" duration="10854000" />
       <workItem from="1686954426286" duration="12341000" />
-      <workItem from="1687000199449" duration="5441000" />
-    </task>
-    <task id="LOCAL-00113" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
-      <created>1673075476240</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1673075476240</updated>
+      <workItem from="1687000199449" duration="6130000" />
     </task>
     <task id="LOCAL-00114" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
       <created>1673076356113</created>
@@ -564,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687000657260</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="Lighting timer">
+      <created>1687008913267</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1687008913267</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="setCenter function not image update bug fix" />
     <MESSAGE value="Low resolution center shift bug fix" />
     <MESSAGE value="merged" />
     <MESSAGE value="Chink reuse fix" />
@@ -620,7 +617,8 @@
     <MESSAGE value="Sun color with lighting angle" />
     <MESSAGE value="Lighting classes and night vision" />
     <MESSAGE value="Facade for lighting color" />
-    <option name="LAST_COMMIT_MESSAGE" value="Facade for lighting color" />
+    <MESSAGE value="Lighting timer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lighting timer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -629,6 +627,11 @@
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
           <line>426</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/MainFrame.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
