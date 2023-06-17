@@ -5,6 +5,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainFrame {
+    public static int counter = 0;
+
     public static void main(String[] argv)
     {
         JFrame frame = new JFrame("New Frame");
@@ -17,6 +19,18 @@ public class MainFrame {
 //        panel.showVariableChanger();
         panel.showColorEditor();
         panel.showCursorGraphics();
+        panel.setLightingTime(18, 0);
+
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+              @Override
+              public void run() {
+                  counter += 5;
+                  panel.setLightingTime(counter / 60, counter % 60);
+                  System.out.println(counter / 60 % 24 +  " : " + counter % 60);
+              }
+          }, 1000, 500);
 
 //        NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
 //        NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;

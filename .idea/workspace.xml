@@ -9,10 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting classes and night vision">
-      <change afterPath="$PROJECT_DIR$/presets/PhongDarkRed.txt" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Facade for lighting color">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/NoiseMapPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,14 +219,7 @@
       <workItem from="1686638975130" duration="12503000" />
       <workItem from="1686789923824" duration="10854000" />
       <workItem from="1686954426286" duration="12341000" />
-      <workItem from="1687000199449" duration="411000" />
-    </task>
-    <task id="LOCAL-00112" summary="Color provider singleton removed">
-      <created>1673068989554</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1673068989554</updated>
+      <workItem from="1687000199449" duration="5441000" />
     </task>
     <task id="LOCAL-00113" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
       <created>1673075476240</created>
@@ -563,7 +557,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686989429738</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="Facade for lighting color">
+      <created>1687000657259</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1687000657260</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +595,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Resolution control" />
     <MESSAGE value="setCenter function not image update bug fix" />
     <MESSAGE value="Low resolution center shift bug fix" />
     <MESSAGE value="merged" />
@@ -619,7 +619,8 @@
     <MESSAGE value="Lighting altitude" />
     <MESSAGE value="Sun color with lighting angle" />
     <MESSAGE value="Lighting classes and night vision" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lighting classes and night vision" />
+    <MESSAGE value="Facade for lighting color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Facade for lighting color" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

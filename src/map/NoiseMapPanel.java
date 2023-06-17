@@ -9,6 +9,7 @@ import map.Noise.ColorProvider;
 import map.Noise.LightingColor.NaturalTimeLightingColor;
 import map.Noise.LightingColor.WhiteLightingColor;
 import map.Noise.NoiseChunkGroup;
+import map.Noise.PaintInterface;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -73,6 +74,8 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private float mapWidth;
     private float mapHeight;
 
+    private float maxSunAltitude = 55;
+
     public NoiseMapPanel()
     {
         this(1, 1);
@@ -130,10 +133,19 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public void updateLighting()
     {
-        mainGroup.updateLighting(this::updateImage);
-        verticalEdgeGroup.updateLighting(this::updateImage);
-        horizontalEdgeGroup.updateLighting(this::updateImage);
-        cornerGroup.updateLighting(this::updateImage);
+        updateLighting(true);
+    }
+
+    public void updateLighting(boolean update)
+    {
+        PaintInterface pi = null;
+        if(update)
+            pi = this::updateImage;
+
+        mainGroup.updateLighting(pi);
+        verticalEdgeGroup.updateLighting(pi);
+        horizontalEdgeGroup.updateLighting(pi);
+        cornerGroup.updateLighting(pi);
     }
 
     public void updateImage()
@@ -352,6 +364,19 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     public void setNaturalLightingColor()
     {
         chunkProvider.setLightingColorPolicy(new NaturalTimeLightingColor());
+    }
+
+    public void setMaxSunAltitude(float maxSunAltitude) {
+        this.maxSunAltitude = maxSunAltitude;
+    }
+
+    public void setLightingTime(float hour_in_24, float minute)
+    {
+        float time = hour_in_24 % 24 + (minute % 60) / 60;
+        chunkProvider.setLightingAltitude((float)(maxSunAltitude * Math.sin(time * Math.PI / 12 - Math.PI / 2)));
+        chunkProvider.setLightingAngle(15 * (time - 12) - 90);
+        updateLighting(false);
+        updateImage();
     }
 
     @Override
