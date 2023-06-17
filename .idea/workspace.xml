@@ -9,9 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting altitude">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Sun color with lighting angle">
+      <change afterPath="$PROJECT_DIR$/src/map/Noise/LightingColor/LightingColorPolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/Noise/LightingColor/NaturalTimeLightingColor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/Noise/LightingColor/WhiteLightingColor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/null.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/null.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
@@ -217,14 +220,7 @@
       <workItem from="1686537735149" duration="2448000" />
       <workItem from="1686638975130" duration="12503000" />
       <workItem from="1686789923824" duration="10854000" />
-      <workItem from="1686954426286" duration="6730000" />
-    </task>
-    <task id="LOCAL-00110" summary="lighting changer angle and strength">
-      <created>1672952773185</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1672952773185</updated>
+      <workItem from="1686954426286" duration="11523000" />
     </task>
     <task id="LOCAL-00111" summary="Chunk provider singleton removed">
       <created>1673067536505</created>
@@ -562,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686815221512</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="Sun color with lighting angle">
+      <created>1686969834219</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1686969834219</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +596,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
     <MESSAGE value="Resize error fixed" />
     <MESSAGE value="Resolution control" />
     <MESSAGE value="setCenter function not image update bug fix" />
@@ -618,7 +620,8 @@
     <MESSAGE value="CursorGraphics design added" />
     <MESSAGE value="CursorGraphics implemented" />
     <MESSAGE value="Lighting altitude" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lighting altitude" />
+    <MESSAGE value="Sun color with lighting angle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sun color with lighting angle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

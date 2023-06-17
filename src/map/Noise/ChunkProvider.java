@@ -1,5 +1,9 @@
 package map.Noise;
 
+import map.Noise.LightingColor.LightingColorPolicy;
+import map.Noise.LightingColor.NaturalTimeLightingColor;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,9 +45,8 @@ public class ChunkProvider {
     private float LIGHTING_Y;
     private float LIGHTING_Z;
 
-    private float RED;
-    private float GREEN;
-    private float BLUE;
+    private LightingColorPolicy lightingColorPolicy;
+    private Color lightingColor;
 
     private int SPECULAR_BRIGHTNESS = 400;
     private int SPECULAR_INTENSITY = 4;
@@ -64,7 +67,6 @@ public class ChunkProvider {
         this.widthArrayDivider = widthArrayDivider;
         this.heightArrayDivider = heightArrayDivider;
         this.pi = pi;
-
         zoom = 1;
         loadedNoiseMap = new HashMap<>();
         keeper = new ReusableChunkKeeper();
@@ -77,7 +79,8 @@ public class ChunkProvider {
         arrayWidth = (int)(chunkWidth / widthArrayDivider);
         arrayHeight = (int)(chunkHeight / heightArrayDivider);
         updateLighting();
-        updateColor();
+        lightingColorPolicy = new NaturalTimeLightingColor();
+        lightingColor = lightingColorPolicy.generateColor(LIGHTING_ANGLE, LIGHTING_ALTITUDE);
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -184,26 +187,6 @@ public class ChunkProvider {
         }
     }
 
-    private void updateColor()
-    {
-        int a = 115;
-//        float red_in = 0.97F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 4) / 0.89F;
-//        RED = 1 - pow(pow(pow(red_in, 2), 2), 2);
-//        float green_in = 0.966F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 1.57F;
-//        GREEN = 1 - pow(pow(green_in, 3), 3);
-//        float blue_in = 0.994F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 10) / 20F;
-//        BLUE = 1 - pow(pow(blue_in, 9), 9);
-
-        float red_in = 0.97F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 0.993F;
-        RED = 1 - pow(pow(pow(red_in, 2), 2), 2);
-        float green_in = 0.96F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 2.29F;
-        GREEN = 1 - pow(pow(green_in, 3), 3);
-        float blue_in = 0.994F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 8) / 20F;
-        BLUE = 1 - pow(pow(blue_in, 9), 9);
-
-        System.out.println("RED: " + RED * 255 + "GREEN: " + GREEN * 255 + "BLUE: " + BLUE * 255);
-    }
-
     private void updateLighting()
     {
         LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(-LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
@@ -283,7 +266,7 @@ public class ChunkProvider {
     public void setLightingAngle(float lightingAngle) {
         LIGHTING_ANGLE = lightingAngle;
         updateLighting();
-        updateColor();
+        lightingColor = lightingColorPolicy.generateColor(LIGHTING_ANGLE, LIGHTING_ALTITUDE);
     }
 
     public float getLightingAltitude()
@@ -320,16 +303,14 @@ public class ChunkProvider {
         return LIGHTING_Z;
     }
 
-    public float getRed() {
-        return RED;
+    public Color getLightingColor() {
+        return lightingColor;
     }
 
-    public float getGreen() {
-        return GREEN;
-    }
-
-    public float getBlue() {
-        return BLUE;
+    public void setLightingColorPolicy(LightingColorPolicy policy)
+    {
+        lightingColorPolicy = policy;
+        lightingColor = lightingColorPolicy.generateColor(LIGHTING_ANGLE, LIGHTING_ALTITUDE);
     }
 
     public int getSpecularBrightness()
