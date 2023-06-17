@@ -33,13 +33,17 @@ public class ChunkProvider {
     private float MASK_SIZE = 20;
     private float MASK_SHADOW = 2F;
 
-    private float LIGHTING_ANGLE = 0;
+    private float LIGHTING_ANGLE = 90;
     private float LIGHTING_ALTITUDE = 45;
-    private float LIGHTING_STRENGTH = 0.6F;
+    private float LIGHTING_STRENGTH = 1.7F;
 
-    private float LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-    private float LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-    private float LIGHTING_Z = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ALTITUDE)));
+    private float LIGHTING_X;
+    private float LIGHTING_Y;
+    private float LIGHTING_Z;
+
+    private float RED;
+    private float GREEN;
+    private float BLUE;
 
     private int SPECULAR_BRIGHTNESS = 400;
     private int SPECULAR_INTENSITY = 4;
@@ -72,6 +76,8 @@ public class ChunkProvider {
 
         arrayWidth = (int)(chunkWidth / widthArrayDivider);
         arrayHeight = (int)(chunkHeight / heightArrayDivider);
+        updateLighting();
+        updateColor();
     }
 
     public void setPaintInterface(PaintInterface pi)
@@ -178,6 +184,34 @@ public class ChunkProvider {
         }
     }
 
+    private void updateColor()
+    {
+        int a = 115;
+//        float red_in = 0.97F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 4) / 0.89F;
+//        RED = 1 - pow(pow(pow(red_in, 2), 2), 2);
+//        float green_in = 0.966F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 1.57F;
+//        GREEN = 1 - pow(pow(green_in, 3), 3);
+//        float blue_in = 0.994F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 10) / 20F;
+//        BLUE = 1 - pow(pow(blue_in, 9), 9);
+
+        float red_in = 0.97F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 0.993F;
+        RED = 1 - pow(pow(pow(red_in, 2), 2), 2);
+        float green_in = 0.96F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 6) / 2.29F;
+        GREEN = 1 - pow(pow(green_in, 3), 3);
+        float blue_in = 0.994F - pow((float)Math.cos(LIGHTING_ANGLE / a - Math.PI / 4), 8) / 20F;
+        BLUE = 1 - pow(pow(blue_in, 9), 9);
+
+        System.out.println("RED: " + RED * 255 + "GREEN: " + GREEN * 255 + "BLUE: " + BLUE * 255);
+    }
+
+    private void updateLighting()
+    {
+        LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(-LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
+        LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(-LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
+        LIGHTING_Z = -(float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ALTITUDE)));
+    }
+
+
     public float getNoiseCoefficient(){
         return NOISE_COEFFICIENT;
     }
@@ -238,10 +272,18 @@ public class ChunkProvider {
         return LIGHTING_ANGLE;
     }
 
+    public static float pow(float p, int n)
+    {
+        float a = 1;
+        for(int i = 0; i < n; i++)
+            a *= p;
+        return a;
+    }
+
     public void setLightingAngle(float lightingAngle) {
         LIGHTING_ANGLE = lightingAngle;
-        LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
+        updateLighting();
+        updateColor();
     }
 
     public float getLightingAltitude()
@@ -252,10 +294,7 @@ public class ChunkProvider {
     public void setLightingAltitude(float lightingAltitude)
     {
         LIGHTING_ALTITUDE = lightingAltitude;
-        LIGHTING_X = (float)(LIGHTING_STRENGTH * Math.cos(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Y = (float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ANGLE)) * Math.cos(Math.toRadians(LIGHTING_ALTITUDE)));
-        LIGHTING_Z = -(float)(LIGHTING_STRENGTH * Math.sin(Math.toRadians(LIGHTING_ALTITUDE)));
-
+        updateLighting();
     }
 
     public float getLightingStrength() {
@@ -279,6 +318,18 @@ public class ChunkProvider {
 
     public float getLightingZ() {
         return LIGHTING_Z;
+    }
+
+    public float getRed() {
+        return RED;
+    }
+
+    public float getGreen() {
+        return GREEN;
+    }
+
+    public float getBlue() {
+        return BLUE;
     }
 
     public int getSpecularBrightness()

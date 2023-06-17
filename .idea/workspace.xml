@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="CursorGraphics implemented">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting altitude">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/LightingChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,14 +216,8 @@
       <workItem from="1686509936366" duration="405000" />
       <workItem from="1686537735149" duration="2448000" />
       <workItem from="1686638975130" duration="12503000" />
-      <workItem from="1686789923824" duration="7390000" />
-    </task>
-    <task id="LOCAL-00109" summary="lighting changer angle and strength">
-      <created>1672952150456</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1672952150456</updated>
+      <workItem from="1686789923824" duration="10854000" />
+      <workItem from="1686954426286" duration="6730000" />
     </task>
     <task id="LOCAL-00110" summary="lighting changer angle and strength">
       <created>1672952773185</created>
@@ -560,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686793460518</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="Lighting altitude">
+      <created>1686815221511</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1686815221512</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="coordinate conversion functions  added" />
     <MESSAGE value="Chunk border removed. ReusableChunkKeeper error recovery" />
     <MESSAGE value="Resize error fixed" />
     <MESSAGE value="Resolution control" />
@@ -616,14 +617,15 @@
     <MESSAGE value="Code clean up and lighting constants changed" />
     <MESSAGE value="CursorGraphics design added" />
     <MESSAGE value="CursorGraphics implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="CursorGraphics implemented" />
+    <MESSAGE value="Lighting altitude" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lighting altitude" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>418</line>
+          <line>426</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

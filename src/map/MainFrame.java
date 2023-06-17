@@ -14,7 +14,7 @@ public class MainFrame {
         OverlayLayout layout = new OverlayLayout(panel);
         panel.setLayout(layout);
         panel.showLightingChanger();
-        panel.showVariableChanger();
+//        panel.showVariableChanger();
         panel.showColorEditor();
         panel.showCursorGraphics();
 

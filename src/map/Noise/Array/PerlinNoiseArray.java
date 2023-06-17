@@ -309,11 +309,19 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
                 float coefficient = Math.max(diffusionMap[i][j] + ambientIntensity + specularMap[i][j], 0);
 
+                Color lightingColor = new Color(255,94,49);
+
                 Color c5 = new Color(
-                        (int)Math.min(c.getRed() * coefficient, 255),
-                        (int)Math.min(c.getGreen() * coefficient, 255),
-                        (int)Math.min(c.getBlue() * coefficient, 255)
+                        (int)Math.min(c.getRed() * coefficient * chunkProvider.getRed(), 255),
+                        (int)Math.min(c.getGreen() * coefficient * chunkProvider.getGreen(), 255),
+                        (int)Math.min(c.getBlue() * coefficient * chunkProvider.getBlue(), 255)
                 );
+
+//                Color c5 = new Color(
+//                        (int)Math.min(c.getRed() * Math.max(diffusionMap[i][j] + ambientIntensity + specularMap[i][j], 0), 255),
+//                        (int)Math.min(c.getGreen() * Math.max(diffusionMap[i][j] + ambientIntensity * 0.8 + specularMap[i][j], 0), 255),
+//                        (int)Math.min(c.getBlue() * Math.max(diffusionMap[i][j] + ambientIntensity * 0.7 + specularMap[i][j], 0), 255)
+//                );
 
                 bi.setRGB(i, j, c5.getRGB());
             }
