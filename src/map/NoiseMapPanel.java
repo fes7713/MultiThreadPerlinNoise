@@ -6,6 +6,8 @@ import map.Cursor.EmptyCursorGraphics;
 import map.Noise.Array.LightingChanger;
 import map.Noise.ChunkProvider;
 import map.Noise.ColorProvider;
+import map.Noise.LightingColor.NaturalTimeLightingColor;
+import map.Noise.LightingColor.WhiteLightingColor;
 import map.Noise.NoiseChunkGroup;
 import org.jetbrains.annotations.NotNull;
 
@@ -340,6 +342,16 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
 
     public void setCursorGraphics(@NotNull CursorGraphics cursorGraphics){
         this.cursorGraphics = cursorGraphics;
+    }
+
+    public void setWhiteLightingColor()
+    {
+        chunkProvider.setLightingColorPolicy(new WhiteLightingColor());
+    }
+
+    public void setNaturalLightingColor()
+    {
+        chunkProvider.setLightingColorPolicy(new NaturalTimeLightingColor());
     }
 
     @Override
