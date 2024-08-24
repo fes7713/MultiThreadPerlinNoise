@@ -19,6 +19,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private final ColorProvider colorProvider;
 
     private float[][] noiseMap;
+    private float[][] tempNoiseMap;
+    private float[][] tempNormalMap;
     private float[][] normalMap;
     private float[][] convNoiseMap;
     private float[][] fallOffMap;
@@ -36,6 +38,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private final FastNoise fn;
     private BufferedImage bi;
     private float zoom;
+
+    private static float SMOOTHING = 50;
 
     public PerlinNoiseArray(ChunkProvider chunkProvider, ColorProvider colorProvider, FastNoise fn, float left, float top, int width, int height, float zoom, float centerX, float centerY){
         this.chunkProvider = chunkProvider;
@@ -56,6 +60,8 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         specularMap = new float[width][height];
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
+        tempNoiseMap = new float[width][height];
+        tempNormalMap = new float[width][height];
 
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
@@ -117,31 +123,81 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         specularMap = new float[width][height];
         fallOffMap = new float[width][height];
         convNoiseMap = new float[width][height];
+        tempNoiseMap = new float[width][height];
+        tempNormalMap = new float[width][height];
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
 
-    public void initNoiseMap(float resolution)
+    public void fillTempNoiseMap(float resolution)
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] = fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
+                tempNoiseMap[i][j] = fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
             }
         }
     }
 
-    public void increaseResolution(float resolution)
+    public void clearNoiseMap()
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] += fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
+                noiseMap[i][j] = 0;
             }
         }
     }
+
+    public void fillTempToNormalMap(){
+        for(int i = 0; i < width - 1; i++) {
+            for (int j = 0; j < height - 1; j++) {
+                Vector3f normal = cross(
+                        zoom, 0, (tempNoiseMap[i + 1][j] - tempNoiseMap[i][j]),
+                        0, zoom, (tempNoiseMap[i][j + 1] - tempNoiseMap[i][j]));
+
+                tempNormalMap[i][j] = normalIntensity(normal, normal.length());
+            }
+        }
+    }
+
+    public void addTempToNoiseMap(float resolution){
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                noiseMap[i][j] += tempNoiseMap[i][j] * (1 / (1 + SMOOTHING * resolution * Math.abs(tempNoiseMap[i][j])));
+            }
+        }
+    }
+
+    @Override
+    public void initNoiseMap(float resolution) {
+        clearNoiseMap();
+        fillTempNoiseMap(resolution);
+        fillTempToNormalMap();
+        addTempToNoiseMap(resolution);
+    }
+
+    @Override
+    public void increaseResolution(float resolution) {
+        fillTempNoiseMap(resolution);
+        fillTempToNormalMap();
+        addTempToNoiseMap(resolution);
+    }
+
+//    public void increaseResolution(float resolution)
+//    {
+//        for(int i = 0; i < width; i++)
+//        {
+//            for(int j = 0; j < height; j++)
+//            {
+//                noiseMap[i][j] += fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
+//            }
+//        }
+//    }
 
     public void generateNormalMap()
     {
@@ -248,10 +304,11 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
 //        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
 //        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
+        return (noise + NOISE_SHIFT) * NOISE_COEFFICIENT * chunkProvider.getSpecularBrightness();
 //        return 0.6*noise + 0.2;
 //        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
 //        return Math.abs(NOISE_COEFFICIENT * Math.pow(noise, 3)) + Math.abs(NOISE_COEFFICIENT * noise);
-        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * noise)) - 1) + NOISE_SHIFT) * chunkProvider.getSpecularBrightness();
+//        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * noise)) - 1) + NOISE_SHIFT) * chunkProvider.getSpecularBrightness();
     }
 
     public void convertData()
@@ -398,30 +455,30 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 
     public static void main(String[] args)
     {
-        ColorProvider colorProvider = new ColorProvider(null, 256);
-        colorProvider.loadColorPreset("PhongRealisticColor1.txt");
-        ChunkProvider chunkProvider = new ChunkProvider(colorProvider, null);
-        VariableChanger vc = new VariableChanger(chunkProvider, null);
-        vc.loadVariable();
-        PerlinNoiseArray array = new PerlinNoiseArray(chunkProvider, colorProvider, new FastNoise(), -500, -500, 100, 100, 1, 500, 500);
-        int resolutionMin = chunkProvider.getResolutionMin();
-        int resolutionMax = chunkProvider.getResolutionMax();
-
-        if(Thread.interrupted())
-            return;
-        array.initNoiseMap(resolutionMin);
-
-        for (int i = resolutionMin + 1; i < resolutionMax + 4; i++) {
-            array.increaseResolution((float)Math.pow(2, i));
-        }
-        array.generateNormalMap();
-        array.updateImage(null);
-
-        File outputfile = new File("image.png");
-        try {
-            ImageIO.write(array.bi, "png", outputfile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        ColorProvider colorProvider = new ColorProvider(null, 256);
+//        colorProvider.loadColorPreset("PhongRealisticColor1.txt");
+//        ChunkProvider chunkProvider = new ChunkProvider(colorProvider, null);
+//        VariableChanger vc = new VariableChanger(chunkProvider, null);
+//        vc.loadVariable();
+//        PerlinNoiseArray array = new PerlinNoiseArray(chunkProvider, colorProvider, new FastNoise(), -500, -500, 100, 100, 1, 500, 500);
+//        int resolutionMin = chunkProvider.getResolutionMin();
+//        int resolutionMax = chunkProvider.getResolutionMax();
+//
+//        if(Thread.interrupted())
+//            return;
+//        array.initNoiseMap(resolutionMin);
+//
+//        for (int i = resolutionMin + 1; i < resolutionMax + 4; i++) {
+//            array.increaseResolution((float)Math.pow(2, i));
+//        }
+//        array.generateNormalMap();
+//        array.updateImage(null);
+//
+//        File outputfile = new File("image.png");
+//        try {
+//            ImageIO.write(array.bi, "png", outputfile);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -101,7 +101,8 @@ public class NoiseChunk implements NoiseChunkInterface{
 
                 if(Thread.interrupted())
                     return;
-                array.initNoiseMap(resolutionMin);
+//                array.initNoiseMap(resolutionMin);
+                array.clearNoiseMap();
                 if(Thread.interrupted())
                     return;
                 array.generateNormalMap();

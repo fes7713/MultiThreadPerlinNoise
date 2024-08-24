@@ -9,10 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Lighting timer">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="East and west shadow direction flipped">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,9 +94,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainFrame">
-    <configuration name="JDesktopPaneTest9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="map.JDesktopPaneTest9" />
+    <configuration name="FallOffImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.Noise.Array.FallOffImage" />
       <module name="MuthThreadParlinNoise" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="map.Noise.Array.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,9 +151,9 @@
       <list>
         <item itemvalue="Application.MainFrame" />
         <item itemvalue="Application.PerlinNoiseArray" />
+        <item itemvalue="Application.FallOffImage" />
         <item itemvalue="Application.MapEditor" />
         <item itemvalue="Application.LightingChanger" />
-        <item itemvalue="Application.JDesktopPaneTest9" />
       </list>
     </recent_temporary>
   </component>
@@ -217,14 +227,12 @@
       <workItem from="1686638975130" duration="12503000" />
       <workItem from="1686789923824" duration="10854000" />
       <workItem from="1686954426286" duration="12341000" />
-      <workItem from="1687000199449" duration="6130000" />
-    </task>
-    <task id="LOCAL-00114" summary="PerlinNoiseArray variables moved to ChunkProvider. VariableChanger file moved">
-      <created>1673076356113</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1673076356113</updated>
+      <workItem from="1687000199449" duration="6915000" />
+      <workItem from="1687053814097" duration="169000" />
+      <workItem from="1687150548103" duration="605000" />
+      <workItem from="1687161860631" duration="368000" />
+      <workItem from="1724484240750" duration="4805000" />
+      <workItem from="1724491398355" duration="4856000" />
     </task>
     <task id="LOCAL-00115" summary="Getter for colors">
       <created>1673076568252</created>
@@ -562,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687008913267</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="East and west shadow direction flipped">
+      <created>1687009661226</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1687009661226</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,6 +589,7 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="BEK_SORT_TYPE" value="1" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -593,7 +609,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Low resolution center shift bug fix" />
     <MESSAGE value="merged" />
     <MESSAGE value="Chink reuse fix" />
     <MESSAGE value="cloud" />
@@ -618,20 +633,36 @@
     <MESSAGE value="Lighting classes and night vision" />
     <MESSAGE value="Facade for lighting color" />
     <MESSAGE value="Lighting timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lighting timer" />
+    <MESSAGE value="East and west shadow direction flipped" />
+    <option name="LAST_COMMIT_MESSAGE" value="East and west shadow direction flipped" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>426</line>
+          <line>492</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/MainFrame.java</url>
-          <line>29</line>
+          <line>13</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>186</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>160</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

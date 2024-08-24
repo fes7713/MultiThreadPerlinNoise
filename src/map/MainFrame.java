@@ -16,21 +16,22 @@ public class MainFrame {
         OverlayLayout layout = new OverlayLayout(panel);
         panel.setLayout(layout);
         panel.showLightingChanger();
-//        panel.showVariableChanger();
+        panel.showVariableChanger();
+        panel.showMapEditor();
         panel.showColorEditor();
         panel.showCursorGraphics();
-        panel.setLightingTime(18, 0);
+        panel.setLightingTime(12, 0);
 
         Timer timer = new Timer();
 
-        timer.scheduleAtFixedRate(new TimerTask() {
-              @Override
-              public void run() {
-                  counter += 5;
-                  panel.setLightingTime(counter / 60, counter % 60);
-                  System.out.println(counter / 60 % 24 +  " : " + counter % 60);
-              }
-          }, 1000, 100);
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//              @Override
+//              public void run() {
+//                  counter += 5;
+//                  panel.setLightingTime(counter / 60, counter % 60);
+//                  System.out.println(counter / 60 % 24 +  " : " + counter % 60);
+//              }
+//          }, 1000, 100);
 
 //        NoiseMapPanel cloud = new NoiseMapPanel(2, 2) ;
 //        NoiseMapPanel cloudHigh = new NoiseMapPanel(2, 2) ;
