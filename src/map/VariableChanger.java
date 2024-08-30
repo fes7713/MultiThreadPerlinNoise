@@ -72,9 +72,9 @@ public class VariableChanger extends JPanel{
         this.add(noiseSteepnessSlider);
         noiseShiftSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(chunkProvider.getNoiseShift() * precision));
         this.add(noiseShiftSlider);
-        normalSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -1 * precision, 10 * precision, (int)(chunkProvider.getNormalCoefficient() * precision));
+        normalSteepnessSlider = new JSlider(JSlider.HORIZONTAL, -0 * precision, 1 * precision, (int)(chunkProvider.getNormalCoefficient() * precision));
         this.add(normalSteepnessSlider);
-        normalShiftSlider = new JSlider(JSlider.HORIZONTAL, -10 * precision, 10 * precision, (int)(chunkProvider.getNormalShift() * precision));
+        normalShiftSlider = new JSlider(JSlider.HORIZONTAL, -0 * precision, 100 * precision, (int)(chunkProvider.getNormalShift() * precision));
         this.add(normalShiftSlider);
         maskSizeSlider = new JSlider(JSlider.HORIZONTAL, 0 * precision, 50 * precision, (int) chunkProvider.getMaskSize() * precision);
         this.add(maskSizeSlider);

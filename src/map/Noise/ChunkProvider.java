@@ -49,12 +49,12 @@ public class ChunkProvider {
     private Color lightingColor;
 
     private int SPECULAR_BRIGHTNESS = 400;
-    private int SPECULAR_INTENSITY = 4;
+    private int SPECULAR_INTENSITY = 10;
 
-    private float AMBIENT_INTENSITY = 0.1F;
+    private float AMBIENT_INTENSITY = 0.3F;
 
-    private int RESOLUTION_MIN = -3;
-    private int RESOLUTION_MAX = 14;
+    private int RESOLUTION_MIN = -5;
+    private int RESOLUTION_MAX = 10;
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
     {

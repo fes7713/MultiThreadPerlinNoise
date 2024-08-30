@@ -9,14 +9,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="East and west shadow direction flipped">
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Metalic Terrain">
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain20240830.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408301.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408302.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408303.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/image.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +88,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/SummerProjectCC/Poker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="profiler.jvm" />
@@ -232,21 +241,9 @@
       <workItem from="1687150548103" duration="605000" />
       <workItem from="1687161860631" duration="368000" />
       <workItem from="1724484240750" duration="4805000" />
-      <workItem from="1724491398355" duration="4856000" />
-    </task>
-    <task id="LOCAL-00115" summary="Getter for colors">
-      <created>1673076568252</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1673076568252</updated>
-    </task>
-    <task id="LOCAL-00116" summary="Adapted to Alpha colors">
-      <created>1673094346720</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1673094346720</updated>
+      <workItem from="1724491398355" duration="12448000" />
+      <workItem from="1724976934582" duration="4694000" />
+      <workItem from="1725024381660" duration="3680000" />
     </task>
     <task id="LOCAL-00117" summary="Code Cleaned">
       <created>1673095163892</created>
@@ -577,7 +574,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687009661226</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="Metalic Terrain">
+      <created>1724496487595</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1724496487595</updated>
+    </task>
+    <task id="LOCAL-00165" summary="Metalic Terrain">
+      <created>1724496493543</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1724496493543</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,7 +620,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="merged" />
     <MESSAGE value="Chink reuse fix" />
     <MESSAGE value="cloud" />
     <MESSAGE value="centerX faster calculation WIP" />
@@ -634,14 +644,15 @@
     <MESSAGE value="Facade for lighting color" />
     <MESSAGE value="Lighting timer" />
     <MESSAGE value="East and west shadow direction flipped" />
-    <option name="LAST_COMMIT_MESSAGE" value="East and west shadow direction flipped" />
+    <MESSAGE value="Metalic Terrain" />
+    <option name="LAST_COMMIT_MESSAGE" value="Metalic Terrain" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>492</line>
+          <line>512</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -651,18 +662,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>186</line>
+          <line>198</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>160</line>
+          <line>164</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>179</line>
+          <line>191</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

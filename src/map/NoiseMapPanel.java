@@ -60,7 +60,7 @@ public class NoiseMapPanel extends JPanel implements ComponentListener, MouseMot
     private static final float ZOOM_RATIO = 2;
 
     private static final int DEFAULT_ZOOM_MAX_LIMIT = 4;
-    private static final int DEFAULT_ZOOM_MIN_LIMIT = - 10;
+    private static final int DEFAULT_ZOOM_MIN_LIMIT = - 3;
     private static final int DEFAULT_CENTERX = 9000;
     private static final int DEFAULT_CENTERY = 0;
     private static final int DEFAULT_MAP_WIDTH = 4000;

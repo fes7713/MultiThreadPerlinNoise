@@ -20,7 +20,7 @@ public class MainFrame {
         panel.showMapEditor();
         panel.showColorEditor();
         panel.showCursorGraphics();
-        panel.setLightingTime(12, 0);
+        panel.setLightingTime(20, 0);
 
         Timer timer = new Timer();
 

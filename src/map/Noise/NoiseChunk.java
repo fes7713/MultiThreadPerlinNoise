@@ -150,7 +150,7 @@ public class NoiseChunk implements NoiseChunkInterface{
 
     @Override
     public void variableChanged() {
-        array.convertData();
+//        array.convertData();
     }
 
     @Override
