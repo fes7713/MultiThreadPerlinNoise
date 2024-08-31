@@ -9,22 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Metalic Terrain">
-      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain20240830.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408301.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408302.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408303.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/variables/SmoothingMountain4.txt" afterDir="false" />
+    <list default="true" id="92224316-740d-4120-bacc-2c1fc54b169a" name="Changes" comment="Removed conv noise map">
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain20240831.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408311.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408312.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presets/RealisticTerrain202408313.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variables/RealisticTerrain202408312.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MuthThreadParlinNoise_jar/MuthThreadParlinNoise.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presets/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/presets/default.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArrayInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/ChunkProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Noise/NoiseChunk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/VariableChanger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/VariableChanger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/variables/default.txt" beforeDir="false" afterPath="$PROJECT_DIR$/variables/default.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -243,14 +238,7 @@
       <workItem from="1724484240750" duration="4805000" />
       <workItem from="1724491398355" duration="12448000" />
       <workItem from="1724976934582" duration="4694000" />
-      <workItem from="1725024381660" duration="3680000" />
-    </task>
-    <task id="LOCAL-00117" summary="Code Cleaned">
-      <created>1673095163892</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1673095163892</updated>
+      <workItem from="1725024381660" duration="21193000" />
     </task>
     <task id="LOCAL-00118" summary="Color slider and setCenter will center the screen to the map too">
       <created>1673115943400</created>
@@ -588,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1724496493543</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="Removed conv noise map">
+      <created>1725028812046</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1725028812046</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,7 +615,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Chink reuse fix" />
     <MESSAGE value="cloud" />
     <MESSAGE value="centerX faster calculation WIP" />
     <MESSAGE value="variable changer decoupled with noise map panel." />
@@ -645,14 +639,15 @@
     <MESSAGE value="Lighting timer" />
     <MESSAGE value="East and west shadow direction flipped" />
     <MESSAGE value="Metalic Terrain" />
-    <option name="LAST_COMMIT_MESSAGE" value="Metalic Terrain" />
+    <MESSAGE value="Removed conv noise map" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed conv noise map" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>512</line>
+          <line>491</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -662,23 +657,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>198</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>164</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>191</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/Noise/Array/PerlinNoiseArray.java</url>
-          <line>179</line>
-          <option name="timeStamp" value="19" />
+          <line>383</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

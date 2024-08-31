@@ -4,7 +4,6 @@ import map.Noise.ChunkProvider;
 import map.Noise.ColorProvider;
 import map.Noise.FastNoise;
 import map.Noise.PaintInterface;
-import map.VariableChanger;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3f;
@@ -26,6 +25,7 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private float[][] fallOffMap;
     private float[][] diffusionMap;
     private float[][] specularMap;
+    private float[][] waterMap;
 
     private float left;
     private float top;
@@ -39,8 +39,11 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     private BufferedImage bi;
     private float zoom;
 
-    private Color waterColor = new Color(50, 120, 150);
-    private float waterHeight = 0;
+    private Color waterShallowColor = new Color(52,90,98);
+    private Color waterDeepColor = new Color(49,73,107);
+    private float waterHeight = 100;
+    private float waterMixCoef = 40F;
+    private float waterLevelCoef = 0.0005F;
 
     private static float SMOOTHING = 5F;
 
@@ -62,9 +65,9 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         diffusionMap = new float[width][height];
         specularMap = new float[width][height];
         fallOffMap = new float[width][height];
-//        convNoiseMap = new float[width][height];
         tempNoiseMap = new float[width][height];
         tempNormalMap = new float[width][height];
+        waterMap = new float[width][height];
 
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
@@ -128,17 +131,19 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
 //        convNoiseMap = new float[width][height];
         tempNoiseMap = new float[width][height];
         tempNormalMap = new float[width][height];
+        waterMap = new float[width][height];
+
         bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         generateFallOffMap();
     }
 
-    public void fillTempNoiseMap(float resolution, float shift, float coefficient)
+    public void fillTempNoiseMap(float resolution)
     {
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                tempNoiseMap[i][j] = (fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution) * coefficient;
+                tempNoiseMap[i][j] = (fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution);
             }
         }
     }
@@ -182,14 +187,14 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         }
     }
 
-    public void addTempToNoiseMap(float resolution){
+    public void addTempToNoiseMap(float resolution, float shift, float coefficient){
         float coef = chunkProvider.getNormalShift() * (float)Math.pow(resolution, chunkProvider.getNormalCoefficient());
 
         for(int i = 0; i < width; i++)
         {
             for(int j = 0; j < height; j++)
             {
-                noiseMap[i][j] += tempNoiseMap[i][j] * (1 / (1 + coef * Math.abs(tempNormalMap[i][j])));
+                noiseMap[i][j] += tempNoiseMap[i][j] * (1 / (1 + coef * Math.abs(tempNormalMap[i][j]))) * coefficient * fallOffMap[i][j];
             }
         }
     }
@@ -197,32 +202,22 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
     @Override
     public void initNoiseMap(float resolution) {
         clearNoiseMap();
-        fillTempNoiseMap(resolution, chunkProvider.getNoiseShift(), chunkProvider.getNoiseCoefficient());
+        fillTempNoiseMap(resolution);
         fillTempToNormalMap();
-        addTempToNoiseMap(resolution);
+        addTempToNoiseMap(resolution, chunkProvider.getNoiseShift(), chunkProvider.getNoiseCoefficient() * 100);
+        generateWaterMap();
     }
 
     @Override
     public void increaseResolution(float resolution) {
-        fillTempNoiseMap(resolution, chunkProvider.getNoiseShift(), chunkProvider.getNoiseCoefficient() * 100);
+        fillTempNoiseMap(resolution);
         fillTempToNormalMap();
-        addTempToNoiseMap(resolution);
+        addTempToNoiseMap(resolution, chunkProvider.getNoiseShift(), chunkProvider.getNoiseCoefficient() * 100);
+        generateWaterMap();
     }
-
-//    public void increaseResolution(float resolution)
-//    {
-//        for(int i = 0; i < width; i++)
-//        {
-//            for(int j = 0; j < height; j++)
-//            {
-//                noiseMap[i][j] += fn.GetNoise((i * zoom  + left) * resolution, (j * zoom + top) * resolution ) / resolution;
-//            }
-//        }
-//    }
 
     public void generateNormalMap()
     {
-//        convertData();
         Vector3f light = new Vector3f(
                 chunkProvider.getLightingX(), chunkProvider.getLightingY(), chunkProvider.getLightingZ());
         float lightLength = light.length();
@@ -319,53 +314,35 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
         }
     }
 
-//    public double convertNoise(float noise, float NOISE_COEFFICIENT, float NOISE_SHIFT)
-//    {
-////        return 1 - (float)Math.pow(2.75, -(noise + 0.75) * (noise + 0.75));
-////        return (int)(Math.atan(100 * noise / 67) * 80) + 127;
-////        return (float)(Math.atan( (noise - NOISE_SHIFT) * NOISE_COEFFICIENT) / Math.PI + 0.5);
-////        return (1 / (1 + Math.exp(-NOISE_COEFFICIENT * (noise - NOISE_SHIFT))));
-//        return (noise + NOISE_SHIFT) * NOISE_COEFFICIENT * chunkProvider.getSpecularBrightness();
-////        return 0.6*noise + 0.2;
-////        return -NOISE_COEFFICIENT*Math.abs(noise) + NOISE_SHIFT;
-////        return Math.abs(NOISE_COEFFICIENT * Math.pow(noise, 3)) + Math.abs(NOISE_COEFFICIENT * noise);
-////        return (-NOISE_SHIFT * Math.abs(2 / (1 + Math.exp(NOISE_COEFFICIENT * noise)) - 1) + NOISE_SHIFT) * chunkProvider.getSpecularBrightness();
-//    }
-
-//    public void convertData()
-//    {
-//        float NOISE_COEFFICIENT = chunkProvider.getNoiseCoefficient();
-//        float NOISE_SHIFT = chunkProvider.getNoiseShift();
-//
-//        for(int i = 0; i < width; i++)
-//            for(int j = 0; j < height; j++)
-//                convNoiseMap[i][j] = (float)convertNoise(noiseMap[i][j], NOISE_COEFFICIENT, NOISE_SHIFT);
-//    }
-
     public void generateWaterMap()
     {
-
+        for(int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if(noiseMap[i][j] < waterHeight)
+                {
+                    waterMap[i][j] = 1 - 1 / (1 + waterLevelCoef * (waterHeight - noiseMap[i][j]) * (waterHeight - noiseMap[i][j]));
+                }else{
+                    waterMap[i][j] = 0;
+                }
+            }
+        }
     }
 
     public void updateImage(PaintInterface pi)
     {
         int[][] colors = colorProvider.getColors();
-        int length = colors.length - 1;
-        float fallOff;
         for(int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
-                fallOff = length * fallOffMap[i][j] * fallOffMap[i][j] / chunkProvider.getSpecularBrightness();
-
                 int heightIndex;
 
-                if(noiseMap[i][j] * fallOff < 0)
+                if(noiseMap[i][j] < 0)
                 {
                     heightIndex = 0;
                 }
-                else if(noiseMap[i][j] * fallOff < colors[0].length)
+                else if(noiseMap[i][j] / 3  < colors[0].length)
                 {
-                    heightIndex = (int)(noiseMap[i][j] * fallOff);
+                    heightIndex = (int)(noiseMap[i][j] / 3);
                 }
                 else{
                     heightIndex = colors[0].length - 1;
@@ -400,16 +377,17 @@ public class PerlinNoiseArray implements PerlinNoiseArrayInterface{
                         (int)Math.min(c.getBlue() * coefficient * lightingColor.getBlue() / 255, 255)
                 );
 
-//                if(heightIndex < 127)
-//                {
-//                    c5 = new Color(
-//                            (int)Math.min(c5.getRed() * heightIndex + waterColor.getRed() * (127 - heightIndex)), 255),
-//                            (int)Math.min(c5.getGreen() * (1 - 1 / (127 - heightIndex)), 255),
-//                            (int)Math.min(c5.getBlue() * (1 - 1 / (127 - heightIndex)), 255)
-//                    );
-//                }
+                Color c6 = c5;
+                if(waterMap[i][j] > 0)
+                {
+                    float ratio = (float) Math.pow(waterMap[i][j], waterMixCoef);
+                    c6 = new Color(
+                            (int)(c6.getRed() * (1 - waterMap[i][j]) + waterShallowColor.getRed() * waterMap[i][j] * (1 - ratio) + waterDeepColor.getRed() * waterMap[i][j] * ratio),
+                            (int)(c6.getGreen() * (1 - waterMap[i][j]) + waterShallowColor.getGreen() * waterMap[i][j] * (1 - ratio) + waterDeepColor.getGreen() * waterMap[i][j] * ratio),
+                            (int)(c6.getBlue() * (1 - waterMap[i][j]) + waterShallowColor.getBlue() * waterMap[i][j] * (1 - ratio) + waterDeepColor.getBlue() * waterMap[i][j] * ratio));
+                }
 
-                bi.setRGB(i, j, c5.getRGB());
+                bi.setRGB(i, j, c6.getRGB());
             }
         }
         if(pi != null)

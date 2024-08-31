@@ -53,7 +53,7 @@ public class ChunkProvider {
 
     private float AMBIENT_INTENSITY = 0.3F;
 
-    private int RESOLUTION_MIN = -5;
+    private int RESOLUTION_MIN = -4;
     private int RESOLUTION_MAX = 10;
 
     public ChunkProvider(ColorProvider colorProvider, PaintInterface pi)
