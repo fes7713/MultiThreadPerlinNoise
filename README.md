@@ -1,5 +1,9 @@
 # MultiThreadPerlinNoise
+### Version 2 (Phong shading)
+<img width="1274" alt="image" src="https://github.com/fes7713/MultiThreadPerlinNoise/assets/71058334/a9f83e74-5511-4a24-9751-6ed02dcffc46">
 
+
+### Version 1
 ![image](https://user-images.githubusercontent.com/71058334/209891014-564ca65a-f89d-4630-99ab-dfa595c8900b.png)
 ![image](https://user-images.githubusercontent.com/71058334/210122895-4da9a3ba-700b-4fb8-a856-2fae2ae698eb.png)
 
